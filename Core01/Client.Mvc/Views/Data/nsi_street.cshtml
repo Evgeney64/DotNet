@@ -1,0 +1,20 @@
+﻿@model Server.Core.ViewModel.VmBase
+
+<table>
+    @foreach (var p in Model.VwNsiStreets)
+    {
+        <tr>
+            <td>@p.NVILLAGE_ID</td>
+            <td>&nbsp&nbsp&nbsp</td>
+            <td>@p.NVILLAGE_TYPE_NAME</td>
+            <td>&nbsp&nbsp&nbsp</td>
+            <td>@p.NVILLAGE_NAME</td>
+            <td>&nbsp&nbsp&nbsp</td>
+            <td>@p.NSTREET_ID</td>
+            <td>&nbsp&nbsp&nbsp</td>
+            <td>@p.NSTREET_TYPE_NAME</td>
+            <td>&nbsp&nbsp&nbsp</td>
+            <td>@p.NSTREET_NAME</td>
+        </tr>
+    }
+</table>

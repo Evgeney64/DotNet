@@ -1,0 +1,12 @@
+﻿@model Server.Core.ViewModel.VmBase
+
+<table>
+    @foreach (var p in Model.Users)
+    {
+        <tr>
+            <td>@p.user_id</td>
+            <td>&nbsp&nbsp&nbsp</td>
+            <td>@p.user_name</td>
+        </tr>
+    }
+</table>
