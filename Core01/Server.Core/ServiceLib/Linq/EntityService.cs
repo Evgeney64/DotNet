@@ -8,7 +8,7 @@ using Server.Core.Public;
 
 namespace ServiceLib
 {
-    public abstract partial class EntityService
+    public abstract partial class EntityServiceLogging
     {
         public readonly static string LogCrtDateFieldName = "CRT_DATE";
         public readonly static string LogMfyDateFieldName = "MFY_DATE";
@@ -17,10 +17,10 @@ namespace ServiceLib
         public readonly static string[] LogFieldNames = new string[] { LogCrtDateFieldName, LogMfyDateFieldName, LogMfySUserIdFieldName };
     }
 
-    public abstract partial class EntityService<TContext> : EntityService, IDisposable
+    public abstract partial class EntityService<TContext> : EntityServiceLogging, IDisposable
         where TContext : DbContext, new()
     {
-        private TContext context;
+        #region Define
         //private ApiContext apiContext;
         protected string connectionString;
 
@@ -35,14 +35,19 @@ namespace ServiceLib
                 return this.context;
             }
         }
+        private TContext context;
+        #endregion
 
+        #region Constructor
         public EntityService()
         { }
         protected EntityService(string _connectionString)
         {
             connectionString = _connectionString;
         }
+        #endregion
 
+        #region CreateContext
         protected virtual TContext CreateContext()
         {
             return CreateContext(connectionString);
@@ -73,7 +78,9 @@ namespace ServiceLib
 
         //    throw new InvalidOperationException("BillBerry API отключен.");
         //}
+        #endregion
 
+        #region Dispose
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -88,6 +95,7 @@ namespace ServiceLib
         {
             this.Dispose(true);
         }
+        #endregion
 
         #region archive
         /*
