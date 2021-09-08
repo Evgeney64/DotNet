@@ -9,17 +9,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/index.js" asp-append-version="true"></script>
+
+    <link href="~/Git/ext-all.css" rel="stylesheet" />
+    <script src="~/Git/ext-all.js"></script>
+
+
     <div class="text-center" id="body_id">
         <h1 class="display-4">Hello world !!!+++</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
 
-    @*<script>
+    <script>
         $(document).ready(function () {
-            Site_Ready();
+            Site_Border();
             Index_Ready();
         });
-    </script>*@
+    </script>
 
 </body>
 </html>
+

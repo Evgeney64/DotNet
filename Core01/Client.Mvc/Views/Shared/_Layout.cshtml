@@ -46,18 +46,18 @@
     <script src="~/js/index.js" asp-append-version="true"></script>
 
     @*<link href="http://cdn.sencha.com/ext/gpl/4.2.0/resources/css/ext-all.css" rel="stylesheet" />*@
-    <link href="~/Git/ext-all.css" rel="stylesheet" />
-
     @*<script src="http://cdn.sencha.com/ext/gpl/4.2.0/ext-all.js"></script>*@
+
+    <link href="~/Git/ext-all.css" rel="stylesheet" />
     <script src="~/Git/ext-all.js"></script>
 
     @RenderSection("Scripts", required: false)
 
-    <script>
+    @*<script>
         $(document).ready(function () {
             Site_Border();
             Index_Ready();
         });
-    </script>
+    </script>*@
 </body>
 </html>

@@ -59,6 +59,25 @@ namespace Server.Core.ViewModel
 
 
         public IEnumerable<scr_user> Users => authServ.Get_USER();
-        public List<scr_user> UsersL => Users.ToList();
+        /*public Func<IEnumerable<scr_user>> Users = () => {
+            List<scr_user> users = new List<scr_user>();
+            return users;
+            };*/
+
+        //public List<scr_user> UsersL => Users.ToList();
+        public List<scr_user> UsersL
+        {
+            get
+            {
+                List<scr_user> users = new List<scr_user>
+                {
+                    new scr_user{ user_id = 1964, user_name = "Евгений"},
+                    new scr_user{ user_id = 1986, user_name = "Андрей"},
+                    new scr_user{ user_id = 1990, user_name = "Рита"},
+                    new scr_user{ user_id = 2014, user_name = "Алиса"},
+                };
+                return users;
+            }
+        }
     }
 }
