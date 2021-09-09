@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +28,7 @@ namespace Server.Core.ViewModel
         public VmBase()
         { }
         private string connectionString;
+        public string ConnectionString { get { return connectionString; } }
         public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
         {
             switch (connectionType)
@@ -78,6 +83,15 @@ namespace Server.Core.ViewModel
                 };
                 return users;
             }
+        }
+        public scr_user[] UsersAr
+        {
+            get { return UsersL.ToArray(); }
+        }
+
+        public string UsersJson
+        {
+            get { return JsonSerializer.Serialize(UsersAr); }
         }
     }
 }
