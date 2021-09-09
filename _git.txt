@@ -1,0 +1,4 @@
+git clone https://github.com/Evgeney64/DotNet.git
+
+git clone https://github.com/Evgeney64/Java-lessons.git
+
