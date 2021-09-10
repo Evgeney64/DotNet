@@ -70,28 +70,30 @@ namespace Server.Core.ViewModel
             };*/
 
         //public List<scr_user> UsersL => Users.ToList();
-        public List<scr_user> UsersL
+        public List<scr_user1> UsersL
         {
             get
             {
-                List<scr_user> users = new List<scr_user>
+                List<scr_user1> users = new List<scr_user1>
                 {
-                    new scr_user{ user_id = 1964, user_name = "Евгений"},
-                    new scr_user{ user_id = 1986, user_name = "Андрей"},
-                    new scr_user{ user_id = 1990, user_name = "Рита"},
-                    new scr_user{ user_id = 2014, user_name = "Алиса"},
+                    new scr_user1{ user_id = 1964, user_name = "Евгений"},
+                    new scr_user1{ user_id = 1986, user_name = "Андрей"},
+                    new scr_user1{ user_id = 1990, user_name = "Рита"},
+                    new scr_user1{ user_id = 2014, user_name = "Алиса"},
                 };
                 return users;
             }
         }
-        public scr_user[] UsersAr
-        {
-            get { return UsersL.ToArray(); }
-        }
 
-        public string UsersJson
-        {
-            get { return JsonSerializer.Serialize(UsersAr); }
-        }
+        public scr_user1[] UsersAr { get { return UsersL.ToArray(); } }
+
+        public string UsersJson { get { return JsonSerializer.Serialize(UsersAr); } }
+    }
+
+    public partial class scr_user1
+    {
+        public int user_id { get; set; }
+        public string user_name { get; set; }
+
     }
 }

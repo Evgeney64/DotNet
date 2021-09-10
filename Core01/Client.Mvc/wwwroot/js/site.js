@@ -51,15 +51,17 @@ function Site_Border() {
 
 function Site_Accordion(data) {
 
-    var usersJson = JSON.stringify(data);
-    var users = $.parseJSON(usersJson);
-    var sss = 1;
+    var data_str = data.replaceAll('&quot;', '"');
+    //var data_str1 = JSON.stringify(data_str);
+    var users = $.parseJSON(data_str);
+    var ss1 = 1;
 
     for (var user in users) {
         //var checkBox = "<input type='checkbox' data-price='" + key.Price + "' name='" + key.Name + "' value='" + key.ID + "'/>" + key.Name + "<br/>";
         //$(checkBox).appendTo('#modifiersDiv');
-        sss = sss + 1;
+        ss1 = ss1 + 1;
     };
+    var ss2 = 1;
 
     Ext.create('Ext.Panel', {
         title: 'Таблица',

@@ -20,7 +20,7 @@ namespace Admin.Controllers
 		public ViewResult GetUsers()
 		{
 			VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-			List<scr_user> list = vmBase.UsersL;
+			//List<scr_user> list = vmBase.UsersL;
 			return View("sys_user", vmBase);
 		}
 	}
