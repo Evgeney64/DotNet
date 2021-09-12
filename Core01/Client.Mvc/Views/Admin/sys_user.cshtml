@@ -1,28 +1,7 @@
-﻿@model Server.Core.ViewModel.VmBase
+﻿@using ru.tsb.mvc.Factories;
+@using Microsoft.AspNetCore.Mvc.ViewFeatures;
+@using Microsoft.AspNetCore.Mvc.Routing;
 
-<html lang="en">
-<body>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+@model Server.Core.ViewModel.VmBase
 
-
-    <table>
-        @foreach (var p in Model.UsersL)
-        {
-            <tr>
-                <td>@p.user_id</td>
-                <td>&nbsp&nbsp&nbsp</td>
-                <td>@p.user_name</td>
-            </tr>
-        }
-    </table>
-
-    <script>
-        $(document).ready(function () {
-            Site_Accordion("@Model.UsersJson");
-        });
-    </script>
-
-</body>
-</html>
-
+@(Configurator.Customize(Model))

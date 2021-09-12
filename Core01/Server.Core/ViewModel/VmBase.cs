@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Routing;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +32,8 @@ namespace Server.Core.ViewModel
         { }
         private string connectionString;
         public string ConnectionString { get { return connectionString; } }
+        public string HtmlString { get; set; }
+        public HtmlHelper Html { get; set; }
         public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
         {
             switch (connectionType)
