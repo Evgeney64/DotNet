@@ -112,3 +112,8 @@ function Site_Accordion(data) {
     });
 
 }
+
+function Site_Accordion1() {
+    var ss = 1;
+    Site_Border();
+}

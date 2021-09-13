@@ -25,7 +25,7 @@ namespace Data.Controllers
         public ViewResult GetStreets()
         {
             VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Data);
-            //List<NSI_STREET> list = vmBase.NsiStreetsL;
+            List<NSI_STREET> list = vmBase.NsiStreetsL;
             return View("nsi_street", vmBase);
         }
     }

@@ -61,6 +61,21 @@ namespace Server.Core.ViewModel
         public IEnumerable<NSI_STREET> NsiStreets => coreServ.Get_NSI_STREET();
         public List<NSI_STREET> NsiStreetsL => NsiStreets.ToList();
         public IEnumerable<VW_NSI_STREET> VwNsiStreets => coreServ.Get_VW_NSI_STREET();
+        public List<VW_NSI_STREET> VwNsiStreetsL
+        {
+            get
+            {
+                List<VW_NSI_STREET> vwNsiStreetsL = new List<VW_NSI_STREET>
+                {
+                    new VW_NSI_STREET
+                    {
+                        NSTREET_ID = 1,
+                        NSTREET_NAME = "Test",
+                    }
+                };
+                return vwNsiStreetsL;
+            }
+        }
 
 
         public IEnumerable<NSI_VILLAGE> NsiVillages => coreServ.Get_NSI_VILLAGE();
