@@ -49,6 +49,30 @@ function Site_Border() {
 
 }
 
+function Site_Border1() {
+    Ext.create('Ext.Panel', {
+        width: 500,
+        height: 360,
+        padding: 10,
+        layout: 'border',
+        items: [{
+            xtype: 'panel',
+            title: 'Центральная панель',
+            html: 'Центральная панель',
+            region: 'center',
+            margin: '5 5 5 5'
+        }, {
+            xtype: 'panel',
+            title: 'Верхняя панель',
+            html: 'Верхняя панель',
+            region: 'north',
+            height: 80
+        } ],
+        renderTo: Ext.getBody()
+    });
+
+}
+
 function Site_Accordion(data) {
 
     var data_str = data.replaceAll('&quot;', '"');

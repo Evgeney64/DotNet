@@ -27,21 +27,21 @@ namespace HtmlHelpersApp.App_Code
 		public static object Customize(this IHtmlHelper html, VmBase vmBase)
 		{
 			string div = "";
-			div += ""
-				//+ "<html lang='en'>"
-				//+ "<body>"
-				+ "<h3>Улицы</h3>"
-				//+ "<script src='~/lib/jquery/dist/jquery.min.js'></script>"
-				+ "<script>"
-					+ "$(document).ready(function () {"
-						+ "Site_Accordion('@Model.UsersJson');"
-					+ "});"
-				+ "</script>"
-				//+ "</body>"
-				//+ "</html>"
-				+ ""
+			div += "<script>" +
+				"" +
+				"	$(document).ready(function () {" +
+                //"		Site_Accordion('@Model.UsersJson');" +
+                "		Ext.create('Ext.Panel', {" +
+                "			width: 500, height: 360, padding: 10, layout: 'border'," +
+                "			items: [" +
+                "				{xtype: 'panel', title: 'Центральная панель', html: 'Центральная панель', region: 'center', margin: '5 5 5 5' }," +
+                "				{xtype: 'panel', title: 'Верхняя панель', html: 'Верхняя панель', region: 'north', height: 80}" +
+                "			]," +
+                "			renderTo: Ext.getBody()" +
+                "			});" +
+                "	});" +
+				"</script>"
 				;
-			//vmBase.HtmlString = @"<html lang='en'/>";
 			object view = html.Raw(div);
 			return view;
 		}
