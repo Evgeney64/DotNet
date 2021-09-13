@@ -1,7 +1,19 @@
 ﻿@using ru.tsb.mvc.Factories;
-@using Microsoft.AspNetCore.Mvc.ViewFeatures;
-@using Microsoft.AspNetCore.Mvc.Routing;
+@using HtmlHelpersApp.App_Code;
 
 @model Server.Core.ViewModel.VmBase
 
-@(Configurator.Customize(Model))
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+    @ListHelper.Customize(Html, Model)
+
+</body>
+</html>
+

@@ -4,9 +4,6 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
 
 using Server.Core.Public;
 using Server.Core.ViewModel;
@@ -58,3 +55,4 @@ namespace ru.tsb.mvc.Factories
 
 	}
 }
+
