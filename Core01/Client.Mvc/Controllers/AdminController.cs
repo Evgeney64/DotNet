@@ -22,13 +22,6 @@ namespace Admin.Controllers
 		public ViewResult GetUsers()
 		{
 			VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-			if (vmBase.UsersJson != null)
-			{ }
-			//vmBase.HtmlString = "<html lang=/"en/"//>";
-			//return Html.Raw(vmBase.HtmlString);
-			//vmBase.HtmlString = "<html lang='en'><body>" +
-			//	"<script>$(document).ready(function() {	Site_Accordion('@Model.UsersJson');});</script></body></html>";
-			//List<scr_user> list = vmBase.UsersL;
 			return View("sys_user", vmBase);
 		}
 		public string GetUsers1()

@@ -1,13 +1,11 @@
-﻿@using ru.tsb.mvc.Factories;
-@using HtmlHelpersApp.App_Code;
+﻿@using HtmlHelpersApp.App_Code;
 
 @model Server.Core.ViewModel.VmBase
 
 <body>
     @ListHelper.Customize(Html, Model)
-
-    @*<script>$(document).ready(function () {Site_Accordion("@Model.UsersJson");});</script>*@
-
 </body>
-</html>
+
+@*<script>$(document).ready(function () {Site_Accordion("@Model.UsersJson");});</script>*@
+
 
