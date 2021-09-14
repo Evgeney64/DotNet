@@ -32,7 +32,7 @@ namespace HtmlHelpersApp.App_Code
 			div += "<script>" +
 				"" +
 				"	$(document).ready(function () {" +
-				"		Site_Accordion(\"@Model.VwNsiStreetsL\");" +
+				"		Site_Accordion(\"@Model.UsersJson\");" +
 				//"		Site_Accordion(\"@Model.UsersJson\");" +
 				"		Site_Accordion1();" +
 				//"		Ext.create('Ext.Panel', {" +
@@ -46,6 +46,8 @@ namespace HtmlHelpersApp.App_Code
                 "	});" +
 				"</script>"
 				;
+			string str = vmBase.UsersJson.Replace("\"", "&quot;");
+			div = "<script>$(document).ready(function () {Site_Accordion(\"" + str + "\");});</script>";
 			object view = html.Raw(div);
 			return view;
 		}

@@ -40,7 +40,7 @@ namespace Server.Core.ViewModel
             {
                 case ConnectionType_Enum.Auth:
                     connectionString = configuration["Data:auth:ConnectionString"];
-                    authServ = new AuthServ(connectionString);
+                    //authServ = new AuthServ(connectionString);
                     break;
                 case ConnectionType_Enum.Data:
                     connectionString = configuration["Data:renovation_web:ConnectionString"];

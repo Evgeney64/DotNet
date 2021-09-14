@@ -22,6 +22,8 @@ namespace Admin.Controllers
 		public ViewResult GetUsers()
 		{
 			VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+			if (vmBase.UsersJson != null)
+			{ }
 			//vmBase.HtmlString = "<html lang=/"en/"//>";
 			//return Html.Raw(vmBase.HtmlString);
 			//vmBase.HtmlString = "<html lang='en'><body>" +
