@@ -22,12 +22,45 @@ namespace ru.tsb.mvc
 {
     public partial class Startup
     {
+        public IConfiguration AppConfiguration { get; }
+        public IConfiguration CustomConfiguration { get; set; }
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            AppConfiguration = configuration;
+
+            #region 4.Конфигурация
+            #region 01 - Основы конфигурации
+            if (1 == 2)
+            {
+                // строитель конфигурации
+                var builder = new ConfigurationBuilder()
+                    .AddInMemoryCollection(new Dictionary<string, string>
+                    {
+                    {"firstname", "Tom"},
+                    {"age", "31"}
+                    });
+                // создаем конфигурацию
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+
+            #region 04 - Файловые провайдеры конфигурации (Конфигурация в JSON / XML / INI)
+            if (1 == 2)
+            {
+                string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"] + "config.json";
+                var builder = new ConfigurationBuilder().AddJsonFile(path_conf);
+                //string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"] + "config.xml";
+                //var builder = new ConfigurationBuilder().AddXmlFile(path_conf);
+                //string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"] + "config.ini";
+                //var builder = new ConfigurationBuilder().AddIniFile(path_conf);
+
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+
+            #endregion
         }
 
-        public IConfiguration Configuration { get; }
 
         private IServiceCollection _services;
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -400,9 +433,78 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
-            // ************************************************************************
-        #endregion
-        }
 
+            #region 4.Конфигурация
+            #region 01 - Основы конфигурации
+            if (1 == 2)
+            {
+                #region 1
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync(CustomConfiguration["firstname"]);
+                });
+                #endregion
+
+                #region 2 - (мы можем динамически изменять уже имеющиеся настройки или определять новые)
+                CustomConfiguration["firstname"] = "alice";
+                CustomConfiguration["lastname"] = "simpson";
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync($"{CustomConfiguration["firstname"]} {CustomConfiguration["lastname"]} - {CustomConfiguration["age"]}");
+                });
+                #endregion
+            }
+            #endregion
+
+            #region 02 - Конфигурация по умолчанию
+            if (1 == 2)
+            {
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("Hello world");
+                });
+            }
+            #endregion
+
+            #region 03 - Переменные среды окружения как источник конфигурации
+            if (1 == 2)
+            {
+                string envVars = "";
+                envVars += "JAVA_HOME - ";
+                if (AppConfiguration["JAVA_HOME"] != null) envVars += AppConfiguration["JAVA_HOME"];
+                else envVars += "not set";
+
+                envVars += "\nTEMP - ";
+                if (AppConfiguration["TEMP"] != null) envVars += AppConfiguration["TEMP"];
+                else envVars += "not set";
+
+                envVars += "\nProgram Files - ";
+                if (AppConfiguration["ProgramFiles"] != null) envVars += AppConfiguration["ProgramFiles"];
+                else envVars += "not set";
+
+                { }
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync(envVars);
+                });
+            }
+            #endregion
+
+            #region 04 - Файловые провайдеры конфигурации (Конфигурация в JSON / XML / INI)
+            if (1 == 2)
+            {
+                var color = CustomConfiguration["color"];
+                var text = CustomConfiguration["text"];
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync($"<p style='color:{color};'>{text}</p>");
+                });
+            }
+            #endregion
+
+            #endregion
+            // ************************************************************************
+            #endregion
+        }
     }
 }
