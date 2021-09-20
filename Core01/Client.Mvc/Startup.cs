@@ -50,14 +50,14 @@ namespace ru.tsb.mvc
             services.AddMvc();
 
             #region Services
-            #region 15 - DI (Создание своих сервисов)
+            #region 05 - DI (Создание своих сервисов)
             if (1 == 2)
             {
                 services.AddTransient<IMessageSender, EmailMessageSender>();
             }
             #endregion
 
-            #region 16 - DI (Расширения для добавления сервисов)
+            #region 06 - DI (Расширения для добавления сервисов)
             if (1 == 2)
             {
                 //services.AddTransient<TimeService>();
@@ -65,7 +65,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 17 - DI (Передача зависимостей - Конструкторы)
+            #region 07 - DI (Передача зависимостей - Конструкторы)
             if (1 == 2)
             {
                 services.AddTransient<IMessageSender, EmailMessageSender>();
@@ -73,14 +73,14 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 18 - DI (Передача зависимостей - HttpContext.RequestServices / ApplicationServices)
+            #region 08 - DI (Передача зависимостей - HttpContext.RequestServices / ApplicationServices)
             if (1 == 2)
             {
                 services.AddTransient<IMessageSender, EmailMessageSender>();
             }
             #endregion
 
-            #region 19 - DI (Передача зависимостей - Invoke / InvokeAsync)
+            #region 09 - DI (Передача зависимостей - Invoke / InvokeAsync)
             if (1 == 2)
             {
                 services.AddTransient<IMessageSender, EmailMessageSender>();
@@ -117,7 +117,7 @@ namespace ru.tsb.mvc
             #region Services
             // ************************************************************************
             // https://metanit.com/sharp/aspnet5/1.1.php
-
+            #region 2.Основы ASP.NET Core
             #region 01 - Run()
             if (1 == 2)
             {
@@ -258,8 +258,10 @@ namespace ru.tsb.mvc
                 { }
             }
             #endregion
+            #endregion
 
-            #region 11 - UseDeveloperExceptionPage
+            #region 3.Dependency Injection
+            #region 01 - UseDeveloperExceptionPage
             if (1 == 2)
             {
                 if (env.IsDevelopment())
@@ -276,7 +278,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 12 - UseExceptionHandler
+            #region 02 - UseExceptionHandler
             if (1 == 2)
             {
                 env.EnvironmentName = "Production";
@@ -301,7 +303,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 13 - StatusCodePagesMiddleware 
+            #region 03 - StatusCodePagesMiddleware 
             if (1 == 2)
             {
                 // http://localhost:58982/hello
@@ -321,7 +323,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 14 - Dependency Injection
+            #region 04 - Dependency Injection
             if (1 == 2)
             {
                 // Все сервисы
@@ -346,7 +348,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 15 - DI (Создание своих сервисов)
+            #region 05 - DI (Создание своих сервисов)
             if (1 == 2)
             {
                 //app.Run(async (context) =>
@@ -356,7 +358,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 16 - DI (Расширения для добавления сервисов)
+            #region 06 - DI (Расширения для добавления сервисов)
             if (1 == 2)
             {
                 //app.Run(async (context) =>
@@ -367,7 +369,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 17 - DI (Передача зависимостей - Конструкторы)
+            #region 07 - DI (Передача зависимостей - Конструкторы)
             if (1 == 2)
             {
                 //app.Run(async (context) =>
@@ -377,7 +379,7 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 18 - DI (Передача зависимостей - HttpContext.RequestServices / ApplicationServices)
+            #region 08 - DI (Передача зависимостей - HttpContext.RequestServices / ApplicationServices)
             if (1 == 2)
             {
                 app.Run(async (context) =>
@@ -391,14 +393,15 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 19 - DI (Передача зависимостей - Invoke / InvokeAsync)
+            #region 09 - DI (Передача зависимостей - Invoke / InvokeAsync)
             if (1 == 2)
             {
                 app.UseMiddleware<MessageMiddleware>();
             }
             #endregion
-            // ************************************************************************
             #endregion
+            // ************************************************************************
+        #endregion
         }
 
     }

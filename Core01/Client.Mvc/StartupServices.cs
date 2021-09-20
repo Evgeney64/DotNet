@@ -34,6 +34,7 @@ namespace ru.tsb.mvc
         }
     }
 
+    #region 2.Основы ASP.NET Core
     #region 06 - Token
     public static class TokenExtensions
     {
@@ -175,8 +176,10 @@ namespace ru.tsb.mvc
         }
     }
     #endregion
+    #endregion
 
-    #region 15 - DI (Создание своих сервисов)
+    #region 3.Dependency Injection
+    #region 05 - DI (Создание своих сервисов)
     public interface IMessageSender
     {
         string Send();
@@ -197,7 +200,7 @@ namespace ru.tsb.mvc
     }
     #endregion
 
-    #region 16 - DI (Расширения для добавления сервисов)
+    #region 06 - DI (Расширения для добавления сервисов)
     public class TimeService
     {
         public string GetTime() => System.DateTime.Now.ToString("hh:mm:ss");
@@ -211,7 +214,7 @@ namespace ru.tsb.mvc
     }
     #endregion
 
-    #region 17 - DI (Передача зависимостей - Конструкторы)
+    #region 07 - DI (Передача зависимостей - Конструкторы)
     public class MessageService
     {
         IMessageSender _sender;
@@ -226,7 +229,7 @@ namespace ru.tsb.mvc
     }
     #endregion
 
-    #region 19 - DI (Передача зависимостей - Invoke / InvokeAsync)
+    #region 09 - DI (Передача зависимостей - Invoke / InvokeAsync)
     public class MessageMiddleware
     {
         private readonly RequestDelegate _next;
@@ -242,5 +245,6 @@ namespace ru.tsb.mvc
             await context.Response.WriteAsync(messageSender.Send());
         }
     }
+    #endregion
     #endregion
 }
