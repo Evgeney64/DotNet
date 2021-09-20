@@ -175,4 +175,72 @@ namespace ru.tsb.mvc
         }
     }
     #endregion
+
+    #region 15 - DI (Создание своих сервисов)
+    public interface IMessageSender
+    {
+        string Send();
+    }
+    public class EmailMessageSender : IMessageSender
+    {
+        public string Send()
+        {
+            return "Sent by Email";
+        }
+    }
+    public class SmsMessageSender : IMessageSender
+    {
+        public string Send()
+        {
+            return "Sent by SMS";
+        }
+    }
+    #endregion
+
+    #region 16 - DI (Расширения для добавления сервисов)
+    public class TimeService
+    {
+        public string GetTime() => System.DateTime.Now.ToString("hh:mm:ss");
+    }
+    public static class ServiceProviderExtensions
+    {
+        public static void AddTimeService(this IServiceCollection services)
+        {
+            services.AddTransient<TimeService>();
+        }
+    }
+    #endregion
+
+    #region 17 - DI (Передача зависимостей - Конструкторы)
+    public class MessageService
+    {
+        IMessageSender _sender;
+        public MessageService(IMessageSender sender)
+        {
+            _sender = sender;
+        }
+        public string Send()
+        {
+            return _sender.Send();
+        }
+    }
+    #endregion
+
+    #region 19 - DI (Передача зависимостей - Invoke / InvokeAsync)
+    public class MessageMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public MessageMiddleware(RequestDelegate next)
+        {
+            this._next = next;
+        }
+
+        public async Task InvokeAsync(HttpContext context, IMessageSender messageSender)
+        {
+            context.Response.ContentType = "text/html;charset=utf-8";
+            await context.Response.WriteAsync(messageSender.Send());
+        }
+    }
+    #endregion
 }
