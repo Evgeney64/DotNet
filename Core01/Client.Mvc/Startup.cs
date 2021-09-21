@@ -181,6 +181,30 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
+
+            #region 5.Состояние приложения
+            #region 03 - Сессии
+            if (1 == 2)
+            {
+                services.AddDistributedMemoryCache();
+                //services.AddSession();
+                services.AddSession(options =>
+                {
+                    options.Cookie.Name = ".MyApp.Session";
+                    options.IdleTimeout = TimeSpan.FromSeconds(3600);
+                    options.Cookie.IsEssential = true;
+                });
+            }
+            #endregion
+
+            #region 04 - Сессии (Хранение сложных объектов)
+            if (1 == 2)
+            {
+                services.AddDistributedMemoryCache();
+                services.AddSession();
+            }
+            #endregion
+            #endregion
             #endregion
         }
 
@@ -661,6 +685,111 @@ namespace ru.tsb.mvc
             if (1 == 2)
             {
                 app.UseMiddleware<ConfigurationClassMiddleware>();
+            }
+            #endregion
+            #endregion
+
+            #region 5.Состояние приложения
+            #region 01 - HttpContext.Items
+            if (1 == 2)
+            {
+                app.Use(async (context, next) =>
+                {
+                    context.Items["text1"] = "Text from HttpContext.Items";
+                    context.Items.Add("text2", "Привет мир !!!");
+                    await next.Invoke();
+                });
+
+                app.Run(async (context) =>
+                {
+                    string text = "";
+                    if (context.Items.ContainsKey("text1")) text += $"<p>text1 - {context.Items["text1"]}</p>";
+                    if (context.Items.ContainsKey("text2")) text += $"<p>text2 - {context.Items["text2"]}</p>";
+                    context.Response.ContentType = "text/html; charset=utf-8";
+                    await context.Response.WriteAsync(text);
+                });
+            }
+            #endregion
+
+            #region 02 - Куки
+            if (1 == 2)
+            {
+                app.Run(async (context) =>
+                {
+                    if (context.Request.Cookies.ContainsKey("name"))
+                    {
+                        // второй запрос
+                        string name = context.Request.Cookies["name"];
+                        await context.Response.WriteAsync($"Hello {name}!");
+                    }
+                    else
+                    {
+                        // первый запрос
+                        context.Response.Cookies.Append("name", "Tom");
+                        await context.Response.WriteAsync("Hello World!");
+                    }
+                });
+            }
+            #endregion
+
+            #region 03 - Сессии
+            if (1 == 2)
+            {
+                app.UseSession();
+
+                app.Run(async (context) =>
+                {
+                    // второй запрос
+                    if (context.Session.Keys.Contains("name"))
+                        await context.Response.WriteAsync($"Hello {context.Session.GetString("name")}!");
+                    else
+                    {
+                        // первый запрос
+                        context.Session.SetString("name", "Tom");
+                        await context.Response.WriteAsync("Hello World!");
+                    }
+                });
+            }
+            #endregion
+
+            #region 04 - Сессии (Хранение сложных объектов)
+            if (1 == 2)
+            {
+                app.UseSession();
+
+                app.Run(async (context) =>
+                {
+                    if (context.Session.Keys.Contains("configuration"))
+                    {
+                        ConfigurationClass conf = context.Session.Get<ConfigurationClass>("configuration");
+                        string text = "";
+                        text += $"<table><tr>";
+                        text += $"<td>default - </td><td style='color:{conf.color};'>{conf.ConnectionStrings.DefaultConnection}</td>";
+                        text += $"</tr></table>";
+                        text += $"<p>TKO - {conf.ConnectionStrings.TKOConnection}</p>";
+                        text += $"<p>RESK - {conf.ConnectionStrings.RESKConnection}</p>";
+                        text += $"<p>NESK - {conf.ConnectionStrings.NESKConnection}</p>";
+                        { }
+
+                        await context.Response.WriteAsync(text);
+                    }
+                    else
+                    {
+                        ConfigurationClass conf = new ConfigurationClass 
+                        { 
+                            color = "blue",
+                            ConnectionStrings = new ConnectionStringsClass
+                            {
+                                DefaultConnection = "renowation_web",
+                                TKOConnection = "renowation_web_tko",
+                                RESKConnection = "renowation_web_resk",
+                                NESKConnection = "renowation_web_nesk",
+                            }
+                        };
+                        context.Session.Set<ConfigurationClass>("configuration", conf);
+                        await context.Response.WriteAsync("Hello World!");
+                    }
+                });
             }
             #endregion
             #endregion

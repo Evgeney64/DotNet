@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Microsoft.Extensions.Options;
 using System.Text;
+using System.Text.Json;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -357,6 +358,24 @@ namespace ru.tsb.mvc
             { }
 
             await context.Response.WriteAsync(text);
+        }
+    }
+    #endregion
+    #endregion
+
+    #region 5.Состояние приложения
+    #region 04 - Сессии (Хранение сложных объектов)
+    public static class SessionExtensions
+    {
+        public static void Set<T>(this ISession session, string key, T value)
+        {
+            session.SetString(key, JsonSerializer.Serialize<T>(value));
+        }
+
+        public static T Get<T>(this ISession session, string key)
+        {
+            var value = session.GetString(key);
+            return value == null ? default(T) : JsonSerializer.Deserialize<T>(value);
         }
     }
     #endregion
