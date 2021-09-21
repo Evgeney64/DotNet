@@ -9,10 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Microsoft.Extensions.Options;
+using System.Text;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using Server.Core;
+
 
 namespace ru.tsb.mvc
 {
@@ -298,6 +302,58 @@ namespace ru.tsb.mvc
             string text = $"<p><h1>Middleware</h1></p>";
             text += $"<p style='color:{color};'>{name}</p>";
             text += $"<p>{path}</p>";
+            { }
+
+            await context.Response.WriteAsync(text);
+        }
+    }
+    #endregion
+
+    #region 09 - Проекция конфигурации на классы
+    public class ConfigurationClass
+    {
+        public string color { get; set; }
+        public string text { get; set; }
+        public ConnectionStringsClass ConnectionStrings { get; set; }
+        public List<string> Languages { get; set; }
+        public ConfigurationCompanyClass Company { get; set; }
+    }
+    public class ConfigurationCompanyClass
+    {
+        public string Title { get; set; }
+        public string Country { get; set; }
+    }
+    public class ConnectionStringsClass
+    {
+        public string DefaultConnection { get; set; }
+        public string TKOConnection { get; set; }
+        public string RESKConnection { get; set; }
+        public string NESKConnection { get; set; }
+    }
+    #endregion
+
+    #region 10 - Передача конфигурации через IOptions
+    public class ConfigurationClassMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public ConfigurationClassMiddleware(RequestDelegate next, IOptions<ConfigurationClass> options)
+        {
+            _next = next;
+            conf = options.Value;
+        }
+
+        public ConfigurationClass conf { get; }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            string text = "";
+            text += $"<table><tr>";
+            text += $"<td>default - </td><td style='color:{conf.color};'>{conf.ConnectionStrings.DefaultConnection}</td>";
+            text += $"</tr></table>";
+            text += $"<p>TKO - {conf.ConnectionStrings.TKOConnection}</p>";
+            text += $"<p>RESK - {conf.ConnectionStrings.RESKConnection}</p>";
+            text += $"<p>NESK - {conf.ConnectionStrings.NESKConnection}</p>";
             { }
 
             await context.Response.WriteAsync(text);

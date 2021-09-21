@@ -28,6 +28,7 @@ namespace ru.tsb.mvc
         {
             AppConfiguration = configuration;
 
+            #region Services
             #region 4.Конфигурация
             #region 01 - Основы конфигурации
             if (1 == 2)
@@ -58,12 +59,14 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 05 / 06 / 07
+            #region 05 / 06 / 07 / 09 / 10
             if (1 == 2)
             {
-                string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"];
+                string path_conf = "";
+                //path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"]; ;
 
                 var builder = new ConfigurationBuilder()
+                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
                     .AddJsonFile(path_conf + "config.json")
                     .AddEnvironmentVariables()
                     .AddInMemoryCollection(new Dictionary<string, string>
@@ -92,7 +95,7 @@ namespace ru.tsb.mvc
                 CustomConfiguration = builder.Build();
             }
             #endregion
-
+            #endregion
             #endregion
         }
 
@@ -166,8 +169,18 @@ namespace ru.tsb.mvc
                 services.AddTransient<IConfiguration>(provider => CustomConfiguration);
             }
             #endregion
-            #endregion
 
+            #region 10 - Передача конфигурации через IOptions
+            if (1 == 2)
+            {
+                services.Configure<ConfigurationClass>(CustomConfiguration);
+                services.Configure<ConfigurationClass>(opt =>
+                {
+                    opt.color = "blue";
+                });
+            }
+            #endregion
+            #endregion
             #endregion
         }
 
@@ -583,6 +596,8 @@ namespace ru.tsb.mvc
             #region 07 - Работа с конфигурацией (GetSection)
             if (1 == 2)
             {
+                string color = CustomConfiguration["color"];
+
                 IConfigurationSection connStrings = CustomConfiguration.GetSection("ConnectionStrings");
                 string def_con = connStrings.GetSection("DefaultConnection").Value;
                 
@@ -590,10 +605,12 @@ namespace ru.tsb.mvc
                 string resk_con = CustomConfiguration["ConnectionStrings:RESKConnection"];
                 string nesk_con = CustomConfiguration.GetConnectionString("NESKConnection");
 
-                string text = $"<p'>default - {def_con}</p>";
-                text += $"<p'>TKO - {tko_con}</p>";
-                text += $"<p'>RESK - {resk_con}</p>";
-                text += $"<p'>NESK - {nesk_con}</p>";
+                string text = "";
+                text += $"<table><tr>";
+                text += $"<td>default - </td><td style='color:{color};'>{def_con}</td>";
+                text += $"</tr></table>";
+                text += $"<p>RESK - {resk_con}</p>";
+                text += $"<p>NESK - {nesk_con}</p>";
                 { }
                 app.Run(async (context) =>
                 {
@@ -610,6 +627,40 @@ namespace ru.tsb.mvc
                 {
                     await context.Response.WriteAsync("{\n" + projectJsonContent + "}");
                 });
+            }
+            #endregion
+
+            #region 09 - Проекция конфигурации на классы
+            if (1 == 2)
+            {
+                ConfigurationClass conf = new ConfigurationClass();
+                CustomConfiguration.Bind(conf);
+
+                // Привязка секций конфигурации 
+                ConnectionStringsClass conf_conn = CustomConfiguration
+                    .GetSection("ConnectionStrings")
+                    .Get<ConnectionStringsClass>()
+                    ;
+
+                string text = "";
+                text += $"<table><tr>";
+                text += $"<td>default - </td><td style='color:{conf.color};'>{conf.ConnectionStrings.DefaultConnection}</td>";
+                text += $"</tr></table>";
+                text += $"<p>TKO - {conf.ConnectionStrings.TKOConnection}</p>";
+                text += $"<p>RESK - {conf_conn.RESKConnection}</p>";
+                text += $"<p>NESK - {conf_conn.NESKConnection}</p>";
+                { }
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync(text);
+                });
+            }
+            #endregion
+
+            #region 10 - Передача конфигурации через IOptions
+            if (1 == 2)
+            {
+                app.UseMiddleware<ConfigurationClassMiddleware>();
             }
             #endregion
             #endregion

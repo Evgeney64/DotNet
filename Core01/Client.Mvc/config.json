@@ -7,5 +7,14 @@
     "RESKConnection": "renowation_web_resk",
     "NESKConnection": "renowation_web_nesk",
     "UsersContext": "Users database"
+  },
+  "languages": [
+    "English",
+    "German",
+    "Spanish"
+  ],
+  "company": {
+    "title": "Microsoft",
+    "country": "USA"
   }
 }
