@@ -32,6 +32,29 @@ namespace ru.tsb.mvc
                 await context.Response.WriteAsync("About");
             });
         }
+
+        #region 4.Конфигурация
+        #region 08 - Работа с конфигурацией (анализ файла конфигурации)
+        private string getSectionContent(IConfiguration configSection)
+        {
+            string sectionContent = "";
+            foreach (var section in configSection.GetChildren())
+            {
+                sectionContent += "\"" + section.Key + "\":";
+                if (section.Value == null)
+                {
+                    string subSectionContent = getSectionContent(section);
+                    sectionContent += "{\n" + subSectionContent + "},\n";
+                }
+                else
+                {
+                    sectionContent += "\"" + section.Value + "\",\n";
+                }
+            }
+            return sectionContent;
+        }
+        #endregion
+        #endregion
     }
 
     #region 2.Основы ASP.NET Core
@@ -243,6 +266,41 @@ namespace ru.tsb.mvc
         {
             context.Response.ContentType = "text/html;charset=utf-8";
             await context.Response.WriteAsync(messageSender.Send());
+        }
+    }
+    #endregion
+    #endregion
+
+    #region 4.Конфигурация
+    #region 06 - Объединение источников конфигурации (UseMiddleware)
+    public class ConfigMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public ConfigMiddleware(RequestDelegate next, IConfiguration config)
+        {
+            _next = next;
+            CustomConfiguration = config;
+        }
+        public IConfiguration CustomConfiguration { get; set; }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            // определен в файле conf.json
+            string color = CustomConfiguration["color"];
+
+            // определен в памяти
+            string name = CustomConfiguration["name"] + " - " + CustomConfiguration["age"];
+
+            // определен в переменных среды окружения
+            string path = "TEMP - " + CustomConfiguration["TEMP"];
+
+            string text = $"<p><h1>Middleware</h1></p>";
+            text += $"<p style='color:{color};'>{name}</p>";
+            text += $"<p>{path}</p>";
+            { }
+
+            await context.Response.WriteAsync(text);
         }
     }
     #endregion

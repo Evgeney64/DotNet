@@ -58,6 +58,41 @@ namespace ru.tsb.mvc
             }
             #endregion
 
+            #region 05 / 06 / 07
+            if (1 == 2)
+            {
+                string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"];
+
+                var builder = new ConfigurationBuilder()
+                    .AddJsonFile(path_conf + "config.json")
+                    .AddEnvironmentVariables()
+                    .AddInMemoryCollection(new Dictionary<string, string>
+                    {
+                        {"name", "Tom"},
+                        {"age", "31"}
+                    })
+                    .AddConfiguration(configuration)
+                    ;
+                // создаем конфигурацию
+
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+
+            #region 08 - Работа с конфигурацией (анализ файла конфигурации)
+            if (1 == 2)
+            {
+                string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"];
+
+                var builder = new ConfigurationBuilder()
+                    .AddJsonFile(path_conf + "project.json")
+                    ;
+                // создаем конфигурацию
+
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+
             #endregion
         }
 
@@ -66,6 +101,7 @@ namespace ru.tsb.mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Default
             _services = services;
             //services.AddDbContext<EntityContext>(options =>
             //    options.UseSqlServer(Configuration["Data:renovation_web:ConnectionString"]));
@@ -81,8 +117,10 @@ namespace ru.tsb.mvc
             //    .AddDefaultTokenProviders();
 
             services.AddMvc();
+            #endregion
 
             #region Services
+            #region 3.Dependency Injection
             #region 05 - DI (Создание своих сервисов)
             if (1 == 2)
             {
@@ -120,6 +158,17 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
+
+            #region 4.Конфигурация
+            #region 06 - Объединение источников конфигурации (UseMiddleware)
+            if (1 == 2)
+            {
+                services.AddTransient<IConfiguration>(provider => CustomConfiguration);
+            }
+            #endregion
+            #endregion
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -131,7 +180,7 @@ namespace ru.tsb.mvc
         #endregion
             )
         {
-            #region Common
+            #region Default
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -502,6 +551,67 @@ namespace ru.tsb.mvc
             }
             #endregion
 
+            #region 05 - Объединение источников конфигурации
+            if (1 == 2)
+            {
+                // определен в файле conf.json
+                string color = CustomConfiguration["color"];
+
+                // определен в памяти
+                string name = CustomConfiguration["name"] + " - " + CustomConfiguration["age"];
+
+                // определен в переменных среды окружения
+                string path = "TEMP - " + CustomConfiguration["TEMP"];
+
+                string text = $"<p style='color:{color};'>{name}</p>";
+                text += $"<p>{path}</p>";
+                { }
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync(text);
+                });
+            }
+            #endregion
+
+            #region 06 - Объединение источников конфигурации (UseMiddleware)
+            if (1 == 2)
+            {
+                app.UseMiddleware<ConfigMiddleware>();
+            }
+            #endregion
+
+            #region 07 - Работа с конфигурацией (GetSection)
+            if (1 == 2)
+            {
+                IConfigurationSection connStrings = CustomConfiguration.GetSection("ConnectionStrings");
+                string def_con = connStrings.GetSection("DefaultConnection").Value;
+                
+                string tko_con = CustomConfiguration.GetSection("ConnectionStrings:TKOConnection").Value;
+                string resk_con = CustomConfiguration["ConnectionStrings:RESKConnection"];
+                string nesk_con = CustomConfiguration.GetConnectionString("NESKConnection");
+
+                string text = $"<p'>default - {def_con}</p>";
+                text += $"<p'>TKO - {tko_con}</p>";
+                text += $"<p'>RESK - {resk_con}</p>";
+                text += $"<p'>NESK - {nesk_con}</p>";
+                { }
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync(text);
+                });
+            }
+            #endregion
+
+            #region 08 - Работа с конфигурацией (анализ файла конфигурации)
+            if (1 == 2)
+            {
+                string projectJsonContent = getSectionContent(CustomConfiguration);
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("{\n" + projectJsonContent + "}");
+                });
+            }
+            #endregion
             #endregion
             // ************************************************************************
             #endregion

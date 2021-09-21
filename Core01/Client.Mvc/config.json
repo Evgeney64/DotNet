@@ -1,4 +1,11 @@
 {
   "color": "red",
-  "text": "welcome!"
+  "text": "welcome!",
+  "ConnectionStrings": {
+    "DefaultConnection": "renowation_web",
+    "TKOConnection": "renowation_web_tko",
+    "RESKConnection": "renowation_web_resk",
+    "NESKConnection": "renowation_web_nesk",
+    "UsersContext": "Users database"
+  }
 }
