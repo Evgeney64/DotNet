@@ -19,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Core;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 namespace ru.tsb.mvc
 {
@@ -227,12 +228,12 @@ namespace ru.tsb.mvc
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
             #endregion
 
             #region Services
@@ -841,6 +842,51 @@ namespace ru.tsb.mvc
                 {
                     logging(context, logger);
                     await context.Response.WriteAsync("Hello World!");
+                });
+            }
+            #endregion
+            #endregion
+
+            #region 7.ћаршрутизаци€
+            #region 01 - ќсновы маршрутизации в ASP.NET Core
+            if (1 == 1)
+            {
+                app.Use(async (context, next) =>
+                {
+                    // получаем конечную точку
+                    Endpoint endpoint = context.GetEndpoint();
+
+                    if (endpoint != null)
+                    {
+                        // получаем шаблон маршрута, который ассоциирован с конечной точкой
+                        var routePattern = (endpoint as Microsoft.AspNetCore.Routing.RouteEndpoint)?.RoutePattern?.RawText;
+
+                        Debug.WriteLine($"Endpoint Name: {endpoint.DisplayName}");
+                        Debug.WriteLine($"Route Pattern: {routePattern}");
+
+                        // если конечна€ точка определена, передаем обработку дальше
+                        await next();
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Endpoint: null");
+                        // если конечна€ точка не определена, завершаем обработку
+                        // http://localhost:58982/About
+                        await context.Response.WriteAsync("Endpoint is not defined");
+                    }
+                });
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapGet("/index", async context =>
+                    {
+                        // http://localhost:58982/index
+                        await context.Response.WriteAsync("Hello Index!");
+                    });
+                    endpoints.MapGet("/", async context =>
+                    {
+                        // http://localhost:58982
+                        await context.Response.WriteAsync("Hello World!");
+                    });
                 });
             }
             #endregion
