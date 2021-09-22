@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using Microsoft.Extensions.Options;
 using System.Text;
@@ -17,7 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using Server.Core;
-
+using System.IO;
 
 namespace ru.tsb.mvc
 {
@@ -59,6 +61,28 @@ namespace ru.tsb.mvc
             return sectionContent;
         }
         #endregion
+        #endregion
+
+        #region 6.Логгирование
+        private void logging(HttpContext context
+            //, ILogger<Startup> logger
+            , ILogger logger
+            )
+        {
+            logger.LogInformation("==================================================");
+            // пишем на консоль информацию
+            logger.LogInformation("--- LogCritical ----------------------");
+            logger.LogCritical("{0}", context.Request.Path);
+            logger.LogInformation("--- LogDebug ----------------------");
+            logger.LogDebug("{0}", context.Request.Path);
+            logger.LogInformation("--- LogError ----------------------");
+            logger.LogError("{0}", context.Request.Path);
+            logger.LogInformation("--- LogInformation ----------------------");
+            logger.LogInformation("{0}", context.Request.Path);
+            //logger.LogInformation($"Путь запроса {context.Request.Path}");
+            logger.LogInformation("--- LogWarning ----------------------");
+            logger.LogWarning("{0}", context.Request.Path);
+        }
         #endregion
     }
 
@@ -376,6 +400,67 @@ namespace ru.tsb.mvc
         {
             var value = session.GetString(key);
             return value == null ? default(T) : JsonSerializer.Deserialize<T>(value);
+        }
+    }
+    #endregion
+    #endregion
+
+    #region 6.Логгирование
+    #region 03 - Создание провайдера логгирования
+    public class FileLogger : ILogger
+    {
+        private string filePath;
+        private static object _lock = new object();
+        public FileLogger(string path)
+        {
+            filePath = path;
+        }
+        public IDisposable BeginScope<TState>(TState state)
+        {
+            return null;
+        }
+
+        public bool IsEnabled(LogLevel logLevel)
+        {
+            //return logLevel == LogLevel.Trace;
+            return true;
+        }
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        {
+            if (formatter != null)
+            {
+                lock (_lock)
+                {
+                    File.AppendAllText(filePath, formatter(state, exception) + Environment.NewLine);
+                }
+            }
+        }
+    }
+
+    public class FileLoggerProvider : ILoggerProvider
+    {
+        private string path;
+        public FileLoggerProvider(string _path)
+        {
+            path = _path;
+        }
+        public ILogger CreateLogger(string categoryName)
+        {
+            return new FileLogger(path);
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+
+    public static class FileLoggerExtensions
+    {
+        public static ILoggerFactory AddFile(this ILoggerFactory factory, string filePath)
+        {
+            factory.AddProvider(new FileLoggerProvider(filePath));
+            return factory;
         }
     }
     #endregion

@@ -12,11 +12,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 using Microsoft.EntityFrameworkCore;
 
 using Server.Core;
 using System.Text;
+using System.IO;
 
 namespace ru.tsb.mvc
 {
@@ -98,7 +100,6 @@ namespace ru.tsb.mvc
             #endregion
             #endregion
         }
-
 
         private IServiceCollection _services;
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -214,6 +215,7 @@ namespace ru.tsb.mvc
             //, IMessageSender messageSender  // 15 - DI (Создание своих сервисов)
             //, TimeService timeService  // 16 - DI (Расширения для добавления сервисов)
             //, MessageService messageService // 17 - DI (Передача зависимостей - Конструкторы)
+            //, ILogger<Startup> logger // 01 - Ведение лога и ILogger
         #endregion
             )
         {
@@ -789,6 +791,56 @@ namespace ru.tsb.mvc
                         context.Session.Set<ConfigurationClass>("configuration", conf);
                         await context.Response.WriteAsync("Hello World!");
                     }
+                });
+            }
+            #endregion
+            #endregion
+
+            #region 6.Логгирование
+            #region 01 - Ведение лога и ILogger
+            if (1 == 2)
+            {
+                app.Run(async (context) =>
+                {
+                    //logging(context, logger);
+                    await context.Response.WriteAsync("Hello World!");
+                });
+            }
+            #endregion
+
+            #region 02 - Фабрика логгера и провайдеры логгирования
+            if (1 == 2)
+            {
+                var loggerFactory = LoggerFactory.Create(builder =>
+                {
+                    builder.AddConsole();
+                    builder.AddDebug();
+                });
+                //ILogger logger = loggerFactory.CreateLogger<Startup>();
+                ILogger<Startup> logger = loggerFactory.CreateLogger<Startup>();
+                app.Run(async (context) =>
+                {
+                    logging(context, logger);
+                    await context.Response.WriteAsync("Hello World!");
+                });
+            }
+            #endregion
+
+            #region 03 - Создание провайдера логгирования
+            if (1 == 2)
+            {
+                var loggerFactory = LoggerFactory.Create(builder =>
+                {
+                    builder.AddConsole();
+                    builder.AddDebug();
+                });
+                loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
+                ILogger logger = loggerFactory.CreateLogger("FileLogger");
+
+                app.Run(async (context) =>
+                {
+                    logging(context, logger);
+                    await context.Response.WriteAsync("Hello World!");
                 });
             }
             #endregion
