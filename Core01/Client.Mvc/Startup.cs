@@ -22,6 +22,12 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 
+
+using ru.tsb.mvc.Models.Users;
+using ServiceLib;
+using Server.Core.CoreModel;
+using Server.Core.AuthModel;
+
 namespace ru.tsb.mvc
 {
     public partial class Startup
@@ -109,19 +115,8 @@ namespace ru.tsb.mvc
         {
             #region Default
             _services = services;
-            //services.AddDbContext<EntityContext>(options =>
-            //    options.UseSqlServer(Configuration["Data:renovation_web:ConnectionString"]));
-            //services.AddTransient<ICoreEdm, CoreEdm>();
 
-            services.AddControllersWithViews();
-
-            //services.AddDbContext<AppidentityDbContext>(options => 
-            //    options.UseSqlServer(Configuration["Data:auth:ConnectionString"]));
-            
-            //services.AddIdentity<scr_user, IdentityRole>()
-            //    .AddEntityFrameworkStores<AppidentityDbContext>()
-            //    .AddDefaultTokenProviders();
-
+            //services.AddControllersWithViews();
             services.AddMvc();
             #endregion
 
@@ -217,6 +212,28 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
+
+            #region 8.ASP.NET Core MVC
+            #region 01 - Первое приложение
+            if (1 == 2)
+            {
+                services.AddRouting();
+                services.AddDbContext<EntityContext>(options =>
+                    options.UseSqlServer(AppConfiguration["Data:gos:ConnectionString"]));
+                //services.AddDbContext<EntityContext>(options =>
+                //    options.UseSqlServer(AppConfiguration["Data:renovation_web:ConnectionString"]));
+                //services.AddTransient<ICoreEdm, CoreEdm>();
+
+                //services.AddDbContext<AppidentityDbContext>(options =>
+                //    options.UseSqlServer(AppConfiguration["Data:auth:ConnectionString"]));
+
+                //services.AddIdentity<scr_user, IdentityRole>()
+                //    .AddEntityFrameworkStores<AppidentityDbContext>()
+                //    .AddDefaultTokenProviders();
+            }
+            #endregion
+            #endregion
+
             #endregion
         }
 
@@ -238,12 +255,12 @@ namespace ru.tsb.mvc
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
             #endregion
 
             #region Services

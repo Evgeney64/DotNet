@@ -20,5 +20,8 @@ namespace Server.Core.CoreModel
         public IQueryable<NSI_STREET> Get_NSI_STREET() => Context.NSI_STREET;
 
         public IQueryable<NSI_VILLAGE> Get_NSI_VILLAGE() => Context.NSI_VILLAGE;
+
+        public IQueryable<street> GetStreets() => Context.street;
+        public IQueryable<type_street> GetTypeStreets() => Context.type_street;
     }
 }

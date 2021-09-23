@@ -16,6 +16,7 @@ namespace Server.Core.Public
         None = 0,
         Auth = 1,
         Data = 2,
+        Gos = 3,
     }
 }
 

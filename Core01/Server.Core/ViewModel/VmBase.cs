@@ -46,6 +46,10 @@ namespace Server.Core.ViewModel
                     connectionString = configuration["Data:renovation_web:ConnectionString"];
                     coreServ = new CoreServ(connectionString);
                     break;
+                case ConnectionType_Enum.Gos:
+                    connectionString = configuration["Data:gos:ConnectionString"];
+                    coreServ = new CoreServ(connectionString);
+                    break;
             }
             //var contextOptions = new DbContextOptionsBuilder<EntityContext>()
             //    .UseSqlServer(connectionString)
@@ -108,6 +112,12 @@ namespace Server.Core.ViewModel
         public scr_user1[] UsersAr { get { return UsersL.ToArray(); } }
 
         public string UsersJson { get { return JsonSerializer.Serialize(UsersAr); } }
+
+        public IEnumerable<street> streets => coreServ.GetStreets();
+        public List<street> streetsL => coreServ.GetStreets().ToList();
+
+        public IEnumerable<type_street> type_streets => coreServ.GetTypeStreets();
+        public List<type_street> type_streetsL => coreServ.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
     }
 
     public partial class scr_user1
