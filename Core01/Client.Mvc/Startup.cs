@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -849,7 +850,7 @@ namespace ru.tsb.mvc
 
             #region 7.Маршрутизация
             #region 01 - Основы маршрутизации в ASP.NET Core
-            if (1 == 1)
+            if (1 == 2)
             {
                 app.Use(async (context, next) =>
                 {
@@ -887,6 +888,83 @@ namespace ru.tsb.mvc
                         // http://localhost:58982
                         await context.Response.WriteAsync("Hello World!");
                     });
+                });
+            }
+            #endregion
+
+            #region 02 - RouterMiddleware
+            if (1 == 2)
+            {
+                // определяем обработчик маршрута
+                var myRouteHandler = new RouteHandler(Handle);
+
+                // создаем маршрут, используя обработчик
+                var routeBuilder = new RouteBuilder(app, myRouteHandler);
+
+                // само определение маршрута - он должен соответствовать запросу {controller}/{action}
+                // http://localhost:58982/1
+                routeBuilder.MapRoute("default", "{controller}/");
+                // http://localhost:58982/1/2
+                routeBuilder.MapRoute("two_param", "{controller}/{action}");
+                // http://localhost:58982/1/2/3
+                routeBuilder.MapRoute("three_param", "{controller}/{action}/{id}");
+                // строим маршрут
+                app.UseRouter(routeBuilder.Build());
+
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                });
+            }
+            #endregion
+
+            #region 03 - Определение маршрутов
+            if (1 == 1)
+            {
+                var routeBuilder = new RouteBuilder(app);
+
+                // http://localhost:58982/1/2
+                routeBuilder.MapRoute("{controller}/{action}",
+                    async context => {
+                        context.Response.ContentType = "text/html; charset=utf-8";
+                        await context.Response.WriteAsync("двухсегментный запрос");
+                    });
+
+                // http://localhost:58982/1/2/3
+                routeBuilder.MapRoute("{controller}/{action}/{id}", Handle3);
+
+                // Статические сегменты
+                //routeBuilder.MapRoute("default", "store/{action}");
+
+                // Необязательные параметры
+                //routeBuilder.MapRoute("default", "{controller}/{action?}/{id?}");
+
+                // Значения для параметров по умолчанию
+                //routeBuilder.MapRoute("default", "{controller}/{action}/{id?}", 
+                //    new 
+                //    { 
+                //        controller = "home", 
+                //        action = "index" 
+                //    });
+                //routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+                // Передача произвольного количества параметров в запросе
+                // http://localhost:58982/Home/Index/1/name/book/order
+                //routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}/{*catchall}");
+
+                // Использование префиксов
+                //http://localhost:58982/RuHome/Index-en/1
+                //routeBuilder.MapRoute("default", "Ru{controller=Home}/{action=Index}-en/{id?}");
+
+                // Несколько параметров в сегменте
+                //http://localhost:58982/Store/Order/lumia-2015
+                //routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{name}-{year}");
+
+                app.UseRouter(routeBuilder.Build());
+
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
                 });
             }
             #endregion

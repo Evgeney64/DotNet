@@ -84,6 +84,22 @@ namespace ru.tsb.mvc
             logger.LogWarning("{0}", context.Request.Path);
         }
         #endregion
+
+        #region 7.Маршрутизация
+        #region 02 - RouterMiddleware
+        private async Task Handle(HttpContext context)
+        {
+            // собственно обработчик маршрута
+            await context.Response.WriteAsync("Hello ASP.NET Core!");
+        }
+        private async Task Handle3(HttpContext context)
+        {
+            // собственно обработчик маршрута
+            context.Response.ContentType = "text/html; charset=utf-8";
+            await context.Response.WriteAsync("трехсегментный запрос");
+        }
+        #endregion
+        #endregion
     }
 
     #region 2.Основы ASP.NET Core
