@@ -208,6 +208,15 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
+
+            #region 7.Маршрутизация
+            #region 05 - Создание своего маршрута
+            if (1 == 2)
+            {
+                services.AddRouting();
+            }
+            #endregion
+            #endregion
             #endregion
         }
 
@@ -919,7 +928,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region 03 - Определение маршрутов
-            if (1 == 1)
+            if (1 == 2)
             {
                 var routeBuilder = new RouteBuilder(app);
 
@@ -959,6 +968,45 @@ namespace ru.tsb.mvc
                 // Несколько параметров в сегменте
                 //http://localhost:58982/Store/Order/lumia-2015
                 //routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{name}-{year}");
+
+                app.UseRouter(routeBuilder.Build());
+
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                });
+            }
+            #endregion
+
+            #region 04 - Работа с маршрутами
+            if (1 == 2)
+            {
+                //http://localhost:58982/ind/lumia-2015
+                var myRouteHandler = new RouteHandler(Handle4);
+                var routeBuilder = new RouteBuilder(app, myRouteHandler);
+                routeBuilder.MapRoute("default", "{action=Index}/{name}-{year}");
+                app.UseRouter(routeBuilder.Build());
+
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                });
+            }
+            #endregion
+
+            #region 05 - Создание своего маршрута
+            if (1 == 2)
+            {
+                // http://localhost:58982/admin/index
+                var routeBuilder = new RouteBuilder(app);
+
+                routeBuilder.Routes.Add(new AdminRoute());
+
+                routeBuilder.MapRoute("{controller}/{action}",
+                    async context => {
+                        context.Response.ContentType = "text/html;charset=utf-8";
+                        await context.Response.WriteAsync("двухсегментный запрос");
+                    });
 
                 app.UseRouter(routeBuilder.Build());
 

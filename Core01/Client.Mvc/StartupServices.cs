@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Server.Core;
 using System.IO;
+
 
 namespace ru.tsb.mvc
 {
@@ -92,11 +94,23 @@ namespace ru.tsb.mvc
             // собственно обработчик маршрута
             await context.Response.WriteAsync("Hello ASP.NET Core!");
         }
+        #endregion
+        #region 03 - Определение маршрутов
         private async Task Handle3(HttpContext context)
         {
             // собственно обработчик маршрута
             context.Response.ContentType = "text/html; charset=utf-8";
             await context.Response.WriteAsync("трехсегментный запрос");
+        }
+        #endregion
+        #region 04 - Работа с маршрутами
+        private async Task Handle4(HttpContext context)
+        {
+            var routeValues = context.GetRouteData().Values;
+            var action = routeValues["action"].ToString();
+            var name = routeValues["name"].ToString();
+            var year = routeValues["year"].ToString();
+            await context.Response.WriteAsync($"action: {action} | name: {name} | year:{year}");
         }
         #endregion
         #endregion
@@ -477,6 +491,32 @@ namespace ru.tsb.mvc
         {
             factory.AddProvider(new FileLoggerProvider(filePath));
             return factory;
+        }
+    }
+    #endregion
+    #endregion
+
+    #region 7.Маршрутизация
+    #region 05 - Создание своего маршрута
+    public class AdminRoute : IRouter
+    {
+        public VirtualPathData GetVirtualPath(VirtualPathContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task RouteAsync(RouteContext context)
+        {
+            string url = context.HttpContext.Request.Path.Value.TrimEnd('/');
+            if (url.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                context.Handler = async ctx =>
+                {
+                    ctx.Response.ContentType = "text/html;charset=utf-8";
+                    await ctx.Response.WriteAsync("Привет admin!");
+                };
+            }
+            await Task.CompletedTask;
         }
     }
     #endregion
