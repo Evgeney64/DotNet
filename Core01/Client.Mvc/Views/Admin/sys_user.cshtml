@@ -4,14 +4,31 @@
 
 <body>
     @ListHelper.Customize(Html, Model)
+
+    <div>
+        <form asp-controller="Admin" asp-action="SetUser" method="post">
+            <table>
+                <tr>
+                    <td>Имя:</td>
+                    <td><input type="text" name="User" /> </td>
+                </tr>
+                <tr>
+                    <td>Адрес:</td>
+                    <td><input type="text" name="Address" /></td>
+                </tr>
+                <tr>
+                    <td>Телефон:</td>
+                    <td><input type="text" name="ContactPhone" /></td>
+                </tr>
+            </table>    
+            <button type="submit" name="button">Set user</button>
+        </form>
+    </div>
 </body>
 
 @*<form method="POST">
         <input type="submit" value="Отправить" />
     </form>*@
-<form asp-controller="Admin" asp-action="SetUser" method="post">
-    <button type="submit" name="button">Set user</button>
-</form>
 
 @*<script>$(document).ready(function () {Site_Accordion("@Model.UsersJson");});</script>*@
 

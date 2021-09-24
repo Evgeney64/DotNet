@@ -13,6 +13,10 @@ using Server.Core.Public;
 using Server.Core.ViewModel;
 using Server.Core.AuthModel;
 
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 namespace Admin.Controllers 
 {
 	public class AdminController : Controller
@@ -23,30 +27,58 @@ namespace Admin.Controllers
 			configuration = _configuration;
 		}
 
-		public ViewResult GetUsers()
+		#region HttpGet
+		public IActionResult GetUsers()
 		{
 			if (this.HttpContext != null 
 				&& this.Request != null && this.Response != null 
 				&& this.RouteData != null
 				&& this.Url != null && this.User != null
 				&& this.Request.Query != null
-				//&& this.Request.Form != null
 				&& this.Request.QueryString != null
 				) { }
 
-			if (1 == 2)
+			if (this.Request.Query.Keys.Count > 0)
 			{
 				// http://localhost:58982/Admin/GetUsers?altitude=20&height=4
-				string altitudeString = Request.Query.FirstOrDefault(p => p.Key == "altitude").Value;
-				int altitude = Int32.Parse(altitudeString);
-
-				string heightString = Request.Query.FirstOrDefault(p => p.Key == "height").Value;
-				int height = Int32.Parse(heightString);
+				int i = 0;
+				string text = $"<p><h3>RedirectToAction</h3></p>";
+				foreach (string key in this.Request.Query.Keys)
+				{
+					string value = Request.Query.FirstOrDefault(p => p.Key == key).Value;
+					text += $"<p>[{i}] {key} = {value}</p>";
+					i++;
+				}
+				return RedirectToAction("Redirection", "Admin", new { text = text });
 			}
-
-			VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-			return View("sys_user", vmBase);
+			else
+			{
+				VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+				return View("sys_user", vmBase);
+			}
 		}
+		public IActionResult Redirection(string text)
+        {
+			return new HtmlResult(text);
+		}
+
+		public string GetUsersStr()
+		{
+			string text = "";
+			if (this.Request.Query.Keys.Count > 0)
+			{
+				// http://localhost:58982/Admin/GetUsersStr?altitude=20&height=4
+				int i = 0;
+				foreach (string key in this.Request.Query.Keys)
+				{
+					string value = Request.Query.FirstOrDefault(p => p.Key == key).Value;
+					text += "\n" + $"[{i}] {key} = {value}";
+					i++;
+				}
+			}
+			return text;
+		}
+		#endregion
 
 		#region HttpPost
 		[HttpPost]
@@ -56,34 +88,43 @@ namespace Admin.Controllers
 				&& this.Request != null && this.Response != null
 				&& this.RouteData != null
 				&& this.Url != null && this.User != null
-				&& this.Request.Query != null
 				&& this.Request.Form != null
-				&& this.Request.QueryString != null
 				) { }
 
 			string text = "";
-			if (1 == 2)
+			if (this.Request.Form.Keys.Count > 0)
 			{
-				// http://localhost:58982/Admin/SetUsers?altitude=20&height=4
-				string altitudeString = Request.Form.FirstOrDefault(p => p.Key == "altitude").Value;
-				int altitude = Int32.Parse(altitudeString);
-				text += $"<p>altitude = {altitude}</p>";
-
-				string heightString = Request.Form.FirstOrDefault(p => p.Key == "height").Value;
-				int height = Int32.Parse(heightString);
-				text += $"<p>height = {height}</p>";
+				int i = 0;
+				foreach(string key in this.Request.Form.Keys)
+                {
+					string value = Request.Form.FirstOrDefault(p => p.Key == key).Value;
+					text += "\n" + $"[{i}] {key} = {value}";
+					i++;
+				}
 			}
 
 			//VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
 			return text;
 		}
-
-		[HttpPost]
-		public string GetUsers(int? a)
-		{
-			// http://localhost:58982/Admin/Buy
-			return "Спасибо  за покупку!";
-		}
 		#endregion
+	}
+
+	public class HtmlResult : IActionResult
+	{
+		string htmlCode;
+		public HtmlResult(string html)
+		{
+			htmlCode = html;
+		}
+		public async Task ExecuteResultAsync(ActionContext context)
+		{
+			string fullHtmlCode = "<!DOCTYPE html><html><head>";
+			fullHtmlCode += "<title>Главная страница</title>";
+			fullHtmlCode += "<meta charset=utf-8 />";
+			fullHtmlCode += "</head> <body>";
+			fullHtmlCode += htmlCode;
+			fullHtmlCode += "</body></html>";
+			await context.HttpContext.Response.WriteAsync(fullHtmlCode);
+		}
 	}
 }
