@@ -239,9 +239,10 @@ namespace ru.tsb.mvc
             #endregion
 
             #region 9.Контроллеры
-            #region 01 - Контроллеры и их действия
+            #region 01 - Передача зависимостей в контроллер
             if (1 == 2)
             {
+                services.AddTransient<ITimeService, SimpleTimeService>();
             }
             #endregion
             #endregion
@@ -1046,14 +1047,6 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
-
-            #region 9.Контроллеры
-            #region 01 - Контроллеры и их действия
-            if (1 == 2)
-            {
-            }
-            #endregion
-            #endregion
             // ************************************************************************
             #endregion
 
@@ -1062,6 +1055,7 @@ namespace ru.tsb.mvc
             {
                 app.UseMiddleware<StartMiddleware>();
                 app.UseMiddleware<StartEndpointVerifyMiddleware>();
+
                 //app.UseMiddleware<StartEndpointVerifyMiddleware1>();
 
                 //var routeBuilder = new RouteBuilder(app);

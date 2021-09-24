@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -17,6 +18,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+
+using ru.tsb.mvc;
+
 
 namespace Admin.Controllers 
 {
@@ -50,9 +54,15 @@ namespace Admin.Controllers
 				&& this.Request != null && this.Response != null 
 				&& this.RouteData != null
 				&& this.Url != null && this.User != null
-				&& this.Request.Query != null
-				&& this.Request.QueryString != null
+				&& this.Request.Query != null && this.Request.QueryString != null
 				) { }
+
+			#region 9.Контроллеры (01 - Передача зависимостей в контроллер)
+			if (this.HttpContext.RequestServices != null)
+            {
+				ITimeService timeService = HttpContext.RequestServices.GetService<ITimeService>();
+			}
+			#endregion
 
 			if (this.Request.Query.Keys.Count > 0)
 			{

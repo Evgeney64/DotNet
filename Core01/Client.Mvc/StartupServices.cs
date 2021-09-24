@@ -648,7 +648,19 @@ namespace ru.tsb.mvc
     #endregion
 
     #region 9.Контроллеры
-    #region 01 - Контроллеры и их действия
+    #region 01 - Передача зависимостей в контроллер
+    public interface ITimeService
+    {
+        string Time { get; }
+    }
+    public class SimpleTimeService : ITimeService
+    {
+        public SimpleTimeService()
+        {
+            Time = DateTime.Now.ToString("hh:mm:ss");
+        }
+        public string Time { get; }
+    }
     #endregion
     #endregion
 
