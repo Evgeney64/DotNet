@@ -16,6 +16,7 @@ using Server.Core.AuthModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Admin.Controllers 
 {
@@ -26,6 +27,21 @@ namespace Admin.Controllers
 		{
 			configuration = _configuration;
 		}
+
+		#region OnActionExecute
+		public override void OnActionExecuting(ActionExecutingContext context)
+		{
+			if (context.HttpContext.Request.Headers.ContainsKey("User-Agent"))
+			{ }
+			base.OnActionExecuting(context);
+		}
+		public override void OnActionExecuted(ActionExecutedContext context)
+		{
+			if (context.HttpContext.Request.Headers.ContainsKey("User-Agent"))
+			{ }
+			base.OnActionExecuted(context);
+		}
+		#endregion
 
 		#region HttpGet
 		public IActionResult GetUsers()
@@ -49,7 +65,9 @@ namespace Admin.Controllers
 					text += $"<p>[{i}] {key} = {value}</p>";
 					i++;
 				}
-				return RedirectToAction("Redirection", "Admin", new { text = text });
+				//return RedirectToAction("RedirectHtmlResult", "Admin", new { text = text });
+				this.Response.WriteAsync(text);
+				return null;
 			}
 			else
 			{
@@ -57,7 +75,7 @@ namespace Admin.Controllers
 				return View("sys_user", vmBase);
 			}
 		}
-		public IActionResult Redirection(string text)
+		public IActionResult RedirectHtmlResult(string text)
         {
 			return new HtmlResult(text);
 		}
