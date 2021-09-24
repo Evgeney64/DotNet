@@ -6,6 +6,13 @@
     @ListHelper.Customize(Html, Model)
 </body>
 
+@*<form method="POST">
+        <input type="submit" value="Отправить" />
+    </form>*@
+<form asp-controller="Admin" asp-action="SetUser" method="post">
+    <button type="submit" name="button">Set user</button>
+</form>
+
 @*<script>$(document).ready(function () {Site_Accordion("@Model.UsersJson");});</script>*@
 
 

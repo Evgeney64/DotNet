@@ -69,8 +69,8 @@ namespace ru.tsb.mvc
             }
             #endregion
 
-            #region 05 / 06 / 07 / 09 / 10
-            if (1 == 2)
+            #region Start / 05 / 06 / 07 / 09 / 10
+            if (1 == 1)
             {
                 string path_conf = "";
                 //path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"]; ;
@@ -116,8 +116,12 @@ namespace ru.tsb.mvc
             #region Default
             _services = services;
 
-            //services.AddControllersWithViews();
-            services.AddMvc();
+            #region Start
+            if (1 == 1)
+            {
+                services.Configure<ConfigurationClass>(CustomConfiguration);
+            }
+            #endregion
             #endregion
 
             #region Services
@@ -234,7 +238,18 @@ namespace ru.tsb.mvc
             #endregion
             #endregion
 
+            #region 9.Контроллеры
+            #region 01 - Контроллеры и их действия
+            if (1 == 2)
+            {
+            }
             #endregion
+            #endregion
+            #endregion
+
+            //services.AddControllersWithViews();
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -247,20 +262,13 @@ namespace ru.tsb.mvc
         #endregion
             )
         {
-            #region Default
+            #region Default - start
             app.UseStaticFiles();
-
-            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseRouting();
             #endregion
 
             #region Services
@@ -676,7 +684,7 @@ namespace ru.tsb.mvc
             #region 08 - Работа с конфигурацией (анализ файла конфигурации)
             if (1 == 2)
             {
-                string projectJsonContent = getSectionContent(CustomConfiguration);
+                string projectJsonContent = GetSectionContent(CustomConfiguration);
                 app.Run(async (context) =>
                 {
                     await context.Response.WriteAsync("{\n" + projectJsonContent + "}");
@@ -934,6 +942,7 @@ namespace ru.tsb.mvc
                 routeBuilder.MapRoute("two_param", "{controller}/{action}");
                 // http://localhost:58982/1/2/3
                 routeBuilder.MapRoute("three_param", "{controller}/{action}/{id}");
+
                 // строим маршрут
                 app.UseRouter(routeBuilder.Build());
 
@@ -1000,8 +1009,11 @@ namespace ru.tsb.mvc
             {
                 //http://localhost:58982/ind/lumia-2015
                 var myRouteHandler = new RouteHandler(Handle4);
+
                 var routeBuilder = new RouteBuilder(app, myRouteHandler);
+
                 routeBuilder.MapRoute("default", "{action=Index}/{name}-{year}");
+
                 app.UseRouter(routeBuilder.Build());
 
                 app.Run(async (context) =>
@@ -1034,7 +1046,38 @@ namespace ru.tsb.mvc
             }
             #endregion
             #endregion
+
+            #region 9.Контроллеры
+            #region 01 - Контроллеры и их действия
+            if (1 == 2)
+            {
+            }
+            #endregion
+            #endregion
             // ************************************************************************
+            #endregion
+
+            #region Start
+            if (1 == 1)
+            {
+                app.UseMiddleware<StartMiddleware>();
+                app.UseMiddleware<StartEndpointVerifyMiddleware>();
+                //app.UseMiddleware<StartEndpointVerifyMiddleware1>();
+
+                //var routeBuilder = new RouteBuilder(app);
+                //routeBuilder.MapRoute("{controller}/{action}/{id}", StartHandle1);
+                //routeBuilder.MapRoute("{controller}/{action}", StartHandle2);
+                //app.UseRouter(routeBuilder.Build());
+            }
+            #endregion
+
+            #region Default - end
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
             #endregion
         }
     }

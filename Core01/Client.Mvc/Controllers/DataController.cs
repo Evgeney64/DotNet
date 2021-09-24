@@ -32,9 +32,9 @@ namespace Data.Controllers
         public ViewResult GetGosStreets()
         {
             VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Gos);
-            //List<type_street> type_streets = vmBase.type_streetsL;
-            //return View("type_street", vmBase);
-            return View(vmBase.type_streetsL);
+            List<type_street> type_streets = vmBase.type_streetsL;
+            return View("type_street", vmBase);
+            //return View(vmBase.type_streetsL);
         }
     }
 }
