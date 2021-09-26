@@ -82,6 +82,8 @@ namespace Admin.Controllers
 			else
 			{
 				VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+				if (vmBase.UsersL != null)
+				{ }
 				return View("sys_user", vmBase);
 			}
 		}
