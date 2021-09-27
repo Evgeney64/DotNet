@@ -43,22 +43,6 @@ namespace ru.tsb.mvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            #region Default - start
-            //app.UseStaticFiles();
-
-            //app.UseAuthentication();
-            //app.UseAuthorization();
-
-            //app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
-            #endregion
-
             #region Services
             // ************************************************************************
             // https://metanit.com/sharp/aspnet5/1.1.php
@@ -68,15 +52,14 @@ namespace ru.tsb.mvc
             {
                 app.Run(async (context) =>
                 {
-                    string text = $"<p><h4>01 - Run()</h4></p>";
-                    text += $"<h2><p style='color:red;'>Hello World !</p></h2>";
+                    string text = getText($"01 - Run()", $"Hello World !");
                     await context.Response.WriteAsync(text);
                 });
             }
             #endregion
 
             #region 02 - Use() + Run() (1)
-            if (1 == 1)
+            if (1 == 2)
             {
                 int x = 5;
                 int y = 8;
@@ -89,8 +72,7 @@ namespace ru.tsb.mvc
 
                 app.Run(async (context) =>
                 {
-                    string text = $"<p><h4>02 - Use() + Run() (1)</h4></p>";
-                    text += $"<h2><p style='color:red;'>x * y = {z}</p></h2>";
+                    string text = getText($"02 - Use() + Run() (1)", $"x * y = {z}");
                     await context.Response.WriteAsync(text);
                 });
             }
@@ -105,7 +87,8 @@ namespace ru.tsb.mvc
                     x = x * 2;      // 2 * 2 = 4
                     await next.Invoke();    // גûחמג app.Run
                     x = x * 2;      // 8 * 2 = 16
-                    await context.Response.WriteAsync($"Result: {x}");
+                    string text = getText($"03 - () + Run() (2)", $"Result: {x}");
+                    await context.Response.WriteAsync(text);
                 });
 
                 app.Run(async (context) =>
@@ -119,6 +102,8 @@ namespace ru.tsb.mvc
             #region 04 - Map()
             if (1 == 2)
             {
+                // http://localhost:58982/index
+                // http://localhost:58982/Home/about
                 app.Map("/index", Index);
                 app.Map("/Home/about", About);
                 //app.Map("/home", home =>
@@ -129,7 +114,8 @@ namespace ru.tsb.mvc
 
                 app.Run(async (context) =>
                 {
-                    await context.Response.WriteAsync("Page Not Found");
+                    string text = getText($"04 - Map()", $"Page Not Found");
+                    await context.Response.WriteAsync(text);
                 });
             }
             #endregion
@@ -142,7 +128,8 @@ namespace ru.tsb.mvc
 
                 app.Run(async (context) =>
                 {
-                    await context.Response.WriteAsync("Page Not Found");
+                    string text = getText($"05 - TokenMiddleware", $"Page Not Found");
+                    await context.Response.WriteAsync(text);
                 });
             }
             #endregion
@@ -155,7 +142,8 @@ namespace ru.tsb.mvc
 
                 app.Run(async (context) =>
                 {
-                    await context.Response.WriteAsync("Page Not Found");
+                    string text = getText($"06 - TokenExtensions", $"Page Not Found");
+                    await context.Response.WriteAsync(text);
                 });
             }
             #endregion
@@ -168,7 +156,8 @@ namespace ru.tsb.mvc
 
                 app.Run(async (context) =>
                 {
-                    await context.Response.WriteAsync("Hello World");
+                    string text = getText($"07 - TokenParamExtensions", $"Hello World");
+                    await context.Response.WriteAsync(text);
                 });
             }
             #endregion
