@@ -249,7 +249,7 @@ namespace ru.tsb.mvc
 
             #region 19.WEB API
             #region 01 - Создание контроллера
-            if (1 == 1)
+            if (1 == 2)
             {
                 services.AddControllers();
             }
@@ -257,7 +257,7 @@ namespace ru.tsb.mvc
             #endregion
             #endregion
 
-            if (1 == 2)
+            if (1 == 1)
             {
                 //services.AddControllersWithViews();
                 services.AddMvc();
@@ -281,6 +281,14 @@ namespace ru.tsb.mvc
             app.UseAuthorization();
 
             app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
             #endregion
 
             #region Services
@@ -1061,12 +1069,8 @@ namespace ru.tsb.mvc
 
             #region 19.WEB API
             #region 01 - Создание контроллера
-            if (1 == 1)
+            if (1 == 2)
             {
-                // http://localhost:58982/api
-                // http://localhost:58982/api/123
-                // http://localhost:58982/api/users
-                // http://localhost:58982/api/GetUsers
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
@@ -1078,7 +1082,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region Start
-            if (1 == 2)
+            if (1 == 1)
             {
                 app.UseMiddleware<StartMiddleware>();
                 app.UseMiddleware<StartEndpointVerifyMiddleware>();
@@ -1093,15 +1097,15 @@ namespace ru.tsb.mvc
             #endregion
 
             #region Default - end
-            if (1 == 2)
-            {
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Home}/{action=Index}/{id?}");
-                });
-            }
+            //if (1 == 1)
+            //{
+            //    app.UseEndpoints(endpoints =>
+            //    {
+            //        endpoints.MapControllerRoute(
+            //            name: "default",
+            //            pattern: "{controller=Home}/{action=Index}/{id?}");
+            //    });
+            //}
             #endregion
         }
     }
