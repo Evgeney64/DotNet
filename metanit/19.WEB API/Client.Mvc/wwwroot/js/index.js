@@ -20,6 +20,7 @@
             });
         }
     }
+
     // Получение одного пользователя
     async function GetUser(id) {
         var action = "/api/users/";
@@ -36,10 +37,12 @@
             form.elements["age"].value = user.age;
         }
     }
+
     // Добавление пользователя
     async function CreateUser(userName, userAge) {
-
-        const response = await fetch("api/users", {
+        var action = "/api/users";
+        action = "/api/users/CreateUser";
+        const response = await fetch(action, {
             method: "POST",
             headers: { "Accept": "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -53,13 +56,15 @@
             document.querySelector("tbody").append(row(user));
         }
     }
+
     // Изменение пользователя
     async function EditUser(userId, userName, userAge) {
         var action = "/api/users";
-        //action = "/api/users/PostUser";
+        action = "/api/users/SaveUser";
         const response = await fetch(action, {
             method: "POST",
             headers: { "Accept": "application/json", "Content-Type": "application/json" },
+            //headers: { "Accept": "application/json" },
             body: JSON.stringify({
                 id: parseInt(userId, 10),
                 name: userName,
@@ -72,6 +77,7 @@
             document.querySelector("tr[data-rowid='" + user.id + "']").replaceWith(row(user));
         }
     }
+
     // Удаление пользователя
     async function DeleteUser(id) {
         const response = await fetch("/api/users/" + id, {
@@ -90,6 +96,7 @@
         form.reset();
         form.elements["id"].value = 0;
     }
+
     // создание строки для таблицы
     function row(user) {
 
@@ -136,6 +143,7 @@
 
         return tr;
     }
+
     // сброс значений формы
     document.getElementById("reset").click(function (e) {
 
