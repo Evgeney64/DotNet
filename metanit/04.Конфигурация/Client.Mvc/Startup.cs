@@ -30,6 +30,58 @@ namespace ru.tsb.mvc
         public Startup(IConfiguration configuration)
         {
             AppConfiguration = configuration;
+
+            #region 4.Конфигурация
+            #region 04 - Файловые провайдеры конфигурации (Конфигурация в JSON / XML / INI)
+            if (1 == 2)
+            {
+                string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"] + "config.json";
+                var builder = new ConfigurationBuilder().AddJsonFile(path_conf);
+                //string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"] + "config.xml";
+                //var builder = new ConfigurationBuilder().AddXmlFile(path_conf);
+                //string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"] + "config.ini";
+                //var builder = new ConfigurationBuilder().AddIniFile(path_conf);
+
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+
+            #region Start 01 / 05 / 06 / 07 / 09 / 10
+            if (1 == 2)
+            {
+                string path_conf = "";
+                //path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"]; ;
+
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                    .AddJsonFile(path_conf + "config.json")
+                    .AddEnvironmentVariables()
+                    .AddInMemoryCollection(new Dictionary<string, string>
+                    {
+                        {"name", "Tom"},
+                        {"age", "31"}
+                    })
+                    .AddConfiguration(configuration)
+                    ;
+                // создаем конфигурацию
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+
+            #region 08 - Работа с конфигурацией (анализ файла конфигурации)
+            if (1 == 2)
+            {
+                string path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"];
+
+                var builder = new ConfigurationBuilder()
+                    .AddJsonFile(path_conf + "project.json")
+                    ;
+                // создаем конфигурацию
+
+                CustomConfiguration = builder.Build();
+            }
+            #endregion
+            #endregion
         }
 
         private IServiceCollection _services;
@@ -39,204 +91,220 @@ namespace ru.tsb.mvc
             _services = services;
             services.AddMvc();
 
-            #region Services
-            #region 3.Dependency Injection
-            #region 05 - DI (Создание своих сервисов)
+            #region 4.Конфигурация
+            #region 06 - Объединение источников конфигурации (UseMiddleware)
             if (1 == 2)
             {
-                services.AddTransient<IMessageSender, EmailMessageSender>();
+                services.AddTransient<IConfiguration>(provider => CustomConfiguration);
             }
             #endregion
 
-            #region 06 - DI (Расширения для добавления сервисов)
+            #region 10 - Передача конфигурации через IOptions
             if (1 == 2)
             {
-                //services.AddTransient<TimeService>();
-                services.AddTimeService();
+                services.Configure<ConfigurationClass>(CustomConfiguration);
+                services.Configure<ConfigurationClass>(opt =>
+                {
+                    opt.color = "blue";
+                });
             }
-            #endregion
-
-            #region 07 - DI (Передача зависимостей - Конструкторы)
-            if (1 == 2)
-            {
-                services.AddTransient<IMessageSender, EmailMessageSender>();
-                services.AddTransient<MessageService>();
-            }
-            #endregion
-
-            #region 08 / 09
-            if (1 == 1)
-            {
-                services.AddTransient<IMessageSender, EmailMessageSender>();
-            }
-            #endregion
             #endregion
             #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env
-        #region
-            //, IMessageSender messageSender  // 05 - DI (Создание своих сервисов)
-            //, TimeService timeService  // 06 - DI (Расширения для добавления сервисов)
-            //, MessageService messageService // 07 - DI (Передача зависимостей - Конструкторы)
-        #endregion
-
-            )
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            #region Services
-            // ************************************************************************
             // https://metanit.com/sharp/aspnet5/1.1.php
-            #region 3.Dependency Injection
-            #region 01 - UseDeveloperExceptionPage
+            #region 4.Конфигурация
+            #region 01 - Основы конфигурации
             if (1 == 2)
             {
-                if (env.IsDevelopment())
+                #region 1
+                if (1 == 2)
                 {
-                    app.UseDeveloperExceptionPage();
-                }
-
-                app.Run(async (context) =>
-                {
-                    int x = 0;
-                    int y = 8 / x;
-                    //y = 8 * x;
-                    string text = getText("01 - UseDeveloperExceptionPage", $"Result = {y}");
-                    await context.Response.WriteAsync(text);
-                });
-            }
-            #endregion
-
-            #region 02 - UseExceptionHandler
-            if (1 == 2)
-            {
-                env.EnvironmentName = "Production";
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/error");
-                }
-                app.Map("/error", ap => ap.Run(async context =>
-                {
-                    string text = getText("02 - UseExceptionHandler", $"DivideByZeroException occured !");
-                    await context.Response.WriteAsync(text);
-                }));
-                app.Run(async (context) =>
-                {
-                    int x = 0;
-                    int y = 8 / x;
-                    //y = 8 * x;
-                    string text = getText("02 - UseExceptionHandler", $"Result = {y}");
-                    await context.Response.WriteAsync(text);
-                });
-            }
-            #endregion
-
-            #region 03 - StatusCodePagesMiddleware 
-            if (1 == 2)
-            {
-                // http://localhost:58982/hello
-                // http://localhost:58982/about
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                }
-
-                // обработка ошибок HTTP
-                app.UseStatusCodePages();
-
-                app.Map("/hello", ap => ap.Run(async (context) =>
-                {
-                    string text = getText("03 - StatusCodePagesMiddleware", $"/hello");
-                    await context.Response.WriteAsync(text);
-                }));
-            }
-            #endregion
-
-            #region 04 - Dependency Injection
-            if (1 == 2)
-            {
-                // Все сервисы
-                app.Run(async context =>
-                {
-                    var sb = new StringBuilder();
-                    sb.Append("<h1>Все сервисы</h1>");
-                    sb.Append("<table>");
-                    sb.Append("<tr><th>Тип</th><th>Lifetime</th><th>Реализация</th></tr>");
-                    foreach (var svc in _services)
+                    app.Run(async (context) =>
                     {
-                        sb.Append("<tr>");
-                        sb.Append($"<td>{svc.ServiceType.FullName}</td>");
-                        sb.Append($"<td>{svc.Lifetime}</td>");
-                        sb.Append($"<td>{svc.ImplementationType?.FullName}</td>");
-                        sb.Append("</tr>");
-                    }
-                    sb.Append("</table>");
-                    context.Response.ContentType = "text/html;charset=utf-8";
-                    await context.Response.WriteAsync(sb.ToString());
-                });
+                        string text = getText("01 - Основы конфигурации", CustomConfiguration["name"], context);
+                        await context.Response.WriteAsync(text);
+                    });
+                }
+                #endregion
+
+                #region 2 - (мы можем динамически изменять уже имеющиеся настройки или определять новые)
+                if (1 == 2)
+                {
+                    CustomConfiguration["name"] = "Алиса";
+                    CustomConfiguration["lastname"] = "Роева";
+                    CustomConfiguration["age"] = "6.5";
+                    app.Run(async (context) =>
+                    {
+                        string text1 = $"{CustomConfiguration["name"]} {CustomConfiguration["lastname"]} - {CustomConfiguration["age"]}";
+                        string text = getText("01 - Основы конфигурации", text1, context);
+                        await context.Response.WriteAsync(text);
+                    });
+                }
+                #endregion
             }
             #endregion
 
-            #region 05 - DI (Создание своих сервисов)
-            if (1 == 2)
-            {
-                //app.Run(async (context) =>
-                //{
-                //    context.Response.ContentType = "text/html; charset=utf-8";
-                //    await context.Response.WriteAsync(messageSender.Send());
-                //});
-            }
-            #endregion
-
-            #region 06 - DI (Расширения для добавления сервисов)
-            if (1 == 2)
-            {
-                //app.Run(async (context) =>
-                //{
-                //    context.Response.ContentType = "text/html; charset=utf-8";
-                //    string text = getText("06 - DI (Расширения для добавления сервисов)", $"Текущее время: {timeService?.GetTime()}");
-                //    await context.Response.WriteAsync(text);
-                //});
-            }
-            #endregion
-
-            #region 07 - DI (Передача зависимостей - Конструкторы)
-            if (1 == 2)
-            {
-                //app.Run(async (context) =>
-                //{
-                //    context.Response.ContentType = "text/html; charset=utf-8";
-                //    await context.Response.WriteAsync(messageService.Send());
-                //});
-            }
-            #endregion
-
-            #region 08 - DI (Передача зависимостей - HttpContext.RequestServices / ApplicationServices)
+            #region 02 - Конфигурация по умолчанию
             if (1 == 2)
             {
                 app.Run(async (context) =>
                 {
-                    //IMessageSender messageSender = context.RequestServices.GetService<IMessageSender>();
-                    IMessageSender messageSender = app.ApplicationServices.GetService<IMessageSender>();
-                    { }
-                    context.Response.ContentType = "text/html; charset=utf-8";
-                    await context.Response.WriteAsync(messageSender.Send());
+                    string text = getText("02 - Конфигурация по умолчанию", "Hello world", context);
+                    await context.Response.WriteAsync(text);
                 });
             }
             #endregion
 
-            #region 09 - DI (Передача зависимостей - Invoke / InvokeAsync)
-            if (1 == 1)
+            #region 03 - Переменные среды окружения как источник конфигурации
+            if (1 == 2)
             {
-                app.UseMiddleware<MessageMiddleware>();
+                string envVars = "";
+                envVars += $"<p>";
+                envVars += $"JAVA_HOME - ";
+                if (AppConfiguration["JAVA_HOME"] != null) envVars += AppConfiguration["JAVA_HOME"];
+                else envVars += "not set";
+                envVars += $"</p>";
+
+                envVars += $"<p>";
+                envVars += $"\nTEMP - ";
+                if (AppConfiguration["TEMP"] != null) envVars += AppConfiguration["TEMP"];
+                else envVars += "not set";
+                envVars += $"</p>";
+
+                envVars += $"<p>";
+                envVars += $"\nProgram Files - ";
+                if (AppConfiguration["ProgramFiles"] != null) envVars += AppConfiguration["ProgramFiles"];
+                else envVars += "not set";
+                envVars += $"</p>";
+
+                { }
+                app.Run(async (context) =>
+                {
+                    string text = getText("03 - Переменные среды окружения как источник конфигурации", envVars, context);
+                    await context.Response.WriteAsync(text);
+                });
             }
             #endregion
+
+            #region 04 - Файловые провайдеры конфигурации (Конфигурация в JSON / XML / INI)
+            if (1 == 2)
+            {
+                var color = CustomConfiguration["color"];
+                var text1 = CustomConfiguration["text"];
+                app.Run(async (context) =>
+                {
+                    string text = getText("04 - Файловые провайдеры конфигурации (Конфигурация в JSON / XML / INI)", $"<p style='color:{color};'>{text1}</p>", context);
+                    await context.Response.WriteAsync(text);
+                });
+            }
             #endregion
-            // ************************************************************************
+
+            #region 05 - Объединение источников конфигурации
+            if (1 == 2)
+            {
+                // определен в файле conf.json
+                string color = CustomConfiguration["color"];
+
+                // определен в памяти
+                string name = CustomConfiguration["name"] + " - " + CustomConfiguration["age"];
+
+                // определен в переменных среды окружения
+                string path = "TEMP - " + CustomConfiguration["TEMP"];
+
+                string text1 = $"<p style='color:{color};'>{name}</p>";
+                text1 += $"<p>{path}</p>";
+                { }
+                app.Run(async (context) =>
+                {
+                    string text = getText("05 - Объединение источников конфигурации", $"<p style='color:{color};'>{text1}</p>", context);
+                    await context.Response.WriteAsync(text);
+                });
+            }
+            #endregion
+
+            #region 06 - Объединение источников конфигурации (UseMiddleware)
+            if (1 == 2)
+            {
+                app.UseMiddleware<ConfigMiddleware>();
+            }
+            #endregion
+
+            #region 07 - Работа с конфигурацией (GetSection)
+            if (1 == 2)
+            {
+                string color = CustomConfiguration["color"];
+
+                IConfigurationSection connStrings = CustomConfiguration.GetSection("ConnectionStrings");
+                string def_con = connStrings.GetSection("DefaultConnection").Value;
+
+                string tko_con = CustomConfiguration.GetSection("ConnectionStrings:TKOConnection").Value;
+                string resk_con = CustomConfiguration["ConnectionStrings:RESKConnection"];
+                string nesk_con = CustomConfiguration.GetConnectionString("NESKConnection");
+
+                string text = "";
+                text += $"<table><tr>";
+                text += $"<td>default - </td><td style='color:{color};'>{def_con}</td>";
+                text += $"</tr></table>";
+                text += $"<p>RESK - {resk_con}</p>";
+                text += $"<p>NESK - {nesk_con}</p>";
+                { }
+                app.Run(async (context) =>
+                {
+                    string text1 = getText("07 - Работа с конфигурацией (GetSection)", $"<p style='color:{color};'>{text}</p>", context);
+                    await context.Response.WriteAsync(text1);
+                });
+            }
+            #endregion
+
+            #region 08 - Работа с конфигурацией (анализ файла конфигурации)
+            if (1 == 2)
+            {
+                string projectJsonContent = GetSectionContent(CustomConfiguration);
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("{\n" + projectJsonContent + "}");
+                });
+            }
+            #endregion
+
+            #region 09 - Проекция конфигурации на классы
+            if (1 == 2)
+            {
+                ConfigurationClass conf = new ConfigurationClass();
+                CustomConfiguration.Bind(conf);
+
+                // Привязка секций конфигурации 
+                ConnectionStringsClass conf_conn = CustomConfiguration
+                    .GetSection("ConnectionStrings")
+                    .Get<ConnectionStringsClass>()
+                    ;
+
+                string text = "";
+                text += $"<table><tr>";
+                text += $"<td>default - </td><td style='color:{conf.color};'>{conf.ConnectionStrings.DefaultConnection}</td>";
+                text += $"</tr></table>";
+                text += $"<p>TKO - {conf.ConnectionStrings.TKOConnection}</p>";
+                text += $"<p>RESK - {conf_conn.RESKConnection}</p>";
+                text += $"<p>NESK - {conf_conn.NESKConnection}</p>";
+                { }
+                app.Run(async (context) =>
+                {
+                    string text1 = getText("09 - Проекция конфигурации на классы", text, context);
+                    await context.Response.WriteAsync(text1);
+                });
+            }
+            #endregion
+
+            #region 10 - Передача конфигурации через IOptions
+            if (1 == 2)
+            {
+                app.UseMiddleware<ConfigurationClassMiddleware>();
+            }
+            #endregion
             #endregion
         }
     }

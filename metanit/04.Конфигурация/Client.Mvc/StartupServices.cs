@@ -40,81 +40,124 @@ namespace ru.tsb.mvc
                 await context.Response.WriteAsync(getText($"About", $""));
             });
         }
-        public static string GetText(string title, string value) { return getText(title, value); }
-        public static string getText(string title, string value)
+        public static string GetText(string title, string value, HttpContext context = null) { return getText(title, value, context); }
+        public static string getText(string title, string value, HttpContext context = null)
         {
+            if (context != null)
+                context.Response.ContentType = "text/html; charset=utf-8";
+
             string text = $"<p><h4>{title}</h4></p>";
             text += $"<h2><p style='color:red;'>{value}</p></h2>";
             return text;
+        }
 
+        #region 4.Конфигурация
+        #region 08 - Работа с конфигурацией (анализ файла конфигурации)
+        public static string GetSectionContent(IConfiguration configSection)
+        {
+            string sectionContent = "";
+            foreach (var section in configSection.GetChildren())
+            {
+                sectionContent += "\"" + section.Key + "\":";
+                if (section.Value == null)
+                {
+                    string subSectionContent = GetSectionContent(section);
+                    sectionContent += "{\n" + subSectionContent + "},\n";
+                }
+                else
+                {
+                    sectionContent += "\"" + section.Value + "\",\n";
+                }
+            }
+            return sectionContent;
         }
+        #endregion
+        #endregion
     }
 
-    #region 3.Dependency Injection
-    #region 05 - DI (Создание своих сервисов)
-    public interface IMessageSender
-    {
-        string Send();
-    }
-    public class EmailMessageSender : IMessageSender
-    {
-        public string Send()
-        {
-            return Startup.GetText("05 - DI (Создание своих сервисов)", "Sent by Email");
-        }
-    }
-    public class SmsMessageSender : IMessageSender
-    {
-        public string Send()
-        {
-            return Startup.GetText("05 - DI (Создание своих сервисов)", "Sent by SMS");
-        }
-    }
-    #endregion
-
-    #region 06 - DI (Расширения для добавления сервисов)
-    public class TimeService
-    {
-        public string GetTime() => System.DateTime.Now.ToString("hh:mm:ss");
-    }
-    public static class ServiceProviderExtensions
-    {
-        public static void AddTimeService(this IServiceCollection services)
-        {
-            services.AddTransient<TimeService>();
-        }
-    }
-    #endregion
-
-    #region 07 - DI (Передача зависимостей - Конструкторы)
-    public class MessageService
-    {
-        IMessageSender _sender;
-        public MessageService(IMessageSender sender)
-        {
-            _sender = sender;
-        }
-        public string Send()
-        {
-            return _sender.Send();
-        }
-    }
-    #endregion
-
-    #region 09 - DI (Передача зависимостей - Invoke / InvokeAsync)
-    public class MessageMiddleware
+    #region 4.Конфигурация
+    #region 06 - Объединение источников конфигурации (UseMiddleware)
+    public class ConfigMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public MessageMiddleware(RequestDelegate next)
+        public ConfigMiddleware(RequestDelegate next, IConfiguration config)
         {
-            this._next = next;
+            _next = next;
+            CustomConfiguration = config;
+        }
+        public IConfiguration CustomConfiguration { get; set; }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            // определен в файле conf.json
+            string color = CustomConfiguration["color"];
+
+            // определен в памяти
+            string name = CustomConfiguration["name"] + " - " + CustomConfiguration["age"];
+
+            // определен в переменных среды окружения
+            string path = "TEMP - " + CustomConfiguration["TEMP"];
+
+            string text = $"<p><h1>Middleware</h1></p>";
+            text += $"<p style='color:{color};'>{name}</p>";
+            text += $"<p>{path}</p>";
+            { }
+            string text1 = Startup.GetText("06 - Объединение источников конфигурации (UseMiddleware)", $"<p style='color:{color};'>{text}</p>", context);
+            await context.Response.WriteAsync(text1);
+        }
+    }
+    #endregion
+
+    #region 09 - Проекция конфигурации на классы
+    public class ConfigurationClass
+    {
+        public string color { get; set; }
+        public string text { get; set; }
+        public ConnectionStringsClass ConnectionStrings { get; set; }
+        public List<string> Languages { get; set; }
+        public ConfigurationCompanyClass Company { get; set; }
+    }
+    public class ConfigurationCompanyClass
+    {
+        public string Title { get; set; }
+        public string Country { get; set; }
+    }
+    public class ConnectionStringsClass
+    {
+        public string DefaultConnection { get; set; }
+        public string TKOConnection { get; set; }
+        public string RESKConnection { get; set; }
+        public string NESKConnection { get; set; }
+    }
+    #endregion
+
+    #region 10 - Передача конфигурации через IOptions
+    public class ConfigurationClassMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public ConfigurationClassMiddleware(RequestDelegate next, IOptions<ConfigurationClass> options)
+        {
+            _next = next;
+            conf = options.Value;
         }
 
-        public async Task InvokeAsync(HttpContext context, IMessageSender messageSender)
+        public ConfigurationClass conf { get; }
+
+        public async Task InvokeAsync(HttpContext context)
         {
-            context.Response.ContentType = "text/html; charset=utf-8";
-            await context.Response.WriteAsync(messageSender.Send());
+            string text = "";
+            text += $"<table><tr>";
+            text += $"<td>default - </td><td style='color:{conf.color};'>{conf.ConnectionStrings.DefaultConnection}</td>";
+            text += $"</tr></table>";
+            text += $"<p>TKO - {conf.ConnectionStrings.TKOConnection}</p>";
+            text += $"<p>RESK - {conf.ConnectionStrings.RESKConnection}</p>";
+            text += $"<p>NESK - {conf.ConnectionStrings.NESKConnection}</p>";
+            { }
+
+            string text1 = Startup.GetText("10 - Передача конфигурации через IOptions", text, context);
+            await context.Response.WriteAsync(text1);
         }
     }
     #endregion
