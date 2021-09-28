@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Startup-0.cs" />
+    <Compile Remove="StartupServices-0.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Startup.cs1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ext.NET" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
