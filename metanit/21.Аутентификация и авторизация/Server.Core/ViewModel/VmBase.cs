@@ -43,6 +43,8 @@ namespace Server.Core.ViewModel
         public ClaimsPrincipal User { get; set; }
         public string UserName => User.Identity.Name;
         public string UserRole => User.Identity.Name;
+        public string Controller { get; set; }
+        public string Info { get; set; }
         public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
         {
             switch (connectionType)
@@ -106,9 +108,9 @@ namespace Server.Core.ViewModel
         {
             List<scr_user> users = new List<scr_user>
             {
-                new scr_user{ email = "qqq", password = "111", role_name = "admin"},
-                new scr_user{ email = "aaa", password = "222", role_name = "user"},
-                new scr_user{ email = "zzz", password = "333", role_name = "user"},
+                new scr_user{ email = "qqq", password = "111", role = "admin", state = "1"},
+                new scr_user{ email = "aaa", password = "222", role = "user", state = "2"},
+                new scr_user{ email = "zzz", password = "333", role = "user", state = "1"},
             };
             return users;
         }

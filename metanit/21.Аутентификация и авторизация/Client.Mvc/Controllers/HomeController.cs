@@ -43,7 +43,22 @@ namespace Home.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult About()
         {
-            return View(new VmBase(User));
+            VmBase vmBase = new VmBase(User)
+            {
+                Controller = "About",
+            };
+            return View(vmBase);
+        }
+
+        [Authorize(Policy = "OnlyForState_One")]
+        public IActionResult Policy()
+        {
+            VmBase vmBase = new VmBase(User)
+            {
+                Controller = "Policy",
+                Info = "state = 1",
+            };
+            return View("~/Views/Home/About.cshtml", vmBase);
         }
     }
 }

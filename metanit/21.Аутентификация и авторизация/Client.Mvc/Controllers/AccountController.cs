@@ -89,14 +89,16 @@ namespace AuthApp.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, _user.email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, _user.role_name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, _user.role),
+                //new Claim(ClaimTypes.Locality, _user.city),
+                new Claim("state", _user.state)
             };
             { }
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(
-                claims, 
-                "ApplicationCookie", 
-                ClaimsIdentity.DefaultNameClaimType, 
+                claims,
+                "ApplicationCookie",
+                ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType
                 );
             // установка аутентификационных куки

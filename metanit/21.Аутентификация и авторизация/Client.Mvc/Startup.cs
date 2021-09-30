@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -73,7 +74,6 @@ namespace ru.tsb.mvc
             _services = services;
             services.Configure<ConfigurationClass>(CustomConfiguration);
 
-            #region Services
             #region 21.Аутентификация и авторизация
             #region 01 - Аутентификация на основе куки
             if (1 == 1)
@@ -85,11 +85,25 @@ namespace ru.tsb.mvc
                         options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                         options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                     });
-                services.AddControllersWithViews();
+            }
+            #endregion
+
+            #region 02 - Авторизация на основе Claims
+            if (1 == 1)
+            {
+                services.AddAuthorization(opts => {
+                    //opts.AddPolicy("OnlyForLondon", policy => {
+                    //    policy.RequireClaim(ClaimTypes.Locality, "Лондон", "London");
+                    //});
+                    opts.AddPolicy("OnlyForState_One", policy => {
+                        policy.RequireClaim("state", "1");
+                    });
+                });
             }
             #endregion
             #endregion
-            #endregion
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
