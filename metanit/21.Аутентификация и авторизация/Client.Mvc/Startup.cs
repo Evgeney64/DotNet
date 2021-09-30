@@ -81,8 +81,9 @@ namespace ru.tsb.mvc
                 // установка конфигурации подключения
                 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options => //CookieAuthenticationOptions
-                {
+                    {
                         options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                        options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                     });
                 services.AddControllersWithViews();
             }
@@ -103,6 +104,7 @@ namespace ru.tsb.mvc
             {
                 app.UseDeveloperExceptionPage();
 
+                app.UseHttpsRedirection();
                 app.UseStaticFiles();
 
                 app.UseRouting();

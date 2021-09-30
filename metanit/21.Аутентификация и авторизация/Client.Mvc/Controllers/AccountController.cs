@@ -39,11 +39,11 @@ namespace AuthApp.Controllers
                 VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
 
                 scr_user user = vmBase.Users
-                    .Where(ss=>ss.email == _user.email && ss.password == _user.password)
+                    .Where(ss => ss.email == _user.email && ss.password == _user.password)
                     .FirstOrDefault();
                 if (user != null)
                 {
-                    await Authenticate(user.email); // аутентификация
+                    await Authenticate(user); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -83,15 +83,22 @@ namespace AuthApp.Controllers
             return View(_user);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(scr_user _user)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, _user.email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, _user.role_name)
             };
+            { }
             // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            ClaimsIdentity id = new ClaimsIdentity(
+                claims, 
+                "ApplicationCookie", 
+                ClaimsIdentity.DefaultNameClaimType, 
+                ClaimsIdentity.DefaultRoleClaimType
+                );
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }

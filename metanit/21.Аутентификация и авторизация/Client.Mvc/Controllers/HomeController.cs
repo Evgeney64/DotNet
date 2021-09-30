@@ -9,6 +9,7 @@ using Server.Core.CoreModel;
 
 namespace Home.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,12 +19,31 @@ namespace Home.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        //[Authorize]
+        //[AllowAnonymous]
+        [Authorize(Roles = "admin, user")]
         public IActionResult Index()
         {
-            VmBase vmBase = new VmBase();
-            vmBase.User = User;
-            return View(vmBase);
+            if (this.HttpContext != null
+                && this.Request != null && this.Response != null
+                && this.RouteData != null
+                && this.Url != null && this.User != null
+                && this.Request.Query != null && this.Request.QueryString != null
+                ) { }
+            { }
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return RedirectToAction("Login", "Account");
+                //return Content("не аутентифицирован");
+            }
+
+            return View(new VmBase(User));
+        }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult About()
+        {
+            return View(new VmBase(User));
         }
     }
 }

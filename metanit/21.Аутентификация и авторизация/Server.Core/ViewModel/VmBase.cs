@@ -31,12 +31,18 @@ namespace Server.Core.ViewModel
     {
         public VmBase()
         { }
+        public VmBase(ClaimsPrincipal _user)
+        {
+            User = _user;
+        }
+
         private string connectionString;
         public string ConnectionString { get { return connectionString; } }
         public string HtmlString { get; set; }
         public HtmlHelper Html { get; set; }
         public ClaimsPrincipal User { get; set; }
         public string UserName => User.Identity.Name;
+        public string UserRole => User.Identity.Name;
         public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
         {
             switch (connectionType)
@@ -100,9 +106,9 @@ namespace Server.Core.ViewModel
         {
             List<scr_user> users = new List<scr_user>
             {
-                new scr_user{ email = "qqq", password = "111"},
-                new scr_user{ email = "aaa", password = "222"},
-                new scr_user{ email = "zzz", password = "333"},
+                new scr_user{ email = "qqq", password = "111", role_name = "admin"},
+                new scr_user{ email = "aaa", password = "222", role_name = "user"},
+                new scr_user{ email = "zzz", password = "333", role_name = "user"},
             };
             return users;
         }

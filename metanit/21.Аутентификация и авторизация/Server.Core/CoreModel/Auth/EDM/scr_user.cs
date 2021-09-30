@@ -24,6 +24,7 @@ namespace Server.Core.AuthModel
         public int user_id { get; set; }
         public string user_name { get; set; }
         public string password { get; set; }
+        public string role_name { get; set; }
         public int password_format { get; set; }
         public string password_salt { get; set; }
         public string password_question { get; set; }
