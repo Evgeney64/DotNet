@@ -161,7 +161,7 @@ namespace ru.tsb.mvc
             // https://metanit.com/sharp/aspnet5/1.1.php
             #region 21.Аутентификация и авторизация
             #region 01 - Аутентификация на основе куки
-            if (1 == 1)
+            if (1 == 2)
             {
                 app.UseDeveloperExceptionPage();
 
@@ -178,6 +178,26 @@ namespace ru.tsb.mvc
                     endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller=Home}/{action=Index}/{id?}");
+                });
+            }
+            #endregion
+
+            #region 04 - Авторизация с помощью JWT-токенов
+            if (1 == 1)
+            {
+                app.UseDeveloperExceptionPage();
+
+                app.UseDefaultFiles();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
                 });
             }
             #endregion
