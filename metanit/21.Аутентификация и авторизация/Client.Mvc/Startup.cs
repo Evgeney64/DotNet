@@ -80,7 +80,7 @@ namespace ru.tsb.mvc
 
             #region 21.Аутентификация и авторизация
             #region 01 - Аутентификация на основе куки
-            if (1 == 1)
+            if (1 == 2)
             {
                 // установка конфигурации подключения
                 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -93,7 +93,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region 02 - Авторизация на основе Claims
-            if (1 == 1)
+            if (1 == 2)
             {
                 services.AddAuthorization(opts => {
                     //opts.AddPolicy("OnlyForLondon", policy => {
@@ -107,7 +107,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region 03 - Создание ограничений для политики авторизации
-            if (1 == 1)
+            if (1 == 2)
             {
                 services.AddTransient<IAuthorizationHandler, AgeHandler>();
 
@@ -120,7 +120,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region 04 - Авторизация с помощью JWT-токенов
-            if (1 == 2)
+            if (1 == 1)
             {
                 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
