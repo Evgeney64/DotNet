@@ -60,5 +60,16 @@ namespace Home.Controllers
             };
             return View("~/Views/Home/About.cshtml", vmBase);
         }
+
+        [Authorize(Policy = "AgeLimit")]
+        public IActionResult Policy18()
+        {
+            VmBase vmBase = new VmBase(User)
+            {
+                Controller = "Policy-18",
+                Info = "age > 18",
+            };
+            return View("~/Views/Home/About.cshtml", vmBase);
+        }
     }
 }

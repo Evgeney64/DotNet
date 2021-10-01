@@ -108,9 +108,9 @@ namespace Server.Core.ViewModel
         {
             List<scr_user> users = new List<scr_user>
             {
-                new scr_user{ email = "qqq", password = "111", role = "admin", state = "1"},
-                new scr_user{ email = "aaa", password = "222", role = "user", state = "2"},
-                new scr_user{ email = "zzz", password = "333", role = "user", state = "1"},
+                new scr_user{ email = "qqq", password = "111", role = "admin", state = "1", year = 1964 },
+                new scr_user{ email = "aaa", password = "222", role = "user", state = "2", year = 1986 },
+                new scr_user{ email = "zzz", password = "333", role = "user", state = "1", year = 2014 },
             };
             return users;
         }

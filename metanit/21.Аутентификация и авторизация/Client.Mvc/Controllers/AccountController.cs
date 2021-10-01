@@ -91,7 +91,8 @@ namespace AuthApp.Controllers
                 new Claim(ClaimsIdentity.DefaultNameClaimType, _user.email),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, _user.role),
                 //new Claim(ClaimTypes.Locality, _user.city),
-                new Claim("state", _user.state)
+                new Claim("state", _user.state),
+                new Claim(ClaimTypes.DateOfBirth, _user.year.ToString())
             };
             { }
             // создаем объект ClaimsIdentity

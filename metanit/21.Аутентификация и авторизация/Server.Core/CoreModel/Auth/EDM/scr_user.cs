@@ -28,6 +28,7 @@ namespace Server.Core.AuthModel
         public string role { get; set; }
         public string state { get; set; }
         public string city { get; set; }
+        public int year { get; set; }
 
 
         public int password_format { get; set; }

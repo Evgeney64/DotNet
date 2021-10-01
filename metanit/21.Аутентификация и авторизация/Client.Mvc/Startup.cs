@@ -18,11 +18,15 @@ using Microsoft.Extensions.Logging;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 using Server.Core;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 using ru.tsb.mvc.Models.Users;
 using ServiceLib;
@@ -99,6 +103,49 @@ namespace ru.tsb.mvc
                         policy.RequireClaim("state", "1");
                     });
                 });
+            }
+            #endregion
+
+            #region 03 - Создание ограничений для политики авторизации
+            if (1 == 1)
+            {
+                services.AddTransient<IAuthorizationHandler, AgeHandler>();
+
+                services.AddAuthorization(opts => {
+                    // устанавливаем ограничение по возрасту
+                    opts.AddPolicy("AgeLimit",
+                        policy => policy.Requirements.Add(new AgeRequirement(18)));
+                });
+            }
+            #endregion
+
+            #region 04 - Авторизация с помощью JWT-токенов
+            if (1 == 2)
+            {
+                services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            // укзывает, будет ли валидироваться издатель при валидации токена
+                            ValidateIssuer = true,
+                            // строка, представляющая издателя
+                            ValidIssuer = AuthOptions.ISSUER,
+
+                            // будет ли валидироваться потребитель токена
+                            ValidateAudience = true,
+                            // установка потребителя токена
+                            ValidAudience = AuthOptions.AUDIENCE,
+                            // будет ли валидироваться время существования
+                            ValidateLifetime = true,
+
+                            // установка ключа безопасности
+                            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                            // валидация ключа безопасности
+                            ValidateIssuerSigningKey = true,
+                        };
+                    });
             }
             #endregion
             #endregion
