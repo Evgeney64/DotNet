@@ -101,7 +101,8 @@ namespace ru.tsb.mvc
         public const int LIFETIME = 1; // время жизни токена - 1 минута
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
-            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
+            byte[] key = Encoding.ASCII.GetBytes(KEY);
+            return new SymmetricSecurityKey(key);
         }
     }
     #endregion

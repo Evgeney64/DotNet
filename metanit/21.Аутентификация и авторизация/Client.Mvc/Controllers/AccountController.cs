@@ -22,6 +22,8 @@ using Server.Core.ViewModel;
 using Server.Core.CoreModel;
 using Server.Core.AuthModel;
 using ru.tsb.mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Text;
 
 namespace AuthApp.Controllers
 {
@@ -122,6 +124,7 @@ namespace AuthApp.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        #region 04 - Авторизация с помощью JWT-токенов
         [HttpPost("/token")]
         public IActionResult Token(string username, string password)
         {
@@ -141,7 +144,7 @@ namespace AuthApp.Controllers
                     expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
+            { }
             var response = new
             {
                 access_token = encodedJwt,
@@ -168,13 +171,37 @@ namespace AuthApp.Controllers
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, user.role)
                 };
                 ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
+                    new ClaimsIdentity(claims, "Token", 
+                        ClaimsIdentity.DefaultNameClaimType,
+                        ClaimsIdentity.DefaultRoleClaimType
+                        );
                 return claimsIdentity;
             }
 
             // если пользователя не найдено
             return null;
+        }
+        #endregion
+
+    }
+
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ValuesController : Controller
+    {
+        [Authorize]
+        [Route("getlogin")]
+        public IActionResult GetLogin()
+        {
+            return Ok($"Ваш логин: {User.Identity.Name}");
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("getrole")]
+        public IActionResult GetRole()
+        {
+            return Ok("Ваша роль: администратор");
         }
     }
 }
