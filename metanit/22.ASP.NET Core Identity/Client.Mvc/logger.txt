@@ -1,0 +1,20 @@
+==================================================
+--- LogCritical ----------------------
+/Home/about
+--- LogDebug ----------------------
+--- LogError ----------------------
+/Home/about
+--- LogInformation ----------------------
+/Home/about
+--- LogWarning ----------------------
+/Home/about
+==================================================
+--- LogCritical ----------------------
+/resources/themes/images/default/tools/tool-sprites.gif
+--- LogDebug ----------------------
+--- LogError ----------------------
+/resources/themes/images/default/tools/tool-sprites.gif
+--- LogInformation ----------------------
+/resources/themes/images/default/tools/tool-sprites.gif
+--- LogWarning ----------------------
+/resources/themes/images/default/tools/tool-sprites.gif
