@@ -47,7 +47,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region Start 01 / 05 / 06 / 07 / 09 / 10
-            if (1 == 2)
+            if (1 == 1)
             {
                 string path_conf = "";
                 //path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"]; ;
@@ -272,7 +272,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region 09 - Проекция конфигурации на классы
-            if (1 == 2)
+            if (1 == 1)
             {
                 ConfigurationClass conf = new ConfigurationClass();
                 CustomConfiguration.Bind(conf);

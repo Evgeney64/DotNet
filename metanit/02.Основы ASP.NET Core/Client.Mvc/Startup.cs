@@ -48,7 +48,7 @@ namespace ru.tsb.mvc
             // https://metanit.com/sharp/aspnet5/1.1.php
             #region 2.Основы ASP.NET Core
             #region 01 - Run()
-            if (1 == 2)
+            if (1 == 1)
             {
                 app.Run(async (context) =>
                 {
