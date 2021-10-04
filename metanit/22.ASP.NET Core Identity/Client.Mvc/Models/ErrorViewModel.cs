@@ -1,6 +1,6 @@
 using System;
 
-namespace ru.tsb.mvc.Models
+namespace Client.Mvc.Models
 {
     public class ErrorViewModel
     {

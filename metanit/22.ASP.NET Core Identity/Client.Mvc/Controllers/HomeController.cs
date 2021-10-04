@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Client.Mvc.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
-using Server.Core.ViewModel;
-using Server.Core.CoreModel;
-
-namespace Home.Controllers
+namespace Client.Mvc.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -19,57 +18,20 @@ namespace Home.Controllers
             _logger = logger;
         }
 
-        //[Authorize]
-        //[AllowAnonymous]
-        [Authorize(Roles = "admin, user")]
         public IActionResult Index()
         {
-            if (this.HttpContext != null
-                && this.Request != null && this.Response != null
-                && this.RouteData != null
-                && this.Url != null && this.User != null
-                && this.Request.Query != null && this.Request.QueryString != null
-                ) { }
-            { }
-            if (User.Identity.IsAuthenticated == false)
-            {
-                return RedirectToAction("Login", "Account");
-                //return Content("не аутентифицирован");
-            }
-
-            return View(new VmBase(User));
+            return View();
         }
 
-        [Authorize(Roles = "admin")]
-        public IActionResult About()
+        public IActionResult Privacy()
         {
-            VmBase vmBase = new VmBase(User)
-            {
-                Controller = "About",
-            };
-            return View(vmBase);
+            return View();
         }
 
-        [Authorize(Policy = "OnlyForState_One")]
-        public IActionResult Policy()
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            VmBase vmBase = new VmBase(User)
-            {
-                Controller = "Policy",
-                Info = "state = 1",
-            };
-            return View("~/Views/Home/About.cshtml", vmBase);
-        }
-
-        [Authorize(Policy = "AgeLimit")]
-        public IActionResult Policy18()
-        {
-            VmBase vmBase = new VmBase(User)
-            {
-                Controller = "Policy-18",
-                Info = "age > 18",
-            };
-            return View("~/Views/Home/About.cshtml", vmBase);
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
