@@ -50,7 +50,7 @@ namespace ru.tsb.mvc
             if (1 == 1)
             {
                 string path_conf = "";
-                //path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"]; ;
+                path_conf = AppConfiguration["ASPNETCORE_IIS_PHYSICAL_PATH"]; ;
 
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(System.IO.Directory.GetCurrentDirectory())
