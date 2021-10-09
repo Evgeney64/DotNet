@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "20210712-01"
+git commit -m "20211010-01"
 
 rem ************* git remote add origin https://github.com/Evgeney64/DotNet.git
 
