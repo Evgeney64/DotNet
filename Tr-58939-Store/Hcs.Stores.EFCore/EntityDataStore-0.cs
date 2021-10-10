@@ -704,65 +704,9 @@ namespace Hcs.DataSources
         }
         protected virtual void OnDataStoreCreating(EntityRelationBuilder entityRelationBuilder)
         {
-            if (1 == 2)
-            {
-                entityRelationBuilder.Entity<PaymentImportRequest>(e =>
-                    {
-                    //e.NavigateStr<PaymentImportRequestChargesMunicipalService>("PaymentImportRequestChargesMunicipalServices");
-                    //e.NavigateStr<PaymentImportRequestChargesMunicipalServiceNorm>("PaymentImportRequestChargesMunicipalServiceNorm");
-                    //e.NavigateStr<PaymentImportRequestDebtMunicipalService>("PaymentImportRequestDebtMunicipalServices");
-                    { }
-                        e.Navigate(a => a.PaymentImportRequestChargesMunicipalServices)
-                            .Navigate(s => s.PaymentImportRequestChargesMunicipalServiceNorm);
-                        e.Navigate(a => a.PaymentImportRequestPenaltyAndCourtCosts);
-                        e.Navigate(a => a.PaymentImportRequestDebtMunicipalServices);
-                        //onDataStoreCreating(e);
-                        //onDataStoreCreating(typeof(PaymentImportRequest), e);
-                        { }
-                    });
-            }
-            else
-            {
-                entityRelationSet(typeof(PaymentImportRequest));
-            }
-        }
-        List<string> entityRelations = new List<string>();
-        public void entityRelationSet(Type type)
-        {
-            MethodInfo method = typeof(EntityRelationBuilder).GetMethod("EntitySet");
-            MethodInfo methodGen = method.MakeGenericMethod(new[] { type });
-            IEntityRelation item = (IEntityRelation)methodGen.Invoke(entityRelationBuilder, new object[] { });
-
-            entityRelations = new List<string>();
-            entityRelations.Add(type.Name);
-
-            entityRelationRecurce(item, type, 0);
-        }
-        public void entityRelationRecurce(IEntityRelation item, Type type, int step)
-        {
-            foreach (PropertyInfo prop in type.GetProperties()
-                //.Where(ss => ss.CustomAttributes
-                //    .Where(ss1 => ss1.AttributeType.Name == "InversePropertyAttribute").Count() > 0)
-                )
-            {
-                if (prop.CustomAttributes != null
-                    && prop.CustomAttributes.Where(ss1 => ss1.AttributeType.Name == "InversePropertyAttribute").Count() > 0)
-                {
-                    Type type1 = prop.PropertyType;
-                    if (prop.PropertyType.GetGenericArguments().Count() == 1)
-                        type1 = prop.PropertyType.GetGenericArguments().Single();
-
-                    MethodInfo method1 = item.GetType().GetMethod("NavigateSet");
-                    MethodInfo methodGen1 = method1.MakeGenericMethod(new[] { type1 });
-                    IEntityRelation item1 = (IEntityRelation)methodGen1.Invoke(item, new object[] { prop.Name });
-                    if (entityRelations.Contains(prop.Name) == false
-                        && entityRelations.Count() < 20)
-                    {
-                        entityRelationRecurce(item1, type1, step + 1);
-                    }
-                    entityRelations.Add(prop.Name);
-                }
-            }
+            entityRelationBuilder.EntityRelationSet(typeof(PaymentImportRequest));
+            if (entityRelationBuilder.EntityRelations != null)
+            { }
         }
         protected virtual void OnDataStoreCreating_Old(EntityRelationBuilder entityRelationBuilder)
         {

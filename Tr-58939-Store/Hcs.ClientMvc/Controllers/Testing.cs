@@ -17,6 +17,8 @@ namespace Hcs.ClientMvc.Controllers
         {
             EntityDataSourceConfiguration conf = getDataSourceConfiguration("config.json");
             EntityDataStoreNew store = new EntityDataStoreNew(conf);
+            return Guid.NewGuid();
+
             TransactionInfo info = TransactionInfo.Create(SysOperationCode.AccountImport);
 
             Guid guid = await store.CreateTransactionAsync(info);
