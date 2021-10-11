@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="OracleStoredProdDataSource-1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.130" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hcs\Hcs.csproj" />
+  </ItemGroup>
+
+</Project>
