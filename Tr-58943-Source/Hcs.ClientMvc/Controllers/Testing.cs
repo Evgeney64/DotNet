@@ -18,22 +18,21 @@ namespace Hcs.ClientMvc.Controllers
         private async Task<String> testing()
         {
             String str = "";
-            //StoredProcDataSourceConfiguration conf = new StoredProcDataSourceConfiguration();
-            string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=ebuled1-scan1.spb-dc.interrao.ru)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DBCCB)));User Id=cisgkh;Password=cisgkh;";
-            OracleStoredProdDataSource source = new OracleStoredProdDataSource(connectionString);
+            StoredProcDataSourceConfiguration conf = getDataSourceConfiguration("config.json");
+            OracleStoredProdDataSource source = new OracleStoredProdDataSource(conf);
             await source.TestAsync();
             { }
             return str;
         }
 
         #region Configuration
-        private EntityDataSourceConfiguration getDataSourceConfiguration(string config_file)
+        private StoredProcDataSourceConfiguration getDataSourceConfiguration(string config_file)
         {
-            IConfiguration configuration = getConfiguration("Hcs.ClientMvc", "Hcs.Stores.EFCore", config_file);
+            IConfiguration configuration = getConfiguration("Hcs.ClientMvc", "Hcs.Sources.Oracle", config_file);
 
             //EntityDataSourceConfiguration conf1 = configuration.GetSection("EntityDataSourceConfiguration").Get<EntityDataSourceConfiguration>();
-            EntityDataSourceConfiguration conf = new EntityDataSourceConfiguration();
-            configuration.Bind("EntityDataSourceConfiguration", conf);
+            StoredProcDataSourceConfiguration conf = new StoredProcDataSourceConfiguration();
+            configuration.Bind("StoredProcDataSourceConfiguration", conf);
             return conf;
         }
 

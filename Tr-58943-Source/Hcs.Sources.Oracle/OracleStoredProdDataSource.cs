@@ -42,6 +42,7 @@ namespace Hcs.DataSource
             }
 
             this.Configuration = configuration;
+            this.connectionString = configuration.HcsConnectionStringName;
             //this.OnDataStoreCreating(entityRelationBuilder);
         }
         public OracleStoredProdDataSource(string _connectionString)

@@ -1,6 +1,6 @@
 ﻿{
-  "EntityDataSourceConfiguration": {
-    "HcsConnectionStringName": "Server=172.16.100.15; Database=GisHcs; user id=sa;password=123456Qwerty; MultipleActiveResultSets=true;",
+  "StoredProcDataSourceConfiguration": {
+    "HcsConnectionStringName": "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=ebuled1-scan1.spb-dc.interrao.ru)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DBCCB)));User Id=cisgkh;Password=cisgkh;",
     "CommandTimeout": "300",
     "Log": {
       "Mode": "Request"
