@@ -24,8 +24,17 @@ namespace Hcs.ClientMvc.Controllers
 
         public async Task<ActionResult<Guid>> Test()
         {
-            var guid = await testing();
-            return View(guid);
+            return View(Guid.NewGuid());
+        }
+        public ActionResult<String> TestStr()
+        {
+            var str = testing();
+            return str.Result;
+        }
+        public async Task<ActionResult<String>> TestStr11()
+        {
+            String str = await testing();
+            return View(str);
         }
     }
 }

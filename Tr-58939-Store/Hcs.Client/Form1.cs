@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.Configuration;
 
-using Hcs.DataSources;
+using Hcs.Configuration;
+using Hcs.Store;
 
 namespace Hcs.Client
 {

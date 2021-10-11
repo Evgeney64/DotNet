@@ -7,28 +7,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-using Hcs.DataSources;
+using Hcs.Configuration;
+using Hcs.Store;
 
 namespace Hcs.ClientMvc.Controllers
 {
     public partial class HomeController : Controller
     {
-        private async Task<Guid> testing()
+        private async Task<String> testing()
         {
             EntityDataSourceConfiguration conf = getDataSourceConfiguration("config.json");
             EntityDataStoreNew store = new EntityDataStoreNew(conf);
-            return Guid.NewGuid();
-
             TransactionInfo info = TransactionInfo.Create(SysOperationCode.AccountImport);
 
-            Guid guid = await store.CreateTransactionAsync(info);
-            return guid;
+            //Guid guid = Guid.NewGuid();
+            //guid = await store.CreateTransactionAsync(info);
+            //return guid.ToString();
+            String str = store.OnDataStoreCreating();
+            return str;
         }
 
         #region Configuration
         private EntityDataSourceConfiguration getDataSourceConfiguration(string config_file)
         {
-            IConfiguration configuration = getConfiguration(config_file);
+            IConfiguration configuration = getConfiguration("Hcs.ClientMvc", "Hcs.Stores.EFCore", config_file);
 
             //EntityDataSourceConfiguration conf1 = configuration.GetSection("EntityDataSourceConfiguration").Get<EntityDataSourceConfiguration>();
             EntityDataSourceConfiguration conf = new EntityDataSourceConfiguration();
@@ -36,10 +38,10 @@ namespace Hcs.ClientMvc.Controllers
             return conf;
         }
 
-        private IConfiguration getConfiguration(string config_file)
+        private IConfiguration getConfiguration(string client_path, string config_path, string config_file)
         {
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string conf_dir = base_dir.Substring(0, base_dir.IndexOf("Hcs.Client")) + "Hcs.Client\\";
+            string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
             { }
             var builder = new ConfigurationBuilder()
                 //.SetBasePath(conf_dir).AddJsonFile(config_file)

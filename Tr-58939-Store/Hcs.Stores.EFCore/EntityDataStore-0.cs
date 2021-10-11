@@ -10,24 +10,23 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
-using Hcs;
-using Hcs.Model;
-using Hcs.Stores;
 using System.Linq.Expressions;
+
+using Hcs;
+using Hcs.Configuration;
+using Hcs.Model;
+using Hcs.DataSource;
 #endregion
 
-namespace Hcs.DataSources
+namespace Hcs.Store
 {
     public class EntityDataStoreNew : IDataStore2, IDisposable, ILoggable
     {
-        private bool disposed = false;
         protected readonly EntityRelationBuilder entityRelationBuilder = new EntityRelationBuilder();
 
-        //protected HCSEdm Context { get; set; }
-        public Action<string, string> Log { get; set; }
+        #region Constructors
         public EntityDataSourceConfiguration Configuration { get; private set; }
 
-        #region Constructors
         public EntityDataStoreNew(EntityDataSourceConfiguration configuration)
         {
             if (configuration == null)
@@ -36,7 +35,7 @@ namespace Hcs.DataSources
             }
 
             this.Configuration = configuration;
-            this.OnDataStoreCreating(entityRelationBuilder);
+            //this.OnDataStoreCreating(entityRelationBuilder);
         }
         //protected EntityDataStoreNew(EntityDataSourceConfiguration configuration, string dataSourceName)
         //    : this(configuration)
@@ -59,13 +58,7 @@ namespace Hcs.DataSources
         //}
         #endregion
 
-        protected void AddTrace(string header)
-        {
-            if (this.Log != null && this.Configuration.Log != null && this.Configuration.Log.Mode.HasFlag(LogMode.Trace))
-            {
-                this.Log(header, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff"));
-            }
-        }
+        #region get / set async methods
         protected virtual IEnumerable<T> GetDataSet<T>(HcsContext context, Guid stateGuid)
             where T : class //, ITransactionEntity
         {
@@ -628,7 +621,9 @@ namespace Hcs.DataSources
                 throw new DataSourceException(e);
             }
         }
+        #endregion
 
+        #region old
         /*
         protected ICollection GetNavigationCollection(object entity, string navigationProperty, bool load)
         {
@@ -672,6 +667,7 @@ namespace Hcs.DataSources
             }
         }
         */
+        #endregion
         protected HcsContext CreateContext()
         {
             var context = HcsContext.CreateContext(this.Configuration.HcsConnectionStringName);
@@ -702,242 +698,28 @@ namespace Hcs.DataSources
                 fObj.Parameters
                 );
         }
-        protected virtual void OnDataStoreCreating(EntityRelationBuilder entityRelationBuilder)
+        public String OnDataStoreCreating()
         {
+            EntityRelationBuilder entityRelationBuilder = new EntityRelationBuilder();
             entityRelationBuilder.EntityRelationSet(typeof(PaymentImportRequest));
+
+            String str = "";
             if (entityRelationBuilder.EntityRelations != null)
-            { }
+            {
+                //str = "<ul>";
+                foreach (String _str in entityRelationBuilder.EntityRelations)
+                {
+                    //str += "<li>" + _str + "</li>";
+                    str += $"\n" + _str;
+                }
+                //str += "</ul>";
+            }
+            return str;
         }
-        protected virtual void OnDataStoreCreating_Old(EntityRelationBuilder entityRelationBuilder)
-        {
-            #region Nsi
-            entityRelationBuilder
-                .Entity<NsiExportRequest>()
-                .Entity<NsiExportResult>(e =>
-                {
-                    e.Navigate(a => a.NsiExportResultFields);
-                });
-            #endregion
 
-            #region Attachment
-            entityRelationBuilder
-                .Entity<AttachmentPostRequest>()
-                .Entity<AttachmentPostResult>();
-            #endregion
+        #region IDisposable
+        private bool disposed = false;
 
-            #region Organization
-            entityRelationBuilder
-                .Entity<OrganizationExportRequest>(e =>
-                {
-                    e.Navigate(s => s.OrganizationExportRequestData);
-                })
-                .Entity<OrganizationExportResult>(e =>
-                {
-                    e.Navigate(s => s.OrganizationExportResultLegal);
-                    e.Navigate(s => s.OrganizationExportResultEntp);
-                    e.Navigate(s => s.OrganizationExportResultRoles);
-                });
-            #endregion
-
-            #region Account
-            entityRelationBuilder
-                .Entity<AccountImportRequest>(e =>
-                {
-                    e.Navigate(a => a.AccountImportRequestReasons);
-                    e.Navigate(a => a.AccountImportRequestPayer);
-                    e.Navigate(a => a.AccountImportRequestPercentPremises);
-                })
-                .Entity<AccountImportResult>(e =>
-                {
-                    e.Navigate(a => a.AccountImportResultErrors);
-                })
-                .Entity<AccountExportRequest>()
-                .Entity<AccountExportResult>(e =>
-                {
-                    e.Navigate(a => a.AccountExportResultPercentPremises);
-                })
-                .Entity<AccountCloseRequest>()
-                .Entity<AccountCloseResult>(e =>
-                {
-                    e.Navigate(a => a.AccountCloseResultAccounts)
-                        .Navigate(a => a.AccountCloseResultAccountErrors);
-                });
-            #endregion
-
-            #region Ack
-            entityRelationBuilder
-                .Entity<AckImportRequest>()
-                .Entity<AckImportCancellationRequest>()
-                .Entity<AckImportResult>(e =>
-                {
-                    e.Navigate(a => a.AckImportResultErrors);
-                });
-            #endregion
-
-            #region Contract
-            entityRelationBuilder
-                .Entity<ContractImportRequest>(e =>
-                {
-                    e.Navigate(c => c.ContractImportRequestObjectAddresses)
-                        .Navigate(o => o.ContractImportRequestObjectServiceResources);
-                    e.Navigate(c => c.ContractImportRequestSubjects)
-                        .Navigate(s => s.ContractImportRequestSubjectQualityIndicators);
-                    e.Navigate(c => c.ContractImportRequestParty);
-                    e.Navigate(c => c.ContractImportRequestAttachments);
-                })
-                .Entity<ContractImportResult>(e =>
-                {
-                    e.Navigate(c => c.ContractImportResultErrors);
-                });
-            #endregion
-
-            #region Settlement
-            entityRelationBuilder
-                .Entity<SettlementImportRequest>(e =>
-                {
-                    var per = e.Navigate(s => s.SettlementImportRequestPeriods);
-                    per.Navigate(s => s.SettlementImportRequestPeriodInfo);
-                    per.Navigate(s => s.SettlementImportRequestPeriodAnnulment);
-                })
-                .Entity<SettlementImportAnnulmentRequest>()
-                .Entity<SettlementImportResult>(e =>
-                {
-                    e.Navigate(a => a.SettlementImportResultErrors);
-                });
-            #endregion
-
-            #region Device
-            entityRelationBuilder
-                .Entity<DeviceImportRequest>(e =>
-                {
-                    e.Navigate(c => c.DeviceImportRequestAccounts);
-                    e.Navigate(c => c.DeviceImportRequestAddresses);
-                    e.Navigate(c => c.DeviceImportRequestLinkedDevices);
-                    e.Navigate(c => c.DeviceImportRequestValues);
-                })
-                .Entity<DeviceImportArchiveRequest>()
-                .Entity<DeviceImportReplaceRequest>(e =>
-                {
-                    e.Navigate(c => c.DeviceImportReplaceRequestValues);
-                })
-                .Entity<DeviceImportResult>(e =>
-                {
-                    e.Navigate(c => c.DeviceImportResultErrors);
-                });
-            #endregion
-
-            #region DeviceValue
-            entityRelationBuilder
-                .Entity<DeviceValueImportRequest>()
-                .Entity<DeviceValueImportResult>(e =>
-                {
-                    e.Navigate(c => c.DeviceValueImportResultErrors);
-                })
-                .Entity<DeviceValueExportRequest>(e =>
-                {
-                    e.Navigate(c => c.DeviceValueExportRequestDevices);
-                    e.Navigate(c => c.DeviceValueExportRequestDeviceTypes);
-                    e.Navigate(c => c.DeviceValueExportRequestMunicipalResources);
-                })
-                .Entity<DeviceValueExportResult>();
-            #endregion
-
-            #region House
-            entityRelationBuilder
-                .Entity<HouseImportRequest>(e =>
-                {
-                    e.Navigate(c => c.HouseImportRequestBlocks);
-                    e.Navigate(c => c.HouseImportRequestEntrances);
-                    e.Navigate(c => c.HouseImportRequestPremises);
-                    e.Navigate(c => c.HouseImportRequestLivingRooms);
-                })
-                .Entity<HouseImportResult>(e =>
-                {
-                    e.Navigate(c => c.HouseImportResultErrors);
-                    e.Navigate(c => c.HouseImportResultBlocks)
-                        .Navigate(s => s.HouseImportResultBlockErrors);
-                    e.Navigate(c => c.HouseImportResultEntrances)
-                        .Navigate(o => o.HouseImportResultEntranceErrors);
-                    e.Navigate(c => c.HouseImportResultPremises)
-                        .Navigate(s => s.HouseImportResultPremiseErrors);
-                    e.Navigate(c => c.HouseImportResultLivingRooms)
-                        .Navigate(o => o.HouseImportResultLivingRoomErrors);
-                })
-                .Entity<HouseExportRequest>()
-                .Entity<HouseExportResult>(e =>
-                {
-                    e.Navigate(c => c.HouseExportResultBlocks);
-                    e.Navigate(c => c.HouseExportResultEntrances);
-                    e.Navigate(c => c.HouseExportResultPremises);
-                    e.Navigate(c => c.HouseExportResultLivingRooms);
-                });
-            #endregion
-
-            #region Notification
-            entityRelationBuilder
-                .Entity<NotificationImportRequest>(e =>
-                {
-                    e.Navigate(s => s.NotificationImportRequestAccountDebts);
-                })
-                .Entity<NotificationImportDeleteRequest>()
-                .Entity<NotificationImportResult>(e =>
-                {
-                    e.Navigate(c => c.NotificationImportResultErrors);
-                });
-            #endregion
-
-            #region Order
-            entityRelationBuilder
-                .Entity<OrderImportRequest>()
-                .Entity<OrderImportCancellationRequest>()
-                .Entity<OrderImportResult>(e =>
-                {
-                    e.Navigate(a => a.OrderImportResultErrors);
-                });
-            #endregion
-
-            #region Payment
-            entityRelationBuilder
-                .Entity<PaymentImportRequest>(e =>
-                {
-                    e.Navigate(a => a.PaymentImportRequestChargesMunicipalServices)
-                        .Navigate(s => s.PaymentImportRequestChargesMunicipalServiceNorm);
-                    e.Navigate(a => a.PaymentImportRequestPenaltyAndCourtCosts);
-                    e.Navigate(a => a.PaymentImportRequestDebtMunicipalServices);
-                })
-                .Entity<PaymentImportWithdrawRequest>()
-                .Entity<PaymentImportResult>(e =>
-                {
-                    e.Navigate(a => a.PaymentImportResultErrors);
-                })
-                .Entity<PaymentExportRequest>(e =>
-                {
-                    e.Navigate(a => a.PaymentExportRequestDocuments);
-                    e.Navigate(a => a.PaymentExportRequestAccounts);
-                })
-                .Entity<PaymentExportResult>();
-            #endregion
-        }
-        //protected virtual void ApplyConfiguration(DataSourceElement dataSource)
-        //{
-        //    if (dataSource == null)
-        //    {
-        //        throw new Exception("Не задана конфигурация источника.");
-        //    }
-
-        //    this.Configuration.HcsConnectionStringName = dataSource.HCSConnectionStringName;
-        //    this.Configuration.SourceId = dataSource.UniqueId;
-        //    this.Configuration.CommandTimeout = dataSource.CommandTimeout;
-
-        //    if (dataSource.Log.ElementInformation.IsPresent)
-        //    {
-        //        this.Configuration.Log.Mode = dataSource.Log.Mode;
-        //    }
-        //    else if (dataSource.DefaultLogModeSpecified)
-        //    {
-        //        this.Configuration.Log.Mode = dataSource.DefaultLogMode;
-        //    }
-        //}
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -957,6 +739,20 @@ namespace Hcs.DataSources
             }
             GC.SuppressFinalize(this);
         }
+        #endregion
+
+        #region ILoggable
+        public Action<string, string> Log { get; set; }
+
+        protected void AddTrace(string header)
+        {
+            if (this.Log != null && this.Configuration.Log != null && this.Configuration.Log.Mode.HasFlag(LogMode.Trace))
+            {
+                this.Log(header, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff"));
+            }
+        }
+
+        #endregion
     }
 }
 
