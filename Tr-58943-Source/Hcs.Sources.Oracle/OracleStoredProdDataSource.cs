@@ -25,15 +25,17 @@ using Hcs.Model;
 
 namespace Hcs.DataSource
 {
-    #region OracleStoredProdDataSource
     public partial class OracleStoredProdDataSource : IDataSource2, IDisposable, ILoggable
     {
+        #region Define
         private Dictionary<SysOperationCode, Tuple<Type, Type>> sysOperationTypes = new Dictionary<SysOperationCode, Tuple<Type, Type>>();
 
-        #region Constructors
-        public StoredProcDataSourceConfiguration Configuration { get; private set; }
-        private string connectionString { get; set; }
+        protected readonly EntityRelationBuilder entityRelationBuilder = new EntityRelationBuilder();
+        public StoredProcDataSourceConfiguration Configuration { get; set; }
+        private string connectionString { get { return Configuration.HcsConnectionStringName; } }
+        #endregion
 
+        #region Constructors
         public OracleStoredProdDataSource(StoredProcDataSourceConfiguration configuration)
         {
             if (configuration == null)
@@ -41,28 +43,45 @@ namespace Hcs.DataSource
                 throw new ArgumentNullException("configuration");
             }
 
-            this.Configuration = configuration;
-            this.connectionString = configuration.HcsConnectionStringName;
-            //this.OnDataStoreCreating(entityRelationBuilder);
+            Configuration = configuration;
+            OnDataStoreCreating(entityRelationBuilder);
         }
-        public OracleStoredProdDataSource(string _connectionString)
-        {
-            if (_connectionString == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
 
-            this.connectionString = _connectionString;
-            //this.OnDataStoreCreating(entityRelationBuilder);
+        protected void OnDataStoreCreating(EntityRelationBuilder entityRelationBuilder)
+        {
+            entityRelationBuilder.EntityRelationSetAllTypes();
+            //base.OnDataStoreCreating(entityRelationBuilder);
+
+            sysOperationTypes[SysOperationCode.NsiExport] = Tuple.Create(typeof(NsiExportRequest), typeof(NsiExportResult));
+            sysOperationTypes[SysOperationCode.OrganizationExport] = Tuple.Create(typeof(OrganizationExportRequest), typeof(OrganizationExportResult));
+            sysOperationTypes[SysOperationCode.AccountImport] = Tuple.Create(typeof(AccountImportRequest), typeof(AccountImportResult));
+            sysOperationTypes[SysOperationCode.AccountExport] = Tuple.Create(typeof(AccountExportRequest), typeof(AccountExportResult));
+            sysOperationTypes[SysOperationCode.AccountClose] = Tuple.Create(typeof(AccountCloseRequest), typeof(AccountCloseResult));
+            sysOperationTypes[SysOperationCode.AckImport] = Tuple.Create(typeof(AckImportRequest), typeof(AckImportResult));
+            sysOperationTypes[SysOperationCode.ContractImport] = Tuple.Create(typeof(ContractImportRequest), typeof(ContractImportResult));
+            sysOperationTypes[SysOperationCode.SettlementImport] = Tuple.Create(typeof(SettlementImportRequest), typeof(SettlementImportResult));
+            sysOperationTypes[SysOperationCode.DeviceImport] = Tuple.Create(typeof(DeviceImportRequest), typeof(DeviceImportResult));
+            sysOperationTypes[SysOperationCode.DeviceExport] = Tuple.Create(typeof(DeviceExportRequest), typeof(DeviceExportResult));
+            sysOperationTypes[SysOperationCode.DeviceValueImport] = Tuple.Create(typeof(DeviceValueImportRequest), typeof(DeviceValueImportResult));
+            sysOperationTypes[SysOperationCode.DeviceValueExport] = Tuple.Create(typeof(DeviceValueExportRequest), typeof(DeviceValueExportResult));
+            sysOperationTypes[SysOperationCode.HouseImport] = Tuple.Create(typeof(HouseImportRequest), typeof(HouseImportResult));
+            sysOperationTypes[SysOperationCode.HouseExport] = Tuple.Create(typeof(HouseExportRequest), typeof(HouseExportResult));
+            sysOperationTypes[SysOperationCode.NotificationImport] = Tuple.Create(typeof(NotificationImportRequest), typeof(NotificationImportResult));
+            sysOperationTypes[SysOperationCode.OrderImport] = Tuple.Create(typeof(OrderImportRequest), typeof(OrderImportResult));
+            sysOperationTypes[SysOperationCode.PaymentDocumentImport] = Tuple.Create(typeof(PaymentImportRequest), typeof(PaymentImportResult));
+            sysOperationTypes[SysOperationCode.PaymentDocumentExport] = Tuple.Create(typeof(PaymentExportRequest), typeof(PaymentExportResult));
         }
         #endregion
 
+        #region CreateConnection
         protected OracleConnection CreateConnection()
         {
             var connection = new OracleConnection(connectionString);
             return connection;
         }
+        #endregion
 
+        #region SysOperationCode
         private SysOperationCode getSysOperationCodeByRequestType(Type type)
         {
             var sysItems = this.sysOperationTypes
@@ -95,6 +114,7 @@ namespace Hcs.DataSource
 
             return sysItems.First().Key;
         }
+        #endregion
 
         #region old
         //protected SqlConnection CreateConnection(string connectionStringName)
@@ -129,28 +149,6 @@ namespace Hcs.DataSource
         //            };
         //        }
         //    }
-        //}
-        //protected override void OnDataStoreCreating(EntityRelationBuilder entityRelationBuilder)
-        //{
-        //    base.OnDataStoreCreating(entityRelationBuilder);
-        //    sysOperationTypes[SysOperationCode.NsiExport] = Tuple.Create(typeof(NsiExportRequest), typeof(NsiExportResult));
-        //    sysOperationTypes[SysOperationCode.OrganizationExport] = Tuple.Create(typeof(OrganizationExportRequest), typeof(OrganizationExportResult));
-        //    sysOperationTypes[SysOperationCode.AccountImport] = Tuple.Create(typeof(AccountImportRequest), typeof(AccountImportResult));
-        //    sysOperationTypes[SysOperationCode.AccountExport] = Tuple.Create(typeof(AccountExportRequest), typeof(AccountExportResult));
-        //    sysOperationTypes[SysOperationCode.AccountClose] = Tuple.Create(typeof(AccountCloseRequest), typeof(AccountCloseResult));
-        //    sysOperationTypes[SysOperationCode.AckImport] = Tuple.Create(typeof(AckImportRequest), typeof(AckImportResult));
-        //    sysOperationTypes[SysOperationCode.ContractImport] = Tuple.Create(typeof(ContractImportRequest), typeof(ContractImportResult));
-        //    sysOperationTypes[SysOperationCode.SettlementImport] = Tuple.Create(typeof(SettlementImportRequest), typeof(SettlementImportResult));
-        //    sysOperationTypes[SysOperationCode.DeviceImport] = Tuple.Create(typeof(DeviceImportRequest), typeof(DeviceImportResult));
-        //    sysOperationTypes[SysOperationCode.DeviceExport] = Tuple.Create(typeof(DeviceExportRequest), typeof(DeviceExportResult));
-        //    sysOperationTypes[SysOperationCode.DeviceValueImport] = Tuple.Create(typeof(DeviceValueImportRequest), typeof(DeviceValueImportResult));
-        //    sysOperationTypes[SysOperationCode.DeviceValueExport] = Tuple.Create(typeof(DeviceValueExportRequest), typeof(DeviceValueExportResult));
-        //    sysOperationTypes[SysOperationCode.HouseImport] = Tuple.Create(typeof(HouseImportRequest), typeof(HouseImportResult));
-        //    sysOperationTypes[SysOperationCode.HouseExport] = Tuple.Create(typeof(HouseExportRequest), typeof(HouseExportResult));
-        //    sysOperationTypes[SysOperationCode.NotificationImport] = Tuple.Create(typeof(NotificationImportRequest), typeof(NotificationImportResult));
-        //    sysOperationTypes[SysOperationCode.OrderImport] = Tuple.Create(typeof(OrderImportRequest), typeof(OrderImportResult));
-        //    sysOperationTypes[SysOperationCode.PaymentDocumentImport] = Tuple.Create(typeof(PaymentImportRequest), typeof(PaymentImportResult));
-        //    sysOperationTypes[SysOperationCode.PaymentDocumentExport] = Tuple.Create(typeof(PaymentExportRequest), typeof(PaymentExportResult));
         //}
 
         //protected HcsContext CreateContext()
@@ -245,15 +243,17 @@ namespace Hcs.DataSource
 
                 await connection.OpenAsync();
                 IEnumerable<T> data;
+                data = null;
                 try
                 {
                     await this.SetTemporaryListDataSetAsync(connection, objectList, transactionGuid);
-
+                    
                     SysOperationCode sysOperationCode = this.getSysOperationCodeByRequestType(typeof(T));
                     await this.PrepareTemporaryDataSetAsync(connection, transactionGuid, sysOperationCode);
                     data = await this.GetTemporaryDataSetAsync<T>(connection, transactionGuid);
-
+                    
                     IEnumerable<ObjectInfoError> objectListError = await this.GetTemporaryListErrorDataSetAsync(connection, transactionGuid);
+                    { }
                     foreach (var objectError in objectListError.GroupBy(e => e.ObjectId))
                     {
                         var obj = objectList.FirstOrDefault(o => o.ObjectId == objectError.Key);
@@ -268,11 +268,12 @@ namespace Hcs.DataSource
                     //{
                     //
                     //}
+                    
                 }
                 finally
                 {
-                    //await this.TruncateTemporaryListDataSetAsync(connection, transactionGuid);
-                    //await this.TruncateTemporaryDataSetAsync<T>(connection, transactionGuid);
+                    await this.TruncateTemporaryListDataSetAsync(connection, transactionGuid);
+                    await this.TruncateTemporaryDataSetAsync<T>(connection, transactionGuid);
                 }
 
                 this.AddTrace("TakeDataAsync End");
@@ -347,40 +348,6 @@ namespace Hcs.DataSource
                 return listData;
             }
         }
-        public virtual async Task TestAsync()
-        {
-            using (var connection = this.CreateConnection())
-            {
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandTimeout = 300;
-                    command.InitialLOBFetchSize = -1;
-
-                    command.CommandText = "SELECT * FROM HSC_IDS_MAP";
-                    //using (var reader = command.ExecuteReader())
-                    //{
-                    //}
-                    connection.Open();
-                    { }
-                    int count = 0;
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
-                            //                //    var objectInfoError = new ObjectInfoError
-                            //                //    {
-                            //                //        ObjectId = await reader.GetFieldValueAsync<string>(0),
-                            //                //        ErrorCode = await reader.GetFieldValueAsync<string>(1),
-                            //                //        ErrorDescription = await reader.GetFieldValueAsync<string>(2),
-                            //                //    };
-                            count++;
-                        }
-                    }
-                    { }
-                }
-            }
-            return;
-        }
         #endregion
 
         #region IDisposable
@@ -409,7 +376,6 @@ namespace Hcs.DataSource
 
         #region ILoggable
         public Action<string, string> Log { get; set; }
-        #endregion
 
         protected void AddTrace(string header)
         {
@@ -418,137 +384,8 @@ namespace Hcs.DataSource
                 this.Log(header, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff"));
             }
         }
+        #endregion
     }
-    #endregion
-
-    #region CommonOracleStoredProcDataSourceConfiguration
-    public class CommonOracleStoredProcDataSourceConfiguration : StoredProcDataSourceConfiguration
-    {
-        public CommonOracleStoredProcDataSourceConfiguration()
-        {
-            this[SysOperationCode.NsiExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_NsiExport",
-                ResultProcedureName = "HCS_NsiExport_Result",
-                ListProcedureName = "HCS_NsiExport_List",
-            };
-            this[SysOperationCode.OrganizationExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "hcs_organizationexport",
-                ResultProcedureName = "hcs_organizationexport_result",
-                ListProcedureName = "hcs_organizationexport_list",
-            };
-            this[SysOperationCode.AccountImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_AccountImport",
-                ResultProcedureName = "HCS_AccountImport_Result",
-                ListProcedureName = "HCS_AccountImport_List",
-            };
-            this[SysOperationCode.AccountExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_AccountExport",
-                ResultProcedureName = "HCS_AccountExport_Result",
-                ListProcedureName = "HCS_AccountExport_List",
-            };
-            this[SysOperationCode.AccountClose] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_AccountClose",
-                ResultProcedureName = "HCS_AccountClose_Result",
-                ListProcedureName = "HCS_AccountClose_List",
-            };
-            this[SysOperationCode.AckImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_AckImport",
-                ResultProcedureName = "HCS_AckImport_Result",
-                ListProcedureName = "HCS_AckImport_List",
-            };
-            this[SysOperationCode.ContractImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_ContractImport",
-                ResultProcedureName = "HCS_ContractImport_Result",
-                ListProcedureName = "HCS_ContractImport_List",
-            };
-            this[SysOperationCode.SettlementImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_SettlementImport",
-                ResultProcedureName = "HCS_SettlementImport_Result",
-                ListProcedureName = "HCS_SettlementImport_List",
-            };
-            this[SysOperationCode.DeviceImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_DeviceImport",
-                ResultProcedureName = "HCS_DeviceImport_Result",
-                ListProcedureName = "HCS_DeviceImport_List",
-            };
-            this[SysOperationCode.DeviceExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_DeviceExport",
-                ResultProcedureName = "HCS_DeviceExport_Result",
-                ListProcedureName = "HCS_DeviceExport_List",
-            };
-            this[SysOperationCode.DeviceValueImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_DeviceValueImport",
-                ResultProcedureName = "HCS_DeviceValueImport_Result",
-                ListProcedureName = "HCS_DeviceValueImport_List",
-            };
-            this[SysOperationCode.DeviceValueExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_DeviceValueExport",
-                ResultProcedureName = "HCS_DeviceValueExport_Result",
-                ListProcedureName = "HCS_DeviceValueExport_List",
-            };
-            this[SysOperationCode.HouseImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_HouseImport",
-                ResultProcedureName = "HCS_HouseImport_Result",
-                ListProcedureName = "HCS_HouseImport_List",
-            };
-            this[SysOperationCode.HouseExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_HouseExport",
-                ResultProcedureName = "HCS_HouseExport_Result",
-                ListProcedureName = "HCS_HouseExport_List",
-            };
-            this[SysOperationCode.NotificationImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_NotificationImport",
-                ResultProcedureName = "HCS_NotificationImport_Result",
-                ListProcedureName = "HCS_NotificationImport_List",
-            };
-            this[SysOperationCode.OrderImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_OrderImport",
-                ResultProcedureName = "HCS_OrderImport_Result",
-                ListProcedureName = "HCS_OrderImport_List",
-            };
-            this[SysOperationCode.PaymentDocumentImport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_PaymentDocumentImport",
-                ResultProcedureName = "HCS_PaymentDocumentImport_Result",
-                ListProcedureName = "HCS_PaymentDocumentImport_List",
-            };
-            this[SysOperationCode.PaymentDocumentExport] = new StoredProcConfiguration
-            {
-                PrepareProcedureName = "HCS_PaymentDocumentExport",
-                ResultProcedureName = "HCS_PaymentDocumentExport_Result",
-                ListProcedureName = "HCS_PaymentDocumentExport_List",
-            };
-        }
-    }
-    #endregion
-
-    #region CommonOracleStoredProcDataSource
-    public class CommonOracleStoredProcDataSource : OracleStoredProdDataSource
-    {
-        public CommonOracleStoredProcDataSource()
-            : base(new CommonOracleStoredProcDataSourceConfiguration())
-        {
-        }
-        //public CommonOracleStoredProcDataSource(string dataSourceName)
-        //    : base(new CommonOracleStoredProcDataSourceConfiguration(), dataSourceName)
-        //{
-        //}
-    }
-    #endregion
 }
+
+

@@ -12,6 +12,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 using Oracle.ManagedDataAccess.Client;
 
@@ -22,6 +23,7 @@ using Hcs;
 //using Oracle.ManagedDataAccess.Client;
 using Hcs.Configuration;
 using Hcs.Model;
+
 
 namespace Hcs.DataSource
 {
@@ -40,47 +42,53 @@ namespace Hcs.DataSource
                 IList<ObjectInfo> result = new List<ObjectInfo>();
                 IList<ObjectInfoError> resultError = new List<ObjectInfoError>();
 
-                #region temp
                 //using (var context = HCSEdm.CreateContext(this.Configuration.HcsConnectionStringName))
-                //{
-                //    command.CommandText = "SELECT OBJECTID, to_clob(\"comment\") AS \"comment\", OPERATION, NVL(\"group\",0) AS \"group\", to_clob(PARAM) AS PARAM FROM cisgkh.SYSTRANSACTIONOBJECT";
-                //    using (var reader = command.ExecuteReader())
-                //    {
-                //        result = context.ObjectContext
-                //            .Translate<ObjectInfo>(reader)
-                //            .ToList();
-                //        //while (await reader.ReadAsync())
-                //        //{
-                //        //    var objectInfo = new ObjectInfo
-                //        //    {
-                //        //        ObjectId = await reader.GetFieldValueAsync<string>(0),
-                //        //        Comment = !await reader.IsDBNullAsync(1) ? await reader.GetFieldValueAsync<string>(1) : null,
-                //        //        Operation = (int)await reader.GetFieldValueAsync<decimal>(2),
-                //        //        Group = !await reader.IsDBNullAsync(3) ? await reader.GetFieldValueAsync<int>(3) : 0,
-                //        //        Param = !await reader.IsDBNullAsync(4) ? await reader.GetFieldValueAsync<string>(4) : null,
-                //        //    };
-                //        //    result.Add(objectInfo);
-                //        //}
-                //    }
-                //    command.CommandText = "SELECT OBJECTID, ERRORCODE, ERRORDESCRIPTION FROM cisgkh.SYSTRANSACTIONOBJECTERROR";
-                //    using (var reader = await command.ExecuteReaderAsync())
-                //    {
-                //        resultError = context.ObjectContext
-                //            .Translate<ObjectInfoError>(reader)
-                //            .ToList();
-                //        //while (await reader.ReadAsync())
-                //        //{
-                //        //    var objectInfoError = new ObjectInfoError
-                //        //    {
-                //        //        ObjectId = await reader.GetFieldValueAsync<string>(0),
-                //        //        ErrorCode = await reader.GetFieldValueAsync<string>(1),
-                //        //        ErrorDescription = await reader.GetFieldValueAsync<string>(2),
-                //        //    };
-                //        //    resultError.Add(objectInfoError);
-                //        //}
-                //    }
-                //}
-                #endregion
+                {
+                    #region SYSTRANSACTIONOBJECT
+                    //command.CommandText = "SELECT OBJECTID, to_clob(\"comment\") AS \"comment\", OPERATION, NVL(\"group\",0) AS \"group\", to_clob(\"PARAM\") AS \"PARAM\" FROM cisgkh.SYSTRANSACTIONOBJECT";
+                    command.CommandText = "SELECT OBJECTID, to_clob(\"comment\") AS \"comment\", OPERATION, NVL(\"group\",0) AS \"group\", to_clob(\"PARAM\") AS \"PARAM\" FROM SYSTRANSACTIONOBJECT";
+                    command.CommandText += " WHERE ROWNUM <= 10";
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        //result = context.ObjectContext
+                        //    .Translate<ObjectInfo>(reader)
+                        //    .ToList();
+                        while (await reader.ReadAsync())
+                        {
+                            var objectInfo = new ObjectInfo
+                            {
+                                ObjectId = await reader.GetFieldValueAsync<string>(0),
+                                Comment = !await reader.IsDBNullAsync(1) ? await reader.GetFieldValueAsync<string>(1) : null,
+                                Operation = (int)await reader.GetFieldValueAsync<decimal>(2),
+                                Group = !await reader.IsDBNullAsync(3) ? (int)await reader.GetFieldValueAsync<decimal>(3) : 0,
+                                Param = !await reader.IsDBNullAsync(4) ? await reader.GetFieldValueAsync<string>(4) : null,
+                            };
+                            result.Add(objectInfo);
+                        }
+                    }
+                    #endregion
+
+                    #region SYSTRANSACTIONOBJECTERROR
+//                    command.CommandText = "SELECT OBJECTID, ERRORCODE, ERRORDESCRIPTION FROM cisgkh.SYSTRANSACTIONOBJECTERROR";
+                    command.CommandText = "SELECT OBJECTID, ERRORCODE, ERRORDESCRIPTION FROM SYSTRANSACTIONOBJECTERROR";
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        //resultError = context.ObjectContext
+                        //    .Translate<ObjectInfoError>(reader)
+                        //    .ToList();
+                        while (await reader.ReadAsync())
+                        {
+                            var objectInfoError = new ObjectInfoError
+                            {
+                                ObjectId = await reader.GetFieldValueAsync<string>(0),
+                                ErrorCode = await reader.GetFieldValueAsync<string>(1),
+                                ErrorDescription = await reader.GetFieldValueAsync<string>(2),
+                            };
+                            resultError.Add(objectInfoError);
+                        }
+                    }
+                    #endregion
+                }
 
                 foreach (var objectError in resultError.GroupBy(e => e.ObjectId))
                 {
@@ -105,7 +113,8 @@ namespace Hcs.DataSource
                 IList<ObjectInfoError> resultError = new List<ObjectInfoError>();
 
                 command.Connection = connection;
-                command.CommandText = "SELECT OBJECTID, ERRORCODE, ERRORDESCRIPTION FROM cisgkh.SYSTRANSACTIONOBJECTERROR";
+                command.CommandText = "SELECT OBJECTID, ERRORCODE, ERRORDESCRIPTION FROM SYSTRANSACTIONOBJECTERROR"; 
+                //command.CommandText = "SELECT OBJECTID, ERRORCODE, ERRORDESCRIPTION FROM cisgkh.SYSTRANSACTIONOBJECTERROR";
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
@@ -125,22 +134,24 @@ namespace Hcs.DataSource
                 return resultError;
             }
         }
-        private async Task SetTemporaryListDataSetAsync(OracleConnection connection, IEnumerable<ObjectInfo> objectList, Guid transactionGuid)
+        private async Task SetTemporaryListDataSetAsync1(OracleConnection connection, IEnumerable<ObjectInfo> objectList, Guid transactionGuid)
         {
             if (objectList.Count() < 1)
             {
                 throw new Exception("Пустой список.");
             }
 
-            using (var command = new OracleCommand())
+            //using (var command = new OracleCommand())
+            using (var command = connection.CreateCommand())
             {
                 this.AddTrace("SetTemporaryListDataSetAsync Begin");
 
-                command.Connection = connection;
+                //command.Connection = connection;
                 command.CommandTimeout = this.Configuration.CommandTimeout;
 
                 string insert =
-                    "INSERT INTO cisgkh.SYSTRANSACTIONOBJECT (TRANSACTIONGUID, OBJECTID, \"comment\", OPERATION, \"group\", PARAM) " +
+                    //"INSERT INTO cisgkh.SYSTRANSACTIONOBJECT (TRANSACTIONGUID, OBJECTID, \"comment\", OPERATION, \"group\", PARAM) " +
+                    "INSERT INTO SYSTRANSACTIONOBJECT (TRANSACTIONGUID, OBJECTID, \"comment\", OPERATION, \"group\", PARAM) " +
                     String.Join(" UNION ALL ", objectList.Select(o => $"SELECT '{transactionGuid}', '{o.ObjectId}', '{o.Comment?.Replace("'", "''")}', {o.Operation}, {o.Group}, '{o.Param?.Replace("'", "''")}' FROM DUAL"));
                 command.CommandText = insert;
                 await command.ExecuteNonQueryAsync();
@@ -149,7 +160,8 @@ namespace Hcs.DataSource
                 if (objectListError.Count() > 0)
                 {
                     string insertError =
-                        "INSERT INTO cisgkh.SYSTRANSACTIONOBJECTERROR (TRANSACTIONGUID, OBJECTID, ERRORCODE, ERRORDESCRIPTION) " +
+                        //"INSERT INTO cisgkh.SYSTRANSACTIONOBJECTERROR (TRANSACTIONGUID, OBJECTID, ERRORCODE, ERRORDESCRIPTION) " +
+                        "INSERT INTO SYSTRANSACTIONOBJECTERROR (TRANSACTIONGUID, OBJECTID, ERRORCODE, ERRORDESCRIPTION) " +
                         String.Join(" UNION ALL ", objectListError.Select(o => $"SELECT '{transactionGuid}', '{o.ObjectId}', '{o.ErrorCode}', '{o.ErrorDescription?.Replace("'", "''")}' FROM DUAL"));
                     command.CommandText = insertError;
                     await command.ExecuteNonQueryAsync();
@@ -169,13 +181,16 @@ namespace Hcs.DataSource
             this.AddTrace("PrepareTemporaryListDataSetAsync Begin");
 
             var transactionGUIDParameter = new OracleParameter("TransactionGUID", OracleDbType.Char, transactionGUID.ToString(), ParameterDirection.Input);
+            // hcs_organizationexport_list
             //try
             {
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandTimeout = this.Configuration.CommandTimeout;
-                    command.CommandText = String.Format("BEGIN cisgkh.HCS.{0} (:TransactionGUID); END;", procedures.ListProcedureName);
+                    //command.CommandText = String.Format("BEGIN cisgkh.HCS.{0} (:TransactionGUID); END;", procedures.ListProcedureName);
+                    command.CommandText = String.Format("BEGIN HCS.{0} (:TransactionGUID); END;", procedures.ListProcedureName);
                     command.Parameters.Add(transactionGUIDParameter);
+                    
                     await command.ExecuteNonQueryAsync();
                 }
             }
@@ -186,6 +201,23 @@ namespace Hcs.DataSource
 
             this.AddTrace("PrepareTemporaryListDataSetAsync End");
         }
+        private async Task SetTemporaryListDataSetAsync(OracleConnection connection, IEnumerable<ObjectInfo> objectList, Guid transactionGuid)
+        {
+            this.AddTrace("SetTemporaryListDataSetAsync Begin");
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandTimeout = this.Configuration.CommandTimeout;
+                string insert =
+                    //"INSERT INTO cisgkh.SYSTRANSACTIONOBJECT (TRANSACTIONGUID, OBJECTID, \"comment\", OPERATION, \"group\", PARAM) " +
+                    "INSERT INTO SYSTRANSACTIONOBJECT (TRANSACTIONGUID, OBJECTID, \"comment\", OPERATION, \"group\", PARAM) " +
+                    String.Join(" UNION ALL ", objectList.Select(o => $"SELECT '{transactionGuid}', '{o.ObjectId}', '{o.Comment?.Replace("'", "''")}', {o.Operation}, {o.Group}, '{o.Param?.Replace("'", "''")}' FROM DUAL"));
+                command.CommandText = insert;
+                await command.ExecuteNonQueryAsync();
+            }
+
+            this.AddTrace("SetTemporaryListDataSetAsync End");
+        }
         private async Task TruncateTemporaryListDataSetAsync(OracleConnection connection, Guid transactionGuid)
         {
             this.AddTrace("TruncateTemporaryListDataSetAsync Begin");
@@ -195,7 +227,8 @@ namespace Hcs.DataSource
                 command.CommandTimeout = this.Configuration.CommandTimeout;
                 foreach (string table in new[] { "SYSTRANSACTIONOBJECT", "SYSTRANSACTIONOBJECTERROR" })
                 {
-                    command.CommandText = $"TRUNCATE TABLE cisgkh.{table}";
+                    //command.CommandText = $"TRUNCATE TABLE cisgkh.{table}";
+                    command.CommandText = $"TRUNCATE TABLE {table}";
                     await command.ExecuteNonQueryAsync();
                 }
             }
@@ -224,7 +257,8 @@ namespace Hcs.DataSource
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandTimeout = this.Configuration.CommandTimeout;
-                    command.CommandText = String.Format("BEGIN cisgkh.HCS.{0} (:TransactionGUID, :TransferDate); END;", procedures.PrepareProcedureName);
+                    //command.CommandText = String.Format("BEGIN cisgkh.HCS.{0} (:TransactionGUID, :TransferDate); END;", procedures.PrepareProcedureName);
+                    command.CommandText = String.Format("BEGIN HCS.{0} (:TransactionGUID, :TransferDate); END;", procedures.PrepareProcedureName);
                     command.Parameters.Add(transactionGUIDParameter);
                     command.Parameters.Add(transferDateParameter);
                     await command.ExecuteNonQueryAsync();
@@ -241,55 +275,70 @@ namespace Hcs.DataSource
         private async Task<IEnumerable<T>> GetTemporaryDataSetAsync<T>(OracleConnection connection, Guid transactionGUID)
             where T : class
         {
-            return null;
-            
-            #region temp
-            //this.AddTrace("GetTemporaryDataSetAsync Begin");
+            this.AddTrace("GetTemporaryDataSetAsync Begin");
 
-            //List<T> data = new List<T>();
-            //IEnumerable<Type> entityRelationTypes = this.entityRelationBuilder.GetEntityRelation<T>()
-            //    .GetRelations()
-            //    .Select(r => r.Type)
-            //    .Distinct()
-            //    .ToList();
+            List<T> data = new List<T>();
+            IEnumerable<Type> entityRelationTypes = this.entityRelationBuilder.GetEntityRelation<T>()
+                .GetRelations()
+                .Select(r => r.Type)
+                .Distinct()
+                .ToList();
             //using (var context = HCSEdm.CreateContext(this.Configuration.HcsConnectionStringName))
-            //{
-            //    foreach (Type type in entityRelationTypes)
-            //    {
-            //        using (var command = connection.CreateCommand())
-            //        {
-            //            command.CommandText = String.Format("SELECT * FROM cisgkh.{0} WHERE TransactionGUID = :TransactionGUID", type.Name);
-            //            command.Parameters.Add("TransactionGUID", OracleDbType.Char, transactionGUID.ToString(), ParameterDirection.Input);
-            //            using (var reader = await command.ExecuteReaderAsync())
-            //            {
-            //                if (type == typeof(T))
-            //                {
-            //                    data = (await context.Set(type).TranslateAsync(reader))
-            //                        .OfType<T>()
-            //                        .ToList();
-            //                    //data = context.ObjectContext
-            //                    //    .Translate<T>(reader)
-            //                    //    .ToList();
-            //                }
-            //                else
-            //                {
-            //                    var test = (await context.Set(type).TranslateAsync(reader))
-            //                        .OfType<object>()
-            //                        .ToList();
-            //                    //var test = context.ObjectContext
-            //                    //    .Translate(type, reader)
-            //                    //    .OfType<object>()
-            //                    //    .ToList();
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            {
+                foreach (Type type in entityRelationTypes)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        //command.CommandText = String.Format("SELECT * FROM cisgkh.{0} WHERE TransactionGUID = :TransactionGUID", type.Name);
+                        command.CommandText = String.Format("SELECT * FROM {0} WHERE TransactionGUID = :TransactionGUID", type.Name);
+                        command.Parameters.Add("TransactionGUID", OracleDbType.Char, transactionGUID.ToString(), ParameterDirection.Input);
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                if (type == typeof(T))
+                                { }
+                                else
+                                { }
+                                object item = Activator.CreateInstance(type);
+                                if (item == null)
+                                    continue;
+                                for (int i = 0; i < reader.FieldCount; i++)
+                                {
+                                    if (await reader.IsDBNullAsync(i))
+                                        continue;
 
-            //this.AddTrace("GetTemporaryDataSetAsync End");
+                                    string value = await reader.GetFieldValueAsync<string>(i);
+                                    DbColumn col = reader.GetColumnSchema()[i];
+                                    PropertyInfo prop = type.GetProperties().Where(ss => ss.Name.ToUpper() == col.BaseColumnName).FirstOrDefault();
+                                    if (prop != null)
+                                    {
+                                        if (prop.PropertyType.Name == "Guid")
+                                        {
+                                            Guid guid = Guid.Empty;
+                                            if (Guid.TryParse(value, out guid))
+                                                prop.SetValue(item, guid);
+                                            else
+                                            { }
+                                        }
+                                    }
+                                }
+                                if (type == typeof(T))
+                                {
+                                    data.Add((T)item);
+                                }
+                                else
+                                { 
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-            //return data;
-            #endregion
+            this.AddTrace("GetTemporaryDataSetAsync End");
+
+            return data;
         }
         private async Task SetTemporaryDataSetAsync<T>(OracleConnection connection, IEnumerable<T> data)
             where T : class
@@ -391,7 +440,8 @@ namespace Hcs.DataSource
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandTimeout = this.Configuration.CommandTimeout;
-                    command.CommandText = String.Format("BEGIN cisgkh.HCS.{0} (:TransactionGUID, :TransferDate); END;", procedures.ResultProcedureName);
+                    //command.CommandText = String.Format("BEGIN cisgkh.HCS.{0} (:TransactionGUID, :TransferDate); END;", procedures.ResultProcedureName);
+                    command.CommandText = String.Format("BEGIN HCS.{0} (:TransactionGUID, :TransferDate); END;", procedures.ResultProcedureName);
                     command.Parameters.Add(transactionGUIDParameter);
                     command.Parameters.Add(transferDateParameter);
                     await command.ExecuteNonQueryAsync();
@@ -409,22 +459,21 @@ namespace Hcs.DataSource
         {
             this.AddTrace("TruncateTemporaryDataSetAsync Begin");
 
-            #region temp
-            //IEnumerable<Type> entityRelationTypes = this.entityRelationBuilder.GetEntityRelation<T>()
-            //    .GetRelations()
-            //    .Select(r => r.Type)
-            //    .Distinct()
-            //    .ToList();
-            //using (var command = connection.CreateCommand())
-            //{
-            //    command.CommandTimeout = this.Configuration.CommandTimeout;
-            //    foreach (var entityType in entityRelationTypes)
-            //    {
-            //        command.CommandText = $"TRUNCATE TABLE cisgkh.{entityType.Name}";
-            //        await command.ExecuteNonQueryAsync();
-            //    }
-            //}
-            #endregion
+            IEnumerable<Type> entityRelationTypes = this.entityRelationBuilder.GetEntityRelation<T>()
+                .GetRelations()
+                .Select(r => r.Type)
+                .Distinct()
+                .ToList();
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandTimeout = this.Configuration.CommandTimeout;
+                foreach (var entityType in entityRelationTypes)
+                {
+                    //command.CommandText = $"TRUNCATE TABLE cisgkh.{entityType.Name}";
+                    command.CommandText = $"TRUNCATE TABLE {entityType.Name}";
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
 
             this.AddTrace("TruncateTemporaryDataSetAsync End");
         }

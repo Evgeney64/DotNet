@@ -51,6 +51,7 @@ namespace Hcs
 
             return this;
         }
+
         public EntityRelation<TEntity> GetEntityRelation<TEntity>()
         {
             IEntityRelation entityRelation;
@@ -61,7 +62,23 @@ namespace Hcs
             return (EntityRelation<TEntity>)entityRelation;
         }
 
+        #region EntityRelationSet
         public List<string> EntityRelations = new List<string>();
+        public void EntityRelationSetAllTypes()
+        {
+            Assembly assembly = Assembly.GetAssembly(typeof(EntityRelationBuilder));
+
+            List<Type> types = assembly.GetTypes()
+                .Where(ss => ss.FullName.Contains("Hcs.Model")
+                    && ss.FullName.Contains("<>") == false
+                    && ss.IsClass
+                    && ss.BaseType.FullName == "System.Object"
+                    )
+                .OrderBy(ss => ss.FullName)
+                .ToList();
+            foreach (Type type in types)
+                EntityRelationSet(type);
+        }
         public void EntityRelationSet(Type type)
         {
             MethodInfo method = typeof(EntityRelationBuilder).GetMethod("EntitySet");
@@ -97,6 +114,12 @@ namespace Hcs
             }
 
         }
+        #endregion
 
     }
+}
+
+namespace Hcs.Model
+{
+
 }

@@ -1,9 +1,10 @@
 ﻿{
   "StoredProcDataSourceConfiguration": {
-    "HcsConnectionStringName": "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=ebuled1-scan1.spb-dc.interrao.ru)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DBCCB)));User Id=cisgkh;Password=cisgkh;",
+    //"HcsConnectionStringName": "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=ebuled1-scan1.spb-dc.interrao.ru)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DBCCB)));User Id=cisgkh;Password=cisgkh;",
+    "HcsConnectionStringName": "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=srv-eens-eb-tst-db01.eksbyt.ru)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=EENSTST)));User Id=cisgkh1;Password=welcome1;",
     "CommandTimeout": "300",
     "Log": {
       "Mode": "Request"
     }
-  }
+  },
 }

@@ -1,6 +1,5 @@
 ﻿function IndexScript() {
     Ext.onReady(function () {
-
         var panel = Ext.create('Ext.Panel', {
             title: 'ГИС ЖКХ',
             width: 500,
@@ -13,7 +12,7 @@
                     fieldLabel: 'Параметр',
                     id: 'txtParam',
                     height: 20,
-                    fieldStyle: 'background-color: #fff; font-weight: norm; width:350px;'
+                    fieldStyle: 'background-color: #fff; font-weight: bold; width:350px;'
                 }, {
                     xtype: 'textfield',
                     fieldLabel: 'Результат',
@@ -34,12 +33,19 @@
                         'font-weight': 'bold'
                     },
                     handler: function () {
+                        panel.getComponent('txtParam').setValue("executing...");
+                        //var execute = $(panel.getComponent('txtResult'));
+                        //sss1.style.visibility = "hidden";
+                        //execute.css('visibility', 'hidden;');
+                        //execute.css('visibility', 'collapse');
+                        $(panel.getComponent('execute')).css('visibility', 'hidden');
                         Ext.Ajax.request({
-                            url: 'Home/Test',
+                            url: 'Home/TestStr',
                             success: function (response, options) {
                                 if (response != null) {
+                                    panel.getComponent('txtParam').setValue("");
                                     var value = response.responseText;
-                                    TestScript(value);
+                                    HtmlScript(value);
                                     panel.getComponent('txtResult').setValue(value);
                                 }
                             },
@@ -55,6 +61,13 @@
 }
 
 function TestScript(value) {
+    var value_str = value_in.replaceAll('&quot;', '"');
+    var value = JSON.parse(value_str);
+    var value_html = "<p>" + value.ValueGuid + "</p><p>---</p><p>" + value.ValueStr + "</p>";
+    HtmlScript(value_html);
+}
+
+function HtmlScript(value) {
     var sss = 1;
 
     Ext.create('Ext.Panel', {

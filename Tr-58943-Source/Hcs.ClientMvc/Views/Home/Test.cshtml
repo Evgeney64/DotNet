@@ -1,12 +1,12 @@
-﻿@model Guid
+﻿@model Hcs.ClientMvc.Controllers.ViewNodel
 <title>TR-58939 (Test)</title>
 
 <body>
-    <div style="font-weight: bold; font-size: 20px;" id="body_id">@Model</div>
+    <div style="font-weight: bold; font-size: 20px;" id="body_id">@Model.ValueStr</div>
 </body>
 
 <script>
     $(document).ready(function () {
-        TestScript("@Model");
+        TestScript("@Model.ValueJson");
     });
 </script>

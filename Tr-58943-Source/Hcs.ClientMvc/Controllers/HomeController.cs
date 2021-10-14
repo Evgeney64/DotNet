@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hcs.ClientMvc.Controllers
@@ -22,20 +24,30 @@ namespace Hcs.ClientMvc.Controllers
             return View();
         }
 
-        public async Task<ActionResult<Guid>> Test()
+        public async Task<ActionResult<ViewNodel>> Test()
         {
-            String str = await testing();
-            return View(Guid.NewGuid());
+            ViewNodel vm = new ViewNodel();
+            vm.ValueStr = await testing();
+            //vm.ValueStr = "await testing();";
+            vm.ValueGuid = Guid.NewGuid();
+
+            return View(vm);
         }
-        public ActionResult<String> TestStr()
+        public async Task<string> TestStr()
         {
-            var str = testing();
-            return str.Result;
+            ViewNodel vm = new ViewNodel();
+            vm.ValueStr = await testing();
+            vm.ValueGuid = Guid.NewGuid();
+
+            return vm.ValueStr;
         }
-        public async Task<ActionResult<String>> TestStr11()
-        {
-            String str = await testing();
-            return View(str);
-        }
+    }
+
+    public class ViewNodel
+    {
+        public string ValueStr { get; set; }
+        public Guid ValueGuid { get; set; }
+        [JsonIgnore]
+        public string ValueJson { get { return JsonSerializer.Serialize(this); } }
     }
 }
