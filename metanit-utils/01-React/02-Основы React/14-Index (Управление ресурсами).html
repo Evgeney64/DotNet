@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        class Clock extends React.Component {
+            constructor(props) {
+              super(props);
+              this.state = {date: new Date(), name: "Tom"};
+              this.unmount = this.unmount.bind(this);
+            }
+            unmount(){
+                ReactDOM.unmountComponentAtNode(document.getElementById("app"));
+            }
+            componentDidMount() {
+              this.timerId = setInterval(
+                ()=> this.tick(),
+                1000
+              );
+              console.log("componentDidMount()");
+            }
+     
+            componentWillUnmount() {
+              clearInterval(this.timerId);
+              console.log("componentWillUnmount()");
+            }
+     
+            tick() {
+			  console.log("-- tick()---");
+              this.setState({
+                date: new Date()
+              });
+            }
+     
+            render() {
+              return (
+                <div>
+                  <h1>Привет, {this.state.name}</h1>
+                  <h2>Текущее время {this.state.date.toLocaleTimeString()}.</h2>
+                  <button onClick={this.unmount}>Unmount</button>
+                </div>
+              );
+            }
+          }
+          ReactDOM.render(
+              <Clock />,
+              document.getElementById("app")
+          )
+    </script>
+</body>
+</html>
