@@ -8,10 +8,8 @@ http.createServer(function(request, response){
     });
      
 }).listen(3000, function(){
-    console.log("http://localhost:3000/");
+    console.log("http://localhost:3000");
     console.log("http://localhost:3000/about");
     console.log("http://localhost:3000/products");
-    console.log("http://localhost:3000/products/phones");
-    console.log("http://localhost:3000/products/tablets");
     console.log("http://localhost:3000/products/ddd");
 });

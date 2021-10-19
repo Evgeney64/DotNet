@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Маршруты в React</title>
+</head>
+<body>
+    <div id="app"></div>
+         
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+         
+    <script type="text/babel">
+    const Router = ReactRouterDOM.BrowserRouter;
+    const Route = ReactRouterDOM.Route;
+    const Switch = ReactRouterDOM.Switch;
+    const Link = ReactRouterDOM.Link;
+        
+    class Home extends React.Component{
+        render(){
+            return <div>
+                        <h2>Главная</h2>
+                        <p>Match: {JSON.stringify(this.props.match)}</p>
+                        <p>Location {JSON.stringify(this.props.location)}</p>
+                        <p>Id: {this.props.match.params.id}</p>
+                        <p>Name: {new URLSearchParams(this.props.location.search).get("name")}</p>
+                        <p>Age: {new URLSearchParams(this.props.location.search).get("age")}</p>
+                    </div>;
+        }
+    }
+    
+    ReactDOM.render(
+        <Router>
+            <div>
+                <nav>
+                    <Link exact to="/">Home</Link> | 
+                    <Link to="/2/?name=Bob&age=23">Bob</Link> | 
+                    <Link to="/3/?name=Tim&age=33">Tim</Link>
+                </nav>
+                <Switch>
+                    <Route path="/:id?" component={Home} />
+                </Switch>
+            </div>
+        </Router>,
+        document.getElementById("app")
+    )
+	
+    </script>
+</body>
+</html>
