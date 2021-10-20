@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <div id="app"></div>
+        
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        class ClickButton extends React.Component {
+               
+           constructor(props) {
+               super(props);
+               this.state = {counter: 0};
+                   
+               this.press = this.press.bind(this);
+           }
+           incrementCounter(prevState, props) {
+                  return {
+                    counter: prevState.counter + props.increment
+                  };
+            }
+           press(){
+               this.setState(this.incrementCounter);
+           }
+           render() {
+               return <div>
+                        <button onClick={this.press}>Count</button>
+                        <div>Counter: {this.state.counter}<br /> Increment: {this.props.increment}</div>
+                </div>
+           }
+       }
+           
+       ReactDOM.render(
+           <ClickButton increment={2} />,
+           document.getElementById("app")
+       )
+    </script>
+</body>
+</html>
