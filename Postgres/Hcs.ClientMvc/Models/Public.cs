@@ -10,13 +10,18 @@ namespace Hcs.Store
 {
     public class Public
     {
-        public string GenerateScript(DataSourceConfiguration conf)
+        DataSourceConfiguration conf;
+        public Public(DataSourceConfiguration _conf)
         {
+            conf = _conf;
+        }
+        public string GenerateScript()
+        {
+            #region
             #region Define
-            string user = "\"BillBerry\"";
-            string schem = "\"UAP\"";
-            schem = "\"public\"";
-            string table_space = "\"BillBerryTS\"";
+            string user = "\"gis_hcs\"";
+            string schem = "\"gis_hcs\"";
+            string table_space = "\"pg_default\"";
             string collate = "pg_catalog.\"default\"";
 
             List<table> tables = new List<table>();
@@ -118,6 +123,7 @@ namespace Hcs.Store
                                         "   INNER JOIN sys.all_columns col_par on col_par.OBJECT_ID = fk_col.parent_object_id and col_par.column_id = fk_col.parent_column_id" +
                                         "   INNER JOIN sys.all_columns col_ch on col_ch.OBJECT_ID = fk_col.referenced_object_id and col_ch.column_id = fk_col.referenced_column_id" +
                                         " WHERE fk.parent_object_id=@id";
+                                        //" WHERE fk.referenced_object_id=@id";
                                     command3.Connection = connection;
                                     SqlParameter nameParam = new SqlParameter("@id", id);
                                     //if (id == 1737773248)
@@ -192,7 +198,9 @@ namespace Hcs.Store
 
             #region create script
             string crt = "";
+            string del = "";
             string crt_fk = "";
+            string del_fk = "";
             string ins = "";
             foreach (table tbl in tables)
             {
@@ -200,6 +208,8 @@ namespace Hcs.Store
                 string schem_table_name = schem + "." + table_name;
                 crt += " \nCREATE TABLE " + schem_table_name;
                 crt += " \n(";
+
+                del += " \nDROP TABLE " + schem_table_name + ";";
 
                 #region CREATE TABLE
                 bool is_first = true;
@@ -228,22 +238,45 @@ namespace Hcs.Store
                 crt += ";";
 
                 crt += " \n";
-                crt += " ALTER TABLE " + tbl.name + " OWNER to " + user;
+                crt += " ALTER TABLE " + schem_table_name + " OWNER to " + user;
                 crt += ";\n\n";
                 #endregion
 
                 #region CREATE FK
                 if (tbl.foreign_keys.Count() > 0)
                 {
+                    int count = 0;
                     foreach (foreign_key fk in tbl.foreign_keys)
                     {
+                        string fk_name = fk.fk_name;
+                        fk_name = "FK_" + fk.parent_table + "_" + count.ToString();
+                        //fk_name = "FK_" + fk.parent_table + "_" + fk.child_table + "_" + count.ToString();
+                        count++;
+                        //if (fk_name.Length > 63)
+                        //    fk_name = fk_name.Substring(0, 63);
                         crt_fk +=
-                            "\nALTER TABLE " + schem_table_name +
-                            "\n     ADD CONSTRAINT \"" + fk.fk_name + "\" FOREIGN KEY (\"" + fk.child_column + "\")" +
-                            "\n     REFERENCES " + schem + ".\"" + fk.parent_table + "\" (\"" + fk.parent_column + "\") MATCH SIMPLE" +
-                            "\n     ON UPDATE NO ACTION" +
-                            "\n     ON DELETE NO ACTION;";
-                        crt_fk += "\n\n";
+                            "\nALTER TABLE " + schem_table_name + 
+                            " ADD CONSTRAINT \"" + fk_name + "\"" + 
+                            " FOREIGN KEY (\"" + fk.parent_column + "\")" +
+                            " REFERENCES " + schem + ".\"" + fk.child_table + "\" (\"" + fk.child_column + "\") MATCH SIMPLE" +
+                            " ON UPDATE NO ACTION" +
+                            " ON DELETE NO ACTION;";
+                        //crt_fk +=
+                        //    "\nALTER TABLE " + schem_table_name +
+                        //    "\n     ADD CONSTRAINT \"" + fk.fk_name + "\"" +
+                        //    "\n     FOREIGN KEY (\"" + fk.parent_column + "\")" +
+                        //    "\n     REFERENCES " + schem + ".\"" + fk.child_table + "\" (\"" + fk.child_column + "\") MATCH SIMPLE" +
+                        //    "\n     ON UPDATE NO ACTION" +
+                        //    "\n     ON DELETE NO ACTION;";
+                        //crt_fk += "\n\n";
+
+                        del_fk += "\nALTER TABLE " + schem_table_name + " DROP CONSTRAINT \"" + fk_name + "\";";
+                        //del_fk += "\nIF (SELECT * FROM pg_constraint WHERE conname = \"" + fk.fk_name + "\")" + 
+                        //    "\n     ALTER TABLE " + schem_table_name + " DROP CONSTRAINT \"" + fk.fk_name + "\";";
+                        /*
+                        SELECT* FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'SysParams'
+                        SELECT* FROM pg_constraint WHERE conname = 'FK_AttachmentPostResultCopy_AttachmentPostResult'
+                        */
                     }
                 }
                 #endregion
@@ -269,11 +302,14 @@ namespace Hcs.Store
             #region Save
             string path = Directory.GetCurrentDirectory() + "//script";
             writeToFile(path, "create_table.sql", crt);
+            writeToFile(path, "drop_table.sql", del);
             writeToFile(path, "create_fk.sql", crt_fk);
+            writeToFile(path, "drop_fk.sql", del_fk);
             writeToFile(path, "insert_data.sql", ins);
             #endregion
 
-            return "Ok";
+            return "GenerateScript - Ok";
+            #endregion
         }
 
         private void writeToFile(string path_mame, string file_name, string src, bool count_tables = false)
@@ -293,6 +329,23 @@ namespace Hcs.Store
             }
             #endregion
         }
+
+        public string GetData()
+        {
+            return "GetData - Ok";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // получаем объекты из бд и выводим на консоль
+                List<SysOperation> sysOperations = db.SysOperations.ToList();
+                //Console.WriteLine("Users list:");
+                foreach (SysOperation sop in sysOperations)
+                {
+                    //Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                }
+            }
+            return "GetData - Ok";
+        }
     }
 }
+
 

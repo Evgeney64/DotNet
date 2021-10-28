@@ -16,19 +16,28 @@ namespace Hcs.ClientMvc.Controllers
     {
         private async Task<String> testGenPostgr()
         {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json");
+            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "MsSqlConfiguration");
 
-            Public postgr = new Public();
-            String str = postgr.GenerateScript(conf);
+            Public postgr = new Public(conf);
+            String str = postgr.GenerateScript();
+            return str;
+        }
+
+        private async Task<String> testRunPostgr()
+        {
+            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "PostgresConfiguration");
+
+            Public postgr = new Public(conf);
+            String str = postgr.GetData();
             return str;
         }
 
         #region getDataSourceConfiguration
-        private DataSourceConfiguration getDataSourceConfiguration(string config_file)
+        private DataSourceConfiguration getDataSourceConfiguration(string config_file, string name)
         {
             IConfiguration configuration = getConfiguration("Hcs.ClientMvc", "Hcs.ClientMvc", config_file);
             DataSourceConfiguration conf = new DataSourceConfiguration();
-            configuration.Bind("MsSqlConfiguration", conf);
+            configuration.Bind(name, conf);
 
             return conf;
         }

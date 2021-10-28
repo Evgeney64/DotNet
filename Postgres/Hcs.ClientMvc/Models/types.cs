@@ -41,6 +41,7 @@ namespace Hcs.Store
                     this.typePostgres = "integer";
                     break;
                 case SQLTypes.smallint:
+                case SQLTypes.tinyint:
                     this.typePostgres = "smallint";
                     break;
                 case SQLTypes.bit:
@@ -75,7 +76,7 @@ namespace Hcs.Store
                     this.typePostgres = "date";
                     break;
                 case SQLTypes.uniqueidentifier:
-                    this.typePostgres = "uuid";
+                    this.typePostgres = "uuid UNIQUE";
                     break;
                 default:
                     this.typePostgres = "unknown field";
