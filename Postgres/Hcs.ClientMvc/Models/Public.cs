@@ -68,10 +68,17 @@ namespace Hcs.Store
                                 {
                                     #region Define-2
                                     command2.CommandText =
-                                        "SELECT name, column_id, user_type_id, max_length" +
+                                        "SELECT col.name, column_id, user_type_id, max_length" +
                                         //", is_primary_key, is_nullable, is_identity" +
                                         ", is_nullable, is_identity" +
-                                        " FROM sys.all_columns WHERE OBJECT_ID=@id ORDER BY column_id";
+                                        ", CASE WHEN sch.COLUMN_NAME IS NOT NULL THEN 1 ELSE 0 END AS IS_PRIMARY_KEY" +
+                                        " FROM sys.all_columns col" +
+                                        "    INNER JOIN sysobjects tbl on tbl.id = col.object_id" +
+                                        "    LEFT JOIN (SELECT sch.TABLE_NAME, sch.COLUMN_NAME FROM sys.key_constraints pk" +
+                                        "        INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE sch on sch.CONSTRAINT_NAME=pk.name WHERE pk.type='PK'" +
+                                        "        ) sch on sch.TABLE_NAME = tbl.name and sch.COLUMN_NAME = col.name" +
+                                        " WHERE col.object_id=@id ORDER BY column_id" +
+                                        "";
                                     command2.Connection = connection;
                                     SqlParameter nameParam = new SqlParameter("@id", id);
                                     command2.Parameters.Add(nameParam);
@@ -92,9 +99,9 @@ namespace Hcs.Store
                                                 column_id = int.Parse(reader2.GetValue(1).ToString()),
                                                 user_type_id = int.Parse(reader2.GetValue(2).ToString()),
                                                 max_length = int.Parse(reader2.GetValue(3).ToString()),
-                                                //is_primary_key = short.Parse(reader2.GetValue(4).ToString()),
                                                 is_nullable = bool.Parse(reader2.GetValue(4).ToString()),
                                                 is_identity = bool.Parse(reader2.GetValue(5).ToString()),
+                                                is_primary_key = short.Parse(reader2.GetValue(6).ToString()),
                                                 collate = collate,
                                             };
                                             col.typePostgresSet();
@@ -202,6 +209,7 @@ namespace Hcs.Store
             string crt_fk = "";
             string del_fk = "";
             string ins = "";
+            int count0 = 0;
             foreach (table tbl in tables)
             {
                 string table_name = "\"" + tbl.name + "\"";
@@ -219,7 +227,7 @@ namespace Hcs.Store
                         crt += " ,";
                     crt += " \n   \"" + col.name + "\"";
                     crt += " " + col.typePostgres;
-                    if (col.is_primary_key == 1 || col.is_identity)
+                    if (col.is_primary_key == 1)
                         crt += " PRIMARY KEY";
                     else if (col.is_nullable == false)
                         crt += " NOT NULL";
@@ -239,7 +247,7 @@ namespace Hcs.Store
 
                 crt += " \n";
                 crt += " ALTER TABLE " + schem_table_name + " OWNER to " + user;
-                crt += ";\n\n";
+                crt += ";\n";
                 #endregion
 
                 #region CREATE FK
@@ -249,11 +257,13 @@ namespace Hcs.Store
                     foreach (foreign_key fk in tbl.foreign_keys)
                     {
                         string fk_name = fk.fk_name;
-                        fk_name = "FK_" + fk.parent_table + "_" + count.ToString();
-                        //fk_name = "FK_" + fk.parent_table + "_" + fk.child_table + "_" + count.ToString();
-                        count++;
-                        //if (fk_name.Length > 63)
-                        //    fk_name = fk_name.Substring(0, 63);
+                        if (fk_name.Length > 63)
+                        {
+                            fk_name = fk_name.Substring(0, 60) + "_" + count.ToString();
+                            count++;
+                            count0++;
+                            //fk_name = "FK_" + fk.parent_table + "_" + fk.child_table + "_" + count.ToString();
+                        }
                         crt_fk +=
                             "\nALTER TABLE " + schem_table_name + 
                             " ADD CONSTRAINT \"" + fk_name + "\"" + 
@@ -286,17 +296,18 @@ namespace Hcs.Store
                 {
                     foreach (SysOperation sop in sysOperations)
                     {
-                        ins += "\nINSERT INTO " + schem_table_name + "(\"OperationId\", \"OperationName\", \"Name\", \"PacketSize\")" +
-                            "\n VALUES (" +
-                            "\"" + sop.OperationId + "\"" +
-                            ", \"" + sop.OperationName + "\"" +
-                            ", \"" + sop.Name + "\"" +
-                            ", \"" + sop.PacketSize + "\"" +
-                            ")\n";
+                        ins += "\nINSERT INTO " + schem_table_name + " (\"OperationId\", \"OperationName\", \"Name\", \"PacketSize\")" +
+                            " VALUES (" +
+                            "'" + sop.OperationId + "'" +
+                            ", '" + sop.OperationName + "'" +
+                            ", '" + sop.Name + "'" +
+                            ", '" + sop.PacketSize + "'" +
+                            ");";
                     }
                 }
                 #endregion
             }
+            { }
             #endregion
 
             #region Save
