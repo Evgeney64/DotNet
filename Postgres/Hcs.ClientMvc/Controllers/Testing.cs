@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-//using Hcs.Configuration;
 using Hcs.Store;
 
 namespace Hcs.ClientMvc.Controllers
@@ -25,10 +24,30 @@ namespace Hcs.ClientMvc.Controllers
 
         private async Task<String> testRunPostgr()
         {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "PostgresConfiguration");
+            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "MsSqlConfiguration");
 
             Public postgr = new Public(conf);
             String str = postgr.GetData();
+            return str;
+        }
+
+        private async Task<String> getContextSql()
+        {
+            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "MsSqlConfiguration");
+
+            Public postgr = new Public(conf);
+            //String str = postgr.GetSysOperation();
+            String str = postgr.GetSysTransaction();
+            return str;
+        }
+
+        private async Task<String> getContextPostgres()
+        {
+            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "PostgresConfiguration");
+
+            Public postgr = new Public(conf);
+            //String str = postgr.GetSysOperation();
+            String str = postgr.GetSysTransaction();
             return str;
         }
 

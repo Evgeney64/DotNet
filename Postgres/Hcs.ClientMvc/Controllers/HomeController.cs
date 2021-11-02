@@ -38,6 +38,22 @@ namespace Hcs.ClientMvc.Controllers
 
             return vm.ValueStr;
         }
+
+        public async Task<string> GetContextSql()
+        {
+            ViewNodel vm = new ViewNodel();
+            vm.ValueStr = await getContextSql();
+
+            return vm.ValueStr;
+        }
+
+        public async Task<string> GetContextPostgres()
+        {
+            ViewNodel vm = new ViewNodel();
+            vm.ValueStr = await getContextPostgres();
+
+            return vm.ValueStr;
+        }
     }
 
     public class ViewNodel
