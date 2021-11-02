@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\GenerateScript.cs" />
+    <Compile Remove="Models\GenerateScript_old.cs" />
   </ItemGroup>
 
   <ItemGroup>

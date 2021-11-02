@@ -31,14 +31,6 @@ namespace Hcs.ClientMvc.Controllers
             return vm.ValueStr;
         }
 
-        public async Task<string> TestRunPostgr()
-        {
-            ViewNodel vm = new ViewNodel();
-            vm.ValueStr = await testRunPostgr();
-
-            return vm.ValueStr;
-        }
-
         public async Task<string> GetContextSql()
         {
             ViewNodel vm = new ViewNodel();

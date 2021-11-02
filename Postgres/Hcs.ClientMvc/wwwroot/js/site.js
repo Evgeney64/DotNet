@@ -3,7 +3,7 @@
         var panel = Ext.create('Ext.Panel', {
             title: 'ГИС ЖКХ',
             width: 500,
-            height: 240,
+            height: 200,
             padding: 10,
             bodyPadding: 5,
             items: [
@@ -13,7 +13,8 @@
                     id: 'txtParam',
                     height: 20,
                     fieldStyle: 'background-color: #fff; font-weight: bold; width:350px;'
-                }, {
+                },
+                {
                     xtype: 'textfield',
                     fieldLabel: 'Результат',
                     id: 'txtResult',
@@ -42,42 +43,6 @@
                         $(panel.getComponent('passData')).css('visibility', 'hidden');
                         Ext.Ajax.request({
                             url: 'Home/TestGenPostgr',
-                            success: function (response, options) {
-                                if (response != null) {
-                                    panel.getComponent('txtParam').setValue("");
-                                    var value = response.responseText;
-                                    HtmlScript(value);
-                                    panel.getComponent('txtResult').setValue(value);
-                                }
-                            },
-                            failure: function (response, options) {
-                                alert("Ошибка: " + response.statusText);
-                            }
-                        });
-                    }
-                },
-                {
-                    xtype: 'button',
-                    text: 'Подключение к Postgres',
-                    id: 'getData',
-                    height: 30,
-                    width: 450,
-                    margin: '5 0 0 5',
-                    //labelStyle: 'font-weight: bold',
-                    style: {
-                        'color': 'red',
-                        'font-size': '15px',
-                        'font-weight': 'bold'
-                    },
-                    handler: function () {
-                        panel.getComponent('txtParam').setValue("executing...");
-                        //var execute = $(panel.getComponent('txtResult'));
-                        //sss1.style.visibility = "hidden";
-                        //execute.css('visibility', 'hidden;');
-                        //execute.css('visibility', 'collapse');
-                        $(panel.getComponent('passData')).css('visibility', 'hidden');
-                        Ext.Ajax.request({
-                            url: 'Home/TestRunPostgr',
                             success: function (response, options) {
                                 if (response != null) {
                                     panel.getComponent('txtParam').setValue("");
