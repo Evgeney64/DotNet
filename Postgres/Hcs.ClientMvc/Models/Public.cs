@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Hcs.Store
 {
@@ -19,10 +21,10 @@ namespace Hcs.Store
         public string GetSysOperation()
         {
             //using (ApplicationContext context = new ApplicationContext(conf.ConnectionString, conf.is_postgres))
-            using (var context = this.CreateContext())
+            using (ApplicationContext context = this.CreateContext())
             {
                 string str = "";
-                var sopr = context.SysOperation;
+                IQueryable<SysOperation> sopr = context.SysOperation;
                 if (sopr != null)
                 {
                     try
@@ -49,12 +51,12 @@ namespace Hcs.Store
         }
         public string GetSysTransaction()
         {
-            using (ApplicationContext context = new ApplicationContext(conf.ConnectionString, conf.is_postgres))
-            //using (var context = this.CreateContext())
+            //using (ApplicationContext context = new ApplicationContext(conf.ConnectionString, conf.is_postgres))
+            using (ApplicationContext context = this.CreateContext())
             {
                 string str = "";
                 DateTime date = new DateTime(2021, 11, 1);
-                var items = context.SysTransaction.Where(ss => ss.StartDate >= date);
+                IQueryable<SysTransaction> items = context.SysTransaction.Where(ss => ss.StartDate >= date);
                 if (items != null)
                 {
                     try
@@ -65,6 +67,39 @@ namespace Hcs.Store
                         {
                             str += "<p>" + sop.TransactionGUID + "</p>";
                         }
+
+                        #region ChangeTracker
+                        if (1 == 1)
+                        {
+                            int i = 0;
+                            foreach (SysTransaction sop in itemsL)
+                            {
+                                sop.ResultId = i;
+                                i++;
+                                if (i > 5)
+                                    break;
+                            }
+                            context.SysTransaction.Add(new SysTransaction
+                            {
+                                TransactionGUID = Guid.NewGuid(),
+                                ResultId = -1,
+                            });
+                            SysTransaction sopLast = itemsL.LastOrDefault();
+                            context.SysTransaction.Remove(sopLast);
+
+                            List<EntityEntry> entries = context.ChangeTracker.Entries()
+                                .Where(ss => ss.State != EntityState.Unchanged)
+                                .ToList();
+                            { }
+                            foreach (EntityEntry entry in entries)
+                            {
+                                if (entry.Entity is SysTransaction)
+                                {
+                                    ((SysTransaction)entry.Entity).TransactionGUID = Guid.NewGuid();
+                                }
+                            }
+                        }
+                        #endregion
                     }
                     catch (Exception ex)
                     { }
