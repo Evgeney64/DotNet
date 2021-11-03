@@ -1,0 +1,35 @@
+﻿@model Server.Core.ViewModel.VmBase
+
+<html lang="en">
+<body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+
+    <table>
+        @foreach (var p in Model.VwNsiStreetsL)
+         {
+            <tr>
+                <td>@p.NVILLAGE_ID</td>
+                <td>&nbsp&nbsp&nbsp</td>
+                <td>@p.NVILLAGE_TYPE_NAME</td>
+                <td>&nbsp&nbsp&nbsp</td>
+                <td>@p.NVILLAGE_NAME</td>
+                <td>&nbsp&nbsp&nbsp</td>
+                <td>@p.NSTREET_ID</td>
+                <td>&nbsp&nbsp&nbsp</td>
+                <td>@p.NSTREET_TYPE_NAME</td>
+                <td>&nbsp&nbsp&nbsp</td>
+                <td>@p.NSTREET_NAME</td>
+            </tr>
+        }
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            Site_Accordion("@Model.VwNsiStreetsL");
+            Site_Accordion1();
+         });
+    </script>
+</body>
+</html>
