@@ -11,19 +11,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Hcs
 {
+    using Model;
+
     public interface ILoggable
     {
         Action<string, string> Log { get; set; }
     }
 
-    public interface IDataStore2 : IDisposable
+    public interface IDataStore : IDisposable
     {
         Task<Guid> CreateTransactionAsync(TransactionInfo transaction);
         Task<Guid> CreateTransactionAsync(Guid transactionGuid, TransactionInfo transaction);
         Task<bool> IsTransactionExistsAsync(Guid transactionGuid);
+        Task<TransactionInfo> GetTransactionAsync(Guid transactionGuid);
 
         Task SetTransactionResultAsync(Guid transactionGuid, TransactionResultInfo result);
         Task<TransactionResultInfo> GetTransactionResultAsync(Guid transactionGuid);
@@ -36,24 +40,28 @@ namespace Hcs
 
         Task SetTransactionLogAsync(Guid transactionGuid, TransactionLogInfo error);
 
-        Task SetTransactionObjectsAsync(Guid transactionGuid, IEnumerable<ObjectInfo> objectList);
+        //Task SetTransactionObjectsAsync(Guid transactionGuid, IEnumerable<ObjectInfo> objectList);
+        Task<IEnumerable<Guid>> SetTransactionObjectsAsync(TransactionInfo transaction, IEnumerable<ObjectInfo> objectList);
         Task SetTransactionObjectErrorsAsync(Guid transactionGuid, IEnumerable<ObjectInfoError> objectErrorList);
-        Task<IEnumerable<ObjectInfo>> GetTransactionObjectsAsync(Guid transactionGuid);
+        //Task<IEnumerable<ObjectInfo>> GetTransactionObjectsAsync(Guid transactionGuid);
 
         Task<IEnumerable<T>> ReadDataAsync<T>(Guid stateGuid)
             where T : class; //, ITransactionEntity;
         Task SaveDataAsync<T>(IEnumerable<T> data, Guid stateGuid)
             where T : class; //, ITransactionEntity;
+
+        Task<Guid?> AcquireTransactionAsync(TransactionInfo transactionInfo);
+        Task ReleaseTransactionAsync(Guid transactionGuid);
     }
 
-    public interface IDataSource2 : IDisposable
+    public interface IDataSource : IDisposable
     {
         Task<IEnumerable<T>> TakeDataAsync<T>(Guid transactionGuid, IEnumerable<ObjectInfo> objectList)
             where T : class; //, ITransactionEntity;
         Task PassDataAsync<T>(IEnumerable<T> data, Guid transactionGuid, IEnumerable<ObjectInfo> objectList)
             where T : class; //, ITransactionEntity;
         // note: :(
-        Task<IEnumerable<ObjectInfo>> ListAsync(SysOperationCode operationCode);
+        Task<IEnumerable<ObjectInfo>> ListAsync(Guid listGuid, SysOperationCode operationCode);
     }
 
     public interface IDataService2
@@ -67,10 +75,16 @@ namespace Hcs
         Task<IEnumerable<TResultData>> ExportStateAsync<TRequestData, TResultData>(AsyncExportState<TRequestData> asyncState, Action<string, string> log);
     }
 
-    //public interface IFileService
-    //{
-    //    void PostAttachment(IAttachment attachment);
-    //}
+    public interface IFileService
+    {
+        void PostAttachment(IAttachment attachment);
+    }
+
+    public interface ICryptoService
+    {
+        Task<string> GetSignedDataAsync(string certificateThumbprint, string data);
+        Task<string> GetHashAsync(string certificateThumbprint, string data);
+    }
 
     public class ExternalParam
     {
@@ -123,6 +137,12 @@ namespace Hcs
     public class ObjectInfoError : ErrorInfo
     {
         public string ObjectId { get; set; }
+    }
+
+    public class ParamInfo
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 
     public class Grouping<TKey, TElement> : IGrouping<TKey, TElement>
@@ -179,20 +199,63 @@ namespace Hcs
     public class TransactionInfo
     {
         public SysOperationCode OperationCode { get; private set; }
+        public Guid? ListGuid { get; private set; }
+        public string ClientId { get; private set; }
         public string Data { get; private set; }
+        public IEnumerable<ObjectInfo> Objects { get; private set; }
+        public IEnumerable<ParamInfo> Params { get; private set; }
 
-        public static TransactionInfo Create(SysOperationCode operationCode)
+        public bool TryGetParamValue(string paramName, out string paramValue)
+        {
+            if (this.Params != null)
+            {
+                ParamInfo paramInfo = this.Params
+                    .FirstOrDefault(ss => ss.Name == paramName);
+                if (paramInfo != null)
+                {
+                    paramValue = paramInfo.Value;
+                    return true;
+                }
+            }
+            paramValue = null;
+            return false;
+        }
+
+        public static TransactionInfo Create(string clientId, SysOperationCode operationCode)
         {
             return new TransactionInfo
             {
+                ClientId = clientId,
                 OperationCode = operationCode,
             };
         }
-        public static TransactionInfo Create(SysOperationCode operationCode, string data)
+        public static TransactionInfo Create(string clientId, SysOperationCode operationCode, Guid listGuid)
         {
             return new TransactionInfo
             {
+                ClientId = clientId,
                 OperationCode = operationCode,
+                ListGuid = listGuid,
+            };
+        }
+        public static TransactionInfo Create(string clientId, SysOperationCode operationCode, Guid listGuid, IEnumerable<ObjectInfo> objectList)
+        {
+            return new TransactionInfo
+            {
+                ClientId = clientId,
+                OperationCode = operationCode,
+                ListGuid = listGuid,
+                Objects = objectList,
+            };
+        }
+        public static TransactionInfo Create(string clientId, SysOperationCode operationCode, Guid listGuid, IEnumerable<ObjectInfo> objectList, string data)
+        {
+            return new TransactionInfo
+            {
+                ClientId = clientId,
+                OperationCode = operationCode,
+                ListGuid = listGuid,
+                Objects = objectList,
                 Data = data,
             };
         }
@@ -295,6 +358,59 @@ namespace Hcs
         }
     }
 
+    public class CommonException : Exception
+    {
+        public string Code { get; private set; }
+        // todo: убрать затычку
+        public bool CanRestart
+        {
+            get
+            {
+                if (this.Code == PerformServiceError.HCS_SRV_10000.ToString() || this.Code == PerformServiceError.HCS_SRV_20000.ToString())
+                {
+                    return true;
+                }
+                if (this.Code != null)
+                {
+                    string codePrefix = this.Code.Substring(0, 3);
+                    return codePrefix == "EXP" || codePrefix == "AUT" || codePrefix == "STR" || codePrefix == "SRC";
+                }
+                return true;
+            }
+        }
+
+        public CommonException(string message, string code)
+            : base(message)
+        {
+            this.Code = code;
+        }
+        public CommonException(string message, string code, Exception innerException)
+            : base(message, innerException)
+        {
+            this.Code = code;
+        }
+    }
+
+    public enum HcsErrorCode
+    {
+        [Description("Запрос принят.")]
+        HCS_SRV_10000,
+        [Description("Запрос в обработке.")]
+        HCS_SRV_20000,
+
+        [Description("Не удалось сформировать данные для запроса в ГИС ЖКХ.")]
+        HCS_DAT_00001,
+        [Description("Не удалось прочитать данные, полученные от ГИС ЖКХ.")]
+        HCS_DAT_00002,
+        [Description("Данные не соответствуют схеме.")]
+        HCS_DAT_09999,
+
+        [Description("Не указан ФИАС.")]
+        HCS_DAT_10001,
+        [Description("Тип дома в ГИС ЖКХ отличается от указанного.")]
+        HCS_DAT_10002,
+    }
+
     public static class Helper
     {
         public static Guid? ToNullableGuid(this string source)
@@ -319,6 +435,8 @@ namespace Hcs
 
     public enum SysOperationCode
     {
+        Unknown = 0,
+
         NsiExport = 2,
 
         AttachmentPost = 5,
@@ -409,25 +527,25 @@ namespace Hcs
     //    }
     //}
 
-    //public static class JsonHelper
-    //{
-    //    private static JsonSerializerSettings entityJsonSettings = new JsonSerializerSettings
-    //    {
-    //        ObjectCreationHandling = ObjectCreationHandling.Auto,
-    //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-    //        PreserveReferencesHandling = PreserveReferencesHandling.None,
-    //    };
-    //    //JsonConverter jsonConverter = new XElementJsonConverter();
+    public static class JsonHelper
+    {
+        private static JsonSerializerSettings entityJsonSettings = new JsonSerializerSettings
+        {
+            ObjectCreationHandling = ObjectCreationHandling.Auto,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            PreserveReferencesHandling = PreserveReferencesHandling.None,
+        };
+        //JsonConverter jsonConverter = new XElementJsonConverter();
 
-    //    public static string Serialize<T>(T item)
-    //    {
-    //        var str = JsonConvert.SerializeObject(item, entityJsonSettings);
-    //        return str;
-    //    }
-    //    public static T Deserialize<T>(string jsonString)
-    //    {
-    //        T obj = JsonConvert.DeserializeObject<T>(jsonString, entityJsonSettings);
-    //        return obj;
-    //    }
-    //}
+        public static string Serialize<T>(T item)
+        {
+            var str = JsonConvert.SerializeObject(item, entityJsonSettings);
+            return str;
+        }
+        public static T Deserialize<T>(string jsonString)
+        {
+            T obj = JsonConvert.DeserializeObject<T>(jsonString, entityJsonSettings);
+            return obj;
+        }
+    }
 }

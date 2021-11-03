@@ -51,7 +51,6 @@ namespace Hcs
 
             return this;
         }
-
         public EntityRelation<TEntity> GetEntityRelation<TEntity>()
         {
             IEntityRelation entityRelation;
@@ -62,7 +61,6 @@ namespace Hcs
             return (EntityRelation<TEntity>)entityRelation;
         }
 
-        #region EntityRelationSet
         public List<string> EntityRelations = new List<string>();
         public void EntityRelationSetAllTypes()
         {
@@ -114,7 +112,6 @@ namespace Hcs
             }
 
         }
-        #endregion
 
     }
 }

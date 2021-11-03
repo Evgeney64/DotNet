@@ -20,18 +20,4 @@ namespace Hcs.Configuration
     {
         public LogMode Mode { get; set; }
     }
-    public class EntityDataSourceConfiguration
-    {
-        private readonly int defaultCommandTimeout = 300;
-
-        public string HcsConnectionStringName { get; set; }
-        public int CommandTimeout { get; set; }
-        public LogConfiguration Log { get; private set; }
-
-        public EntityDataSourceConfiguration()
-        {
-            this.CommandTimeout = this.defaultCommandTimeout;
-            this.Log = new LogConfiguration();
-        }
-    }
 }

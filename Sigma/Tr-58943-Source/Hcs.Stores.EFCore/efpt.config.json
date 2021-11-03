@@ -1,0 +1,485 @@
+﻿{
+   "CodeGenerationMode": 1,
+   "ContextClassName": "HcsContext",
+   "ContextNamespace": "Hcs.Stores",
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": "Hcs.Model",
+   "OutputContextPath": "D:\\Projects\\gis-hcs\\gis-hcs-general-develop\\Hcs.Stores.EFCore",
+   "OutputPath": "D:\\Projects\\gis-hcs\\gis-hcs-general-develop\\Hcs\\Model",
+   "ProjectRootNamespace": "",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[AccountExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountExportResultPercentPremise]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountImportRequestPayer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountImportRequestPercentPremise]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountImportRequestReason]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AckImportCancellationRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AckImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AckImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AckImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AttachmentPostRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AttachmentPostResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AttachmentPostResultCopy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequestAttachment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequestObjectAddress]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequestObjectServiceResource]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequestParty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequestSubject]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportRequestSubjectQualityIndicator]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceExportResultAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceExportResultAddress]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportArchiveRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportReplaceRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportReplaceRequestValue]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportRequestAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportRequestAddress]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportRequestLinkedDevice]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportRequestValue]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueExportRequestDevice]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueExportRequestDeviceType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueExportRequestMunicipalResource]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeviceValueImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseExportResultBlock]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseExportResultEntrance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseExportResultLivingRoom]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseExportResultPremise]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportRequestBlock]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportRequestEntrance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportRequestLivingRoom]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportRequestPremise]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultBlock]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultBlockError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultEntrance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultEntranceError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultLivingRoom]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultLivingRoomError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultPremise]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HouseImportResultPremiseError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NotificationImportDeleteRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NotificationImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NotificationImportRequestAccountDebt]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NotificationImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NotificationImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NsiExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NsiExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NsiExportResultField]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderImportCancellationRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationExportRequestData]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationExportResultEntp]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationExportResultLegal]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationExportResultRole]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentExportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentExportRequestAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentExportRequestDocument]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentExportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportRequestChargesMunicipalService]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportRequestChargesMunicipalServiceNorm]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportRequestDebtMunicipalService]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportRequestPenaltyAndCourtCost]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentImportWithdrawRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportAnnulmentRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportRequestPeriod]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportRequestPeriodAnnulment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportRequestPeriodInfo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportResult]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SettlementImportResultError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysOperation]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysParams]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysTransaction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysTransactionLog]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysTransactionObject]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysTransactionObjectError]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysTransactionState2]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SysTransactionStateType]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "WIN-6NUGCRFMGHH.GisHcs",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

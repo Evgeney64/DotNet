@@ -16,7 +16,6 @@ namespace Hcs.Model
 
         [Key]
         public Guid TransactionGUID { get; set; }
-        public Guid? AsyncStateGUID { get; set; }
         public int? OperationId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? TransactionDate { get; set; }
@@ -26,6 +25,10 @@ namespace Hcs.Model
         [StringLength(32)]
         public string ErrorCode { get; set; }
         public string ErrorDescription { get; set; }
+        public Guid? ListGUID { get; set; }
+        [Required]
+        [StringLength(32)]
+        public string ClientId { get; set; }
 
         [ForeignKey(nameof(OperationId))]
         [InverseProperty(nameof(SysOperation.SysTransactions))]

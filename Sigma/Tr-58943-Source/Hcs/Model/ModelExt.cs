@@ -70,31 +70,129 @@ namespace Hcs.Model
         }
     }
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class NullableAttribute : Attribute
+    //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    //public class NullableAttribute : Attribute
+    //{
+    //    public NullableAttribute()
+    //    {
+    //    }
+    //}
+
+    //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    //public class StringLengthAttribute : Attribute
+    //{
+    //    public short Length { get; private set; }
+
+    //    public StringLengthAttribute(short length)
+    //    {
+    //        this.Length = length;
+    //    }
+    //}
+
+    #region interfaces
+    public partial class AccountExportRequest : ITransactionEntity
     {
-        public NullableAttribute()
+    }
+    public partial class AccountExportResult : ITransactionEntity
+    {
+    }
+    public partial class AccountExportResultPercentPremise : ITransactionEntity
+    {
+    }
+
+    public partial class AccountImportRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class AccountImportRequestPayer : ITransactionObjectEntity
+    {
+    }
+    public partial class AccountImportRequestPercentPremise : ITransactionObjectEntity
+    {
+    }
+    public partial class AccountImportRequestReason : ITransactionObjectEntity
+    {
+    }
+    public partial class AccountImportResult : IResultEntity<AccountImportResultError>, IResultEntity, ITransactionObjectEntity
+    {
+        ICollection<AccountImportResultError> IResultEntity<AccountImportResultError>.ResultErrors
         {
+            get
+            {
+                return this.AccountImportResultErrors;
+            }
+            set
+            {
+                this.AccountImportResultErrors = value;
+            }
+        }
+
+        IEnumerable<IError> IResultEntity.ResultErrors
+        {
+            get
+            {
+                return this.AccountImportResultErrors;
+            }
+        }
+    }
+    public partial class AccountImportResultError : IError, ITransactionObjectEntity
+    {
+        Guid IError.ParentTransportGUID
+        {
+            get
+            {
+                return this.AccountImportTransportGUID;
+            }
+            set
+            {
+                this.AccountImportTransportGUID = value;
+            }
         }
     }
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class StringLengthAttribute : Attribute
+    public partial class AckImportCancellationRequest : ITransactionObjectEntity
     {
-        public short Length { get; private set; }
-
-        public StringLengthAttribute(short length)
+    }
+    public partial class AckImportRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class AckImportResult : IResultEntity<AckImportResultError>, IResultEntity
+    {
+        ICollection<AckImportResultError> IResultEntity<AckImportResultError>.ResultErrors
         {
-            this.Length = length;
+            get
+            {
+                return this.AckImportResultErrors;
+            }
+            set
+            {
+                this.AckImportResultErrors = value;
+            }
+        }
+
+        IEnumerable<IError> IResultEntity.ResultErrors
+        {
+            get
+            {
+                return this.AckImportResultErrors;
+            }
+        }
+    }
+    public partial class AckImportResultError : IError
+    {
+        Guid IError.ParentTransportGUID
+        {
+            get
+            {
+                return this.AckImportTransportGUID;
+            }
+            set
+            {
+                this.AckImportTransportGUID = value;
+            }
         }
     }
 
-    public partial class DeviceImportRequest
-    {
-        public bool DeviceValuesHasSended { get; set; } //todo: Реализовать выборку инофрмации о том, были ли отправлены данные по показания в ГИС.
-    }
-
-    public partial class AttachmentPostRequest : IAttachment
+    public partial class AttachmentPostRequest : IAttachment, ITransactionObjectEntity
     {
         byte[] IAttachment.Attachment
         {
@@ -122,145 +220,41 @@ namespace Hcs.Model
             };
         }
     }
-
-    public partial class HouseImportRequest : IGKN_EGRP
+    public partial class AttachmentPostResult : ITransactionObjectEntity
     {
     }
-    public partial class HouseImportRequestEntrance : IHouseAnnulment
-    {
-    }
-    public partial class HouseImportRequestBlock : IGKN_EGRP, IHouseAnnulment
-    {
-    }
-    public partial class HouseImportRequestPremise : IGKN_EGRP, IHouseAnnulment
-    {
-    }
-    public partial class HouseImportRequestLivingRoom : IGKN_EGRP, IHouseAnnulment
+    public partial class AttachmentPostResultCopy : ITransactionObjectEntity
     {
     }
 
-    public partial class ContractImportRequest
+    public partial class ContractImportRequest : ITransactionObjectEntity
     {
-        public ContractImportRequestAttachment[] ContractImportRequestAttachmentsArray
-        {
-            get
-            {
-                return this.ContractImportRequestAttachments == null ?
-                    null :
-                    this.ContractImportRequestAttachments.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestAttachments = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestAttachment>(value);
-            }
-        }
-        public ContractImportRequestObjectAddress[] ContractImportRequestObjectAddressesArray
-        {
-            get
-            {
-                return this.ContractImportRequestObjectAddresses == null ?
-                    null :
-                    this.ContractImportRequestObjectAddresses.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestObjectAddresses = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestObjectAddress>(value);
-            }
-        }
-        public ContractImportRequestSubject[] ContractImportRequestSubjectsArray
-        {
-            get
-            {
-                return this.ContractImportRequestSubjects == null ?
-                    null :
-                    this.ContractImportRequestSubjects.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestSubjects = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestSubject>(value);
-            }
-        }
     }
-    public partial class ContractImportRequestSubject
+    public partial class ContractImportRequestAttachment : ITransactionObjectEntity
     {
-        public ContractImportRequestObjectServiceResource[] ContractImportRequestObjectServiceResourcesArray
-        {
-            get
-            {
-                return this.ContractImportRequestObjectServiceResources == null ?
-                    null :
-                    this.ContractImportRequestObjectServiceResources.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestObjectServiceResources = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestObjectServiceResource>(value);
-            }
-        }
-        public ContractImportRequestSubjectQualityIndicator[] ContractImportRequestSubjectQualityIndicatorsArray
-        {
-            get
-            {
-                return this.ContractImportRequestSubjectQualityIndicators == null ?
-                    null :
-                    this.ContractImportRequestSubjectQualityIndicators.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestSubjectQualityIndicators = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestSubjectQualityIndicator>(value);
-            }
-        }
     }
-    public partial class ContractImportRequestObjectAddress
+    public partial class ContractImportRequestObjectAddress : ITransactionObjectEntity
     {
-        public ContractImportRequestObjectServiceResource[] ContractImportRequestObjectServiceResourcesArray
-        {
-            get
-            {
-                return this.ContractImportRequestObjectServiceResources == null ?
-                    null :
-                    this.ContractImportRequestObjectServiceResources.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestObjectServiceResources = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestObjectServiceResource>(value);
-            }
-        }
-        public ContractImportRequestSubjectQualityIndicator[] ContractImportRequestSubjectQualityIndicatorsArray
-        {
-            get
-            {
-                return this.ContractImportRequestSubjectQualityIndicators == null ?
-                    null :
-                    this.ContractImportRequestSubjectQualityIndicators.ToArray();
-            }
-            set
-            {
-                this.ContractImportRequestSubjectQualityIndicators = value == null ?
-                    null :
-                    new HashSet<ContractImportRequestSubjectQualityIndicator>(value);
-            }
-        }
     }
-
-    public partial class ContractImportResult : IResultEntity<ContractImportResultError>, IResultEntity
+    public partial class ContractImportRequestObjectServiceResource : ITransactionObjectEntity
+    {
+    }
+    public partial class ContractImportRequestParty : ITransactionObjectEntity
+    {
+    }
+    public partial class ContractImportRequestSubject : ITransactionObjectEntity
+    {
+    }
+    public partial class ContractImportRequestSubjectQualityIndicator : ITransactionObjectEntity
+    {
+    }
+    public partial class ContractImportResult : IResultEntity<ContractImportResultError>, IResultEntity, ITransactionObjectEntity
     {
         ICollection<ContractImportResultError> IResultEntity<ContractImportResultError>.ResultErrors
         {
             get
-            { 
-                return this.ContractImportResultErrors; 
+            {
+                return this.ContractImportResultErrors;
             }
             set
             {
@@ -276,7 +270,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class ContractImportResultError : IError
+    public partial class ContractImportResultError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -291,51 +285,52 @@ namespace Hcs.Model
         }
     }
 
-    public partial class AccountImportRequest
+    public partial class DeviceExportRequest : ITransactionEntity
     {
-        public AccountImportRequestPercentPremise[] AccountImportRequestPercentPremisesArray
-        { 
-            get
-            {
-                return this.AccountImportRequestPercentPremises == null ?
-                    null :
-                    this.AccountImportRequestPercentPremises.ToArray();
-            }
-            set
-            {
-                this.AccountImportRequestPercentPremises = value == null ?
-                    null :
-                    new HashSet<AccountImportRequestPercentPremise>(value);
-            }
-        }
-        public AccountImportRequestReason[] AccountImportRequestReasonsArray
-        {
-            get
-            {
-                return this.AccountImportRequestReasons == null ?
-                    null :
-                    this.AccountImportRequestReasons.ToArray();
-            }
-            set
-            {
-                this.AccountImportRequestReasons = value == null ?
-                    null :
-                    new HashSet<AccountImportRequestReason>(value);
-            }
-        }
+    }
+    public partial class DeviceExportResult : ITransactionEntity
+    {
+    }
+    public partial class DeviceExportResultAccount : ITransactionEntity
+    {
     }
 
-    public partial class AccountImportResult : IResultEntity<AccountImportResultError>, IResultEntity
+    public partial class DeviceImportArchiveRequest : ITransactionObjectEntity
     {
-        ICollection<AccountImportResultError> IResultEntity<AccountImportResultError>.ResultErrors
+    }
+    public partial class DeviceImportReplaceRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceImportReplaceRequestValue : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceImportRequest : ITransactionObjectEntity
+    {
+        public bool DeviceValuesHasSended { get; set; } //todo: Реализовать выборку инофрмации о том, были ли отправлены данные по показания в ГИС.
+    }
+    public partial class DeviceImportRequestAccount : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceImportRequestAddress : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceImportRequestLinkedDevice : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceImportRequestValue : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceImportResult : IResultEntity<DeviceImportResultError>, IResultEntity, ITransactionObjectEntity
+    {
+        ICollection<DeviceImportResultError> IResultEntity<DeviceImportResultError>.ResultErrors
         {
             get
             {
-                return this.AccountImportResultErrors;
+                return this.DeviceImportResultErrors;
             }
             set
             {
-                this.AccountImportResultErrors = value;
+                this.DeviceImportResultErrors = value;
             }
         }
 
@@ -343,26 +338,116 @@ namespace Hcs.Model
         {
             get
             {
-                return this.AccountImportResultErrors;
+                return this.DeviceImportResultErrors;
             }
         }
     }
-    public partial class AccountImportResultError : IError
+    public partial class DeviceImportResultError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
             get
             {
-                return this.AccountImportTransportGUID;
+                return this.DeviceImportTransportGUID;
             }
             set
             {
-                this.AccountImportTransportGUID = value;
+                this.DeviceImportTransportGUID = value;
             }
         }
     }
 
-    public partial class HouseImportResult : IResultEntity<HouseImportResultError>, IResultEntity
+    public partial class DeviceValueExportRequest : ITransactionEntity
+    {
+    }
+    public partial class DeviceValueExportRequestDevice : ITransactionEntity
+    {
+    }
+    public partial class DeviceValueExportRequestDeviceType : ITransactionEntity
+    {
+    }
+    public partial class DeviceValueExportRequestMunicipalResource : ITransactionEntity
+    {
+    }
+    public partial class DeviceValueExportResult : ITransactionEntity
+    {
+    }
+
+    public partial class DeviceValueImportRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class DeviceValueImportResult : IResultEntity<DeviceValueImportResultError>, IResultEntity, ITransactionObjectEntity
+    {
+        ICollection<DeviceValueImportResultError> IResultEntity<DeviceValueImportResultError>.ResultErrors
+        {
+            get
+            {
+                return this.DeviceValueImportResultErrors;
+            }
+            set
+            {
+                this.DeviceValueImportResultErrors = value;
+            }
+        }
+
+        IEnumerable<IError> IResultEntity.ResultErrors
+        {
+            get
+            {
+                return this.DeviceValueImportResultErrors;
+            }
+        }
+    }
+    public partial class DeviceValueImportResultError : IError, ITransactionObjectEntity
+    {
+        Guid IError.ParentTransportGUID
+        {
+            get
+            {
+                return this.DeviceValueImportTransportGUID;
+            }
+            set
+            {
+                this.DeviceValueImportTransportGUID = value;
+            }
+        }
+    }
+
+    public partial class HouseExportRequest : ITransactionEntity
+    {
+    }
+    public partial class HouseExportResult : ITransactionEntity
+    {
+    }
+    public partial class HouseExportResultBlock : ITransactionEntity
+    {
+    }
+    public partial class HouseExportResultEntrance : ITransactionEntity
+    {
+    }
+    public partial class HouseExportResultLivingRoom : ITransactionEntity
+    {
+    }
+    public partial class HouseExportResultPremise : ITransactionEntity
+    {
+    }
+
+    public partial class HouseImportRequest : IGKN_EGRP, ITransactionObjectEntity
+    {
+    }
+    public partial class HouseImportRequestEntrance : IHouseAnnulment, ITransactionObjectEntity
+    {
+    }
+    public partial class HouseImportRequestBlock : IGKN_EGRP, IHouseAnnulment, ITransactionObjectEntity
+    {
+    }
+    public partial class HouseImportRequestPremise : IGKN_EGRP, IHouseAnnulment, ITransactionObjectEntity
+    {
+    }
+    public partial class HouseImportRequestLivingRoom : IGKN_EGRP, IHouseAnnulment, ITransactionObjectEntity
+    {
+    }
+    public partial class HouseImportResult : IResultEntity<HouseImportResultError>, IResultEntity, ITransactionObjectEntity
     {
         //private IResultEntity GetAllResults()
         //{
@@ -424,7 +509,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultError : IError
+    public partial class HouseImportResultError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -438,7 +523,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultEntrance : IResultEntity<HouseImportResultEntranceError>
+    public partial class HouseImportResultEntrance : IResultEntity<HouseImportResultEntranceError>, ITransactionObjectEntity
     {
         ICollection<HouseImportResultEntranceError> IResultEntity<HouseImportResultEntranceError>.ResultErrors
         {
@@ -452,7 +537,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultEntranceError : IError
+    public partial class HouseImportResultEntranceError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -466,7 +551,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultBlock : IResultEntity<HouseImportResultBlockError>
+    public partial class HouseImportResultBlock : IResultEntity<HouseImportResultBlockError>, ITransactionObjectEntity
     {
         ICollection<HouseImportResultBlockError> IResultEntity<HouseImportResultBlockError>.ResultErrors
         {
@@ -480,7 +565,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultBlockError : IError
+    public partial class HouseImportResultBlockError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -494,7 +579,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultPremise : IResultEntity<HouseImportResultPremiseError>
+    public partial class HouseImportResultPremise : IResultEntity<HouseImportResultPremiseError>, ITransactionObjectEntity
     {
         ICollection<HouseImportResultPremiseError> IResultEntity<HouseImportResultPremiseError>.ResultErrors
         {
@@ -508,7 +593,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultPremiseError : IError
+    public partial class HouseImportResultPremiseError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -522,7 +607,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultLivingRoom : IResultEntity<HouseImportResultLivingRoomError>
+    public partial class HouseImportResultLivingRoom : IResultEntity<HouseImportResultLivingRoomError>, ITransactionObjectEntity
     {
         ICollection<HouseImportResultLivingRoomError> IResultEntity<HouseImportResultLivingRoomError>.ResultErrors
         {
@@ -536,7 +621,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class HouseImportResultLivingRoomError : IError
+    public partial class HouseImportResultLivingRoomError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -551,81 +636,39 @@ namespace Hcs.Model
         }
     }
 
-    public partial class DeviceImportResult : IResultEntity<DeviceImportResultError>, IResultEntity
+    public partial class NotificationImportDeleteRequest : ITransactionObjectEntity
     {
-        ICollection<DeviceImportResultError> IResultEntity<DeviceImportResultError>.ResultErrors
-        {
-            get
-            {
-                return this.DeviceImportResultErrors;
-            }
-            set
-            {
-                this.DeviceImportResultErrors = value;
-            }
-        }
-
-        IEnumerable<IError> IResultEntity.ResultErrors
-        {
-            get
-            {
-                return this.DeviceImportResultErrors;
-            }
-        }
     }
-    public partial class DeviceImportResultError : IError
+    public partial class NotificationImportRequest : ITransactionObjectEntity
     {
-        Guid IError.ParentTransportGUID
-        {
-            get
-            {
-                return this.DeviceImportTransportGUID;
-            }
-            set
-            {
-                this.DeviceImportTransportGUID = value;
-            }
-        }
+    }
+    public partial class NotificationImportRequestAccountDebt : ITransactionObjectEntity
+    {
+    }
+    public partial class NotificationImportResult : ITransactionObjectEntity
+    {
+    }
+    public partial class NotificationImportResultError : ITransactionObjectEntity
+    {
     }
 
-    public partial class DeviceValueImportResult : IResultEntity<DeviceValueImportResultError>, IResultEntity
+    public partial class NsiExportRequest : ITransactionEntity
     {
-        ICollection<DeviceValueImportResultError> IResultEntity<DeviceValueImportResultError>.ResultErrors
-        {
-            get
-            {
-                return this.DeviceValueImportResultErrors;
-            }
-            set
-            {
-                this.DeviceValueImportResultErrors = value;
-            }
-        }
-
-        IEnumerable<IError> IResultEntity.ResultErrors
-        {
-            get
-            {
-                return this.DeviceValueImportResultErrors;
-            }
-        }
     }
-    public partial class DeviceValueImportResultError : IError
+    public partial class NsiExportResult : ITransactionEntity
     {
-        Guid IError.ParentTransportGUID
-        {
-            get
-            {
-                return this.DeviceValueImportTransportGUID;
-            }
-            set
-            {
-                this.DeviceValueImportTransportGUID = value;
-            }
-        }
+    }
+    public partial class NsiExportResultField : ITransactionEntity
+    {
     }
 
-    public partial class OrderImportResult : IResultEntity<OrderImportResultError>, IResultEntity
+    public partial class OrderImportCancellationRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class OrderImportRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class OrderImportResult : IResultEntity<OrderImportResultError>, IResultEntity, ITransactionObjectEntity
     {
         ICollection<OrderImportResultError> IResultEntity<OrderImportResultError>.ResultErrors
         {
@@ -647,7 +690,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class OrderImportResultError : IError
+    public partial class OrderImportResultError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -662,81 +705,57 @@ namespace Hcs.Model
         }
     }
 
-    public partial class AckImportResult : IResultEntity<AckImportResultError>, IResultEntity
+    public partial class OrganizationExportRequest : ITransactionEntity
     {
-        ICollection<AckImportResultError> IResultEntity<AckImportResultError>.ResultErrors
-        {
-            get
-            {
-                return this.AckImportResultErrors;
-            }
-            set
-            {
-                this.AckImportResultErrors = value;
-            }
-        }
-
-        IEnumerable<IError> IResultEntity.ResultErrors
-        {
-            get
-            {
-                return this.AckImportResultErrors;
-            }
-        }
     }
-    public partial class AckImportResultError : IError
+    public partial class OrganizationExportRequestData : ITransactionEntity
     {
-        Guid IError.ParentTransportGUID
-        {
-            get
-            {
-                return this.AckImportTransportGUID;
-            }
-            set
-            {
-                this.AckImportTransportGUID = value;
-            }
-        }
+    }
+    public partial class OrganizationExportResult : ITransactionEntity
+    {
+    }
+    public partial class OrganizationExportResultEntp : ITransactionEntity
+    {
+    }
+    public partial class OrganizationExportResultLegal : ITransactionEntity
+    {
+    }
+    public partial class OrganizationExportResultRole : ITransactionEntity
+    {
     }
 
-    public partial class SettlementImportResult : IResultEntity<SettlementImportResultError>, IResultEntity
+    public partial class PaymentExportRequest : ITransactionEntity
     {
-        ICollection<SettlementImportResultError> IResultEntity<SettlementImportResultError>.ResultErrors
-        {
-            get
-            {
-                return this.SettlementImportResultErrors;
-            }
-            set
-            {
-                this.SettlementImportResultErrors = value;
-            }
-        }
-
-        IEnumerable<IError> IResultEntity.ResultErrors
-        {
-            get
-            {
-                return this.SettlementImportResultErrors;
-            }
-        }
     }
-    public partial class SettlementImportResultError : IError
+    public partial class PaymentExportRequestAccount : ITransactionEntity
     {
-        Guid IError.ParentTransportGUID
-        {
-            get
-            {
-                return this.SettlementImportTransportGUID;
-            }
-            set
-            {
-                this.SettlementImportTransportGUID = value;
-            }
-        }
+    }
+    public partial class PaymentExportRequestDocument : ITransactionEntity
+    {
+    }
+    public partial class PaymentExportResult : ITransactionEntity
+    {
     }
 
-    public partial class PaymentImportResult : IResultEntity<PaymentImportResultError>, IResultEntity
+    public partial class PaymentImportRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class PaymentImportRequestChargesMunicipalService : ITransactionObjectEntity
+    {
+    }
+    public partial class PaymentImportRequestChargesMunicipalServiceNorm : ITransactionObjectEntity
+    {
+    }
+    public partial class PaymentImportRequestDebtMunicipalService : ITransactionObjectEntity
+    {
+    }
+    public partial class PaymentImportRequestPenaltyAndCourtCost : ITransactionObjectEntity
+    {
+    }
+    public partial class PaymentImportWithdrawRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class PaymentImportResult : IResultEntity<PaymentImportResultError>, IResultEntity, ITransactionObjectEntity
     {
         ICollection<PaymentImportResultError> IResultEntity<PaymentImportResultError>.ResultErrors
         {
@@ -758,7 +777,7 @@ namespace Hcs.Model
             }
         }
     }
-    public partial class PaymentImportResultError : IError
+    public partial class PaymentImportResultError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
@@ -773,17 +792,32 @@ namespace Hcs.Model
         }
     }
 
-    public partial class NotificationImportResult : IResultEntity<NotificationImportResultError>, IResultEntity
+    public partial class SettlementImportAnnulmentRequest : ITransactionObjectEntity
     {
-        ICollection<NotificationImportResultError> IResultEntity<NotificationImportResultError>.ResultErrors
+    }
+    public partial class SettlementImportRequest : ITransactionObjectEntity
+    {
+    }
+    public partial class SettlementImportRequestPeriod : ITransactionObjectEntity
+    {
+    }
+    public partial class SettlementImportRequestPeriodAnnulment : ITransactionObjectEntity
+    {
+    }
+    public partial class SettlementImportRequestPeriodInfo : ITransactionObjectEntity
+    {
+    }
+    public partial class SettlementImportResult : IResultEntity<SettlementImportResultError>, IResultEntity, ITransactionObjectEntity
+    {
+        ICollection<SettlementImportResultError> IResultEntity<SettlementImportResultError>.ResultErrors
         {
             get
             {
-                return this.NotificationImportResultErrors;
+                return this.SettlementImportResultErrors;
             }
             set
             {
-                this.NotificationImportResultErrors = value;
+                this.SettlementImportResultErrors = value;
             }
         }
 
@@ -791,24 +825,61 @@ namespace Hcs.Model
         {
             get
             {
-                return this.NotificationImportResultErrors;
+                return this.SettlementImportResultErrors;
             }
         }
     }
-    public partial class NotificationImportResultError : IError
+    public partial class SettlementImportResultError : IError, ITransactionObjectEntity
     {
         Guid IError.ParentTransportGUID
         {
             get
             {
-                return this.NotificationImportTransportGUID;
+                return this.SettlementImportTransportGUID;
             }
             set
             {
-                this.NotificationImportTransportGUID = value;
+                this.SettlementImportTransportGUID = value;
             }
         }
     }
+
+    //public partial class NotificationImportResult : IResultEntity<NotificationImportResultError>, IResultEntity
+    //{
+    //    ICollection<NotificationImportResultError> IResultEntity<NotificationImportResultError>.ResultErrors
+    //    {
+    //        get
+    //        {
+    //            return this.NotificationImportResultErrors;
+    //        }
+    //        set
+    //        {
+    //            this.NotificationImportResultErrors = value;
+    //        }
+    //    }
+
+    //    IEnumerable<IError> IResultEntity.ResultErrors
+    //    {
+    //        get
+    //        {
+    //            return this.NotificationImportResultErrors;
+    //        }
+    //    }
+    //}
+    //public partial class NotificationImportResultError : IError
+    //{
+    //    Guid IError.ParentTransportGUID
+    //    {
+    //        get
+    //        {
+    //            return this.NotificationImportTransportGUID;
+    //        }
+    //        set
+    //        {
+    //            this.NotificationImportTransportGUID = value;
+    //        }
+    //    }
+    //}
 
     //public partial class NsiExportResult : System.Xml.Serialization.IXmlSerializable
     //{
@@ -869,6 +940,8 @@ namespace Hcs.Model
     //        }
     //    }
     //}
+
+    #endregion
 
     public enum OrganizationType : byte
     {
@@ -957,17 +1030,17 @@ namespace Hcs.Model
                 ErrorDescription = description,
             };
         }
-        //public static E CreateError<E>(this ITransactionObjectEntity source, string description)
-        //    where E : IError, new()
-        //{
-        //    return source.CreateError<E>(PerformServiceError.HCS_DAT_00001.ToString(), description);
-        //}
-        //public static E CreateError<E>(this ITransactionObjectEntity source, CommonException exception)
-        //    where E : IError, new()
-        //{
-        //    return source.CreateError<E>(exception.Code, exception.Message);
-        //}
-        
+        public static E CreateError<E>(this ITransactionObjectEntity source, string description)
+            where E : IError, new()
+        {
+            return source.CreateError<E>(HcsErrorCode.HCS_DAT_00001.ToString(), description);
+        }
+        public static E CreateError<E>(this ITransactionObjectEntity source, CommonException exception)
+            where E : IError, new()
+        {
+            return source.CreateError<E>(exception.Code, exception.Message);
+        }
+
         public static T AddError<T, E>(this T result, E error)
             where T : IResultEntity<E>, new()
             where E : IError, new()
@@ -988,13 +1061,13 @@ namespace Hcs.Model
             var error = result.CreateError<E>(code, description);
             return result.AddError(error);
         }
-        //public static T AddError<T, E>(this T result, string description)
-        //    where T : IResultEntity<E>, new()
-        //    where E : IError, new()
-        //{
-        //    var error = result.CreateError<E>(description);
-        //    return result.AddError(error);
-        //}
+        public static T AddError<T, E>(this T result, string description)
+            where T : IResultEntity<E>, new()
+            where E : IError, new()
+        {
+            var error = result.CreateError<E>(description);
+            return result.AddError(error);
+        }
 
         public static T CreateResult<T, E>(this ITransactionObjectEntity source)
             where T : IResultEntity<E>, new()
