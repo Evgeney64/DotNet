@@ -15,11 +15,16 @@ namespace Hcs.Store
             #region
             #region Define
             string user = "\"gis_hcs\"";
+            user = "\"postgres\"";
+
             string schem = "\"gis_hcs\"";
+            schem = "\"tsb\"";
+
             string table_space = "\"pg_default\"";
             string collate = "pg_catalog.\"default\"";
 
             List<table> tables = new List<table>();
+            List<index> indexes = new List<index>();
             List<SysOperation> sysOperations = new List<SysOperation>();
             #endregion
 
@@ -31,7 +36,18 @@ namespace Hcs.Store
                 using (SqlCommand command1 = new SqlCommand())
                 {
                     #region Define-1
-                    command1.CommandText = "SELECT name, id FROM sysobjects WHERE xtype='U' ORDER BY name";
+                    List<string> ignore_tables = new List<string>
+                    {
+                        "__MigrationHistory",
+                        "sysdiagrams",
+                        "UP_BILLS_DZ",
+                    };
+                    string ignore_tables_lst = String.Join(",", ignore_tables.Select(ss => "'" + ss + "'"));
+                    command1.CommandText = 
+                        "SELECT name, id FROM sysobjects" +
+                        " WHERE xtype='U' and SUBSTRING(name,1,3) not in ('ZZ_', 'YY_')" +
+                        "    and name not in (" + ignore_tables_lst + ")" +
+                        " ORDER BY name";
                     command1.Connection = connection;
 
                     SqlDataReader reader1 = command1.ExecuteReader();
@@ -52,6 +68,7 @@ namespace Hcs.Store
                                 id = id,
                                 columns = new List<column>(),
                                 foreign_keys = new List<foreign_key>(),
+                                indexes = new List<index>(),
                             };
                             tables.Add(tbl);
                             #endregion
@@ -158,6 +175,99 @@ namespace Hcs.Store
                                 }
                             }
                             #endregion
+
+                            #region index
+                            if (1 == 1)
+                            {
+                                using (SqlCommand command4 = new SqlCommand())
+                                {
+                                    #region Define-4
+                                    command4.CommandText =
+                                        "SELECT ind.name, ind.object_id, ind.index_id, ind.is_unique" +
+                                        ", CASE WHEN ind.type_desc='CLUSTERED' THEN 1 ELSE 0 END as is_clustered" +
+                                        " FROM sys.indexes ind" +
+                                        "    INNER JOIN sys.objects ob on ob.object_id=ind.object_id" +
+                                        " WHERE ob.name=@name and ind.name IS NOT NULL ORDER BY ind.index_id" +
+                                        "";
+                                    command4.Connection = connection;
+                                    command4.Parameters.Add(new SqlParameter("@name", table_name));
+
+                                    SqlDataReader reader4 = command4.ExecuteReader();
+                                    int count = 1;
+                                    #endregion
+                                    if (reader4.HasRows)
+                                    {
+                                        while (reader4.Read())
+                                        {
+                                            #region index
+                                            object ind_name = reader4.GetValue(0);
+                                            if (ind_name == null)
+                                                continue;
+                                            string ind_name_str = ind_name.ToString();
+                                            if (ind_name_str.Substring(0, 6) == "%_%_FK")
+                                                ind_name_str = "IX_FK_" + table_name;
+                                            if (indexes.Where(ss => ss.index_name == ind_name_str).Count() > 0)
+                                            {
+                                                ind_name_str += "_" + count;
+                                                count++;
+                                            }
+                                            index ind = new index
+                                            {
+                                                index_name = ind_name_str,
+                                                object_id = long.Parse(reader4.GetValue(1).ToString()),
+                                                index_id = int.Parse(reader4.GetValue(2).ToString()),
+                                                is_unique = bool.Parse(reader4.GetValue(3).ToString()),
+                                                is_clustered = int.Parse(reader4.GetValue(4).ToString()),
+                                                index_columns = new List<index_column>(),
+                                            };
+                                            indexes.Add(ind);
+
+                                            #endregion
+
+                                            #region index_column
+                                            using (SqlCommand command41 = new SqlCommand())
+                                            {
+                                                #region Define-41
+                                                command41.CommandText =
+                                                    "SELECT col.name, col.column_id" +
+                                                    " FROM sys.index_columns coli" +
+                                                    "    INNER JOIN sys.all_columns col on col.object_id=coli.object_id and col.column_id=coli.column_id" +
+                                                    " WHERE coli.object_id=@object_id and coli.index_id=@index_id ORDER BY col.column_id" +
+                                                    "";
+                                                command41.Connection = connection;
+                                                command41.Parameters.Add(new SqlParameter("@object_id", ind.object_id));
+                                                command41.Parameters.Add(new SqlParameter("@index_id", ind.index_id));
+
+                                                SqlDataReader reader41 = command41.ExecuteReader();
+                                                #endregion
+                                                if (reader41.HasRows)
+                                                {
+                                                    while (reader41.Read())
+                                                    {
+                                                        #region index_column
+                                                        object col_name = reader41.GetValue(0);
+                                                        if (col_name == null)
+                                                            continue;
+                                                        index_column ind_col = new index_column
+                                                        {
+                                                            column_name = col_name.ToString(),
+                                                            column_id = int.Parse(reader4.GetValue(1).ToString()),
+                                                        };
+                                                        ind.index_columns.Add(ind_col);
+                                                        #endregion
+                                                    }
+                                                }
+                                                reader41.Close();
+                                            }
+                                            #endregion
+
+                                            tbl.indexes.Add(ind);
+                                        }
+                                    }
+                                    reader4.Close();
+                                }
+                            }
+                            #endregion
                         }
                     }
                     reader1.Close();
@@ -165,7 +275,7 @@ namespace Hcs.Store
                 #endregion
 
                 #region insert data
-                if (1 == 1)
+                if (1 == 2)
                 {
                     using (SqlCommand command4 = new SqlCommand())
                     {
@@ -203,6 +313,8 @@ namespace Hcs.Store
             string del = "";
             string crt_fk = "";
             string del_fk = "";
+            string crt_ind = "";
+            string del_ind = "";
             string ins = "";
             int count0 = 0;
             foreach (table tbl in tables)
@@ -286,6 +398,34 @@ namespace Hcs.Store
                 }
                 #endregion
 
+                #region CREATE INDEX
+                if (tbl.indexes.Count() > 0)
+                {
+                    foreach (index ind in tbl.indexes)
+                    {
+                        string is_unique = "";
+                        if (ind.is_unique)
+                            is_unique = "UNIQUE";
+
+                        crt_ind += " \nCREATE " + is_unique + " INDEX \"" + ind.index_name + "\"" +
+                            " ON " + schem_table_name + " USING btree";
+                        crt_ind += " (";
+
+                        del_ind += " \nDROP  INDEX " + schem + ".\"" + ind.index_name + "\";";
+                        bool is_first_ind = true;
+                        foreach (index_column ind_col in ind.index_columns)
+                        {
+                            if (is_first_ind == false)
+                                crt_ind += " ,";
+                            crt_ind += "\"" + ind_col.column_name + "\"";
+                            is_first_ind = false;
+                        }
+                        crt_ind += ")";
+                        crt_ind += " TABLESPACE " + table_space + ";";
+                    }
+                }
+                #endregion
+
                 #region INSERT SysOperation
                 if (tbl.name == "SysOperation" && sysOperations.Count() > 0)
                 {
@@ -310,6 +450,8 @@ namespace Hcs.Store
             writeToFile(path, "create_table.sql", crt);
             writeToFile(path, "drop_table.sql", del);
             writeToFile(path, "create_fk.sql", crt_fk);
+            writeToFile(path, "drop_ind.sql", del_ind);
+            writeToFile(path, "create_ind.sql", crt_ind);
             writeToFile(path, "drop_fk.sql", del_fk);
             writeToFile(path, "insert_data.sql", ins);
             #endregion

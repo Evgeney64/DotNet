@@ -21,6 +21,7 @@ namespace Hcs.Store
         public List<column> columns { get; set; }
 
         public List<foreign_key> foreign_keys { get; set; }
+        public List<index> indexes { get; set; }
 
         public override string ToString()
         {
@@ -70,6 +71,7 @@ namespace Hcs.Store
                     if (collate != null)
                         this.typePostgres += " COLLATE " + collate;
                     break;
+                case SQLTypes.xml:
                 case SQLTypes.text:
                     this.typePostgres = "text";
                     if (collate != null)
@@ -113,6 +115,29 @@ namespace Hcs.Store
         }
     }
 
+    public class index
+    {
+        public string index_name { get; set; }
+        public long object_id { get; set; }
+        public int index_id { get; set; }
+        public bool is_unique { get; set; }
+        public int is_clustered { get; set; }
+        public List<index_column> index_columns { get; set; }
+        public override string ToString()
+        {
+            return index_name;
+        }
+    }
+
+    public class index_column
+    {
+        public string column_name { get; set; }
+        public int column_id { get; set; }
+        public override string ToString()
+        {
+            return column_name + " [" + column_id + "]";
+        }
+    }
     public class foreign_key
     {
         public string fk_name { get; set; }
