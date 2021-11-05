@@ -2,5 +2,5 @@
 **/bin
 **/obj
 **/.vs
-/MvcCore/Core01/Client.Mvc/wwwroot
+Core01/Client.Mvc/wwwroot
 
