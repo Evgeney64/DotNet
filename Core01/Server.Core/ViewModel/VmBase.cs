@@ -36,21 +36,22 @@ namespace Server.Core.ViewModel
         public HtmlHelper Html { get; set; }
         public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
         {
-            switch (connectionType)
-            {
-                case ConnectionType_Enum.Auth:
-                    connectionString = configuration["Data:auth:ConnectionString"];
-                    //authServ = new AuthServ(connectionString);
-                    break;
-                case ConnectionType_Enum.Data:
-                    connectionString = configuration["Data:renovation_web:ConnectionString"];
-                    coreServ = new CoreServ(connectionString);
-                    break;
-                case ConnectionType_Enum.Gos:
-                    connectionString = configuration["Data:gos:ConnectionString"];
-                    coreServ = new CoreServ(connectionString);
-                    break;
-            }
+            
+            //switch (connectionType)
+            //{
+            //    case ConnectionType_Enum.Auth:
+            //        connectionString = configuration["Data:auth:ConnectionString"];
+            //        //authServ = new AuthServ(connectionString);
+            //        break;
+            //    case ConnectionType_Enum.Data:
+            //        connectionString = configuration["Data:renovation_web:ConnectionString"];
+            //        coreServ = new CoreServ(connectionString);
+            //        break;
+            //    case ConnectionType_Enum.Gos:
+            //        connectionString = configuration["Data:gos:ConnectionString"];
+            //        coreServ = new CoreServ(connectionString);
+            //        break;
+            //}
             //var contextOptions = new DbContextOptionsBuilder<EntityContext>()
             //    .UseSqlServer(connectionString)
             //    .Options;
@@ -59,12 +60,12 @@ namespace Server.Core.ViewModel
         }
         //private CoreEdm context { get; }
         //private AuthServ authServ { get; }
-        private CoreServ coreServ { get; }
+        private EntityServ serv { get; }
 
         //public IEnumerable<NSI_STREET> NsiStreets => context.NSI_STREET;
-        public IEnumerable<NSI_STREET> NsiStreets => coreServ.Get_NSI_STREET();
+        public IEnumerable<NSI_STREET> NsiStreets => serv.Get_NSI_STREET();
         public List<NSI_STREET> NsiStreetsL => NsiStreets.ToList();
-        public IEnumerable<VW_NSI_STREET> VwNsiStreets => coreServ.Get_VW_NSI_STREET();
+        //public IEnumerable<VW_NSI_STREET> VwNsiStreets => serv.Get_VW_NSI_STREET();
         public List<VW_NSI_STREET> VwNsiStreetsL
         {
             get
@@ -82,9 +83,9 @@ namespace Server.Core.ViewModel
         }
 
 
-        public IEnumerable<NSI_VILLAGE> NsiVillages => coreServ.Get_NSI_VILLAGE();
+        public IEnumerable<NSI_VILLAGE> NsiVillages => serv.Get_NSI_VILLAGE();
         public List<NSI_VILLAGE> NsiVillagesL => NsiVillages.ToList();
-        public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => coreServ.Get_VW_NSI_VILLAGE();
+        public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => serv.Get_VW_NSI_VILLAGE();
 
 
         //public IEnumerable<scr_user> Users => authServ.Get_USER();
@@ -113,11 +114,11 @@ namespace Server.Core.ViewModel
 
         public string UsersJson { get { return JsonSerializer.Serialize(UsersAr); } }
 
-        public IEnumerable<street> streets => coreServ.GetStreets();
-        public List<street> streetsL => coreServ.GetStreets().ToList();
+        public IEnumerable<street> streets => serv.GetStreets();
+        public List<street> streetsL => serv.GetStreets().ToList();
 
-        public IEnumerable<type_street> type_streets => coreServ.GetTypeStreets();
-        public List<type_street> type_streetsL => coreServ.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
+        public IEnumerable<type_street> type_streets => serv.GetTypeStreets();
+        public List<type_street> type_streetsL => serv.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
     }
 
     public partial class scr_user1

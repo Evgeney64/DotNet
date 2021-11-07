@@ -12,7 +12,7 @@ namespace Server.Core.CoreModel
         public string NVILLAGE_TYPE_NAME { get; set; }
     }
 
-    public partial class CoreServ
+    public partial class EntityServ
     {
         public IQueryable<VW_NSI_STREET> Get_VW_NSI_STREET()
         {

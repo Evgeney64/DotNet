@@ -20,10 +20,12 @@ namespace ServiceLib
 
         string connectionString;
         bool is_postgres;
-        public EntityContext(string _connectionString, bool _is_postgres = false)
+        string postgresSchema;
+        public EntityContext(string _connStr, bool _isPostgr = false, string _postgrSchem = "gis_hcs")
         {
-            connectionString = _connectionString;
-            is_postgres = _is_postgres;
+            connectionString = _connStr;
+            is_postgres = _isPostgr;
+            postgresSchema = _postgrSchem;
             //Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,41 +48,12 @@ namespace ServiceLib
             if (connectionString != null)
             {
                 if (is_postgres)
-                    modelBuilder.HasDefaultSchema("gis_hcs");
+                    modelBuilder.HasDefaultSchema(postgresSchema);
             }
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public int SaveChanges(Guid transactionGuid)
-        {
-            foreach (var entry in this.ChangeTracker.Entries())
-            {
-                //if (entry.Entity is ITransactionEntity)
-                //{
-                //    if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
-                //    {
-                //        ((ITransactionEntity)entry.Entity).TransactionGUID = transactionGuid;
-                //    }
-                //}
-            }
-            return base.SaveChanges();
-        }
-        public async Task<int> SaveChangesAsync(Guid transactionGuid)
-        {
-            foreach (var entry in this.ChangeTracker.Entries())
-            {
-                //if (entry.Entity is ITransactionEntity)
-                //{
-                //    if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
-                //    {
-                //        ((ITransactionEntity)entry.Entity).TransactionGUID = transactionGuid;
-                //    }
-                //}
-            }
-            return await base.SaveChangesAsync();
-            //return base.SaveChanges();
-        }
         public static EntityContext CreateContext(string connectionStringName, bool _is_postgres = false)
         {
             if (connectionStringName == null)
@@ -113,6 +86,38 @@ namespace ServiceLib
             EntityContext context = (EntityContext)constructorInfo.Invoke(new object[] { contextOptions });
             return context;
         }
+
+        #region Save
+        public int SaveChanges(Guid transactionGuid)
+        {
+            foreach (var entry in this.ChangeTracker.Entries())
+            {
+                //if (entry.Entity is ITransactionEntity)
+                //{
+                //    if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
+                //    {
+                //        ((ITransactionEntity)entry.Entity).TransactionGUID = transactionGuid;
+                //    }
+                //}
+            }
+            return base.SaveChanges();
+        }
+        public async Task<int> SaveChangesAsync(Guid transactionGuid)
+        {
+            foreach (var entry in this.ChangeTracker.Entries())
+            {
+                //if (entry.Entity is ITransactionEntity)
+                //{
+                //    if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
+                //    {
+                //        ((ITransactionEntity)entry.Entity).TransactionGUID = transactionGuid;
+                //    }
+                //}
+            }
+            return await base.SaveChangesAsync();
+            //return base.SaveChanges();
+        }
+        #endregion
     }
 }
 
