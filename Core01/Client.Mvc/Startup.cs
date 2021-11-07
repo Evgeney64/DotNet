@@ -26,7 +26,7 @@ using System.Diagnostics;
 using ru.tsb.mvc.Models.Users;
 using ServiceLib;
 using Server.Core.CoreModel;
-using Server.Core.AuthModel;
+//using Server.Core.AuthModel;
 
 namespace ru.tsb.mvc
 {

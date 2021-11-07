@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
+﻿//using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+//using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
+
 using Tsb.Security.Web.Models;
 
 namespace Tsb.Security.Web.Models
@@ -554,7 +557,10 @@ namespace Tsb.Security.Web.Identity
         {
             var userRoles = this.context.scr_GetRolesByUser(user.user_id).ToList();
             // пользователь входит в роль если: нет полного запрета и есть разрешение хотя бы на группу
-            IList<string> roleNames = userRoles.GroupBy(s => s.role_name).Where(g => !g.Any(s => s.group_id == null && s.is_deny) && g.Any(s => !s.is_deny)).Select(g => g.Key).ToList();
+            IList<string> roleNames = userRoles.GroupBy(s => s.role_name)
+                .Where(g => !g.Any(s => s.group_id == null && s.is_deny) && g.Any(s => !s.is_deny))
+                .Select(g => g.Key)
+                .ToList();
 
             return Task.FromResult(roleNames);
         }

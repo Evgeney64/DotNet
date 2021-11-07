@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Data.EntityClient;
 using System.Linq;
 using System.Reflection;
+using System.Security;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web.Configuration;
-using System.Web.Security;
+
 using Tsb.Security.Web.Models;
 using Base64String = System.String;
 
@@ -155,7 +156,7 @@ namespace Tsb.Security.Web.Membership
             }
         }
 
-        internal SecurityContext CreateContext()
+        internal System.Security.SecurityContext CreateContext()
         {
             if (!String.IsNullOrWhiteSpace(connectionStringName))
             {
@@ -166,7 +167,7 @@ namespace Tsb.Security.Web.Membership
                 return new SecurityContext();
             }
         }
-        internal abstract scr_principal GetPrincipalByUserName(SecurityContext context, string username);
+        internal abstract scr_principal GetPrincipalByUserName(System.Security.SecurityContext context, string username);
 
         #region MembershipProvider members
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)

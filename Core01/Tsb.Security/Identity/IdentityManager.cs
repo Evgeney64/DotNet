@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+﻿//using Microsoft.AspNet.Identity;
+//using Microsoft.AspNet.Identity.Owin;
+//using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,7 +11,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Tsb.Security.Web.Configuration;
+using Microsoft.AspNet.Identity;
+
+//using Tsb.Security.Web.Configuration;
 using Tsb.Security.Web.Models;
 
 namespace Tsb.Security.Web.Identity

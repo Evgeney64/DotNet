@@ -18,8 +18,8 @@ namespace Tsb.Security.Web.Models
         public scr_role()
         {
             this.scr_role_principal = new HashSet<scr_role_principal>();
-            this.scr_role_role = new HashSet<scr_role_role>();
-            this.scr_role_role1 = new HashSet<scr_role_role>();
+            //this.scr_role_role = new HashSet<scr_role_role>();
+            //this.scr_role_role1 = new HashSet<scr_role_role>();
         }
     
         public int role_id { get; set; }
@@ -28,9 +28,9 @@ namespace Tsb.Security.Web.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<scr_role_principal> scr_role_principal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<scr_role_role> scr_role_role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<scr_role_role> scr_role_role1 { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<scr_role_role> scr_role_role { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<scr_role_role> scr_role_role1 { get; set; }
     }
 }

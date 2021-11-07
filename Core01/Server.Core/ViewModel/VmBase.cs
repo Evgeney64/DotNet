@@ -21,7 +21,7 @@ using Microsoft.Extensions.Configuration;
 
 using Server.Core.Public;
 using Server.Core.CoreModel;
-using Server.Core.AuthModel;
+//using Server.Core.AuthModel;
 using ServiceLib;
 
 namespace Server.Core.ViewModel
@@ -58,7 +58,7 @@ namespace Server.Core.ViewModel
             //context = new CoreEdm(contextOptions);
         }
         //private CoreEdm context { get; }
-        private AuthServ authServ { get; }
+        //private AuthServ authServ { get; }
         private CoreServ coreServ { get; }
 
         //public IEnumerable<NSI_STREET> NsiStreets => context.NSI_STREET;
@@ -87,7 +87,7 @@ namespace Server.Core.ViewModel
         public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => coreServ.Get_VW_NSI_VILLAGE();
 
 
-        public IEnumerable<scr_user> Users => authServ.Get_USER();
+        //public IEnumerable<scr_user> Users => authServ.Get_USER();
         /*public Func<IEnumerable<scr_user>> Users = () => {
             List<scr_user> users = new List<scr_user>();
             return users;

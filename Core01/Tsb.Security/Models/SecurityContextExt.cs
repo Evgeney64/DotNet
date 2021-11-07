@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
+//using System.Data.Entity;
+//using System.Data.Entity.Core.EntityClient;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tsb.Security.Web.Models
 {
     public partial class SecurityContext
     {
-        public SecurityContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
-        {
-            this.Configuration.ProxyCreationEnabled = false;
-            this.Configuration.UseDatabaseNullSemantics = true;
-        }
+        //public SecurityContext(string nameOrConnectionString)
+        //    : base(nameOrConnectionString)
+        //{
+        //    this.Configuration.ProxyCreationEnabled = false;
+        //    this.Configuration.UseDatabaseNullSemantics = true;
+        //}
 
         #region scr_principal
         public scr_principal GetPrincipalByPrincipalId(int principalId)
@@ -89,25 +90,25 @@ namespace Tsb.Security.Web.Models
         public scr_user GetUserByUserId(int userId, int applicationId)
         {
             return this.scr_user
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .FirstOrDefault(us => us.user_id == userId && us.scr_principal.application_id == applicationId);
         }
         public scr_user GetUserByUserName(string userName, int applicationId)
         {
             return this.scr_user
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .FirstOrDefault(us => String.Compare(us.user_name, userName, true) == 0 && us.scr_principal.application_id == applicationId);
         }
         public IEnumerable<scr_user> GetUsersByEmail(string email, int applicationId)
         {
             return this.scr_user
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .Where(us => String.Compare(us.email, email, true) == 0 && us.scr_principal.application_id == applicationId);
         }
         public IEnumerable<scr_user> GetUsersByPhoneNumber(string phoneNumber, int applicationId)
         {
             return this.scr_user
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .Where(us => String.Compare(us.phone_number, phoneNumber, true) == 0 && us.scr_principal.application_id == applicationId);
         }
         
@@ -297,13 +298,13 @@ namespace Tsb.Security.Web.Models
         public scr_user_group GetUserGroupByGroupId(int userGroupId, int applicationId)
         {
             return this.scr_user_group
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .FirstOrDefault(us => us.user_group_id == userGroupId && us.scr_principal.application_id == applicationId);
         }
         public scr_user_group GetUserGroupByGroupName(string groupName, int applicationId)
         {
             return this.scr_user_group
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .FirstOrDefault(us => String.Compare(us.user_group_name, groupName, true) == 0 && us.scr_principal.application_id == applicationId);
         }
         public IList<scr_user_group> GetUserGroupsByParentGroupId(int parentGroupId, int applicationId)
@@ -311,7 +312,7 @@ namespace Tsb.Security.Web.Models
             List<scr_user_group> allUserGroups = new List<scr_user_group>();
             
             var userGroups = this.scr_user_group
-                .Include(u => u.scr_principal)
+                //.Include(u => u.scr_principal)
                 .Where(g => g.parent_id == parentGroupId && g.scr_principal.application_id == applicationId);
             allUserGroups.AddRange(userGroups);
             foreach (var userGroup in userGroups)
@@ -348,28 +349,6 @@ namespace Tsb.Security.Web.Models
         {
             User,
             UserGroup,
-        }
-
-        public static SecurityContext CreateContext(string sqlConnectionStringName)
-        {
-            if (sqlConnectionStringName == null)
-            {
-                throw new ArgumentNullException("sqlConnectionStringName");
-            }
-
-            ConnectionStringSettings connectionStringSettings = ConfigurationManager.ConnectionStrings[sqlConnectionStringName];
-            if (connectionStringSettings == null)
-            {
-                throw new SettingsPropertyNotFoundException();
-            }
-
-            EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
-            entityBuilder.Provider = connectionStringSettings.ProviderName;
-            entityBuilder.ProviderConnectionString = connectionStringSettings.ConnectionString;
-            entityBuilder.Metadata = "res://*/Models.SecurityContext.csdl|res://*/Models.SecurityContext.ssdl|res://*/Models.SecurityContext.msl";
-
-            SecurityContext context = new SecurityContext(entityBuilder.ConnectionString);
-            return context;
         }
     }
 

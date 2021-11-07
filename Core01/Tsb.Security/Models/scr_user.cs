@@ -11,15 +11,17 @@ namespace Tsb.Security.Web.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class scr_user
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public scr_user()
         {
-            this.scr_user_login = new HashSet<scr_user_login>();
+            //this.scr_user_login = new HashSet<scr_user_login>();
         }
-    
+
+        [Key]
         public int user_id { get; set; }
         public string user_name { get; set; }
         public string password { get; set; }
@@ -41,10 +43,14 @@ namespace Tsb.Security.Web.Models
         public short is_email_confirmed { get; set; }
         public string phone_number { get; set; }
         public short is_phone_number_confirmed { get; set; }
-    
-        public virtual scr_principal scr_principal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<scr_user_login> scr_user_login { get; set; }
+        public override string ToString()
+        {
+            return user_id + " - " + user_name + " [" + email + "]";
+        }
+
+        //public virtual scr_principal scr_principal { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<scr_user_login> scr_user_login { get; set; }
         public virtual scr_user_group scr_user_group { get; set; }
     }
 }

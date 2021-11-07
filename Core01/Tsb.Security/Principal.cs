@@ -21,7 +21,7 @@ namespace Tsb.Security.Web
                 return current;
             }
         }
-        
+
         protected PrincipalFactory()
         {
         }
@@ -77,8 +77,8 @@ namespace Tsb.Security.Web.Membership
         bool DeveloperMode { get; }
         bool Debug { get; }
         int[] UserGroups { get; }
-        IBitrix24Identity Bitrix24Identity { get; }
-        IACSaleIdentity ACSaleIdentity { get; }
+        //IBitrix24Identity Bitrix24Identity { get; }
+        //IACSaleIdentity ACSaleIdentity { get; }
 
         IGroups GetGroupsForRole(string roleName);
     }

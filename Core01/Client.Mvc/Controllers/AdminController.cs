@@ -4,23 +4,21 @@ using System.Linq;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http;
 
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 using Server.Core.Public;
 using Server.Core.ViewModel;
-using Server.Core.AuthModel;
+//using Server.Core.AuthModel;
 
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 using ru.tsb.mvc;
-
+using Tsb.Security.Web.Models;
 
 namespace Admin.Controllers 
 {
@@ -50,8 +48,20 @@ namespace Admin.Controllers
 		#region HttpGet
 		public IActionResult GetUsers()
 		{
-			if (this.HttpContext != null 
-				&& this.Request != null && this.Response != null 
+			DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "EntityDataAuthMsSql");
+			using (SecurityContext context = SecurityContext.CreateContext(conf.ConnectionString))
+			{
+				//List<scr_principal> scr_principals = context.scr_principal.ToList();
+				List<scr_user> scr_users = context.scr_user.ToList();
+				{ }
+				VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+				return View("sys_user", vmBase);
+			}
+		}
+		public IActionResult GetUsers1()
+		{
+			if (this.HttpContext != null
+				&& this.Request != null && this.Response != null
 				&& this.RouteData != null
 				&& this.Url != null && this.User != null
 				&& this.Request.Query != null && this.Request.QueryString != null
@@ -59,7 +69,7 @@ namespace Admin.Controllers
 
 			#region 9.Контроллеры (01 - Передача зависимостей в контроллер)
 			if (this.HttpContext.RequestServices != null)
-            {
+			{
 				ITimeService timeService = HttpContext.RequestServices.GetService<ITimeService>();
 			}
 			#endregion
@@ -137,6 +147,31 @@ namespace Admin.Controllers
 			return text;
 		}
 		#endregion
+
+		#region getDataSourceConfiguration
+		private DataSourceConfiguration getDataSourceConfiguration(string config_file, string name)
+		{
+			IConfiguration configuration = getConfiguration("Client.Mvc", "Client.Mvc", config_file);
+			DataSourceConfiguration conf = new DataSourceConfiguration();
+			configuration.Bind(name, conf);
+
+			return conf;
+		}
+
+		private IConfiguration getConfiguration(string client_path, string config_path, string config_file)
+		{
+			string base_dir = AppDomain.CurrentDomain.BaseDirectory;
+			string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
+			{ }
+			var builder = new ConfigurationBuilder()
+				//.SetBasePath(conf_dir).AddJsonFile(config_file)
+				.AddJsonFile(conf_dir + config_file)
+				;
+			IConfiguration configuration = builder.Build();
+			return configuration;
+		}
+		#endregion
+
 	}
 
 	public class HtmlResult : IActionResult
@@ -157,4 +192,12 @@ namespace Admin.Controllers
 			await context.HttpContext.Response.WriteAsync(fullHtmlCode);
 		}
 	}
+
+	public class DataSourceConfiguration
+	{
+		public string ConnectionString { get; set; }
+		public int CommandTimeout { get; set; }
+		public bool is_postgres { get; set; }
+	}
+
 }

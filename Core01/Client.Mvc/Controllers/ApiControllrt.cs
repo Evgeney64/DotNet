@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Server.Core.Public;
 using Server.Core.ViewModel;
 using Server.Core.CoreModel;
-using Server.Core.AuthModel;
+//using Server.Core.AuthModel;
 using ru.tsb.mvc;
 
 namespace Data.Controllers
@@ -25,51 +25,51 @@ namespace Data.Controllers
         #endregion
 
         #region http://localhost:58982/api/users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<scr_user>>> Get()
-        {
-            VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-            if (vmBase.UsersL != null)
-            { }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<scr_user>>> Get()
+        //{
+        //    VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+        //    if (vmBase.UsersL != null)
+        //    { }
 
-            return new ObjectResult(vmBase.UsersL);
-        }
+        //    return new ObjectResult(vmBase.UsersL);
+        //}
         #endregion
 
         #region http://localhost:58982/api/users/GetUsers
-        [HttpGet("{action}")]
-        public async Task<ActionResult<IEnumerable<scr_user>>> GetUsers()
-        {
-            VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-            if (vmBase.UsersL != null)
-            { }
+        //[HttpGet("{action}")]
+        //public async Task<ActionResult<IEnumerable<scr_user>>> GetUsers()
+        //{
+        //    VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+        //    if (vmBase.UsersL != null)
+        //    { }
 
-            return new ObjectResult(vmBase.UsersL);
-        }
+        //    return new ObjectResult(vmBase.UsersL);
+        //}
         #endregion
 
         #region http://localhost:58982/api/users/123
-        [HttpGet("{id}")]
-        public async Task<ActionResult<scr_user>> Get(int id)
-        {
-            VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-            if (vmBase.UsersL != null)
-            { }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<scr_user>> Get(int id)
+        //{
+        //    VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+        //    if (vmBase.UsersL != null)
+        //    { }
 
-            return new ObjectResult(vmBase.UsersL);
-        }
+        //    return new ObjectResult(vmBase.UsersL);
+        //}
         #endregion
 
         #region http://localhost:58982/api/users/GetUsers/123
-        [HttpGet("{action}/{id}")]
-        public async Task<ActionResult<scr_user>> GetUsers(int id)
-        {
-            VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
-            if (vmBase.UsersL != null)
-            { }
+        //[HttpGet("{action}/{id}")]
+        //public async Task<ActionResult<scr_user>> GetUsers(int id)
+        //{
+        //    VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Auth);
+        //    if (vmBase.UsersL != null)
+        //    { }
 
-            return new ObjectResult(vmBase.UsersL);
-        }
+        //    return new ObjectResult(vmBase.UsersL);
+        //}
         #endregion
 
         // POST api/users

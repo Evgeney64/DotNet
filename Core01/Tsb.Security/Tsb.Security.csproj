@@ -1,225 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tsb.Security.Web</RootNamespace>
-    <AssemblyName>Tsb.Security</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UapDebug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\UapDebug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;UAP;CRM</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\UapDebug\Tsb.Security.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UapRelease|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\UapRelease\</OutputPath>
-    <DefineConstants>TRACE;UAP;CRM</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LikDebug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\LikDebug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;LIK</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LikRelease|AnyCPU'">
-    <OutputPath>bin\LikRelease\</OutputPath>
-    <DefineConstants>TRACE;LIK</DefineConstants>
-    <DebugType>none</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'HcsDebug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\HcsDebug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;HCS</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'HcsRelease|AnyCPU'">
-    <OutputPath>bin\HcsRelease\</OutputPath>
-    <DefineConstants>TRACE;HCS</DefineConstants>
-    <Optimize>true</Optimize>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'HelpDebug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\HelpDebug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;HELP</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'HelpRelease|AnyCPU'">
-    <OutputPath>bin\HelpRelease\</OutputPath>
-    <DefineConstants>TRACE;HELP</DefineConstants>
-    <Optimize>true</Optimize>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Owin">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="Membership\**" />
+    <EmbeddedResource Remove="Membership\**" />
+    <None Remove="Membership\**" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Configuration\WebConfiguration.cs" />
-    <Compile Include="Identity\IdentityManager.cs" />
-    <Compile Include="Identity\IdentityModel.cs" />
-    <Compile Include="Identity\Infrastructure.cs" />
-    <Compile Include="licence\Extentions.cs" />
-    <Compile Include="licence\KeyStores\KeyStorePart1.cs" />
-    <Compile Include="licence\KeyStores\KeyStorePart2.cs" />
-    <Compile Include="licence\KeyStores\KeyStorePart3.cs" />
-    <Compile Include="Models\scr_GetRolesByUser_Result1.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_group.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_principal.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_role.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_role_principal.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_role_role.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_session.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_session_claim.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_user.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_user_claim.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_user_group.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scr_user_login.cs">
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SecurityContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SecurityContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SecurityContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SecurityContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SecurityContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SecurityContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SecurityContextExt.cs" />
-    <Compile Include="Principal.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Configuration\WebConfiguration.cs" />
+    <Compile Remove="Identity\IdentityManager.cs" />
+    <Compile Remove="Identity\IdentityModel.cs" />
+    <Compile Remove="Identity\Infrastructure.cs" />
+    <Compile Remove="Identity\Infrastructure1.cs" />
+    <Compile Remove="licence\Extentions.cs" />
+    <Compile Remove="Models\SecurityContext.Context-1.cs" />
+    <Compile Remove="Models\SecurityContext.Designer.cs" />
+    <Compile Remove="Models\SecurityContextExt.cs" />
+    <Compile Remove="Principal.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <EntityDeploy Include="Models\SecurityContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SecurityContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <None Remove="Models\SecurityContext.Context.tt" />
+    <None Remove="Models\SecurityContext.edmx" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <!--<PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />-->
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.19" />
+
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.18" />
   </ItemGroup>
+
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Identity\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\SecurityContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SecurityContext.Context.cs</LastGenOutput>
-      <DependentUpon>SecurityContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\SecurityContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SecurityContext.cs</LastGenOutput>
-      <DependentUpon>SecurityContext.edmx</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

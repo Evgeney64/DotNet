@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Web.Configuration;
 
 namespace Tsb.Security.Web.Configuration
 {
@@ -418,11 +417,11 @@ namespace Tsb.Security.Web.Configuration
             {
                 this["IsOn"] = value;
             }
-        }        
+        }
         [ConfigurationProperty("FolderPath", IsRequired = true, DefaultValue = "\\")]
         public string FolderPath
         {
-            get 
+            get
             {
                 return (string)this["FolderPath"];
             }
@@ -920,7 +919,7 @@ namespace Tsb.Security.Web.Configuration
                 base["UseDefaultClient"] = value;
             }
         }
-        
+
         public SystemClient this[int id]
         {
             get
@@ -1070,7 +1069,7 @@ namespace Tsb.Security.Web.Configuration
             base.BaseRemove(id);
         }
     }
-    
+
     public class SystemHelp : ConfigurationElement
     {
         [ConfigurationProperty("Id", IsRequired = true, IsKey = true)]
@@ -1529,7 +1528,7 @@ namespace Tsb.Security.Web.Configuration
                 return (SystemSession)base["Session"];
             }
         }
-        
+
         [ConfigurationProperty("UserValidator")]
         public SystemUserValidator UserValidator
         {
@@ -1900,7 +1899,7 @@ namespace Tsb.Security.Web.Configuration
             }
         }
     }
-    
+
     public class SystemTwoFactor : ConfigurationElement
     {
         [ConfigurationProperty("Enabled", DefaultValue = false)]
@@ -2014,7 +2013,7 @@ namespace Tsb.Security.Web.Configuration
     public class SystemThirdPartyAuthentication : ConfigurationElement
     {
         private IList<SystemThirdPartyAuthenticationItem> items;
-        
+
         public ICollection<SystemThirdPartyAuthenticationItem> Items
         {
             get
@@ -2917,8 +2916,8 @@ namespace Tsb.Security.Web.Configuration
             base.BaseRemove(id);
         }
     }
-    
-    #endregion 
+
+    #endregion
 
     #region Printers
 
@@ -3160,7 +3159,7 @@ namespace Tsb.Security.Web.Configuration
                 base["FriendlyName"] = value;
             }
         }
-        
+
         [ConfigurationProperty("DataSourceId")]
         public byte DataSourceId
         {
@@ -3182,7 +3181,7 @@ namespace Tsb.Security.Web.Configuration
         }
     }
 
-    
+
     #endregion
 
     #region Captcha
@@ -3449,7 +3448,7 @@ namespace Tsb.Security.Web.Configuration
     public static class WebConfigurationHelper
     {
         private static string AuthenticationSectionName = "system.web/authentication";
-        
+
         private static string SharePointSectionName = "CustomSectionGroup/ConfigSectionSP";
         private static string EmailSectionName = "CustomSectionGroup/ConfigSectionEmail";
         private static string SMSSectionName = "CustomSectionGroup/ConfigSectionSMS";
@@ -3480,10 +3479,10 @@ namespace Tsb.Security.Web.Configuration
         {
             return WebConfigurationManager.OpenWebConfiguration(System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath);
 
-//            WebConfigurationFileMap fileMap = new WebConfigurationFileMap();
-//            VirtualDirectoryMapping virtualDirectoryMap = new VirtualDirectoryMapping(AppDomain.CurrentDomain.BaseDirectory, true, "Web.config");
-//            fileMap.VirtualDirectories.Add("/", virtualDirectoryMap);
-//            return WebConfigurationManager.OpenMappedWebConfiguration(fileMap, "/");
+            //            WebConfigurationFileMap fileMap = new WebConfigurationFileMap();
+            //            VirtualDirectoryMapping virtualDirectoryMap = new VirtualDirectoryMapping(AppDomain.CurrentDomain.BaseDirectory, true, "Web.config");
+            //            fileMap.VirtualDirectories.Add("/", virtualDirectoryMap);
+            //            return WebConfigurationManager.OpenMappedWebConfiguration(fileMap, "/");
         }
 
         public static ConnectionStringSettingsCollection GetConnectionStrings()
@@ -3597,7 +3596,7 @@ namespace Tsb.Security.Web.Configuration
             return WebConfigurationManager.GetWebApplicationSection(PrivatImportSectionName) as ConfigSectionPrivatImport;
         }
 
-        
+
         public static ConfigSectionSystem GetConfigSectionSystem()
         {
             return WebConfigurationManager.GetWebApplicationSection(SystemSectionName) as ConfigSectionSystem;

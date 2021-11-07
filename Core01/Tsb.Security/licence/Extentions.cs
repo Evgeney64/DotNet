@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+using Microsoft.AspNetCore.Http;
 using Tsb.Security.Web.licence.KeyStores;
 
 namespace Tsb.Security.Web.licence

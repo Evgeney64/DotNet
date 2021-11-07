@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.DataProtection;
+﻿//using Microsoft.AspNet.Identity.Owin;
+//using Microsoft.Owin;
+//using Microsoft.Owin.Security;
+//using Microsoft.Owin.Security.DataProtection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
-using Tsb.Security.Web.Membership;
+//using Tsb.Security.Web.Membership;
 
 namespace Tsb.Security.Web.Identity
 {

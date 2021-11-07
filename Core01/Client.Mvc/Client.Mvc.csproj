@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Server.Core\Server.Core.csproj" />
+    <ProjectReference Include="..\Tsb.Security\Tsb.Security.csproj" />
   </ItemGroup>
 
 </Project>

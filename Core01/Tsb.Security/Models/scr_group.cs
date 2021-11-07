@@ -11,19 +11,21 @@ namespace Tsb.Security.Web.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class scr_group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public scr_group()
         {
-            this.scr_role_principal = new HashSet<scr_role_principal>();
+            //this.scr_role_principal = new HashSet<scr_role_principal>();
         }
-    
+
+        [Key]
         public int group_id { get; set; }
         public string group_name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<scr_role_principal> scr_role_principal { get; set; }
+
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<scr_role_principal> scr_role_principal { get; set; }
     }
 }
