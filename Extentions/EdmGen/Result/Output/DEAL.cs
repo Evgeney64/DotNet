@@ -9,13 +9,14 @@
 
 namespace Server.Core.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Server.Core.Public;
     
-}
-namespace Server.Core.Model
-{
     
-    
-    public class DEAL
+    public partial class DEAL : IEntityObject, IEntityLog, IEntityPeriod
     {
     }
 }

@@ -41,24 +41,34 @@ namespace EdmGen
             if (oneFile_Serv)
             {
                 servOneUnit = new CodeCompileUnit();
-                TsbCodeGenResult item = new TsbCodeGenResult
+                TsbCodeGenResult res_item = new TsbCodeGenResult
                 {
-                    Class_Serv = new CodeTypeDeclaration(name),
+                    Class_Serv = new CodeTypeDeclaration
+                    {
+                        Name = name,
+                        IsPartial = true,
+                    },
                     Namespace_Serv = new CodeNamespace("Server.Core.Model"),
-                    Namespace_Serv_Using = new CodeNamespace("Server.Core.Model"),
+                    //Namespace_Serv_Using = new CodeNamespace("Server.Core.Model1"),
                 };
-                List<TsbCodeGenResult> res = new List<TsbCodeGenResult>();
-                res.Add(item);
-                foreach (var res_item in res)
+                //List<TsbCodeGenResult> res = new List<TsbCodeGenResult>();
+                //res.Add(item);
+                //foreach (var res_item in res)
                 {
                     #region
+                    #region interfaces
+                    res_item.Class_Serv.BaseTypes.Add("IEntityObject");
+                    res_item.Class_Serv.BaseTypes.Add("IEntityLog");
+                    res_item.Class_Serv.BaseTypes.Add("IEntityPeriod");
+                    #endregion
+
                     if (!res_item.Is_Error)
                     {
                         if ((oneFile_Serv) && (res_item.Class_Serv != null))
                         {
                             if (is_servFirst)
                             {
-                                servOneUnit.Namespaces.Add(res_item.Namespace_Serv_Using);
+                                //servOneUnit.Namespaces.Add(res_item.Namespace_Serv_Using);
                                 servOneNamespace = res_item.Namespace_Serv;
                                 // !!!
                                 servOneNamespace.Types.Add(res_item.Class_Serv);
@@ -109,7 +119,15 @@ namespace EdmGen
 
                 if (servOneNamespace != null)
                 {
+                    servOneNamespace.Imports.Add(new CodeNamespaceImport("System"));
+                    servOneNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
+                    servOneNamespace.Imports.Add(new CodeNamespaceImport("System.ComponentModel.DataAnnotations"));
+                    servOneNamespace.Imports.Add(new CodeNamespaceImport("System.ComponentModel.DataAnnotations.Schema"));
+                    servOneNamespace.Imports.Add(new CodeNamespaceImport("Server.Core.Public"));
+
                     servOneUnit.Namespaces.Add(servOneNamespace);
+                    //CodeTypeReference typeRef1 = new CodeTypeReference("System.DateTime");
+
                     if (servOneModelNamespace != null)
                     {
                         servOneUnit.Namespaces.Add(servOneModelNamespace);

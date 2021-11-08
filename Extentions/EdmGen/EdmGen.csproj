@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Result\Input\**" />
+    <Compile Remove="Result\Output\**" />
     <EmbeddedResource Remove="Result\Input\**" />
+    <EmbeddedResource Remove="Result\Output\**" />
     <None Remove="Result\Input\**" />
+    <None Remove="Result\Output\**" />
     <Page Remove="Result\Input\**" />
+    <Page Remove="Result\Output\**" />
   </ItemGroup>
 
   <ItemGroup>
