@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EdmGen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="208" Width="375">
+        Title="MainWindow" Height="400" Width="800">
     <Grid Margin="0,0,10,10">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="67,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.043,0.041" Height="66" Width="219" Click="Button_Click"/>
+        <Button Content="Create _files.txt" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.043,0.041" Height="60" Width="400" Click="CreateFile" FontSize="30.0" />
+        <Button Content="Generate class" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.043,0.041" Height="60" Width="400" Click="GenerateClass" FontSize="30.0"/>
 
     </Grid>
 </Window>

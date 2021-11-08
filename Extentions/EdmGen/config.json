@@ -8,18 +8,4 @@
       "Mode": "Request"
     }
   },
-  "EntityDataAuthMsSql": {
-    "ConnectionString": "Server=ROEV\\EVGEN; Database=renovation_auth_mvc; user id=sa;password=1212; MultipleActiveResultSets=true;",
-    "CommandTimeout": "300",
-    "Log": {
-      "Mode": "Request"
-    }
-  },
-  "EntityDataPostgres": {
-    "ConnectionString": "Server=10.196.72.100; Database=gis_hcs; Port=5432; User Id=gis_hcs; Password=123456Qwerty;",
-    "CommandTimeout": "300",
-    "Log": {
-      "Mode": "Request"
-    }
-  }
 }

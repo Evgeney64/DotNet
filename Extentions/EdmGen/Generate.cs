@@ -6,27 +6,49 @@ using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 
+using Model;
+
 namespace EdmGen
 {
     public class Generate
     {
-        public void Start()
+        public void CreateFile()
         {
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
             string input_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Input";
-            string output_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Output";
-
             if (Directory.Exists(input_dir))
             {
                 string[] path_files = Directory.GetFiles(input_dir);
                 string[] files = path_files.Select(ss => Path.GetFileName(ss)).ToArray();
                 files = files.Select(ss => ss.Substring(0, ss.Length - 3)).ToArray();
 
-                foreach(string file in files)
-                {
-                    GenerateOne(output_dir, file);
-                }
+                File.WriteAllLines(input_dir + "//_files.txt", files);
             }
+        }
+
+        public void GenerateClass()
+        {
+            string base_dir = AppDomain.CurrentDomain.BaseDirectory;
+            string input_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Input";
+            string output_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Output";
+            string[] files = System.IO.File.ReadAllLines(input_dir + "//_files.txt");
+            { }
+
+            Test test = new Test();
+            test.Execute();
+
+            foreach (string file in files)
+            {
+                GenerateOne(output_dir, file);
+            }
+            #region old
+            //if (Directory.Exists(input_dir))
+            //{
+            //    string[] path_files = Directory.GetFiles(input_dir);
+            //    string[] files = path_files.Select(ss => Path.GetFileName(ss)).ToArray();
+            //    files = files.Select(ss => ss.Substring(0, ss.Length - 3)).ToArray();
+            //}
+            #endregion
         }
 
         public void GenerateOne(string dir, string name)

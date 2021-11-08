@@ -25,10 +25,15 @@ namespace EdmGen
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CreateFile(object sender, RoutedEventArgs e)
         {
             Generate gen = new Generate();
-            gen.Start();
+            gen.CreateFile();
+        }
+        private void GenerateClass(object sender, RoutedEventArgs e)
+        {
+            Generate gen = new Generate();
+            gen.GenerateClass();
         }
     }
 }
