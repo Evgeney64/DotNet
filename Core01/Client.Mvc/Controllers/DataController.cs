@@ -2,13 +2,12 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
-
-using Server.Core.Public;
-using Server.Core.ViewModel;
-using Server.Core.CoreModel;
-using ServiceLib;
 using Client.Mvc.Models;
 using System.Linq;
+
+using Server.Core;
+using Server.Core.Public;
+using Server.Core.Model;
 
 namespace Data.Controllers
 {

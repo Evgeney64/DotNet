@@ -5,14 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="CoreModel\Auth\**" />
-    <EmbeddedResource Remove="CoreModel\Auth\**" />
-    <None Remove="CoreModel\Auth\**" />
+    <Compile Remove="Context\**" />
+    <Compile Remove="DataModel\Auth\**" />
+    <EmbeddedResource Remove="Context\**" />
+    <EmbeddedResource Remove="DataModel\Auth\**" />
+    <None Remove="Context\**" />
+    <None Remove="DataModel\Auth\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="CoreModel\Data\CoreContext.cs" />
-    <Compile Remove="CoreModel\Data\CoreServ.cs" />
+    <Compile Remove="DataModel\Context\Types.cs" />
+    <Compile Remove="DataModel\Data\CoreContext.cs" />
+    <Compile Remove="DataModel\Data\CoreServ.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
     <Folder Include="ViewModel\Classes\" />
     <Folder Include="ViewModel\Config\" />
     <Folder Include="ViewModel\Types\" />

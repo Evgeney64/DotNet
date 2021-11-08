@@ -2,7 +2,7 @@
 @using HtmlHelpersApp.App_Code;
 
 
-@model Server.Core.ViewModel.VmBase
+@model Server.Core.VmBase
 
 @{
     string[] cities = new string[] { "Лондон", "Париж", "Берлин" };

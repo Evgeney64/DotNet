@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using Server.Core.ViewModel;
+using Server.Core;
+
 
 namespace HtmlHelpersApp.App_Code
 {

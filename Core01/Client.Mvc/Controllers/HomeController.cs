@@ -3,9 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
-using Server.Core.ViewModel;
-using Server.Core.CoreModel;
-
 namespace Home.Controllers
 {
     public class HomeController : Controller

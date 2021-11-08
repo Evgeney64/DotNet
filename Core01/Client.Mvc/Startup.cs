@@ -17,16 +17,9 @@ using Microsoft.Extensions.Logging;
 
 using Microsoft.EntityFrameworkCore;
 
-using Server.Core;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
-
-
-using ru.tsb.mvc.Models.Users;
-using ServiceLib;
-using Server.Core.CoreModel;
-//using Server.Core.AuthModel;
 
 namespace ru.tsb.mvc
 {
@@ -222,8 +215,8 @@ namespace ru.tsb.mvc
             if (1 == 2)
             {
                 services.AddRouting();
-                services.AddDbContext<EntityContext>(options =>
-                    options.UseSqlServer(AppConfiguration["Data:gos:ConnectionString"]));
+                //services.AddDbContext<EntityContext>(options =>
+                //    options.UseSqlServer(AppConfiguration["Data:gos:ConnectionString"]));
                 //services.AddDbContext<EntityContext>(options =>
                 //    options.UseSqlServer(AppConfiguration["Data:renovation_web:ConnectionString"]));
                 //services.AddTransient<ICoreEdm, CoreEdm>();

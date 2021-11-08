@@ -7,19 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-using Server.Core.Public;
-using Server.Core.ViewModel;
-//using Server.Core.AuthModel;
-
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 using ru.tsb.mvc;
 using Tsb.Security.Web.Models;
 using Client.Mvc.Models;
+using Server.Core;
+using Server.Core.Public;
 
 namespace Admin.Controllers 
 {

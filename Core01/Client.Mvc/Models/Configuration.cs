@@ -7,20 +7,13 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using Server.Core.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
-using Server.Core.Public;
-//using Server.Core.AuthModel;
 using Microsoft.AspNetCore.Mvc.Filters;
-
-using ru.tsb.mvc;
-using Tsb.Security.Web.Models;
 
 namespace Client.Mvc.Models
 {

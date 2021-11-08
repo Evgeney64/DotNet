@@ -20,11 +20,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Extensions.Configuration;
 
 using Server.Core.Public;
-using Server.Core.CoreModel;
-//using Server.Core.AuthModel;
-using ServiceLib;
+using Server.Core.Context;
+using Server.Core.Model;
 
-namespace Server.Core.ViewModel
+
+namespace Server.Core
 {
     public partial class VmBase
     {

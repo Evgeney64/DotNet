@@ -4,12 +4,6 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Server.Core.Public;
-using Server.Core.ViewModel;
-using Server.Core.CoreModel;
-//using Server.Core.AuthModel;
-using ru.tsb.mvc;
-
 namespace Data.Controllers
 {
     [ApiController]

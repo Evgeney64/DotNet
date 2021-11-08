@@ -1,4 +1,4 @@
-﻿@model Server.Core.ViewModel.VmBase
+﻿@model Server.Core.VmBase
 
 @(Model.HtmlString)
 
