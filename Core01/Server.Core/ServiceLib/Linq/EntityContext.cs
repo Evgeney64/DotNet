@@ -12,15 +12,17 @@ namespace ServiceLib
 {
     public partial class EntityContext : DbContext
     {
+        #region Define
+        string connectionString;
+        bool is_postgres;
+        string postgresSchema;
+        #endregion
+
         public EntityContext()
         { }
         public EntityContext(DbContextOptions<EntityContext> options)
             : base(options)
         { }
-
-        string connectionString;
-        bool is_postgres;
-        string postgresSchema;
         public EntityContext(string _connStr, bool _isPostgr = false, string _postgrSchem = "gis_hcs")
         {
             connectionString = _connStr;
@@ -30,6 +32,7 @@ namespace ServiceLib
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            #region
             try
             {
                 if (connectionString != null)
@@ -42,9 +45,11 @@ namespace ServiceLib
             }
             catch (Exception ex)
             { }
+            #endregion
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region
             if (connectionString != null)
             {
                 if (is_postgres)
@@ -52,10 +57,12 @@ namespace ServiceLib
             }
 
             base.OnModelCreating(modelBuilder);
+            #endregion
         }
 
         public static EntityContext CreateContext(string connectionStringName, bool _is_postgres = false)
         {
+            #region
             if (connectionStringName == null)
             {
                 throw new ArgumentNullException("connectionStringName");
@@ -85,6 +92,7 @@ namespace ServiceLib
 
             EntityContext context = (EntityContext)constructorInfo.Invoke(new object[] { contextOptions });
             return context;
+            #endregion
         }
 
         #region Save

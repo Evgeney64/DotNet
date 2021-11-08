@@ -48,39 +48,6 @@ namespace ServiceLib
         }
         #endregion
 
-        #region CreateContext
-        protected virtual TContext CreateContext()
-        {
-            return CreateContext(connectionString);
-        }
-        public static TContext CreateContext(string connectionStringName)
-        {
-            #region
-            var constructorInfo = typeof(TContext).GetConstructor(new Type[] { typeof(DbContextOptions<EntityContext>) });
-            if (constructorInfo == null)
-            {
-                throw new Exception("DbContext должен иметь конструктор с параметром EntityConnection.");
-            }
-
-            DbContextOptions<EntityContext> contextOptions = new DbContextOptionsBuilder<EntityContext>()
-                .UseSqlServer(connectionStringName)
-                .Options;
-
-            TContext context = (TContext)constructorInfo.Invoke(new object[] { contextOptions });
-            return context;
-            #endregion
-        }
-        //protected virtual ApiContext CreateApiContext()
-        //{
-        //    if (StaticContext.UseApi)
-        //    {
-        //        return new ApiContext();
-        //    }
-
-        //    throw new InvalidOperationException("BillBerry API отключен.");
-        //}
-        #endregion
-
         #region Dispose
         protected virtual void Dispose(bool disposing)
         {
@@ -98,7 +65,40 @@ namespace ServiceLib
         }
         #endregion
 
-        #region archive
+        #region CreateContext old
+        //protected virtual TContext CreateContext()
+        //{
+        //    return CreateContext(connectionString);
+        //}
+        //public static TContext CreateContext(string connectionStringName)
+        //{
+        //    #region
+        //    var constructorInfo = typeof(TContext).GetConstructor(new Type[] { typeof(DbContextOptions<EntityContext>) });
+        //    if (constructorInfo == null)
+        //    {
+        //        throw new Exception("DbContext должен иметь конструктор с параметром EntityConnection.");
+        //    }
+
+        //    DbContextOptions<EntityContext> contextOptions = new DbContextOptionsBuilder<EntityContext>()
+        //        .UseSqlServer(connectionStringName)
+        //        .Options;
+
+        //    TContext context = (TContext)constructorInfo.Invoke(new object[] { contextOptions });
+        //    return context;
+        //    #endregion
+        //}
+        //protected virtual ApiContext CreateApiContext()
+        //{
+        //    if (StaticContext.UseApi)
+        //    {
+        //        return new ApiContext();
+        //    }
+
+        //    throw new InvalidOperationException("BillBerry API отключен.");
+        //}
+        #endregion
+
+        #region archive old
         /*
         private static MethodInfo filterMethodInfo = typeof(EntityService<TContext>).GetMethod("Filter", BindingFlags.Public | BindingFlags.Static);
         private static MethodInfo checkMethodInfo = typeof(EntityService<TContext>).GetMethod("Check", BindingFlags.Public | BindingFlags.Static);

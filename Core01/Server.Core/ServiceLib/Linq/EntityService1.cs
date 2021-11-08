@@ -7,6 +7,7 @@ namespace Server.Core.CoreModel
 {
     public partial class EntityServ : ServiceLib.EntityService<EntityContext>
     {
+        #region Context
         public EntityServ()
         { }
         public EntityServ(string connectionString)
@@ -19,13 +20,15 @@ namespace Server.Core.CoreModel
             {
                 if (base.Context == null)
                 {
-                    //base.Context = this.CreateContext();
-                    base.Context = EntityContext.CreateContext(connectionString);
+                    //base.Context = EntityContext.CreateContext(connectionString);
+                    base.Context = new EntityContext(connectionString);
                 }
                 return base.Context;
             }
         }
+        #endregion
 
+        #region Services
         //public IQueryable<NSI_STREET> Get_NSI_STREET_1()
         //{
         //    IQueryable<NSI_STREET> items = Context.NSI_STREET;
@@ -42,6 +45,7 @@ namespace Server.Core.CoreModel
 
         public IQueryable<street> GetStreets() => Context.street;
         public IQueryable<type_street> GetTypeStreets() => Context.type_street;
+        #endregion
         #endregion
     }
 }
