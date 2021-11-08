@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using Server.Core.Public;
 using Server.Core.ViewModel;
 using Server.Core.CoreModel;
+using ServiceLib;
+using Client.Mvc.Models;
+using System.Linq;
 
 namespace Data.Controllers
 {
@@ -17,10 +20,19 @@ namespace Data.Controllers
             configuration = _configuration;
         }
 
-        public ViewResult GetVillages()
+        public ViewResult GetVillages0()
         {
             VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Data);
             return View("nsi_village", vmBase);
+        }
+        public ViewResult GetVillages()
+        {
+            DataConfiguration conf = ConfigurateHelper.GetConfiguration("config.json", "EntityDataMsSql");
+            VmBase vmBase = new VmBase(conf.ConnectionString);
+            List<rgn> items1 = vmBase.GetRgns();
+            List<village> items = vmBase.GetVillages();
+            { }
+            return View("sys_user", vmBase);
         }
         public ViewResult GetStreets()
         {

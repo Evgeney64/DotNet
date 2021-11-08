@@ -23,6 +23,9 @@ namespace ServiceLib
         #region Gos
         public virtual DbSet<street> street { get; set; }
         public virtual DbSet<type_street> type_street { get; set; }
+
+        public virtual DbSet<village> village { get; set; }
+        public virtual DbSet<rgn> rgn { get; set; }
         #endregion    
     }
 }

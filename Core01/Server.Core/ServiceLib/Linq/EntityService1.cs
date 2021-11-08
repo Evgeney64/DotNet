@@ -23,7 +23,12 @@ namespace Server.Core.CoreModel
 
         public IQueryable<NSI_VILLAGE> Get_NSI_VILLAGE() => Context.NSI_VILLAGE;
 
+        #region Gos
+        public IQueryable<village> Get_village() => Context.village;
+        public IQueryable<rgn> Get_rgn() => Context.rgn;
+
         public IQueryable<street> GetStreets() => Context.street;
         public IQueryable<type_street> GetTypeStreets() => Context.type_street;
+        #endregion
     }
 }

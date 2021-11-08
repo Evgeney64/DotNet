@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 using ru.tsb.mvc;
 using Tsb.Security.Web.Models;
+using Client.Mvc.Models;
 
 namespace Admin.Controllers 
 {
@@ -48,7 +49,7 @@ namespace Admin.Controllers
 		#region HttpGet
 		public IActionResult GetUsers()
 		{
-			DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "EntityDataAuthMsSql");
+			DataConfiguration conf = ConfigurateHelper.GetConfiguration("config.json", "EntityDataAuthMsSql");
 			using (SecurityContext context = SecurityContext.CreateContext(conf.ConnectionString))
 			{
 				//List<scr_principal> scr_principals = context.scr_principal.ToList();
@@ -147,31 +148,6 @@ namespace Admin.Controllers
 			return text;
 		}
 		#endregion
-
-		#region getDataSourceConfiguration
-		private DataSourceConfiguration getDataSourceConfiguration(string config_file, string name)
-		{
-			IConfiguration configuration = getConfiguration("Client.Mvc", "Client.Mvc", config_file);
-			DataSourceConfiguration conf = new DataSourceConfiguration();
-			configuration.Bind(name, conf);
-
-			return conf;
-		}
-
-		private IConfiguration getConfiguration(string client_path, string config_path, string config_file)
-		{
-			string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-			string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
-			{ }
-			var builder = new ConfigurationBuilder()
-				//.SetBasePath(conf_dir).AddJsonFile(config_file)
-				.AddJsonFile(conf_dir + config_file)
-				;
-			IConfiguration configuration = builder.Build();
-			return configuration;
-		}
-		#endregion
-
 	}
 
 	public class HtmlResult : IActionResult
@@ -191,13 +167,6 @@ namespace Admin.Controllers
 			fullHtmlCode += "</body></html>";
 			await context.HttpContext.Response.WriteAsync(fullHtmlCode);
 		}
-	}
-
-	public class DataSourceConfiguration
-	{
-		public string ConnectionString { get; set; }
-		public int CommandTimeout { get; set; }
-		public bool is_postgres { get; set; }
 	}
 
 }

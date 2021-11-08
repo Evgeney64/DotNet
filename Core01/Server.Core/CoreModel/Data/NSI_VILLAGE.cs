@@ -60,4 +60,5 @@ namespace Server.Core.CoreModel
         */
         long IEntityObject.Id { get { return NVILLAGE_ID; } }
     }
+
 }

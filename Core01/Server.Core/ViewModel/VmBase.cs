@@ -30,6 +30,10 @@ namespace Server.Core.ViewModel
     {
         public VmBase()
         { }
+        public VmBase(string _connectionString)
+        {
+            connectionString = _connectionString;
+        }
         private string connectionString;
         public string ConnectionString { get { return connectionString; } }
         public string HtmlString { get; set; }
@@ -84,7 +88,32 @@ namespace Server.Core.ViewModel
 
 
         public IEnumerable<NSI_VILLAGE> NsiVillages => serv.Get_NSI_VILLAGE();
-        public List<NSI_VILLAGE> NsiVillagesL => NsiVillages.ToList();
+        public List<NSI_VILLAGE> GetNsiVillages()
+        {
+            using (EntityServ _serv = new EntityServ(connectionString))
+            {
+                nsiVillagesL = _serv.Get_NSI_VILLAGE().ToList();
+                return nsiVillagesL;
+            }
+        }
+        private List<NSI_VILLAGE> nsiVillagesL;
+        public List<village> GetVillages()
+        {
+            using (EntityServ _serv = new EntityServ(connectionString))
+            {
+                List<village> items = _serv.Get_village().ToList();
+                return items;
+            }
+        }
+        public List<rgn> GetRgns()
+        {
+            using (EntityServ _serv = new EntityServ(connectionString))
+            {
+                List<rgn> items = _serv.Get_rgn().ToList();
+                return items;
+            }
+        }
+        public List<NSI_VILLAGE> NsiVillagesL => nsiVillagesL;
         public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => serv.Get_VW_NSI_VILLAGE();
 
 
