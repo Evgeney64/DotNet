@@ -20,9 +20,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Extensions.Configuration;
 
 using Server.Core.Public;
-using Server.Core.Context;
 using Server.Core.Model;
-
 
 namespace Server.Core
 {
@@ -104,13 +102,6 @@ namespace Server.Core
         public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => serv.Get_VW_NSI_VILLAGE();
 
 
-        //public IEnumerable<scr_user> Users => authServ.Get_USER();
-        /*public Func<IEnumerable<scr_user>> Users = () => {
-            List<scr_user> users = new List<scr_user>();
-            return users;
-            };*/
-
-        //public List<scr_user> UsersL => Users.ToList();
         public List<scr_user1> UsersL
         {
             get

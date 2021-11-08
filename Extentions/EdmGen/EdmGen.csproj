@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Result\Input\**" />
+    <EmbeddedResource Remove="Result\Input\**" />
+    <None Remove="Result\Input\**" />
+    <Page Remove="Result\Input\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Result\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>
