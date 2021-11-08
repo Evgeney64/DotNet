@@ -28,6 +28,7 @@ namespace Server.Core.ViewModel
 {
     public partial class VmBase
     {
+        #region Define
         public VmBase()
         { }
         public VmBase(string _connectionString)
@@ -38,6 +39,7 @@ namespace Server.Core.ViewModel
         public string ConnectionString { get { return connectionString; } }
         public string HtmlString { get; set; }
         public HtmlHelper Html { get; set; }
+        private EntityServ serv { get; }
         public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
         {
             
@@ -64,8 +66,9 @@ namespace Server.Core.ViewModel
         }
         //private CoreEdm context { get; }
         //private AuthServ authServ { get; }
-        private EntityServ serv { get; }
+        #endregion
 
+        #region Data
         //public IEnumerable<NSI_STREET> NsiStreets => context.NSI_STREET;
         public IEnumerable<NSI_STREET> NsiStreets => serv.Get_NSI_STREET();
         public List<NSI_STREET> NsiStreetsL => NsiStreets.ToList();
@@ -97,22 +100,6 @@ namespace Server.Core.ViewModel
             }
         }
         private List<NSI_VILLAGE> nsiVillagesL;
-        public List<village> GetVillages()
-        {
-            using (EntityServ _serv = new EntityServ(connectionString))
-            {
-                List<village> items = _serv.Get_village().ToList();
-                return items;
-            }
-        }
-        public List<rgn> GetRgns()
-        {
-            using (EntityServ _serv = new EntityServ(connectionString))
-            {
-                List<rgn> items = _serv.Get_rgn().ToList();
-                return items;
-            }
-        }
         public List<NSI_VILLAGE> NsiVillagesL => nsiVillagesL;
         public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => serv.Get_VW_NSI_VILLAGE();
 
@@ -142,12 +129,26 @@ namespace Server.Core.ViewModel
         public scr_user1[] UsersAr { get { return UsersL.ToArray(); } }
 
         public string UsersJson { get { return JsonSerializer.Serialize(UsersAr); } }
+        #endregion
 
+        #region Gos
+        public void DoSmth()
+        {
+            using (EntityServ _serv = new EntityServ(connectionString))
+            {
+                rgns = _serv.Get_rgn().ToList();
+                villages = _serv.Get_village().ToList();
+            }
+        }
+        public List<rgn> rgns;
+        public List<village> villages;
         public IEnumerable<street> streets => serv.GetStreets();
         public List<street> streetsL => serv.GetStreets().ToList();
 
         public IEnumerable<type_street> type_streets => serv.GetTypeStreets();
         public List<type_street> type_streetsL => serv.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
+        #endregion
+
     }
 
     public partial class scr_user1

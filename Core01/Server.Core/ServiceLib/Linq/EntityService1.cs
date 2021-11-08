@@ -13,6 +13,19 @@ namespace Server.Core.CoreModel
             : base(connectionString)
         { }
 
+        protected override EntityContext Context
+        {
+            get
+            {
+                if (base.Context == null)
+                {
+                    //base.Context = this.CreateContext();
+                    base.Context = EntityContext.CreateContext(connectionString);
+                }
+                return base.Context;
+            }
+        }
+
         //public IQueryable<NSI_STREET> Get_NSI_STREET_1()
         //{
         //    IQueryable<NSI_STREET> items = Context.NSI_STREET;

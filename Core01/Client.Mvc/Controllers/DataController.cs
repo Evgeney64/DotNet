@@ -29,10 +29,12 @@ namespace Data.Controllers
         {
             DataConfiguration conf = ConfigurateHelper.GetConfiguration("config.json", "EntityDataMsSql");
             VmBase vmBase = new VmBase(conf.ConnectionString);
-            List<rgn> items1 = vmBase.GetRgns();
-            List<village> items = vmBase.GetVillages();
-            { }
-            return View("sys_user", vmBase);
+
+            vmBase.DoSmth();
+            //List<rgn> rgns = vmBase.rgns;
+            //List<village> villages = vmBase.villages;
+            //{ }
+            return View("nsi_village", vmBase);
         }
         public ViewResult GetStreets()
         {

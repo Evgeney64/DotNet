@@ -121,29 +121,31 @@ namespace ServiceLib
     }
 }
 
-namespace Server.Core.ViewModel
-{
-    public partial class VmBase
-    {
-        DataSourceConfiguration conf;
-        protected EntityContext CreateContext()
-        {
-            var context = EntityContext.CreateContext(conf.ConnectionString, conf.is_postgres);
-            //$$$
-            //context.ObjectContext.Connection.Open();
-            //context.ObjectContext.CommandTimeout = this.Configuration.CommandTimeout;
-            AssemblyName assemblyName = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
-            string versionNumber = assemblyName.Version.ToString();
-            //var sysParams = context.SysParams
-            //    .AsNoTracking()
-            //    .FirstOrDefault();
-            //$$$
-            //if (sysParams == null || !String.Equals(sysParams.VersionNumber, versionNumber, StringComparison.Ordinal))
-            //{
-            //    throw new Exception(String.Format("Текущая версия промежуточной БД не поддерживается. Требуется версия {0}", versionNumber));
-            //}
+#region old
+//namespace Server.Core.ViewModel
+//{
+//    public partial class VmBase
+//    {
+//        DataSourceConfiguration conf;
+//        protected EntityContext CreateContext()
+//        {
+//            var context = EntityContext.CreateContext(conf.ConnectionString, conf.is_postgres);
+//            //$$$
+//            //context.ObjectContext.Connection.Open();
+//            //context.ObjectContext.CommandTimeout = this.Configuration.CommandTimeout;
+//            AssemblyName assemblyName = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
+//            string versionNumber = assemblyName.Version.ToString();
+//            //var sysParams = context.SysParams
+//            //    .AsNoTracking()
+//            //    .FirstOrDefault();
+//            //$$$
+//            //if (sysParams == null || !String.Equals(sysParams.VersionNumber, versionNumber, StringComparison.Ordinal))
+//            //{
+//            //    throw new Exception(String.Format("Текущая версия промежуточной БД не поддерживается. Требуется версия {0}", versionNumber));
+//            //}
 
-            return context;
-        }
-    }
-}
+//            return context;
+//        }
+//    }
+//}
+#endregion

@@ -24,18 +24,19 @@ namespace ServiceLib
         //private ApiContext apiContext;
         protected string connectionString;
 
-        protected TContext Context
-        {
-            get
-            {
-                if (this.context == null)
-                {
-                    this.context = this.CreateContext();
-                }
-                return this.context;
-            }
-        }
-        private TContext context;
+        protected virtual TContext Context { get; set; }
+        //protected TContext Context
+        //{
+        //    get
+        //    {
+        //        if (this.context == null)
+        //        {
+        //            this.context = this.CreateContext();
+        //        }
+        //        return this.context;
+        //    }
+        //}
+        //private TContext context;
         #endregion
 
         #region Constructor
