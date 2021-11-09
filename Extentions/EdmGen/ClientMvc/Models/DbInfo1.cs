@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Model
 {
-    public partial class Public
+    public partial class DbInfo
     {
         private void createColumn(SqlConnection connection, table tbl)
         {

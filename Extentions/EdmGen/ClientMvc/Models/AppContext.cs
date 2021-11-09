@@ -7,57 +7,57 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
-    public partial class ApplicationContext : DbContext
+    public partial class AppContext : DbContext
     {
         string connectionString;
         bool is_postgres;
 
         #region Constructor
-        public ApplicationContext()
+        public AppContext()
         {
         }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public AppContext(DbContextOptions<AppContext> options)
             : base(options)
         {
         }
-        public ApplicationContext(string _connectionString, bool _is_postgres = false)
+        public AppContext(string _connectionString, bool _is_postgres = false)
         {
             connectionString = _connectionString;
             is_postgres = _is_postgres;
             //Database.EnsureCreated();
         }
 
-        public static ApplicationContext CreateContext(string connectionStringName, bool _is_postgres = false)
+        public static AppContext CreateContext(string connectionStringName, bool _is_postgres = false)
         {
             if (connectionStringName == null)
             {
                 throw new ArgumentNullException("connectionStringName");
             }
 
-            var constructorInfo = typeof(ApplicationContext).GetConstructor(
-                new Type[] { typeof(DbContextOptions<ApplicationContext>) }
+            var constructorInfo = typeof(AppContext).GetConstructor(
+                new Type[] { typeof(DbContextOptions<AppContext>) }
                 );
             if (constructorInfo == null)
             {
                 throw new Exception("DbContext должен иметь конструктор с параметром EntityConnection.");
             }
 
-            DbContextOptions<ApplicationContext> contextOptions = null;
+            DbContextOptions<AppContext> contextOptions = null;
             if (_is_postgres == false)
             {
-                contextOptions = new DbContextOptionsBuilder<ApplicationContext>()
+                contextOptions = new DbContextOptionsBuilder<AppContext>()
                     .UseSqlServer(connectionStringName)
                     .Options;
             }
             else
             {
-                contextOptions = new DbContextOptionsBuilder<ApplicationContext>()
+                contextOptions = new DbContextOptionsBuilder<AppContext>()
                     .UseNpgsql(connectionStringName)
                     .Options;
             }
 
-            ApplicationContext context = (ApplicationContext)constructorInfo.Invoke(new object[] { contextOptions });
+            AppContext context = (AppContext)constructorInfo.Invoke(new object[] { contextOptions });
             return context;
         }
         #endregion

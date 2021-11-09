@@ -23,26 +23,18 @@ namespace ClientMvc.Controllers
         {
             return View();
         }
-        public async Task<string> TestGenPostgr()
+        public async Task<string> Task1()
         {
             ViewNodel vm = new ViewNodel();
-            vm.ValueStr = await testGenPostgr();
+            vm.ValueStr = await task1();
 
             return vm.ValueStr;
         }
 
-        public async Task<string> GetContextSql()
+        public async Task<string> Task2()
         {
             ViewNodel vm = new ViewNodel();
-            vm.ValueStr = await getContextSql();
-
-            return vm.ValueStr;
-        }
-
-        public async Task<string> GetContextPostgres()
-        {
-            ViewNodel vm = new ViewNodel();
-            vm.ValueStr = await getContextPostgres();
+            vm.ValueStr = await task2();
 
             return vm.ValueStr;
         }

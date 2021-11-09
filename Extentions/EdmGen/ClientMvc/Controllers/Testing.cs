@@ -14,58 +14,25 @@ namespace ClientMvc.Controllers
 {
     public partial class HomeController : Controller
     {
-        private async Task<String> testGenPostgr()
+        private async Task<String> task1()
         {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "MsSqlConfiguration");
+            DataSourceConfiguration conf = Configurator.GetDataSourceConfiguration("config.json", "MsSqlConfiguration");
 
-            Public postgr = new Public(conf);
-            String str = postgr.GenerateScript();
-            return str;
-        }
-
-        private async Task<String> getContextSql()
-        {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "MsSqlConfiguration");
-
-            Public postgr = new Public(conf);
-            //String str = postgr.GetSysOperation();
+            DbInfo postgr = new DbInfo(conf);
+            //String str = postgr.GenerateScript();
             String str = "";
             return str;
         }
 
-        private async Task<String> getContextPostgres()
+        private async Task<String> task2()
         {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "PostgresConfiguration");
+            DataSourceConfiguration conf = Configurator.GetDataSourceConfiguration("config.json", "MsSqlConfiguration");
 
-            Public postgr = new Public(conf);
+            DbInfo postgr = new DbInfo(conf);
             //String str = postgr.GetSysOperation();
             String str = "";
             return str;
         }
-
-        #region getDataSourceConfiguration
-        private DataSourceConfiguration getDataSourceConfiguration(string config_file, string name)
-        {
-            IConfiguration configuration = getConfiguration("Hcs.ClientMvc", "Hcs.ClientMvc", config_file);
-            DataSourceConfiguration conf = new DataSourceConfiguration();
-            configuration.Bind(name, conf);
-
-            return conf;
-        }
-
-        private IConfiguration getConfiguration(string client_path, string config_path, string config_file)
-        {
-            string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
-            { }
-            var builder = new ConfigurationBuilder()
-                //.SetBasePath(conf_dir).AddJsonFile(config_file)
-                .AddJsonFile(conf_dir + config_file)
-                ;
-            IConfiguration configuration = builder.Build();
-            return configuration;
-        }
-        #endregion
 
     }
 }

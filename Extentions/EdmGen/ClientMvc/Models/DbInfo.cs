@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Model
 {
-    public partial class Public
+    public partial class DbInfo
     {
         #region Define
         DataSourceConfiguration conf;
@@ -30,19 +30,13 @@ namespace Model
         string ins = "";
         int count0 = 0;
         #endregion
-        public Public(DataSourceConfiguration _conf)
+        public DbInfo(DataSourceConfiguration _conf)
         {
             conf = _conf;
         }
 
-        public string GenerateScript()
+        public void GenerateInfo()
         {
-            #region
-            #region Define
-            user = "\"postgres\"";
-            schem = "\"tsb\"";
-            #endregion
-
             #region get tables
             using (SqlConnection connection = new SqlConnection(conf.ConnectionString))
             {
@@ -128,8 +122,12 @@ namespace Model
             }
             { }
             #endregion
-
-            #region create script
+        }
+        public void GenerateScript()
+        {
+            #region
+            user = "\"postgres\"";
+            schem = "\"tsb\"";
 
             foreach (table tbl in tables)
             {
@@ -174,9 +172,11 @@ namespace Model
                 }
                 #endregion
             }
-            { }
             #endregion
+        }
 
+        public void SaveScript()
+        {
             #region Save
             string path = Directory.GetCurrentDirectory() + "//script";
             writeToFile(path, "create_table.sql", crt);
@@ -186,9 +186,6 @@ namespace Model
             writeToFile(path, "create_ind.sql", crt_ind);
             writeToFile(path, "drop_fk.sql", del_fk);
             writeToFile(path, "insert_data.sql", ins);
-            #endregion
-
-            return "GenerateScript - Ok";
             #endregion
         }
 

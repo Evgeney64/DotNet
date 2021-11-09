@@ -23,7 +23,7 @@
                 },
                 {
                     xtype: 'button',
-                    text: 'Генерация скриптов',
+                    text: 'Генерация _files.txt',
                     id: 'passData',
                     height: 30,
                     width: 450,
@@ -42,7 +42,7 @@
                         //execute.css('visibility', 'collapse');
                         $(panel.getComponent('passData')).css('visibility', 'hidden');
                         Ext.Ajax.request({
-                            url: 'Home/TestGenPostgr',
+                            url: 'Home/Task1',
                             success: function (response, options) {
                                 if (response != null) {
                                     panel.getComponent('txtParam').setValue("");
@@ -59,7 +59,7 @@
                 },
                 {
                     xtype: 'button',
-                    text: 'Подключение к MS-SQL (DbContext)',
+                    text: 'Генерация классов EDM',
                     id: 'getContextSql',
                     height: 30,
                     width: 450,
@@ -74,7 +74,7 @@
                         panel.getComponent('txtParam').setValue("executing...");
                         $(panel.getComponent('passData')).css('visibility', 'hidden');
                         Ext.Ajax.request({
-                            url: 'Home/GetContextSql',
+                            url: 'Home/Task2',
                             success: function (response, options) {
                                 if (response != null) {
                                     panel.getComponent('txtParam').setValue("");
