@@ -36,23 +36,21 @@ namespace Tsb.Generate
         public static ServiceResult GenerateEdmClass(DataSourceConfiguration conf)
         {
             #region
+            string root = "EdmGen";
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string input_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Input";
-            string output_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Output";
+            string result_dir = base_dir.Substring(0, base_dir.IndexOf(root)) + root + "\\Result";
+            string input_dir = result_dir + "\\Input";
+            string output_dir = result_dir + "\\Output";
             string[] files = File.ReadAllLines(input_dir + "//_files.txt");
             { }
-
-            //Test test = new Test();
-            //test.Execute();
 
             DbInfo info = new DbInfo(conf);
             info.files = files;
             info.GenerateInfo();
             if (info.tables != null)
-            { }
-            foreach (table tbl in info.tables)
             {
-                generateOne(output_dir, tbl, info);
+                foreach (table tbl in info.tables)
+                    generateOne(output_dir, tbl);
             }
             #region old
             //if (Directory.Exists(input_dir))
@@ -66,7 +64,7 @@ namespace Tsb.Generate
             #endregion
         }
 
-        public static ServiceResult generateOne(string dir, table tbl, DbInfo info)
+        public static ServiceResult generateOne(string dir, table tbl)
         {
             #region
             CodeCompileUnit classUnit = new CodeCompileUnit();
