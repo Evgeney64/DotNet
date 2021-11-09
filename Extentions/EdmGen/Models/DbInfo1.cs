@@ -102,10 +102,10 @@ namespace Tsb.Model
                             foreign_key fk = new foreign_key
                             {
                                 fk_name = col_name.ToString(),
-                                parent_table = reader3.GetValue(1).ToString(),
-                                child_table = reader3.GetValue(2).ToString(),
-                                parent_column = reader3.GetValue(3).ToString(),
-                                child_column = reader3.GetValue(4).ToString(),
+                                this_table = reader3.GetValue(1).ToString(),
+                                ref_table = reader3.GetValue(2).ToString(),
+                                this_column = reader3.GetValue(3).ToString(),
+                                ref_column = reader3.GetValue(4).ToString(),
                             };
                             tbl.foreign_keys.Add(fk);
                             #endregion
@@ -257,8 +257,8 @@ namespace Tsb.Model
                     crt_fk +=
                         "\nALTER TABLE " + schem_table_name +
                         " ADD CONSTRAINT \"" + fk_name + "\"" +
-                        " FOREIGN KEY (\"" + fk.parent_column + "\")" +
-                        " REFERENCES " + schem + ".\"" + fk.child_table + "\" (\"" + fk.child_column + "\") MATCH SIMPLE" +
+                        " FOREIGN KEY (\"" + fk.this_column + "\")" +
+                        " REFERENCES " + schem + ".\"" + fk.ref_table + "\" (\"" + fk.ref_column + "\") MATCH SIMPLE" +
                         " ON UPDATE NO ACTION" +
                         " ON DELETE NO ACTION;";
                     //crt_fk +=

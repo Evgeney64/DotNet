@@ -50,9 +50,9 @@ namespace Tsb.Generate
             info.GenerateInfo();
             if (info.tables != null)
             { }
-            foreach (string file in files)
+            foreach (table tbl in info.tables)
             {
-                generateOne(output_dir, file, info);
+                generateOne(output_dir, tbl, info);
             }
             #region old
             //if (Directory.Exists(input_dir))
@@ -66,26 +66,29 @@ namespace Tsb.Generate
             #endregion
         }
 
-        public static ServiceResult generateOne(string dir, string name, DbInfo info)
+        public static ServiceResult generateOne(string dir, table tbl, DbInfo info)
         {
             #region
-            table tbl = info.tables.Where(ss => ss.name == name).FirstOrDefault();
-            if (tbl == null)
-                return new ServiceResult("Недопустимая таблица", true);
 
+            #region Define
             CodeCompileUnit servOneUnit = new CodeCompileUnit();
-            CodeNamespace servOneNamespace = null;
-            CodeNamespace servOneModelNamespace = null;
+            //CodeNamespace servOneNamespace = null;
+            //CodeNamespace servOneModelNamespace = null;
 
             TsbCodeGenResult item_class = new TsbCodeGenResult
             {
                 Class_Serv = new CodeTypeDeclaration
                 {
-                    Name = name,
+                    Name = tbl.name,
                     IsPartial = true,
                 },
                 Namespace_Serv = new CodeNamespace("Server.Core.Model"),
+                FilePath_Serv = dir + "//" + tbl.name + ".cs",
             };
+
+            CodeNamespace servOneNamespace = item_class.Namespace_Serv;
+            servOneNamespace.Types.Add(item_class.Class_Serv);
+            #endregion
 
             #region columns
             foreach (column col in tbl.columns)
@@ -93,9 +96,9 @@ namespace Tsb.Generate
                 col.typeClrSet();
                 CodeMemberField prop = new CodeMemberField
                 {
-                    Name = col.name + " { get; set; }",
-                    Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                    Attributes = MemberAttributes.Public,
                     Type = new CodeTypeReference(col.typeClr),
+                    Name = col.name + " { get; set; }",
                 };
                 if (col.is_primary_key == 1)
                 {
@@ -108,15 +111,57 @@ namespace Tsb.Generate
             }
             #endregion
 
+            #region navigation props (parents)
+            if (tbl.parents.Count() > 0)
+            {
+                foreach (table parent in tbl.parents)
+                {
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference("virtual " + parent.name),
+                        Name = parent.name + " { get; set; }",
+                    };
+                    item_class.Class_Serv.Members.Add(prop);
+                }
+            }
+            #endregion
+
+            #region navigation props (children)
+            if (tbl.children.Count() > 0)
+            {
+                foreach (table child in tbl.children)
+                {
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
+                        Name = child.name + "s { get; set; }",
+                    };
+                    item_class.Class_Serv.Members.Add(prop);
+                }
+            }
+            #endregion
+
+            #region IEntityObject
+            column pk = tbl.columns.Where(ss => ss.is_primary_key == 1).FirstOrDefault();
+            if (pk != null)
+            {
+                CodeMemberField propPk = new CodeMemberField
+                {
+                    Attributes = MemberAttributes.Final,
+                    Type = new CodeTypeReference(typeof(long)),
+                    Name = "IEntityObject.Id { get { return " + pk.name + " } }",
+                };
+                item_class.Class_Serv.Members.Add(propPk);
+            }
+            #endregion
+
             #region interfaces
             item_class.Class_Serv.BaseTypes.Add("IEntityObject");
             item_class.Class_Serv.BaseTypes.Add("IEntityLog");
             item_class.Class_Serv.BaseTypes.Add("IEntityPeriod");
             #endregion
-
-            servOneNamespace = item_class.Namespace_Serv;
-            servOneNamespace.Types.Add(item_class.Class_Serv);
-            item_class.FilePath_Serv = dir + "//" + name + ".cs";
 
             #region uses
             servOneNamespace.Imports.Add(new CodeNamespaceImport("System"));
@@ -127,13 +172,13 @@ namespace Tsb.Generate
             servOneUnit.Namespaces.Add(servOneNamespace);
             #endregion
 
-            if (servOneModelNamespace != null)
-            {
-                servOneUnit.Namespaces.Add(servOneModelNamespace);
-            }
+            //if (servOneModelNamespace != null)
+            //{
+            //    servOneUnit.Namespaces.Add(servOneModelNamespace);
+            //}
 
             #region save Edm class
-            string codeFileName_Serv = dir + "//" + name + ".cs";
+            string codeFileName_Serv = dir + "//" + tbl.name + ".cs";
             using (var outFile = File.Open(codeFileName_Serv, FileMode.Create))
             using (var fileWriter = new StreamWriter(outFile))
             using (var indentedTextWriter = new IndentedTextWriter(fileWriter, "    "))

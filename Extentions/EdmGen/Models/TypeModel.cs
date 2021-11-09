@@ -9,6 +9,7 @@ namespace Tsb.Model
 {
     public class ServiceResult
     {
+        #region
         public ServiceResult(string message) { Message = message; }
         public ServiceResult(string message, bool error) 
         {
@@ -21,32 +22,40 @@ namespace Tsb.Model
         public string Message { get; set; }
         public string ErrorMessage { get; set; }
         public bool Error { get; set; }
+        #endregion
     }
 
     public class DataSourceConfiguration
     {
+        #region
         public string ConnectionString { get; set; }
         public int CommandTimeout { get; set; }
         public bool is_postgres { get; set; }
+        #endregion
     }
 
     public class table
     {
+        #region
         public string name { get; set; }
         public long id { get; set; }
         public List<column> columns { get; set; }
 
         public List<foreign_key> foreign_keys { get; set; }
+        public List<table> parents { get; set; }
+        public List<table> children { get; set; }
         public List<index> indexes { get; set; }
 
         public override string ToString()
         {
             return name;
         }
+        #endregion
     }
 
     public class column
     {
+        #region
         public string name { get; set; }
         public int column_id { get; set; }
 
@@ -196,10 +205,12 @@ namespace Tsb.Model
         {
             return name + " [" + typePostgres + " (" + max_length + ")]";
         }
+        #endregion
     }
 
     public class index
     {
+        #region
         public string index_name { get; set; }
         public long object_id { get; set; }
         public int index_id { get; set; }
@@ -210,29 +221,34 @@ namespace Tsb.Model
         {
             return index_name;
         }
+        #endregion
     }
 
     public class index_column
     {
+        #region
         public string column_name { get; set; }
         public int column_id { get; set; }
         public override string ToString()
         {
             return column_name + " [" + column_id + "]";
         }
+        #endregion
     }
     public class foreign_key
     {
+        #region
         public string fk_name { get; set; }
-        public string parent_table { get; set; }
-        public string child_table { get; set; }
-        public string parent_column { get; set; }
-        public string child_column { get; set; }
+        public string this_table { get; set; }
+        public string ref_table { get; set; }
+        public string this_column { get; set; }
+        public string ref_column { get; set; }
 
         public override string ToString()
         {
             return fk_name;
         }
+        #endregion
     }
 
     public enum SQLTypes

@@ -38,7 +38,7 @@ namespace Tsb.Model
 
         public void GenerateInfo()
         {
-            #region get tables
+            #region
             using (SqlConnection connection = new SqlConnection(conf.ConnectionString))
             {
                 connection.Open();
@@ -86,6 +86,8 @@ namespace Tsb.Model
                                 columns = new List<column>(),
                                 foreign_keys = new List<foreign_key>(),
                                 indexes = new List<index>(),
+                                parents = new List<table>(),
+                                children = new List<table>(),
                             };
                             tables.Add(tbl);
                             #endregion
@@ -130,7 +132,19 @@ namespace Tsb.Model
                 }
                 #endregion
             }
-            { }
+
+            foreach (table tbl in tables.Where(ss => ss.foreign_keys.Count() > 0))
+            {
+                foreach (foreign_key fk in tbl.foreign_keys)
+                {
+                    table ref_table = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
+                    if (ref_table != null)
+                    {
+                        tbl.parents.Add(ref_table);
+                        ref_table.children.Add(tbl);
+                    }
+                }
+            }
             #endregion
         }
         public void GenerateScript()
