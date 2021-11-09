@@ -105,6 +105,72 @@ namespace Tsb.Model
             }
 
         }
+        public void typeClrSet()
+        {
+            switch (this.typeSQL)
+            {
+                case SQLTypes.bigint:
+                    if (!this.is_nullable)
+                        typeClr = typeof(long);
+                    else
+                        typeClr = typeof(long?);
+                    break;
+                case SQLTypes.int_type:
+                    if (!this.is_nullable)
+                        typeClr = typeof(int);
+                    else
+                        typeClr = typeof(int?);
+                    break;
+                case SQLTypes.smallint:
+                    if (!this.is_nullable)
+                        typeClr = typeof(short);
+                    else
+                        typeClr = typeof(short?);
+                    break;
+                case SQLTypes.tinyint:
+                    if (!this.is_nullable)
+                        typeClr = typeof(byte);
+                    else
+                        typeClr = typeof(byte?);
+                    break;
+                case SQLTypes.bit:
+                    if (!this.is_nullable)
+                        typeClr = typeof(bool);
+                    else
+                        typeClr = typeof(bool?);
+                    break;
+                case SQLTypes.numeric:
+                case SQLTypes.money:
+                case SQLTypes.decimal_type:
+                    if (!this.is_nullable)
+                        typeClr = typeof(decimal);
+                    else
+                        typeClr = typeof(decimal?);
+                    break;
+                case SQLTypes.varchar:
+                case SQLTypes.varbinary:
+                case SQLTypes.char_type:
+                    typeClr = typeof(string);
+                    break;
+                case SQLTypes.xml:
+                case SQLTypes.text:
+                    typeClr = typeof(string);
+                    break;
+                case SQLTypes.datetime:
+                    if (!this.is_nullable)
+                        typeClr = typeof(DateTime);
+                    else
+                        typeClr = typeof(DateTime?);
+                    break;
+                case SQLTypes.uniqueidentifier:
+                    typeClr = typeof(Guid);
+                    break;
+                default:
+                    typeClr = typeof(string);
+                    break;
+            }
+
+        }
         public int user_type_id { get; set; }
         public string collate { get; set; }
         public int max_length { get; set; }
@@ -114,6 +180,7 @@ namespace Tsb.Model
 
 
         public string typePostgres { get; set; }
+        public Type typeClr { get; set; }
         public SQLTypes typeSQL
         {
             get

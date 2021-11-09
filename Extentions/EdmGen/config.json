@@ -1,7 +1,7 @@
 ﻿{
   "MsSqlConfiguration": {
-    "ConnectionString1": "Server=172.16.100.15; Database=GisHcs; user id=sa;password=123456Qwerty; MultipleActiveResultSets=true;",
-    "ConnectionString": "Server=ROEV\\EVGEN; Database=renovation_home; user id=sa;password=1212; MultipleActiveResultSets=true;",
+    "ConnectionString": "Server=172.16.100.15; Database=gostest3; user id=sa;password=123456Qwerty; MultipleActiveResultSets=true;",
+    "ConnectionString1": "Server=ROEV\\EVGEN; Database=renovation_home; user id=sa;password=1212; MultipleActiveResultSets=true;",
     "CommandTimeout": "300"
   },
   "PostgresConfiguration": {

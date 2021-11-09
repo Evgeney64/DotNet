@@ -12,14 +12,15 @@ namespace Tsb.Model
     {
         #region Define
         DataSourceConfiguration conf;
+        public string[] files = null;
 
         string user = "\"gis_hcs\"";
         string schem = "\"gis_hcs\"";
         string table_space = "\"pg_default\"";
         string collate = "pg_catalog.\"default\"";
 
-        List<table> tables = new List<table>();
-        List<index> indexes = new List<index>();
+        public List<table> tables = new List<table>();
+        public List<index> indexes = new List<index>();
 
         string crt = "";
         string del = "";
@@ -52,12 +53,21 @@ namespace Tsb.Model
                         "UP_BILLS_DZ",
                     };
                     string ignore_tables_lst = String.Join(",", ignore_tables.Select(ss => "'" + ss + "'"));
-                    command1.CommandText =
+                    string sql =
                         "SELECT name, id FROM sysobjects" +
                         " WHERE xtype='U' and SUBSTRING(name,1,3) not in ('ZZ_', 'YY_')" +
                         "    and name not in (" + ignore_tables_lst + ")" +
-                        " ORDER BY name";
+                        "";
+                    if (files != null && files.Count() > 0)
+                    {
+                        string files_lst = String.Join(",", files.Select(ss => "'" + ss + "'"));
+                        sql += "    and name in (" + files_lst + ")";
+                    }
+
+                    sql += " ORDER BY name";
+                    command1.CommandText = sql;
                     command1.Connection = connection;
+
 
                     SqlDataReader reader1 = command1.ExecuteReader();
                     #endregion

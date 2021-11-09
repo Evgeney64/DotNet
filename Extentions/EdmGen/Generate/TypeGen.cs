@@ -37,4 +37,5 @@ namespace Tsb.Generate
         public bool Is_Error { get; set; }
         public string ErrMess { get; set; }
     }
+
 }

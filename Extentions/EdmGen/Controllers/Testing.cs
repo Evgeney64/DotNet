@@ -16,8 +16,6 @@ namespace Tsb.Controllers
     {
         private async Task<String> task1()
         {
-            DataSourceConfiguration conf = Configurator.GetDataSourceConfiguration("config.json", "MsSqlConfiguration");
-
             ServiceResult res = EdmGenerator.CreateResultFile();
             return res.Error ? res.ErrorMessage : res.Message;
         }
@@ -26,10 +24,8 @@ namespace Tsb.Controllers
         {
             DataSourceConfiguration conf = Configurator.GetDataSourceConfiguration("config.json", "MsSqlConfiguration");
 
-            DbInfo postgr = new DbInfo(conf);
-            //String str = postgr.GetSysOperation();
-            String str = "";
-            return str;
+            ServiceResult res = EdmGenerator.GenerateEdmClass(conf);
+            return res.Error ? res.ErrorMessage : res.Message;
         }
 
     }
