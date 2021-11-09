@@ -82,6 +82,7 @@ namespace Tsb.Model
                             table tbl = new table
                             {
                                 name = table_name.ToString(),
+                                fk_name = table_name.ToString(),
                                 id = long.Parse(reader1.GetValue(1).ToString()),
                                 columns = new List<column>(),
                                 foreign_keys = new List<foreign_key>(),
@@ -133,6 +134,7 @@ namespace Tsb.Model
                 #endregion
             }
 
+            #region foreign_keys (parents / children)
             foreach (table tbl in tables.Where(ss => ss.foreign_keys.Count() > 0))
             {
                 foreach (foreign_key fk in tbl.foreign_keys)
@@ -140,11 +142,39 @@ namespace Tsb.Model
                     table ref_table = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
                     if (ref_table != null)
                     {
-                        tbl.parents.Add(ref_table);
-                        ref_table.children.Add(tbl);
+                        tbl.parents.Add(new table { name = fk.ref_table, fk_name = fk.ref_table });
+                        ref_table.children.Add(new table { name = tbl.name, fk_name = tbl.name });
                     }
                 }
             }
+            foreach (table tbl in tables
+                .Where(ss => ss.parents.Count() > 0 || ss.children.Count() > 0)
+                .OrderBy(ss => ss.name)
+                )
+            {
+                //List<table> _tables = new List<table>();
+                //_tables.AddRange(tbl.parents);
+                //_tables.AddRange(tbl.children);
+                foreach (table tbl1 in tbl.parents.OrderBy(ss => ss.name))
+                {
+                    int i = 0;
+                    List<table> _tables = tbl.parents.Where(ss => ss.name == tbl1.name).ToList();
+                    if (tbl.name == "EVENT" && tbl1.name == "PARTNER")
+                    { }
+                    foreach (table tbl2 in _tables)
+                    {
+                        if (i > 0)
+                        {
+                            tbl2.fk_nom = i;
+                            tbl2.fk_name = tbl2.name + tbl2.fk_nom;
+                        }
+                        i++;
+                    }
+                    if (tbl.name == "EVENT")
+                    { }
+                }
+            }
+            #endregion
             #endregion
         }
         public void GenerateScript()

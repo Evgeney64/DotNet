@@ -38,6 +38,8 @@ namespace Tsb.Model
     {
         #region
         public string name { get; set; }
+        public string fk_name { get; set; }
+        public int? fk_nom { get; set; }
         public long id { get; set; }
         public List<column> columns { get; set; }
 

@@ -110,7 +110,7 @@ namespace Tsb.Generate
                 {
                     CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
                         new CodeThisReferenceExpression(),
-                        child.name + "s"
+                        child.fk_name
                         );
                     CodeObjectCreateExpression value = new CodeObjectCreateExpression(
                         "HashSet<" + child.name + ">",
@@ -119,59 +119,9 @@ namespace Tsb.Generate
                     constructor.Statements.Add(new CodeAssignStatement(prop, value));
                 }
                 classItem.Class_Serv.Members.Add(constructor);
-            }
-            #endregion
 
-            #region columns
-            foreach (column col in tbl.columns)
-            {
-                col.typeClrSet();
-                CodeMemberField prop = new CodeMemberField
-                {
-                    Attributes = MemberAttributes.Public,
-                    Type = new CodeTypeReference(col.typeClr),
-                    Name = col.name + " { get; set; }",
-                };
-                if (col.is_primary_key == 1)
-                {
-                    prop.CustomAttributes.Add(new CodeAttributeDeclaration("KeyAttribute"));
-                    //prop.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    //    "System.ComponentModel.DataAnnotations.KeyAttribute",
-                    //    new CodeAttributeArgument(new CodePrimitiveExpression(""))));
-                }
-                classItem.Class_Serv.Members.Add(prop);
-            }
-            #endregion
-
-            #region navigation props (parents)
-            if (tbl.parents.Count() > 0)
-            {
-                foreach (table parent in tbl.parents)
-                {
-                    CodeMemberField prop = new CodeMemberField
-                    {
-                        Attributes = MemberAttributes.Public,
-                        Type = new CodeTypeReference("virtual " + parent.name),
-                        Name = parent.name + " { get; set; }",
-                    };
-                    classItem.Class_Serv.Members.Add(prop);
-                }
-            }
-            #endregion
-
-            #region navigation props (children)
-            if (tbl.children.Count() > 0)
-            {
-                foreach (table child in tbl.children)
-                {
-                    CodeMemberField prop = new CodeMemberField
-                    {
-                        Attributes = MemberAttributes.Public,
-                        Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
-                        Name = child.name + "s { get; set; }",
-                    };
-                    classItem.Class_Serv.Members.Add(prop);
-                }
+                constructor.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Constructor"));
+                constructor.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
             }
             #endregion
 
@@ -186,6 +136,104 @@ namespace Tsb.Generate
                     Name = "IEntityObject.Id { get { return " + pk.name + " } }",
                 };
                 classItem.Class_Serv.Members.Add(propPk);
+            }
+            #endregion
+
+            #region columns
+            if (tbl.columns.Count() > 0)
+            {
+                int i = 0;
+                CodeMemberField prop0 = null;
+                CodeMemberField prop1 = null;
+                foreach (column col in tbl.columns)
+                {
+                    col.typeClrSet();
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference(col.typeClr),
+                        Name = col.name + " { get; set; }",
+                    };
+                    if (i == 0)
+                        prop0 = prop;
+                    else if (i == tbl.columns.Count - 1)
+                        prop1 = prop;
+                    i++;
+
+                    if (col.is_primary_key == 1)
+                    {
+                        prop.CustomAttributes.Add(new CodeAttributeDeclaration("KeyAttribute"));
+                        //prop.CustomAttributes.Add(new CodeAttributeDeclaration(
+                        //    "System.ComponentModel.DataAnnotations.KeyAttribute",
+                        //    new CodeAttributeArgument(new CodePrimitiveExpression(""))));
+                    }
+                    classItem.Class_Serv.Members.Add(prop);
+                }
+                if (tbl.columns.Count() > 1)
+                {
+                    prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Columns"));
+                    prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
+                }
+            }
+            #endregion
+
+            #region navigation props (parents)
+            if (tbl.parents.Count() > 0)
+            {
+                int i = 0;
+                CodeMemberField prop0 = null;
+                CodeMemberField prop1 = null;
+                foreach (table parent in tbl.parents.OrderBy(ss => ss.name))
+                {
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference("virtual " + parent.name),
+                        Name = parent.fk_name + " { get; set; }",
+                    };
+                    if (i == 0)
+                        prop0 = prop;
+                    else if (i == tbl.parents.Count - 1)
+                        prop1 = prop;
+                    i++;
+
+                    classItem.Class_Serv.Members.Add(prop);
+                }
+                if (tbl.parents.Count() > 1)
+                {
+                    prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Navigation - parents"));
+                    prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
+                }
+            }
+            #endregion
+
+            #region navigation props (children)
+            if (tbl.children.Count() > 0)
+            {
+                int i = 0;
+                CodeMemberField prop0 = null;
+                CodeMemberField prop1 = null;
+                foreach (table child in tbl.children.OrderBy(ss => ss.name))
+                {
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
+                        Name = child.fk_name + " { get; set; }",
+                    };
+                    if (i == 0)
+                        prop0 = prop;
+                    else if (i == tbl.children.Count - 1)
+                        prop1 = prop;
+                    i++;
+
+                    classItem.Class_Serv.Members.Add(prop);
+                }
+                if (tbl.children.Count() > 1)
+                {
+                    prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Navigation - children"));
+                    prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
+                }
             }
             #endregion
 
