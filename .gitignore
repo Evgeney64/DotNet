@@ -2,5 +2,6 @@
 **/bin
 **/obj
 **/.vs
+**/Result
 Core01/Client.Mvc/wwwroot
 
