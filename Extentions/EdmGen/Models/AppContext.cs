@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Model
+namespace Tsb.Model
 {
     public partial class AppContext : DbContext
     {

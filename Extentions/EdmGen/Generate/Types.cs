@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.CodeDom;
 
-namespace Generate
+namespace Tsb.Generate
 {
     public class TsbCodeGenResult
     {

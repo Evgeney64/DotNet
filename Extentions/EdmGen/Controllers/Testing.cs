@@ -7,10 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-using Model;
-using Generate;
+using Tsb.Model;
+using Tsb.Generate;
 
-namespace ClientMvc.Controllers
+namespace Tsb.Controllers
 {
     public partial class HomeController : Controller
     {
@@ -18,10 +18,8 @@ namespace ClientMvc.Controllers
         {
             DataSourceConfiguration conf = Configurator.GetDataSourceConfiguration("config.json", "MsSqlConfiguration");
 
-            DbInfo postgr = new DbInfo(conf);
-            //String str = postgr.GenerateScript();
-            String str = "";
-            return str;
+            ServiceResult res = EdmGenerator.CreateResultFile();
+            return res.Error ? res.ErrorMessage : res.Message;
         }
 
         private async Task<String> task2()

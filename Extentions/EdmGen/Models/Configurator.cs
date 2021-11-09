@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
-using Generate;
+
+using Tsb.Generate;
 
 
-namespace Model
+namespace Tsb.Model
 {
     public class Configurator
     {
         #region getDataSourceConfiguration
         public static DataSourceConfiguration GetDataSourceConfiguration(string config_file, string name)
         {
-            IConfiguration configuration = getConfiguration("Hcs.ClientMvc", "Hcs.ClientMvc", config_file);
+            IConfiguration configuration = getConfiguration("EdmGen", "EdmGen", config_file);
             DataSourceConfiguration conf = new DataSourceConfiguration();
             configuration.Bind(name, conf);
 

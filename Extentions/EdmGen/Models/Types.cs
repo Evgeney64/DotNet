@@ -5,8 +5,24 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Model
+namespace Tsb.Model
 {
+    public class ServiceResult
+    {
+        public ServiceResult(string message) { Message = message; }
+        public ServiceResult(string message, bool error) 
+        {
+            Error = error;
+            if (error == false)
+                Message = message; 
+            else
+                ErrorMessage = message;
+        }
+        public string Message { get; set; }
+        public string ErrorMessage { get; set; }
+        public bool Error { get; set; }
+    }
+
     public class DataSourceConfiguration
     {
         public string ConnectionString { get; set; }

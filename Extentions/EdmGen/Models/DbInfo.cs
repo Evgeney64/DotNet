@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Model
+namespace Tsb.Model
 {
     public partial class DbInfo
     {

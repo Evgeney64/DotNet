@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace ClientMvc.Controllers
+namespace Tsb.Controllers
 {
     public partial class HomeController : Controller
     {

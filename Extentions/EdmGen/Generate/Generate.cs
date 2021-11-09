@@ -6,13 +6,13 @@ using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 
-using Model;
+using Tsb.Model;
 
-namespace Generate
+namespace Tsb.Generate
 {
-    public class Generate
+    public class EdmGenerator
     {
-        public void CreateFile()
+        public static ServiceResult CreateResultFile()
         {
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
             string input_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Input";
@@ -23,7 +23,9 @@ namespace Generate
                 files = files.Select(ss => ss.Substring(0, ss.Length - 3)).ToArray();
 
                 File.WriteAllLines(input_dir + "//_files.txt", files);
+                return new ServiceResult("Файл сохранен");
             }
+            return new ServiceResult("Файл не сохранен", true);
         }
 
         public void GenerateClass()
