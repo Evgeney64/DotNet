@@ -69,25 +69,59 @@ namespace Tsb.Generate
         public static ServiceResult generateOne(string dir, table tbl, DbInfo info)
         {
             #region
+            CodeCompileUnit classUnit = new CodeCompileUnit();
+            CodeNamespace classNamespace = new CodeNamespace("Server.Core.Model");
+            classUnit.Namespaces.Add(classNamespace);
 
-            #region Define
-            CodeCompileUnit servOneUnit = new CodeCompileUnit();
-            //CodeNamespace servOneNamespace = null;
-            //CodeNamespace servOneModelNamespace = null;
+            #region uses
+            classNamespace.Imports.Add(new CodeNamespaceImport("System"));
+            classNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
+            classNamespace.Imports.Add(new CodeNamespaceImport("System.ComponentModel.DataAnnotations"));
+            classNamespace.Imports.Add(new CodeNamespaceImport("System.ComponentModel.DataAnnotations.Schema"));
+            //servOneNamespace.Imports.Add(new CodeNamespaceImport("Server.Core.Public"));
+            #endregion
 
-            TsbCodeGenResult item_class = new TsbCodeGenResult
+            #region class
+            TsbCodeGenResult classItem = new TsbCodeGenResult
             {
                 Class_Serv = new CodeTypeDeclaration
                 {
                     Name = tbl.name,
                     IsPartial = true,
                 },
-                Namespace_Serv = new CodeNamespace("Server.Core.Model"),
+                Namespace_Serv = classNamespace, //new CodeNamespace("Server.Core.Model"),
                 FilePath_Serv = dir + "//" + tbl.name + ".cs",
             };
+            classNamespace.Types.Add(classItem.Class_Serv);
+            #endregion
 
-            CodeNamespace servOneNamespace = item_class.Namespace_Serv;
-            servOneNamespace.Types.Add(item_class.Class_Serv);
+            #region interfaces
+            classItem.Class_Serv.BaseTypes.Add("IEntityObject");
+            classItem.Class_Serv.BaseTypes.Add("IEntityLog");
+            classItem.Class_Serv.BaseTypes.Add("IEntityPeriod");
+            #endregion
+
+            #region Constructor
+            if (tbl.children.Count() > 0)
+            {
+                CodeConstructor constructor = new CodeConstructor
+                {
+                    Attributes = MemberAttributes.Public,
+                };
+                foreach (table child in tbl.children)
+                {
+                    CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
+                        new CodeThisReferenceExpression(),
+                        child.name + "s"
+                        );
+                    CodeObjectCreateExpression value = new CodeObjectCreateExpression(
+                        "HashSet<" + child.name + ">",
+                        new CodeExpression[] { }
+                        );
+                    constructor.Statements.Add(new CodeAssignStatement(prop, value));
+                }
+                classItem.Class_Serv.Members.Add(constructor);
+            }
             #endregion
 
             #region columns
@@ -107,7 +141,7 @@ namespace Tsb.Generate
                     //    "System.ComponentModel.DataAnnotations.KeyAttribute",
                     //    new CodeAttributeArgument(new CodePrimitiveExpression(""))));
                 }
-                item_class.Class_Serv.Members.Add(prop);
+                classItem.Class_Serv.Members.Add(prop);
             }
             #endregion
 
@@ -122,7 +156,7 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual " + parent.name),
                         Name = parent.name + " { get; set; }",
                     };
-                    item_class.Class_Serv.Members.Add(prop);
+                    classItem.Class_Serv.Members.Add(prop);
                 }
             }
             #endregion
@@ -138,7 +172,7 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
                         Name = child.name + "s { get; set; }",
                     };
-                    item_class.Class_Serv.Members.Add(prop);
+                    classItem.Class_Serv.Members.Add(prop);
                 }
             }
             #endregion
@@ -153,38 +187,18 @@ namespace Tsb.Generate
                     Type = new CodeTypeReference(typeof(long)),
                     Name = "IEntityObject.Id { get { return " + pk.name + " } }",
                 };
-                item_class.Class_Serv.Members.Add(propPk);
+                classItem.Class_Serv.Members.Add(propPk);
             }
             #endregion
 
-            #region interfaces
-            item_class.Class_Serv.BaseTypes.Add("IEntityObject");
-            item_class.Class_Serv.BaseTypes.Add("IEntityLog");
-            item_class.Class_Serv.BaseTypes.Add("IEntityPeriod");
-            #endregion
-
-            #region uses
-            servOneNamespace.Imports.Add(new CodeNamespaceImport("System"));
-            servOneNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
-            servOneNamespace.Imports.Add(new CodeNamespaceImport("System.ComponentModel.DataAnnotations"));
-            servOneNamespace.Imports.Add(new CodeNamespaceImport("System.ComponentModel.DataAnnotations.Schema"));
-            //servOneNamespace.Imports.Add(new CodeNamespaceImport("Server.Core.Public"));
-            servOneUnit.Namespaces.Add(servOneNamespace);
-            #endregion
-
-            //if (servOneModelNamespace != null)
-            //{
-            //    servOneUnit.Namespaces.Add(servOneModelNamespace);
-            //}
-
-            #region save Edm class
+            #region save classUnit
             string codeFileName_Serv = dir + "//" + tbl.name + ".cs";
             using (var outFile = File.Open(codeFileName_Serv, FileMode.Create))
             using (var fileWriter = new StreamWriter(outFile))
             using (var indentedTextWriter = new IndentedTextWriter(fileWriter, "    "))
             {
                 var provider = new Microsoft.CSharp.CSharpCodeProvider();
-                provider.GenerateCodeFromCompileUnit(servOneUnit,
+                provider.GenerateCodeFromCompileUnit(classUnit,
                     indentedTextWriter,
                     new CodeGeneratorOptions() { BracingStyle = "C" });
             }
