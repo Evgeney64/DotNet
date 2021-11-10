@@ -142,8 +142,8 @@ namespace Tsb.Model
                     table ref_table = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
                     if (ref_table != null)
                     {
-                        tbl.parents.Add(new table { name = fk.ref_table, fk_name = fk.ref_table });
-                        ref_table.children.Add(new table { name = tbl.name, fk_name = tbl.name });
+                        tbl.parents.Add(new table { name = fk.ref_table, fk_name = fk.fk_name });
+                        ref_table.children.Add(new table { name = tbl.name, fk_name = fk.fk_name });
                     }
                 }
             }

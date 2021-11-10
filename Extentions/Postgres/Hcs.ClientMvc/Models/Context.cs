@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Hcs.Model;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hcs.Store
@@ -12,6 +11,15 @@ namespace Hcs.Store
     {
         string connectionString;
         bool is_postgres;
+        public ApplicationContext()
+        {
+        }
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
+        {
+        }
+
         public ApplicationContext(string _connectionString, bool _is_postgres = false)
         {
             connectionString = _connectionString;

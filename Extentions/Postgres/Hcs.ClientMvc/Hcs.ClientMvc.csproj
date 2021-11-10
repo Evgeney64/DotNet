@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Old\**" />
+    <Content Remove="Models\Old\**" />
+    <EmbeddedResource Remove="Models\Old\**" />
+    <None Remove="Models\Old\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Context-0.cs" />
     <Compile Remove="Models\GenerateScript_old.cs" />
+    <Compile Remove="Models\Public.cs" />
+    <Compile Remove="Models\SysOperation.cs" />
   </ItemGroup>
 
   <ItemGroup>

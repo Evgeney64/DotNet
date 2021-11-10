@@ -28,6 +28,11 @@ namespace Hcs.Store
         string del_ind = "";
         string ins = "";
         int count0 = 0;
+        DataSourceConfiguration conf;
+        public Public(DataSourceConfiguration _conf)
+        {
+            conf = _conf;
+        }
         #endregion
 
         public string GenerateScript()
@@ -91,7 +96,7 @@ namespace Hcs.Store
                 #endregion
 
                 #region insert data
-                if (1 == 2)
+                if (1 == 1)
                 {
                     using (SqlCommand command4 = new SqlCommand())
                     {
@@ -151,7 +156,7 @@ namespace Hcs.Store
                 scriptIndex(tbl, schem_table_name);
 
                 #region INSERT SysOperation
-                if (1 == 2)
+                if (1 == 1)
                 {
                     if (tbl.name == "SysOperation" && sysOperations.Count() > 0)
                     {

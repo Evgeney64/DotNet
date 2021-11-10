@@ -22,26 +22,6 @@ namespace Hcs.ClientMvc.Controllers
             return str;
         }
 
-        private async Task<String> getContextSql()
-        {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "MsSqlConfiguration");
-
-            Public postgr = new Public(conf);
-            //String str = postgr.GetSysOperation();
-            String str = postgr.GetSysTransaction();
-            return str;
-        }
-
-        private async Task<String> getContextPostgres()
-        {
-            DataSourceConfiguration conf = getDataSourceConfiguration("config.json", "PostgresConfiguration");
-
-            Public postgr = new Public(conf);
-            //String str = postgr.GetSysOperation();
-            String str = postgr.GetSysTransaction();
-            return str;
-        }
-
         #region getDataSourceConfiguration
         private DataSourceConfiguration getDataSourceConfiguration(string config_file, string name)
         {

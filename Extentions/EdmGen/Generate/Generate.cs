@@ -180,6 +180,13 @@ namespace Tsb.Generate
             #region navigation props (parents)
             if (tbl.parents.Count() > 0)
             {
+                // [ForeignKey()]
+                // https://www.entityframeworktutorial.net/code-first/foreignkey-dataannotations-attribute-in-code-first.aspx
+
+                // [InverseProperty("Author")]
+                // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
+
+
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
@@ -221,6 +228,7 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
                         Name = child.fk_name + " { get; set; }",
                     };
+                    //prop.CustomAttributes.Add(new CodeAttributeDeclaration("InverseProperty"));
                     if (i == 0)
                         prop0 = prop;
                     else if (i == tbl.children.Count - 1)

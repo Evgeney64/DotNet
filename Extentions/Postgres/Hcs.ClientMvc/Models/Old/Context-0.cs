@@ -10,14 +10,6 @@ namespace Hcs.Store
 {
     public partial class ApplicationContext : DbContext
     {
-        public ApplicationContext()
-        {
-        }
-
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
-        {
-        }
         public DbSet<SysOperation> SysOperation { get; set; }
         public DbSet<SysTransaction> SysTransaction { get; set; }
     }

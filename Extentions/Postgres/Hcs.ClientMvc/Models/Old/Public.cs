@@ -12,11 +12,6 @@ namespace Hcs.Store
 {
     public partial class Public
     {
-        DataSourceConfiguration conf;
-        public Public(DataSourceConfiguration _conf)
-        {
-            conf = _conf;
-        }
 
         public string GetSysOperation()
         {

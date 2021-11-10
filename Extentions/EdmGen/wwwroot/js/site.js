@@ -3,7 +3,7 @@
         var panel = Ext.create('Ext.Panel', {
             title: 'ГИС ЖКХ',
             width: 500,
-            height: 200,
+            height: 180,
             padding: 10,
             bodyPadding: 5,
             items: [
@@ -93,6 +93,7 @@
                     xtype: 'button',
                     text: 'Подключение к Postgres (DbContext)',
                     id: 'getContextPostgres',
+                    hidden: "True",
                     height: 30,
                     width: 450,
                     margin: '1 0 0 1',

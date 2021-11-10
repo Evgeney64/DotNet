@@ -3,7 +3,7 @@
         var panel = Ext.create('Ext.Panel', {
             title: 'ГИС ЖКХ',
             width: 500,
-            height: 200,
+            height: 140,
             padding: 10,
             bodyPadding: 5,
             items: [
@@ -43,70 +43,6 @@
                         $(panel.getComponent('passData')).css('visibility', 'hidden');
                         Ext.Ajax.request({
                             url: 'Home/TestGenPostgr',
-                            success: function (response, options) {
-                                if (response != null) {
-                                    panel.getComponent('txtParam').setValue("");
-                                    var value = response.responseText;
-                                    HtmlScript(value);
-                                    panel.getComponent('txtResult').setValue(value);
-                                }
-                            },
-                            failure: function (response, options) {
-                                alert("Ошибка: " + response.statusText);
-                            }
-                        });
-                    }
-                },
-                {
-                    xtype: 'button',
-                    text: 'Подключение к MS-SQL (DbContext)',
-                    id: 'getContextSql',
-                    height: 30,
-                    width: 450,
-                    margin: '5 0 0 5',
-                    //labelStyle: 'font-weight: bold',
-                    style: {
-                        'color': 'red',
-                        'font-size': '15px',
-                        'font-weight': 'bold'
-                    },
-                    handler: function () {
-                        panel.getComponent('txtParam').setValue("executing...");
-                        $(panel.getComponent('passData')).css('visibility', 'hidden');
-                        Ext.Ajax.request({
-                            url: 'Home/GetContextSql',
-                            success: function (response, options) {
-                                if (response != null) {
-                                    panel.getComponent('txtParam').setValue("");
-                                    var value = response.responseText;
-                                    HtmlScript(value);
-                                    panel.getComponent('txtResult').setValue(value);
-                                }
-                            },
-                            failure: function (response, options) {
-                                alert("Ошибка: " + response.statusText);
-                            }
-                        });
-                    }
-                },
-                {
-                    xtype: 'button',
-                    text: 'Подключение к Postgres (DbContext)',
-                    id: 'getContextPostgres',
-                    height: 30,
-                    width: 450,
-                    margin: '1 0 0 1',
-                    //labelStyle: 'font-weight: bold',
-                    style: {
-                        'color': 'red',
-                        'font-size': '15px',
-                        'font-weight': 'bold'
-                    },
-                    handler: function () {
-                        panel.getComponent('txtParam').setValue("executing...");
-                        $(panel.getComponent('passData')).css('visibility', 'hidden');
-                        Ext.Ajax.request({
-                            url: 'Home/GetContextPostgres',
                             success: function (response, options) {
                                 if (response != null) {
                                     panel.getComponent('txtParam').setValue("");
