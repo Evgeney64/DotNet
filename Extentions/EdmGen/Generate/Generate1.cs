@@ -141,8 +141,9 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual " + parent.name),
                         Name = parent.name + parent.fk_nom + " { get; set; }",
                     };
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(parent.fk_name, false)));
 
-                    #region foreign_key - [InverseProperty]
+                    #region [InverseProperty]
                     foreign_key fk = tbl.foreign_keys.Where(ss => ss.fk_name == parent.fk_name).FirstOrDefault();
                     if (fk != null)
                     {
@@ -151,8 +152,6 @@ namespace Tsb.Generate
 
                         // [InverseProperty("Author")]
                         // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
-
-                        prop.Comments.Add(new CodeCommentStatement(new CodeComment(fk.fk_name, false)));
 
                         prop.CustomAttributes.Add(new CodeAttributeDeclaration(
                             "InverseProperty",
@@ -190,14 +189,7 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
                         Name = child.name + child.fk_nom + " { get; set; }",
                     };
-
-                    #region foreign_key
-                    foreign_key fk = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
-                    if (fk != null)
-                    {
-                        prop.Comments.Add(new CodeCommentStatement(new CodeComment(fk.fk_name, false)));
-                    }
-                    #endregion
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name, false)));
 
                     if (i == 0)
                         prop0 = prop;

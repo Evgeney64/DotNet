@@ -155,6 +155,8 @@ namespace Tsb.Model
                 //List<table> _tables = new List<table>();
                 //_tables.AddRange(tbl.parents);
                 //_tables.AddRange(tbl.children);
+                if (tbl.name == "Partners")
+                { }
                 foreach (table tbl1 in tbl.parents.OrderBy(ss => ss.name))
                 {
                     int i = 0;
@@ -166,6 +168,8 @@ namespace Tsb.Model
                         i++;
                     }
                 }
+                if (tbl.name == "Partners")
+                { }
                 foreach (table tbl1 in tbl.children.OrderBy(ss => ss.name))
                 {
                     int i = 0;
