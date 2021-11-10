@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Server.Core.Public
+namespace Server.Core.Model
 {
     public interface IEntityObject
     {

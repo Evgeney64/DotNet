@@ -15,20 +15,20 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_CONTACT : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NCONTACT_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NCONTACT_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NCONTACT_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public string MASK { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string CONNECTION_PREFIX { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +38,18 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_NSI_EVENT_NSI_CONTACT
+        public virtual ICollection<NSI_EVENT> NSI_EVENT { get; set; }//;
+        
+        // FK_PARTNER_CONTACT_NSI_CONTACT
+        public virtual ICollection<PARTNER_CONTACT> PARTNER_CONTACT { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_CONTACT()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.NSI_EVENT = new HashSet<NSI_EVENT>();
+            this.PARTNER_CONTACT = new HashSet<PARTNER_CONTACT>();
         }
         #endregion
     }

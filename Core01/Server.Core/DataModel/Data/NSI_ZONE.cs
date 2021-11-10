@@ -15,26 +15,22 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_STREET : IEntityObject, IEntityLog
+    public partial class NSI_ZONE : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NSTREET_ID; } }//;
+        long IEntityObject.Id { get { return NZONE_ID; } }//;
         
         [KeyAttribute()]
-        public long NSTREET_ID { get; set; }//;
+        public int NZONE_ID { get; set; }//;
         
-        public System.Nullable<long> NVILLAGE_ID { get; set; }//;
+        public System.Nullable<int> ZONE_PART { get; set; }//;
         
-        public System.Nullable<long> NSTREET_TYPE_ID { get; set; }//;
+        public System.Nullable<int> NZONE_UNION_ID { get; set; }//;
         
-        public string NSTREET_NAME { get; set; }//;
+        public string NZONE_NAME { get; set; }//;
         
-        public string GNI_CODE { get; set; }//;
-        
-        public string FIAS { get; set; }//;
-        
-        public System.Nullable<int> NDATA_SOURCE_ID { get; set; }//;
+        public System.Nullable<int> PARENT_ID { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -44,24 +40,28 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - parents
-        // FK_NSI_STREET_NSI_STREET_TYPE
-        [InverseProperty("NSTREET_TYPE_ID")]
-        public virtual NSI_STREET_TYPE NSI_STREET_TYPE { get; set; }//;
+        // FK_NSI_ZONE_NSI_ZONE
+        [InverseProperty("PARENT_ID")]
+        public virtual NSI_ZONE NSI_ZONE { get; set; }//;
         
-        // FK_NSI_STREET_NSI_VILLAGE
-        [InverseProperty("NVILLAGE_ID")]
-        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
+        // FK_NSI_ZONE_NSI_ZONE_UNION
+        [InverseProperty("NZONE_UNION_ID")]
+        public virtual NSI_ZONE_UNION NSI_ZONE_UNION { get; set; }//;
         #endregion
         
         #region Navigation - children
-        // FK_BUILD_NSI_STREET
-        public virtual ICollection<BUILD> BUILD { get; set; }//;
+        // FK_NSI_METER_PARAM_NSI_ZONE
+        public virtual ICollection<NSI_METER_PARAM> NSI_METER_PARAM { get; set; }//;
+        
+        // FK_NSI_ZONE_NSI_ZONE
+        public virtual ICollection<NSI_ZONE> NSI_ZONE { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_STREET()
+        public NSI_ZONE()
         {
-            this.BUILD = new HashSet<BUILD>();
+            this.NSI_METER_PARAM = new HashSet<NSI_METER_PARAM>();
+            this.NSI_ZONE = new HashSet<NSI_ZONE>();
         }
         #endregion
     }

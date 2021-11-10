@@ -15,20 +15,16 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_FACTORY : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NFACTORY_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NFACTORY_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
-        
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string NFACTORY_NAME { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +34,14 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_NSI_METER_NSI_FACTORY
+        public virtual ICollection<NSI_METER> NSI_METER { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_FACTORY()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.NSI_METER = new HashSet<NSI_METER>();
         }
         #endregion
     }

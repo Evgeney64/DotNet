@@ -15,20 +15,18 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_SYS_TABLE_TREE_RELATION : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NSYS_TABLE_TREE_RELATION_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NSYS_TABLE_TREE_RELATION_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NSYS_TABLE_TREE_RELATION_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<int> STABLE_ID { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -37,15 +35,21 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
+        #region Navigation - parents
+        // FK_NSI_SYS_TABLE_TREE_RELATION_SYS_TABLE
+        [InverseProperty("STABLE_ID")]
+        public virtual SYS_TABLE SYS_TABLE { get; set; }//;
+        #endregion
+        
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_SYS_TABLE_TREE_RELATION_NSI_SYS_TABLE_TREE_RELATION
+        public virtual ICollection<SYS_TABLE_TREE_RELATION> SYS_TABLE_TREE_RELATION { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_SYS_TABLE_TREE_RELATION()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.SYS_TABLE_TREE_RELATION = new HashSet<SYS_TABLE_TREE_RELATION>();
         }
         #endregion
     }

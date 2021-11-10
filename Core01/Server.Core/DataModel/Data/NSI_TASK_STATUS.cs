@@ -15,20 +15,16 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_TASK_STATUS : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NTASK_STATUS_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NTASK_STATUS_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
-        
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string NTASK_STATUS_NAME { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +34,22 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_TASK_REESTR_NSI_TASK_STATUS
+        public virtual ICollection<TASK> TASK { get; set; }//;
+        
+        // FK_TASK_EXECUTION_NSI_TASK_STATUS
+        public virtual ICollection<TASK_EXECUTION> TASK_EXECUTION { get; set; }//;
+        
+        // FK_TASK_EXECUTION_DETAIL_NSI_TASK_STATUS
+        public virtual ICollection<TASK_EXECUTION_DETAIL> TASK_EXECUTION_DETAIL { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_TASK_STATUS()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.TASK = new HashSet<TASK>();
+            this.TASK_EXECUTION = new HashSet<TASK_EXECUTION>();
+            this.TASK_EXECUTION_DETAIL = new HashSet<TASK_EXECUTION_DETAIL>();
         }
         #endregion
     }

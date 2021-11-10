@@ -15,20 +15,20 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class EXT_PARAM : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return EXT_PARAM_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public long EXT_PARAM_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public System.Nullable<int> STABLE_ID { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public System.Nullable<long> ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<int> NPARAM_ID { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -37,15 +37,21 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
+        #region Navigation - parents
+        // FK_EXT_PARAM_NSI_PARAM
+        [InverseProperty("NPARAM_ID")]
+        public virtual NSI_PARAM NSI_PARAM { get; set; }//;
+        #endregion
+        
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_EXT_PARAM_EXT_PARAM_VALUE
+        public virtual ICollection<EXT_PARAM_VALUE> EXT_PARAM_VALUE { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public EXT_PARAM()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.EXT_PARAM_VALUE = new HashSet<EXT_PARAM_VALUE>();
         }
         #endregion
     }

@@ -15,20 +15,20 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_OBLAST : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NOBLAST_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public long NOBLAST_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NOBLAST_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public string GNI_CODE { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string FIAS { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,13 +38,25 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
+        // FK_BUILD_NSI_OBLAST
+        public virtual ICollection<BUILD> BUILD { get; set; }//;
+        
+        // FK_NSI_MUNICIPALITY_NSI_OBLAST
+        public virtual ICollection<NSI_MUNICIPALITY> NSI_MUNICIPALITY { get; set; }//;
+        
+        // FK_nsi_oblast_region_nsi_oblast
+        public virtual ICollection<NSI_OBLAST_REGION> NSI_OBLAST_REGION { get; set; }//;
+        
+        // FK_NSI_VILLAGE_NSI_OBLAST
         public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_OBLAST()
         {
+            this.BUILD = new HashSet<BUILD>();
+            this.NSI_MUNICIPALITY = new HashSet<NSI_MUNICIPALITY>();
+            this.NSI_OBLAST_REGION = new HashSet<NSI_OBLAST_REGION>();
             this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
         }
         #endregion

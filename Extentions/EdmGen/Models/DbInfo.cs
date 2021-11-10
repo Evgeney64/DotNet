@@ -147,6 +147,7 @@ namespace Tsb.Model
                     }
                 }
             }
+            { }
             foreach (table tbl in tables
                 .Where(ss => ss.parents.Count() > 0 || ss.children.Count() > 0)
                 .OrderBy(ss => ss.name)

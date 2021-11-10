@@ -15,26 +15,24 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_STREET : IEntityObject, IEntityLog
+    public partial class SYS_AUTO_TEST_DETAIL : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NSTREET_ID; } }//;
+        long IEntityObject.Id { get { return SAUTO_TEST_DETAIL_ID; } }//;
         
         [KeyAttribute()]
-        public long NSTREET_ID { get; set; }//;
+        public long SAUTO_TEST_DETAIL_ID { get; set; }//;
         
-        public System.Nullable<long> NVILLAGE_ID { get; set; }//;
+        public long SAUTO_TEST_ID { get; set; }//;
         
-        public System.Nullable<long> NSTREET_TYPE_ID { get; set; }//;
+        public System.Nullable<long> PARENT_ID { get; set; }//;
         
-        public string NSTREET_NAME { get; set; }//;
+        public System.Nullable<int> TYPE_ID { get; set; }//;
         
-        public string GNI_CODE { get; set; }//;
+        public System.Nullable<int> LEVEL { get; set; }//;
         
-        public string FIAS { get; set; }//;
-        
-        public System.Nullable<int> NDATA_SOURCE_ID { get; set; }//;
+        public System.Nullable<int> BROWSER_TYPE { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -44,24 +42,24 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - parents
-        // FK_NSI_STREET_NSI_STREET_TYPE
-        [InverseProperty("NSTREET_TYPE_ID")]
-        public virtual NSI_STREET_TYPE NSI_STREET_TYPE { get; set; }//;
+        // FK_SYS_AUTO_TEST_SYS_AUTO_TEST_DETAIL
+        [InverseProperty("SAUTO_TEST_ID")]
+        public virtual SYS_AUTO_TEST SYS_AUTO_TEST { get; set; }//;
         
-        // FK_NSI_STREET_NSI_VILLAGE
-        [InverseProperty("NVILLAGE_ID")]
-        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
+        // FK_SYS_AUTO_TEST_DETAIL_SYS_AUTO_TEST_DETAIL_PARENT
+        [InverseProperty("PARENT_ID")]
+        public virtual SYS_AUTO_TEST_DETAIL SYS_AUTO_TEST_DETAIL { get; set; }//;
         #endregion
         
         #region Navigation - children
-        // FK_BUILD_NSI_STREET
-        public virtual ICollection<BUILD> BUILD { get; set; }//;
+        // FK_SYS_AUTO_TEST_DETAIL_SYS_AUTO_TEST_DETAIL_PARENT
+        public virtual ICollection<SYS_AUTO_TEST_DETAIL> SYS_AUTO_TEST_DETAIL { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_STREET()
+        public SYS_AUTO_TEST_DETAIL()
         {
-            this.BUILD = new HashSet<BUILD>();
+            this.SYS_AUTO_TEST_DETAIL = new HashSet<SYS_AUTO_TEST_DETAIL>();
         }
         #endregion
     }

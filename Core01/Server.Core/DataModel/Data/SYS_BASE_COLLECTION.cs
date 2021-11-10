@@ -15,38 +15,32 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class SYS_BASE_COLLECTION : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return SBASE_COLLECTION_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public long SBASE_COLLECTION_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public System.Nullable<int> SUSER_ID { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public System.Nullable<int> STABLE_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<long> ID { get; set; }//;
+        
+        public System.Nullable<long> PARENT_ID { get; set; }//;
+        
+        public System.Nullable<int> LEVEL_ID { get; set; }//;
+        
+        public System.Nullable<int> SBASE_COLLECTION_GROUP { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
         public System.Nullable<System.DateTime> MFY_DATE { get; set; }//;
         
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
-        #endregion
-        
-        #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
-        #endregion
-        
-        #region Constructor
-        public NSI_VILLAGE_TYPE()
-        {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
-        }
         #endregion
     }
 }

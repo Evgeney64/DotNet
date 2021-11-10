@@ -15,20 +15,16 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_DOCUMENT_ITEM : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NDOCUMENT_ITEM_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NDOCUMENT_ITEM_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
-        
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string NDOCUMENT_ITEM_NAME { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +34,22 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_NSI_DOCUMENT_ITEM_DOCUMENT_ITEM
+        public virtual ICollection<DOCUMENT_ITEM> DOCUMENT_ITEM { get; set; }//;
+        
+        // FK_SYS_HELP_NSI_DOCUMENT_ITEM
+        public virtual ICollection<SYS_HELP> SYS_HELP { get; set; }//;
+        
+        // FK_SYS_HELP_INDEX_NSI_DOCUMENT_ITEM
+        public virtual ICollection<SYS_HELP_INDEX> SYS_HELP_INDEX { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_DOCUMENT_ITEM()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.DOCUMENT_ITEM = new HashSet<DOCUMENT_ITEM>();
+            this.SYS_HELP = new HashSet<SYS_HELP>();
+            this.SYS_HELP_INDEX = new HashSet<SYS_HELP_INDEX>();
         }
         #endregion
     }

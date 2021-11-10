@@ -15,20 +15,16 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_TASK_TRIGGER_TIME : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NTASK_TRIGGER_TIME_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NTASK_TRIGGER_TIME_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
-        
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string NTASK_TRIGGER_TIME_NAME { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +34,14 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_TASK_TRIGGER_TIME_NSI_TASK_TRIGGER_TIME
+        public virtual ICollection<TASK_TRIGGER_TIME> TASK_TRIGGER_TIME { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_TASK_TRIGGER_TIME()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.TASK_TRIGGER_TIME = new HashSet<TASK_TRIGGER_TIME>();
         }
         #endregion
     }

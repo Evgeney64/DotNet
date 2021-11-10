@@ -15,20 +15,16 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class SYS_TABLE_COLUMN_ENUM_GROUP : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return STABLE_COLUMN_ENUM_GROUP_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int STABLE_COLUMN_ENUM_GROUP_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
-        
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string STABLE_COLUMN_ENUM_GROUP_NAME { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +34,22 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_NSI_PARAM_SYS_TABLE_COLUMN_ENUM_GROUP
+        public virtual ICollection<NSI_PARAM> NSI_PARAM { get; set; }//;
+        
+        // FK_SYS_TABLE_COLUMN_SYS_TABLE_COLUMN_ENUM_GROUP
+        public virtual ICollection<SYS_TABLE_COLUMN> SYS_TABLE_COLUMN { get; set; }//;
+        
+        // FK_SYS_TABLE_COLUMN_ENUM_GROUP_SYS_TABLE_COLUMN_ENUM
+        public virtual ICollection<SYS_TABLE_COLUMN_ENUM> SYS_TABLE_COLUMN_ENUM { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public SYS_TABLE_COLUMN_ENUM_GROUP()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.NSI_PARAM = new HashSet<NSI_PARAM>();
+            this.SYS_TABLE_COLUMN = new HashSet<SYS_TABLE_COLUMN>();
+            this.SYS_TABLE_COLUMN_ENUM = new HashSet<SYS_TABLE_COLUMN_ENUM>();
         }
         #endregion
     }

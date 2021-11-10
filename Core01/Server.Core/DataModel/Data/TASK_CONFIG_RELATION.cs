@@ -15,20 +15,20 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class TASK_CONFIG_RELATION : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return TASK_CONFIG_RELATION_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public long TASK_CONFIG_RELATION_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public System.Nullable<int> NTASK_CONFIG_ID { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public System.Nullable<long> CHILD_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<int> STABLE_ID { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -37,16 +37,14 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
-        #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
-        #endregion
+        #region Navigation - parents
+        // FK_TASK_CONFIG_RELATION_NTASK_CONFIG_ID
+        [InverseProperty("NTASK_CONFIG_ID")]
+        public virtual NSI_TASK_CONFIG NSI_TASK_CONFIG { get; set; }//;
         
-        #region Constructor
-        public NSI_VILLAGE_TYPE()
-        {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
-        }
+        // FK_TASK_CONFIG_RELATION_STABLE_ID
+        [InverseProperty("STABLE_ID")]
+        public virtual SYS_TABLE SYS_TABLE { get; set; }//;
         #endregion
     }
 }

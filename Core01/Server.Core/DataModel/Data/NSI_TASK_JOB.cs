@@ -15,26 +15,28 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_STREET : IEntityObject, IEntityLog
+    public partial class NSI_TASK_JOB : IEntityObject, IEntityLog, IEntityPeriod
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NSTREET_ID; } }//;
+        long IEntityObject.Id { get { return NTASK_JOB_ID; } }//;
         
         [KeyAttribute()]
-        public long NSTREET_ID { get; set; }//;
+        public int NTASK_JOB_ID { get; set; }//;
         
-        public System.Nullable<long> NVILLAGE_ID { get; set; }//;
+        public System.DateTime DATE_BEG { get; set; }//;
         
-        public System.Nullable<long> NSTREET_TYPE_ID { get; set; }//;
+        public System.Nullable<System.DateTime> DATE_END { get; set; }//;
         
-        public string NSTREET_NAME { get; set; }//;
+        public System.Nullable<int> THREAD_COUNT { get; set; }//;
         
-        public string GNI_CODE { get; set; }//;
+        public System.Nullable<short> THREAD_AUTO { get; set; }//;
         
-        public string FIAS { get; set; }//;
+        public string CRON { get; set; }//;
         
-        public System.Nullable<int> NDATA_SOURCE_ID { get; set; }//;
+        public string NTASK_JOB_NAME { get; set; }//;
+        
+        public string NTASK_JOB_SNAME { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -43,25 +45,19 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
-        #region Navigation - parents
-        // FK_NSI_STREET_NSI_STREET_TYPE
-        [InverseProperty("NSTREET_TYPE_ID")]
-        public virtual NSI_STREET_TYPE NSI_STREET_TYPE { get; set; }//;
-        
-        // FK_NSI_STREET_NSI_VILLAGE
-        [InverseProperty("NVILLAGE_ID")]
-        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
-        #endregion
-        
         #region Navigation - children
-        // FK_BUILD_NSI_STREET
-        public virtual ICollection<BUILD> BUILD { get; set; }//;
+        // FK_NSI_TASK_JOB_SCHEM_NSI_TASK_JOB
+        public virtual ICollection<NSI_TASK_JOB_SCHEM> NSI_TASK_JOB_SCHEM { get; set; }//;
+        
+        // FK_NSI_TASK_JOB_SCHEM_NSI_TASK_JOB1
+        public virtual ICollection<NSI_TASK_JOB_SCHEM> NSI_TASK_JOB_SCHEM1 { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_STREET()
+        public NSI_TASK_JOB()
         {
-            this.BUILD = new HashSet<BUILD>();
+            this.NSI_TASK_JOB_SCHEM = new HashSet<NSI_TASK_JOB_SCHEM>();
+            this.NSI_TASK_JOB_SCHEM1 = new HashSet<NSI_TASK_JOB_SCHEM>();
         }
         #endregion
     }

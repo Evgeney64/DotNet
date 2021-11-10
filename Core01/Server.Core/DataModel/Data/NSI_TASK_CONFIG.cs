@@ -15,20 +15,24 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_TASK_CONFIG : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NTASK_CONFIG_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NTASK_CONFIG_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NTASK_CONFIG_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public System.Nullable<int> NTASK_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string DETAIL { get; set; }//;
+        
+        public string COMMENT { get; set; }//;
+        
+        public System.Nullable<short> IS_DEFAULT { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -37,15 +41,21 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
+        #region Navigation - parents
+        // FK_NSI_TASK_CONFIG_NTASK_ID
+        [InverseProperty("NTASK_ID")]
+        public virtual NSI_TASK NSI_TASK { get; set; }//;
+        #endregion
+        
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_TASK_CONFIG_RELATION_NTASK_CONFIG_ID
+        public virtual ICollection<TASK_CONFIG_RELATION> TASK_CONFIG_RELATION { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_TASK_CONFIG()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.TASK_CONFIG_RELATION = new HashSet<TASK_CONFIG_RELATION>();
         }
         #endregion
     }

@@ -15,37 +15,49 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_ACCOUNT_PERIOD : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NACCOUNT_PERIOD_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NACCOUNT_PERIOD_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public System.Nullable<System.DateTime> ACCOUNT_PERIOD { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public System.Nullable<long> PARTNER_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<System.DateTime> PAYMENT_PERIOD { get; set; }//;
+        
+        public System.Nullable<int> NDEPARTMENT_ID { get; set; }//;
+        
+        public System.Nullable<int> ACCOUNT_PERIOD_TYPE { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
         public System.Nullable<System.DateTime> MFY_DATE { get; set; }//;
         
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
+        
+        public string NACCOUNT_PERIOD_NAME { get; set; }//;
+        #endregion
+        
+        #region Navigation - parents
+        // FK_NSI_ACCOUNT_PERIOD_PARTNER
+        [InverseProperty("PARTNER_ID")]
+        public virtual PARTNER PARTNER { get; set; }//;
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_DEAL_NSI_ACCOUNT_PERIOD
+        public virtual ICollection<DEAL> DEAL { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_ACCOUNT_PERIOD()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.DEAL = new HashSet<DEAL>();
         }
         #endregion
     }

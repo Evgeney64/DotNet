@@ -15,20 +15,22 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_OBLAST_REGION : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NOBLAST_REGION_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public long NOBLAST_REGION_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NOBLAST_REGION_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public string GNI_CODE { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<long> NOBLAST_ID { get; set; }//;
+        
+        public string FIAS { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -37,13 +39,19 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
+        #region Navigation - parents
+        // FK_nsi_oblast_region_nsi_oblast
+        [InverseProperty("NOBLAST_ID")]
+        public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
+        #endregion
+        
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
+        // FK_NSI_VILLAGE_NSI_OBLAST_REGION
         public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_OBLAST_REGION()
         {
             this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
         }

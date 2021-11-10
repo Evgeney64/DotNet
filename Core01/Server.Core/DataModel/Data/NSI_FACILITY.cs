@@ -15,37 +15,49 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_FACILITY : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NFACILITY_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NFACILITY_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NFACILITY_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public string NFACILITY_SNAME { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public System.Nullable<int> NFACILITY_GROUP_ID { get; set; }//;
+        
+        public string NAME_IMAGE { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
         public System.Nullable<System.DateTime> MFY_DATE { get; set; }//;
         
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
+        
+        public System.Nullable<int> LIVING { get; set; }//;
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_BUILD_NSI_FACILITY
+        public virtual ICollection<BUILD> BUILD { get; set; }//;
+        
+        // FK_DEAL_NSI_FACILITY
+        public virtual ICollection<DEAL> DEAL { get; set; }//;
+        
+        // FK_FACILITY_NSI_FACILITY
+        public virtual ICollection<FACILITY> FACILITY { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_FACILITY()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.BUILD = new HashSet<BUILD>();
+            this.DEAL = new HashSet<DEAL>();
+            this.FACILITY = new HashSet<FACILITY>();
         }
         #endregion
     }

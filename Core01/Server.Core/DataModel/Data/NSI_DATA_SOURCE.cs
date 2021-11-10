@@ -15,20 +15,20 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class NSI_DATA_SOURCE : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return NDATA_SOURCE_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public int NDATA_SOURCE_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public string NDATA_SOURCE_NAME { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
+        public System.Nullable<short> ASKUE { get; set; }//;
         
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string DETAIL { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -38,14 +38,18 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        // FK_EVENT_NSI_DATA_SOURCE
+        public virtual ICollection<EVENT> EVENT { get; set; }//;
+        
+        // FK_SYS_BASE_RELATION_NSI_DATA_SOURCE
+        public virtual ICollection<SYS_BASE_RELATION> SYS_BASE_RELATION { get; set; }//;
         #endregion
         
         #region Constructor
-        public NSI_VILLAGE_TYPE()
+        public NSI_DATA_SOURCE()
         {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.EVENT = new HashSet<EVENT>();
+            this.SYS_BASE_RELATION = new HashSet<SYS_BASE_RELATION>();
         }
         #endregion
     }

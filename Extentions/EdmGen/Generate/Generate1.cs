@@ -87,7 +87,7 @@ namespace Tsb.Generate
                 {
                     Attributes = MemberAttributes.Final,
                     Type = new CodeTypeReference(typeof(long)),
-                    Name = "IEntityObject.Id { get { return " + pk.name + " } }",
+                    Name = "IEntityObject.Id { get { return " + pk.name + "; } }//",
                 };
                 classItem.Class_Serv.Members.Add(propPk);
             }
@@ -101,11 +101,27 @@ namespace Tsb.Generate
                 foreach (column col in tbl.columns)
                 {
                     col.typeClrSet();
+                    #region CodeMemberProperty old
+                    //CodeMemberProperty prop = new CodeMemberProperty
+                    //{
+                    //    Attributes = MemberAttributes.Public,
+                    //    Type = new CodeTypeReference(col.typeClr),
+                    //    Name = col.name,
+                    //    HasGet = true,
+                    //    HasSet = true,
+                    //};
+                    //prop.GetStatements.Add(new CodeMethodReturnStatement(
+                    //    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)));
+                    //prop.SetStatements.Add(new CodeAssignStatement(
+                    //    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName), 
+                    //    new CodePropertySetValueReferenceExpression()));
+                    #endregion
+
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference(col.typeClr),
-                        Name = col.name + " { get; set; }",
+                        Name = col.name + " { get; set; }//",
                     };
                     propLast = prop;
                     i++;
@@ -139,7 +155,7 @@ namespace Tsb.Generate
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual " + parent.name),
-                        Name = parent.name + parent.fk_nom + " { get; set; }",
+                        Name = parent.name + parent.fk_nom + " { get; set; }//",
                     };
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment(parent.fk_name, false)));
 
@@ -187,7 +203,7 @@ namespace Tsb.Generate
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
-                        Name = child.name + child.fk_nom + " { get; set; }",
+                        Name = child.name + child.fk_nom + " { get; set; }//",
                     };
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name, false)));
 

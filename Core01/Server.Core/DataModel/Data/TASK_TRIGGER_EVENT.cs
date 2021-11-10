@@ -15,20 +15,18 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_VILLAGE_TYPE : IEntityObject, IEntityLog
+    public partial class TASK_TRIGGER_EVENT : IEntityObject, IEntityLog
     {
         
         #region Columns
-        long IEntityObject.Id { get { return NVILLAGE_TYPE_ID; } }//;
+        long IEntityObject.Id { get { return TASK_TRIGGER_ID; } }//;
         
         [KeyAttribute()]
-        public long NVILLAGE_TYPE_ID { get; set; }//;
+        public long TASK_TRIGGER_ID { get; set; }//;
         
-        public string NVILLAGE_TYPE_SNAME { get; set; }//;
+        public int NEVENT_ID { get; set; }//;
         
-        public string GNI_SOCR { get; set; }//;
-        
-        public string NVILLAGE_TYPE_NAME { get; set; }//;
+        public string PARAM { get; set; }//;
         
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
         
@@ -37,16 +35,14 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         
-        #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
-        #endregion
+        #region Navigation - parents
+        // FK_TASK_EVENT_TRIGGER_NSI_EVENT
+        [InverseProperty("NEVENT_ID")]
+        public virtual NSI_EVENT NSI_EVENT { get; set; }//;
         
-        #region Constructor
-        public NSI_VILLAGE_TYPE()
-        {
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
-        }
+        // FK_TASK_TRIGGER_EVENT_TASK_TRIGGER
+        [InverseProperty("TASK_TRIGGER_ID")]
+        public virtual TASK_TRIGGER TASK_TRIGGER { get; set; }//;
         #endregion
     }
 }
