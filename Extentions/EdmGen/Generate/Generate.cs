@@ -96,7 +96,12 @@ namespace Tsb.Generate
             #region interfaces
             classItem.Class_Serv.BaseTypes.Add("IEntityObject");
             classItem.Class_Serv.BaseTypes.Add("IEntityLog");
-            classItem.Class_Serv.BaseTypes.Add("IEntityPeriod");
+            if (tbl.columns.Where(ss => ss.name == "DATE_BEG").Count() == 1
+                && tbl.columns.Where(ss => ss.name == "DATE_END").Count() == 1
+                )
+            {
+                classItem.Class_Serv.BaseTypes.Add("IEntityPeriod");
+            }
             #endregion
 
             #region Constructor
