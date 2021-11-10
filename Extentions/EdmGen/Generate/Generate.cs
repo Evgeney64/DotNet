@@ -110,7 +110,7 @@ namespace Tsb.Generate
                 {
                     CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
                         new CodeThisReferenceExpression(),
-                        child.fk_name
+                        child.name + child.fk_nom
                         );
                     CodeObjectCreateExpression value = new CodeObjectCreateExpression(
                         "HashSet<" + child.name + ">",
@@ -127,9 +127,10 @@ namespace Tsb.Generate
 
             #region IEntityObject
             column pk = tbl.columns.Where(ss => ss.is_primary_key == 1).FirstOrDefault();
+            CodeMemberField propPk = null;
             if (pk != null)
             {
-                CodeMemberField propPk = new CodeMemberField
+                propPk = new CodeMemberField
                 {
                     Attributes = MemberAttributes.Final,
                     Type = new CodeTypeReference(typeof(long)),
@@ -140,11 +141,10 @@ namespace Tsb.Generate
             #endregion
 
             #region columns
+            CodeMemberField propLast = null;
             if (tbl.columns.Count() > 0)
             {
                 int i = 0;
-                CodeMemberField prop0 = null;
-                CodeMemberField prop1 = null;
                 foreach (column col in tbl.columns)
                 {
                     col.typeClrSet();
@@ -154,10 +154,7 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference(col.typeClr),
                         Name = col.name + " { get; set; }",
                     };
-                    if (i == 0)
-                        prop0 = prop;
-                    else if (i == tbl.columns.Count - 1)
-                        prop1 = prop;
+                    propLast = prop;
                     i++;
 
                     if (col.is_primary_key == 1)
@@ -169,24 +166,17 @@ namespace Tsb.Generate
                     }
                     classItem.Class_Serv.Members.Add(prop);
                 }
-                if (tbl.columns.Count() > 1)
-                {
-                    prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Columns"));
-                    prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
-                }
+            }
+            if (propPk != null && propLast != null)
+            {
+                propPk.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Columns"));
+                propLast.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
             }
             #endregion
 
             #region navigation props (parents)
             if (tbl.parents.Count() > 0)
             {
-                // [ForeignKey()]
-                // https://www.entityframeworktutorial.net/code-first/foreignkey-dataannotations-attribute-in-code-first.aspx
-
-                // [InverseProperty("Author")]
-                // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
-
-
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
@@ -196,17 +186,33 @@ namespace Tsb.Generate
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual " + parent.name),
-                        Name = parent.fk_name + " { get; set; }",
+                        Name = parent.name + parent.fk_nom + " { get; set; }",
                     };
+                    #region [InverseProperty]
+                    foreign_key fk = tbl.foreign_keys.Where(ss => ss.fk_name == parent.fk_name).FirstOrDefault();
+                    if (fk != null)
+                    {
+                        // [ForeignKey()]
+                        // https://www.entityframeworktutorial.net/code-first/foreignkey-dataannotations-attribute-in-code-first.aspx
+
+                        // [InverseProperty("Author")]
+                        // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
+
+                        prop.CustomAttributes.Add(new CodeAttributeDeclaration(
+                            "InverseProperty",
+                            new CodeAttributeArgument(new CodePrimitiveExpression(fk.ref_column))
+                            ));
+                    }
+                    #endregion
+
                     if (i == 0)
                         prop0 = prop;
-                    else if (i == tbl.parents.Count - 1)
-                        prop1 = prop;
+                    prop1 = prop;
                     i++;
 
                     classItem.Class_Serv.Members.Add(prop);
                 }
-                if (tbl.parents.Count() > 1)
+                if (prop0 != null && prop1 != null)
                 {
                     prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Navigation - parents"));
                     prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
@@ -226,18 +232,16 @@ namespace Tsb.Generate
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
-                        Name = child.fk_name + " { get; set; }",
+                        Name = child.name + child.fk_nom + " { get; set; }",
                     };
-                    //prop.CustomAttributes.Add(new CodeAttributeDeclaration("InverseProperty"));
                     if (i == 0)
                         prop0 = prop;
-                    else if (i == tbl.children.Count - 1)
-                        prop1 = prop;
+                    prop1 = prop;
                     i++;
 
                     classItem.Class_Serv.Members.Add(prop);
                 }
-                if (tbl.children.Count() > 1)
+                if (prop0 != null && prop1 != null)
                 {
                     prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Navigation - children"));
                     prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
