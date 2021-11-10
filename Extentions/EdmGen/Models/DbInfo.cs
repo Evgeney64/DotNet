@@ -159,19 +159,23 @@ namespace Tsb.Model
                 {
                     int i = 0;
                     List<table> _tables = tbl.parents.Where(ss => ss.name == tbl1.name).ToList();
-                    if (tbl.name == "EVENT" && tbl1.name == "PARTNER")
-                    { }
                     foreach (table tbl2 in _tables)
                     {
                         if (i > 0)
-                        {
                             tbl2.fk_nom = i;
-                            tbl2.fk_name = tbl2.name + tbl2.fk_nom;
-                        }
                         i++;
                     }
-                    if (tbl.name == "EVENT")
-                    { }
+                }
+                foreach (table tbl1 in tbl.children.OrderBy(ss => ss.name))
+                {
+                    int i = 0;
+                    List<table> _tables = tbl.children.Where(ss => ss.name == tbl1.name).ToList();
+                    foreach (table tbl2 in _tables)
+                    {
+                        if (i > 0)
+                            tbl2.fk_nom = i;
+                        i++;
+                    }
                 }
             }
             #endregion
