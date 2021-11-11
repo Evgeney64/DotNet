@@ -6,10 +6,76 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Hcs.Store
+namespace Tsb.Model
 {
-    public partial class Public
+    public partial class DbInfo
     {
+        private void createTables(SqlConnection connection)
+        {
+            try
+            {
+                using (SqlCommand command1 = new SqlCommand())
+                {
+                    #region Define-1
+                    List<string> ignore_tables = new List<string>
+                    {
+                        "__MigrationHistory",
+                        "sysdiagrams",
+                        "UP_BILLS_DZ",
+                    };
+                    string ignore_tables_lst = String.Join(",", ignore_tables.Select(ss => "'" + ss + "'"));
+                    string sql =
+                        "SELECT name, id FROM sysobjects" +
+                        " WHERE xtype='U' and SUBSTRING(name,1,3) not in ('ZZ_', 'YY_')" +
+                        "    and name not in (" + ignore_tables_lst + ")" +
+                        "";
+                    if (files != null && files.Count() > 0)
+                    {
+                        string files_lst = String.Join(",", files.Select(ss => "'" + ss + "'"));
+                        sql += "    and name in (" + files_lst + ")";
+                    }
+
+                    sql += " ORDER BY name";
+                    command1.CommandText = sql;
+                    command1.Connection = connection;
+
+
+                    SqlDataReader reader1 = command1.ExecuteReader();
+                    #endregion
+                    if (reader1.HasRows)
+                    {
+                        int nom = 0;
+                        while (reader1.Read())
+                        {
+                            #region
+                            object table_name = reader1.GetValue(0);
+                            if (table_name == null)
+                                continue;
+                            table tbl = new table
+                            {
+                                name = table_name.ToString(),
+                                fk_name = table_name.ToString(),
+                                id = long.Parse(reader1.GetValue(1).ToString()),
+                                columns = new List<column>(),
+                                foreign_keys = new List<foreign_key>(),
+                                indexes = new List<index>(),
+                                parents = new List<table>(),
+                                children = new List<table>(),
+                                nom = nom,
+                            };
+                            nom++;
+                            tables.Add(tbl);
+                            Console.WriteLine("[table] - " + tbl.nom + " - " + tbl.name);
+                            #endregion
+                        }
+                    }
+                    reader1.Close();
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+
         private void createColumns(SqlConnection connection)
         {
             try
@@ -106,10 +172,10 @@ namespace Hcs.Store
                             {
                                 fk_name = col_name.ToString(),
                                 object_id = long.Parse(reader3.GetValue(1).ToString()),
-                                parent_table = reader3.GetValue(2).ToString(),
-                                child_table = reader3.GetValue(3).ToString(),
-                                parent_column = reader3.GetValue(4).ToString(),
-                                child_column = reader3.GetValue(5).ToString(),
+                                this_table = reader3.GetValue(2).ToString(),
+                                ref_table = reader3.GetValue(3).ToString(),
+                                this_column = reader3.GetValue(4).ToString(),
+                                ref_column = reader3.GetValue(5).ToString(),
                             };
                             foreign_keys.Add(fk);
                             //tbl.foreign_keys.Add(fk);
@@ -218,101 +284,6 @@ namespace Hcs.Store
             #endregion
         }
 
-        private void scriptColumn(table tbl, string schem_table_name)
-        {
-            if (tbl.columns.Count() > 0)
-            {
-                bool is_first = true;
-                foreach (column col in tbl.columns)
-                {
-                    if (is_first == false)
-                        crt += " ,";
-                    crt += " \n   \"" + col.name + "\"";
-                    crt += " " + col.typePostgres;
-                    if (col.is_primary_key == 1)
-                        crt += " PRIMARY KEY";
-                    else if (col.is_nullable == false)
-                        crt += " NOT NULL";
-
-                    if (col.is_identity)
-                    {
-                        //crt += " GENERATED ALWAYS AS IDENTITY";
-                        crt += " GENERATED BY DEFAULT AS IDENTITY";
-                    }
-
-                    is_first = false;
-                }
-            }
-        }
-        private void scriptFK(table tbl, string schem_table_name)
-        {
-            if (tbl.foreign_keys.Count() > 0)
-            {
-                int count = 0;
-                foreach (foreign_key fk in tbl.foreign_keys)
-                {
-                    string fk_name = fk.fk_name;
-                    if (fk_name.Length > 63)
-                    {
-                        fk_name = fk_name.Substring(0, 60) + "_" + count.ToString();
-                        count++;
-                        count0++;
-                        //fk_name = "FK_" + fk.parent_table + "_" + fk.child_table + "_" + count.ToString();
-                    }
-                    crt_fk +=
-                        "\nALTER TABLE " + schem_table_name +
-                        " ADD CONSTRAINT \"" + fk_name + "\"" +
-                        " FOREIGN KEY (\"" + fk.parent_column + "\")" +
-                        " REFERENCES " + schem + ".\"" + fk.child_table + "\" (\"" + fk.child_column + "\") MATCH SIMPLE" +
-                        " ON UPDATE NO ACTION" +
-                        " ON DELETE NO ACTION;";
-                    //crt_fk +=
-                    //    "\nALTER TABLE " + schem_table_name +
-                    //    "\n     ADD CONSTRAINT \"" + fk.fk_name + "\"" +
-                    //    "\n     FOREIGN KEY (\"" + fk.parent_column + "\")" +
-                    //    "\n     REFERENCES " + schem + ".\"" + fk.child_table + "\" (\"" + fk.child_column + "\") MATCH SIMPLE" +
-                    //    "\n     ON UPDATE NO ACTION" +
-                    //    "\n     ON DELETE NO ACTION;";
-                    //crt_fk += "\n\n";
-
-                    del_fk += "\nALTER TABLE " + schem_table_name + " DROP CONSTRAINT \"" + fk_name + "\";";
-                    //del_fk += "\nIF (SELECT * FROM pg_constraint WHERE conname = \"" + fk.fk_name + "\")" + 
-                    //    "\n     ALTER TABLE " + schem_table_name + " DROP CONSTRAINT \"" + fk.fk_name + "\";";
-                    /*
-                    SELECT* FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'SysParams'
-                    SELECT* FROM pg_constraint WHERE conname = 'FK_AttachmentPostResultCopy_AttachmentPostResult'
-                    */
-                }
-            }
-        }
-        private void scriptIndex(table tbl, string schem_table_name)
-        {
-            if (tbl.indexes.Count() > 0)
-            {
-                foreach (index ind in tbl.indexes)
-                {
-                    string is_unique = "";
-                    if (ind.is_unique)
-                        is_unique = "UNIQUE";
-
-                    crt_ind += " \nCREATE " + is_unique + " INDEX \"" + ind.index_name + "\"" +
-                        " ON " + schem_table_name + " USING btree";
-                    crt_ind += " (";
-
-                    del_ind += " \nDROP  INDEX " + schem + ".\"" + ind.index_name + "\";";
-                    bool is_first_ind = true;
-                    foreach (index_column ind_col in ind.index_columns)
-                    {
-                        if (is_first_ind == false)
-                            crt_ind += " ,";
-                        crt_ind += "\"" + ind_col.column_name + "\"";
-                        is_first_ind = false;
-                    }
-                    crt_ind += ")";
-                    crt_ind += " TABLESPACE " + table_space + ";";
-                }
-            }
-        }
     }
 }
 
