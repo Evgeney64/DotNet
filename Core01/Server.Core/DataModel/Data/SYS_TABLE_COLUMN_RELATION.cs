@@ -62,12 +62,12 @@ namespace Server.Core.Model
         [InverseProperty("STABLE_PARENT_ID")]
         public virtual SYS_TABLE SYS_TABLE1 { get; set; }//;
         
-        // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN
-        [InverseProperty("STABLE_COLUMN_CHILD_ID")]
-        public virtual SYS_TABLE_COLUMN SYS_TABLE_COLUMN { get; set; }//;
-        
         // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN1
         [InverseProperty("STABLE_COLUMN_PARENT_ID")]
+        public virtual SYS_TABLE_COLUMN SYS_TABLE_COLUMN { get; set; }//;
+        
+        // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN
+        [InverseProperty("STABLE_COLUMN_CHILD_ID")]
         public virtual SYS_TABLE_COLUMN SYS_TABLE_COLUMN1 { get; set; }//;
         #endregion
     }

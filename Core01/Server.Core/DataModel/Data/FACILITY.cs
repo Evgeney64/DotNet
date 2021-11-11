@@ -86,7 +86,7 @@ namespace Server.Core.Model
         
         // FK_FACILITY_FACILITY
         [InverseProperty("PARENT_ID")]
-        public virtual FACILITY FACILITY { get; set; }//;
+        public virtual FACILITY FACILITY1 { get; set; }//;
         
         // FK_FACILITY_NSI_FACILITY
         [InverseProperty("NFACILITY_ID")]
@@ -104,7 +104,7 @@ namespace Server.Core.Model
         public virtual ICollection<EVENT_STATE> EVENT_STATE { get; set; }//;
         
         // FK_FACILITY_FACILITY
-        public virtual ICollection<FACILITY> FACILITY { get; set; }//;
+        public virtual ICollection<FACILITY> FACILITY2 { get; set; }//;
         #endregion
         
         #region Constructor
@@ -113,7 +113,7 @@ namespace Server.Core.Model
             this.DOCUMENT = new HashSet<DOCUMENT>();
             this.EVENT = new HashSet<EVENT>();
             this.EVENT_STATE = new HashSet<EVENT_STATE>();
-            this.FACILITY = new HashSet<FACILITY>();
+            this.FACILITY2 = new HashSet<FACILITY>();
         }
         #endregion
     }

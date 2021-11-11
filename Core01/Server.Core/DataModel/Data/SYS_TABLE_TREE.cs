@@ -54,12 +54,12 @@ namespace Server.Core.Model
         
         // FK_SYS_TABLE_TREE_SYS_TABLE_TREE
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_TABLE_TREE SYS_TABLE_TREE { get; set; }//;
+        public virtual SYS_TABLE_TREE SYS_TABLE_TREE1 { get; set; }//;
         #endregion
         
         #region Navigation - children
         // FK_SYS_TABLE_TREE_SYS_TABLE_TREE
-        public virtual ICollection<SYS_TABLE_TREE> SYS_TABLE_TREE { get; set; }//;
+        public virtual ICollection<SYS_TABLE_TREE> SYS_TABLE_TREE2 { get; set; }//;
         
         // FK_SYS_TABLE_TREE_RELATION_SYS_TABLE_TREE
         public virtual ICollection<SYS_TABLE_TREE_RELATION> SYS_TABLE_TREE_RELATION { get; set; }//;
@@ -68,7 +68,7 @@ namespace Server.Core.Model
         #region Constructor
         public SYS_TABLE_TREE()
         {
-            this.SYS_TABLE_TREE = new HashSet<SYS_TABLE_TREE>();
+            this.SYS_TABLE_TREE2 = new HashSet<SYS_TABLE_TREE>();
             this.SYS_TABLE_TREE_RELATION = new HashSet<SYS_TABLE_TREE_RELATION>();
         }
         #endregion

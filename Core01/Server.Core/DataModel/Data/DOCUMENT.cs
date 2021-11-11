@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class DOCUMENT : IEntityObject, IEntityLog, IEntityPeriod
+    public partial class DOCUMENT : IEntityObject, IEntityLog
     {
         
         #region Columns
@@ -106,7 +106,7 @@ namespace Server.Core.Model
         
         // FK_DOCUMENT_DOCUMENT
         [InverseProperty("CONS_PARENT_ID")]
-        public virtual DOCUMENT DOCUMENT { get; set; }//;
+        public virtual DOCUMENT DOCUMENT1 { get; set; }//;
         
         // FK_DOCUMENT_FACILITY
         [InverseProperty("FACILITY_ID")]
@@ -131,7 +131,7 @@ namespace Server.Core.Model
         
         #region Navigation - children
         // FK_DOCUMENT_DOCUMENT
-        public virtual ICollection<DOCUMENT> DOCUMENT { get; set; }//;
+        public virtual ICollection<DOCUMENT> DOCUMENT2 { get; set; }//;
         
         // FK_DOCUMENT_ITEM_DOCUMENT
         public virtual ICollection<DOCUMENT_ITEM> DOCUMENT_ITEM { get; set; }//;
@@ -161,7 +161,7 @@ namespace Server.Core.Model
         #region Constructor
         public DOCUMENT()
         {
-            this.DOCUMENT = new HashSet<DOCUMENT>();
+            this.DOCUMENT2 = new HashSet<DOCUMENT>();
             this.DOCUMENT_ITEM = new HashSet<DOCUMENT_ITEM>();
             this.DOCUMENT_RELATION = new HashSet<DOCUMENT_RELATION>();
             this.DOCUMENT_STORAGE = new HashSet<DOCUMENT_STORAGE>();

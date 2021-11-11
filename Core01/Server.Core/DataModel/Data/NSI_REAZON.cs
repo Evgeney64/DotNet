@@ -40,13 +40,13 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_DEAL_NSI_REAZON
+        // FK_DEAL_NSI_REAZON_2
         public virtual ICollection<DEAL> DEAL { get; set; }//;
         
-        // FK_DEAL_NSI_REAZON_1
+        // FK_DEAL_NSI_REAZON
         public virtual ICollection<DEAL> DEAL1 { get; set; }//;
         
-        // FK_DEAL_NSI_REAZON_2
+        // FK_DEAL_NSI_REAZON_1
         public virtual ICollection<DEAL> DEAL2 { get; set; }//;
         
         // FK_DOCUMENT_NSI_REAZON

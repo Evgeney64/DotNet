@@ -78,7 +78,7 @@ namespace Server.Core.Model
         
         // FK_DOCUMENT_ITEM_DOCUMENT_ITEM
         [InverseProperty("PARENT_ID")]
-        public virtual DOCUMENT_ITEM DOCUMENT_ITEM { get; set; }//;
+        public virtual DOCUMENT_ITEM DOCUMENT_ITEM1 { get; set; }//;
         
         // FK_DOCUMENT_ITEM_NSI_CALC
         [InverseProperty("NCALC_ID")]
@@ -99,7 +99,7 @@ namespace Server.Core.Model
         
         #region Navigation - children
         // FK_DOCUMENT_ITEM_DOCUMENT_ITEM
-        public virtual ICollection<DOCUMENT_ITEM> DOCUMENT_ITEM { get; set; }//;
+        public virtual ICollection<DOCUMENT_ITEM> DOCUMENT_ITEM2 { get; set; }//;
         
         // FK_DOCUMENT_RELATION_DOCUMENT_ITEM
         public virtual ICollection<DOCUMENT_RELATION> DOCUMENT_RELATION { get; set; }//;
@@ -114,7 +114,7 @@ namespace Server.Core.Model
         #region Constructor
         public DOCUMENT_ITEM()
         {
-            this.DOCUMENT_ITEM = new HashSet<DOCUMENT_ITEM>();
+            this.DOCUMENT_ITEM2 = new HashSet<DOCUMENT_ITEM>();
             this.DOCUMENT_RELATION = new HashSet<DOCUMENT_RELATION>();
             this.EVENT = new HashSet<EVENT>();
             this.EVENT_STATE = new HashSet<EVENT_STATE>();

@@ -68,11 +68,11 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_SYS_TABLE_SYS_TABLE_PARENT
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_TABLE SYS_TABLE { get; set; }//;
+        public virtual SYS_TABLE SYS_TABLE1 { get; set; }//;
         
         // FK_SYS_TABLE_SYS_TABLE
         [InverseProperty("TREE_STABLE_ID")]
-        public virtual SYS_TABLE SYS_TABLE1 { get; set; }//;
+        public virtual SYS_TABLE SYS_TABLE2 { get; set; }//;
         #endregion
         
         #region Navigation - children
@@ -113,10 +113,10 @@ namespace Server.Core.Model
         public virtual ICollection<SYS_GROUP_OBJECT> SYS_GROUP_OBJECT { get; set; }//;
         
         // FK_SYS_TABLE_SYS_TABLE_PARENT
-        public virtual ICollection<SYS_TABLE> SYS_TABLE { get; set; }//;
+        public virtual ICollection<SYS_TABLE> SYS_TABLE3 { get; set; }//;
         
         // FK_SYS_TABLE_SYS_TABLE
-        public virtual ICollection<SYS_TABLE> SYS_TABLE1 { get; set; }//;
+        public virtual ICollection<SYS_TABLE> SYS_TABLE4 { get; set; }//;
         
         // FK_SYS_TABLE_COL_SYS_TABLE
         public virtual ICollection<SYS_TABLE_COLUMN> SYS_TABLE_COLUMN { get; set; }//;
@@ -158,8 +158,8 @@ namespace Server.Core.Model
             this.SYS_COUNTER_DETAIL = new HashSet<SYS_COUNTER_DETAIL>();
             this.SYS_GROUP_FILTER = new HashSet<SYS_GROUP_FILTER>();
             this.SYS_GROUP_OBJECT = new HashSet<SYS_GROUP_OBJECT>();
-            this.SYS_TABLE = new HashSet<SYS_TABLE>();
-            this.SYS_TABLE1 = new HashSet<SYS_TABLE>();
+            this.SYS_TABLE3 = new HashSet<SYS_TABLE>();
+            this.SYS_TABLE4 = new HashSet<SYS_TABLE>();
             this.SYS_TABLE_COLUMN = new HashSet<SYS_TABLE_COLUMN>();
             this.SYS_TABLE_COLUMN1 = new HashSet<SYS_TABLE_COLUMN>();
             this.SYS_TABLE_COLUMN_RELATION = new HashSet<SYS_TABLE_COLUMN_RELATION>();

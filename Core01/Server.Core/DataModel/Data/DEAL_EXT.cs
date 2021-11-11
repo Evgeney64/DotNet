@@ -78,20 +78,20 @@ namespace Server.Core.Model
         [InverseProperty("DEAL_ID")]
         public virtual DEAL DEAL { get; set; }//;
         
-        // FK_DEAL_EXT_PARTNER_1
-        [InverseProperty("BUYER_ID")]
-        public virtual PARTNER PARTNER { get; set; }//;
-        
         // FK_DEAL_EXT_PARTNER1
         [InverseProperty("SELLER_ID")]
-        public virtual PARTNER PARTNER1 { get; set; }//;
+        public virtual PARTNER PARTNER { get; set; }//;
         
         // FK_DEAL_EXT_PARTNER2
         [InverseProperty("PAYER_ID")]
-        public virtual PARTNER PARTNER2 { get; set; }//;
+        public virtual PARTNER PARTNER1 { get; set; }//;
         
         // FK_DEAL_EXT_PARTNER3
         [InverseProperty("CONSIGNEE_ID")]
+        public virtual PARTNER PARTNER2 { get; set; }//;
+        
+        // FK_DEAL_EXT_PARTNER_1
+        [InverseProperty("BUYER_ID")]
         public virtual PARTNER PARTNER3 { get; set; }//;
         #endregion
     }

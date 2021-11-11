@@ -60,13 +60,13 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - parents
-        // FK_NSI_TASK_PARENT_ID
-        [InverseProperty("PARENT_ID")]
-        public virtual NSI_TASK NSI_TASK { get; set; }//;
-        
         // FK_NSI_TASK_SOURCE_ID
         [InverseProperty("SOURCE_ID")]
         public virtual NSI_TASK NSI_TASK1 { get; set; }//;
+        
+        // FK_NSI_TASK_PARENT_ID
+        [InverseProperty("PARENT_ID")]
+        public virtual NSI_TASK NSI_TASK2 { get; set; }//;
         
         // FK_NSI_TASK_SYS_TABLE
         [InverseProperty("STABLE_ID")]
@@ -74,11 +74,11 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_NSI_TASK_PARENT_ID
-        public virtual ICollection<NSI_TASK> NSI_TASK { get; set; }//;
-        
         // FK_NSI_TASK_SOURCE_ID
-        public virtual ICollection<NSI_TASK> NSI_TASK1 { get; set; }//;
+        public virtual ICollection<NSI_TASK> NSI_TASK3 { get; set; }//;
+        
+        // FK_NSI_TASK_PARENT_ID
+        public virtual ICollection<NSI_TASK> NSI_TASK4 { get; set; }//;
         
         // FK_NSI_TASK_CONFIG_NTASK_ID
         public virtual ICollection<NSI_TASK_CONFIG> NSI_TASK_CONFIG { get; set; }//;
@@ -90,8 +90,8 @@ namespace Server.Core.Model
         #region Constructor
         public NSI_TASK()
         {
-            this.NSI_TASK = new HashSet<NSI_TASK>();
-            this.NSI_TASK1 = new HashSet<NSI_TASK>();
+            this.NSI_TASK3 = new HashSet<NSI_TASK>();
+            this.NSI_TASK4 = new HashSet<NSI_TASK>();
             this.NSI_TASK_CONFIG = new HashSet<NSI_TASK_CONFIG>();
             this.TASK = new HashSet<TASK>();
         }

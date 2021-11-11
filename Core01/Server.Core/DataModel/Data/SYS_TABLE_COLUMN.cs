@@ -96,7 +96,7 @@ namespace Server.Core.Model
         
         // FK_SYS_TABLE_COLUMN_SYS_TABLE_COLUMN
         [InverseProperty("TREE_PARENT_COLUMN_ID")]
-        public virtual SYS_TABLE_COLUMN SYS_TABLE_COLUMN { get; set; }//;
+        public virtual SYS_TABLE_COLUMN SYS_TABLE_COLUMN1 { get; set; }//;
         
         // FK_SYS_TABLE_COLUMN_SYS_TABLE_COLUMN_ENUM_GROUP
         [InverseProperty("STABLE_COLUMN_ENUM_GROUP_ID")]
@@ -111,12 +111,12 @@ namespace Server.Core.Model
         public virtual ICollection<NSI_PARAM> NSI_PARAM1 { get; set; }//;
         
         // FK_SYS_TABLE_COLUMN_SYS_TABLE_COLUMN
-        public virtual ICollection<SYS_TABLE_COLUMN> SYS_TABLE_COLUMN { get; set; }//;
-        
-        // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN
-        public virtual ICollection<SYS_TABLE_COLUMN_RELATION> SYS_TABLE_COLUMN_RELATION { get; set; }//;
+        public virtual ICollection<SYS_TABLE_COLUMN> SYS_TABLE_COLUMN2 { get; set; }//;
         
         // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN1
+        public virtual ICollection<SYS_TABLE_COLUMN_RELATION> SYS_TABLE_COLUMN_RELATION { get; set; }//;
+        
+        // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN
         public virtual ICollection<SYS_TABLE_COLUMN_RELATION> SYS_TABLE_COLUMN_RELATION1 { get; set; }//;
         #endregion
         
@@ -125,7 +125,7 @@ namespace Server.Core.Model
         {
             this.NSI_PARAM = new HashSet<NSI_PARAM>();
             this.NSI_PARAM1 = new HashSet<NSI_PARAM>();
-            this.SYS_TABLE_COLUMN = new HashSet<SYS_TABLE_COLUMN>();
+            this.SYS_TABLE_COLUMN2 = new HashSet<SYS_TABLE_COLUMN>();
             this.SYS_TABLE_COLUMN_RELATION = new HashSet<SYS_TABLE_COLUMN_RELATION>();
             this.SYS_TABLE_COLUMN_RELATION1 = new HashSet<SYS_TABLE_COLUMN_RELATION>();
         }

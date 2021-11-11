@@ -18,11 +18,11 @@ namespace Server.Core.Context
         public virtual DbSet<NSI_VILLAGE_TYPE> NSI_VILLAGE_TYPE { get; set; }
 
         #region Gos
-        public virtual DbSet<street> street { get; set; }
-        public virtual DbSet<type_street> type_street { get; set; }
+        //public virtual DbSet<street> street { get; set; }
+        //public virtual DbSet<type_street> type_street { get; set; }
 
-        public virtual DbSet<village> village { get; set; }
-        public virtual DbSet<rgn> rgn { get; set; }
+        //public virtual DbSet<village> village { get; set; }
+        //public virtual DbSet<rgn> rgn { get; set; }
         #endregion    
     }
 }

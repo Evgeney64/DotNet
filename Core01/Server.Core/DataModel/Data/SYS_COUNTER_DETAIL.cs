@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class SYS_COUNTER_DETAIL : IEntityObject, IEntityLog, IEntityPeriod
+    public partial class SYS_COUNTER_DETAIL : IEntityObject, IEntityLog
     {
         
         #region Columns

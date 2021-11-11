@@ -76,7 +76,7 @@ namespace Server.Core.Model
         
         // FK_SYS_HELP_SYS_HELP
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_HELP SYS_HELP { get; set; }//;
+        public virtual SYS_HELP SYS_HELP1 { get; set; }//;
         
         // FK_SYS_HELP_SYS_VERSION
         [InverseProperty("SVERSION_ID")]
@@ -85,7 +85,7 @@ namespace Server.Core.Model
         
         #region Navigation - children
         // FK_SYS_HELP_SYS_HELP
-        public virtual ICollection<SYS_HELP> SYS_HELP { get; set; }//;
+        public virtual ICollection<SYS_HELP> SYS_HELP2 { get; set; }//;
         
         // FK_SYS_HELP_INDEX_SYS_HELP
         public virtual ICollection<SYS_HELP_INDEX> SYS_HELP_INDEX { get; set; }//;
@@ -94,7 +94,7 @@ namespace Server.Core.Model
         #region Constructor
         public SYS_HELP()
         {
-            this.SYS_HELP = new HashSet<SYS_HELP>();
+            this.SYS_HELP2 = new HashSet<SYS_HELP>();
             this.SYS_HELP_INDEX = new HashSet<SYS_HELP_INDEX>();
         }
         #endregion

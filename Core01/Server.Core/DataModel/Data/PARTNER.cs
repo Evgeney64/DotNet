@@ -124,16 +124,16 @@ namespace Server.Core.Model
         // FK_DEAL_PARTNER1
         public virtual ICollection<DEAL> DEAL1 { get; set; }//;
         
-        // FK_DEAL_EXT_PARTNER_1
+        // FK_DEAL_EXT_PARTNER1
         public virtual ICollection<DEAL_EXT> DEAL_EXT { get; set; }//;
         
-        // FK_DEAL_EXT_PARTNER1
+        // FK_DEAL_EXT_PARTNER2
         public virtual ICollection<DEAL_EXT> DEAL_EXT1 { get; set; }//;
         
-        // FK_DEAL_EXT_PARTNER2
+        // FK_DEAL_EXT_PARTNER3
         public virtual ICollection<DEAL_EXT> DEAL_EXT2 { get; set; }//;
         
-        // FK_DEAL_EXT_PARTNER3
+        // FK_DEAL_EXT_PARTNER_1
         public virtual ICollection<DEAL_EXT> DEAL_EXT3 { get; set; }//;
         
         // FK_DOCUMENT_PARTNER

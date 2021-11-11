@@ -42,7 +42,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_NSI_ZONE_NSI_ZONE
         [InverseProperty("PARENT_ID")]
-        public virtual NSI_ZONE NSI_ZONE { get; set; }//;
+        public virtual NSI_ZONE NSI_ZONE1 { get; set; }//;
         
         // FK_NSI_ZONE_NSI_ZONE_UNION
         [InverseProperty("NZONE_UNION_ID")]
@@ -54,14 +54,14 @@ namespace Server.Core.Model
         public virtual ICollection<NSI_METER_PARAM> NSI_METER_PARAM { get; set; }//;
         
         // FK_NSI_ZONE_NSI_ZONE
-        public virtual ICollection<NSI_ZONE> NSI_ZONE { get; set; }//;
+        public virtual ICollection<NSI_ZONE> NSI_ZONE2 { get; set; }//;
         #endregion
         
         #region Constructor
         public NSI_ZONE()
         {
             this.NSI_METER_PARAM = new HashSet<NSI_METER_PARAM>();
-            this.NSI_ZONE = new HashSet<NSI_ZONE>();
+            this.NSI_ZONE2 = new HashSet<NSI_ZONE>();
         }
         #endregion
     }

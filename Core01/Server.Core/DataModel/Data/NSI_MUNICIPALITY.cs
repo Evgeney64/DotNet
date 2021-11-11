@@ -46,7 +46,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_NSI_MUNICIPALITY_NSI_MUNICIPALITY
         [InverseProperty("PARENT_ID")]
-        public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
+        public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY1 { get; set; }//;
         
         // FK_NSI_MUNICIPALITY_NSI_MUNICIPALITY_TYPE
         [InverseProperty("NMUNICIPALITY_TYPE_ID")]
@@ -62,7 +62,7 @@ namespace Server.Core.Model
         public virtual ICollection<BUILD> BUILD { get; set; }//;
         
         // FK_NSI_MUNICIPALITY_NSI_MUNICIPALITY
-        public virtual ICollection<NSI_MUNICIPALITY> NSI_MUNICIPALITY { get; set; }//;
+        public virtual ICollection<NSI_MUNICIPALITY> NSI_MUNICIPALITY2 { get; set; }//;
         
         // FK_NSI_VILLAGE_NSI_MUNICIPALITY
         public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
@@ -72,7 +72,7 @@ namespace Server.Core.Model
         public NSI_MUNICIPALITY()
         {
             this.BUILD = new HashSet<BUILD>();
-            this.NSI_MUNICIPALITY = new HashSet<NSI_MUNICIPALITY>();
+            this.NSI_MUNICIPALITY2 = new HashSet<NSI_MUNICIPALITY>();
             this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
         }
         #endregion

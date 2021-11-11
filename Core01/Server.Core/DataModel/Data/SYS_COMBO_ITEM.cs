@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class SYS_COMBO_ITEM : IEntityObject, IEntityLog
+    public partial class SYS_COMBO_ITEM : IEntityObject
     {
         
         #region Columns

@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class SYS_CHANGE_LIST_EVENT : IEntityObject, IEntityLog
+    public partial class SYS_CHANGE_LIST_EVENT : IEntityObject
     {
         
         #region Columns

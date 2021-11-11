@@ -66,7 +66,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_REPORT_REPORT
         [InverseProperty("PARENT_ID")]
-        public virtual REPORT REPORT { get; set; }//;
+        public virtual REPORT REPORT1 { get; set; }//;
         #endregion
         
         #region Navigation - children
@@ -74,7 +74,7 @@ namespace Server.Core.Model
         public virtual ICollection<DOCUMENT_STORAGE> DOCUMENT_STORAGE { get; set; }//;
         
         // FK_REPORT_REPORT
-        public virtual ICollection<REPORT> REPORT { get; set; }//;
+        public virtual ICollection<REPORT> REPORT2 { get; set; }//;
         
         // FK_REPORT_TABLE_REPORT
         public virtual ICollection<REPORT_TABLE> REPORT_TABLE { get; set; }//;
@@ -84,7 +84,7 @@ namespace Server.Core.Model
         public REPORT()
         {
             this.DOCUMENT_STORAGE = new HashSet<DOCUMENT_STORAGE>();
-            this.REPORT = new HashSet<REPORT>();
+            this.REPORT2 = new HashSet<REPORT>();
             this.REPORT_TABLE = new HashSet<REPORT_TABLE>();
         }
         #endregion

@@ -135,34 +135,24 @@ namespace Tsb.Model
                 }
             }
             { }
+
             foreach (table tbl in tables
                 .Where(ss => ss.parents.Count() > 0 || ss.children.Count() > 0)
                 .OrderBy(ss => ss.name)
                 )
             {
-                //List<table> _tables = new List<table>();
-                //_tables.AddRange(tbl.parents);
-                //_tables.AddRange(tbl.children);
-                if (tbl.name == "Partners")
+                List<table> _tables1 = new List<table>();
+                _tables1.AddRange(tbl.parents);
+                _tables1.AddRange(tbl.children);
+                if (tbl.name == "DOCUMENT")
                 { }
-                foreach (table tbl1 in tbl.parents.OrderBy(ss => ss.name))
+                foreach (table tbl1 in _tables1.OrderBy(ss => ss.name))
                 {
                     int i = 0;
-                    List<table> _tables = tbl.parents.Where(ss => ss.name == tbl1.name).ToList();
-                    foreach (table tbl2 in _tables)
-                    {
-                        if (i > 0)
-                            tbl2.fk_nom = i;
-                        i++;
-                    }
-                }
-                if (tbl.name == "Partners")
-                { }
-                foreach (table tbl1 in tbl.children.OrderBy(ss => ss.name))
-                {
-                    int i = 0;
-                    List<table> _tables = tbl.children.Where(ss => ss.name == tbl1.name).ToList();
-                    foreach (table tbl2 in _tables)
+                    if (tbl.name == tbl1.name && i == 0)
+                        i = 1;
+                    List<table> _tables2 = _tables1.Where(ss => ss.name == tbl1.name).ToList();
+                    foreach (table tbl2 in _tables2)
                     {
                         if (i > 0)
                             tbl2.fk_nom = i;

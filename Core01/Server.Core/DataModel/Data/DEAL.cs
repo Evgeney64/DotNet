@@ -98,16 +98,16 @@ namespace Server.Core.Model
         [InverseProperty("NFACILITY_ID")]
         public virtual NSI_FACILITY NSI_FACILITY { get; set; }//;
         
+        // FK_DEAL_NSI_REAZON_2
+        [InverseProperty("CALC_NREAZON_ID")]
+        public virtual NSI_REAZON NSI_REAZON { get; set; }//;
+        
         // FK_DEAL_NSI_REAZON
         [InverseProperty("OPL_NREAZON_ID")]
-        public virtual NSI_REAZON NSI_REAZON { get; set; }//;
+        public virtual NSI_REAZON NSI_REAZON1 { get; set; }//;
         
         // FK_DEAL_NSI_REAZON_1
         [InverseProperty("CLOSE_NREAZON_ID")]
-        public virtual NSI_REAZON NSI_REAZON1 { get; set; }//;
-        
-        // FK_DEAL_NSI_REAZON_2
-        [InverseProperty("CALC_NREAZON_ID")]
         public virtual NSI_REAZON NSI_REAZON2 { get; set; }//;
         
         // FK_DEAL_PARTNER

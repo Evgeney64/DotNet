@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1340
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Mvc", "Client.Mvc.csproj", "{52456E1E-297C-4B23-BC68-DB0FD820F099}"
 EndProject
@@ -65,24 +65,24 @@ Global
 		{5B207BB3-7E03-451F-8471-AD0717FE5961}.UapRelease|Any CPU.Build.0 = Release|Any CPU
 		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsDebug|Any CPU.ActiveCfg = HcsDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsDebug|Any CPU.Build.0 = HcsDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsRelease|Any CPU.ActiveCfg = HcsRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsRelease|Any CPU.Build.0 = HcsRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpDebug|Any CPU.ActiveCfg = HelpDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpDebug|Any CPU.Build.0 = HelpDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpRelease|Any CPU.ActiveCfg = HelpRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpRelease|Any CPU.Build.0 = HelpRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikDebug|Any CPU.ActiveCfg = LikDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikDebug|Any CPU.Build.0 = LikDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikRelease|Any CPU.ActiveCfg = LikRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikRelease|Any CPU.Build.0 = LikRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.Release|Any CPU.ActiveCfg = UapRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.Release|Any CPU.Build.0 = UapRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapDebug|Any CPU.ActiveCfg = UapDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapDebug|Any CPU.Build.0 = UapDebug|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapRelease|Any CPU.ActiveCfg = UapRelease|Any CPU
-		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapRelease|Any CPU.Build.0 = UapRelease|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HcsRelease|Any CPU.Build.0 = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.HelpRelease|Any CPU.Build.0 = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.LikRelease|Any CPU.Build.0 = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAEBAB8-50CB-486C-8C4F-81816E8CE180}.UapRelease|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

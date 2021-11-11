@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class SYS_USER_CERTIFICATE : IEntityObject, IEntityLog, IEntityPeriod
+    public partial class SYS_USER_CERTIFICATE : IEntityObject
     {
         
         #region Columns

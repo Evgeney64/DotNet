@@ -43,10 +43,17 @@ namespace Tsb.Generate
 
             #region interfaces
             classItem.Class_Serv.BaseTypes.Add("IEntityObject");
-            classItem.Class_Serv.BaseTypes.Add("IEntityLog");
-            if (tbl.columns.Where(ss => ss.name == "DATE_BEG").Count() == 1
-                && tbl.columns.Where(ss => ss.name == "DATE_END").Count() == 1
+            if (tbl.columns.Where(ss => ss.name == "CRT_DATE").Count() == 1
+                && tbl.columns.Where(ss => ss.name == "MFY_DATE").Count() == 1
+                && tbl.columns.Where(ss => ss.name == "MFY_SUSER_ID").Count() == 1
                 )
+            {
+                classItem.Class_Serv.BaseTypes.Add("IEntityLog");
+            }
+            column date_beg = tbl.columns.Where(ss => ss.name == "DATE_BEG").FirstOrDefault();
+            column date_end = tbl.columns.Where(ss => ss.name == "DATE_END").FirstOrDefault();
+            if (date_beg != null && date_beg.is_nullable == false
+                && date_end != null && date_end.is_nullable)
             {
                 classItem.Class_Serv.BaseTypes.Add("IEntityPeriod");
             }

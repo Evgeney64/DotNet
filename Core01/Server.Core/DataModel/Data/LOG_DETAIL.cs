@@ -56,18 +56,18 @@ namespace Server.Core.Model
         
         // FK_LOG_DETAIL_LOG_DETAIL
         [InverseProperty("PARENT_ID")]
-        public virtual LOG_DETAIL LOG_DETAIL { get; set; }//;
+        public virtual LOG_DETAIL LOG_DETAIL1 { get; set; }//;
         #endregion
         
         #region Navigation - children
         // FK_LOG_DETAIL_LOG_DETAIL
-        public virtual ICollection<LOG_DETAIL> LOG_DETAIL { get; set; }//;
+        public virtual ICollection<LOG_DETAIL> LOG_DETAIL2 { get; set; }//;
         #endregion
         
         #region Constructor
         public LOG_DETAIL()
         {
-            this.LOG_DETAIL = new HashSet<LOG_DETAIL>();
+            this.LOG_DETAIL2 = new HashSet<LOG_DETAIL>();
         }
         #endregion
     }

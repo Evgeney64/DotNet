@@ -54,7 +54,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_NSI_PRODUCT_NSI_PRODUCT
         [InverseProperty("PARENT_ID")]
-        public virtual NSI_PRODUCT NSI_PRODUCT { get; set; }//;
+        public virtual NSI_PRODUCT NSI_PRODUCT1 { get; set; }//;
         #endregion
         
         #region Navigation - children
@@ -68,7 +68,7 @@ namespace Server.Core.Model
         public virtual ICollection<NSI_METER> NSI_METER { get; set; }//;
         
         // FK_NSI_PRODUCT_NSI_PRODUCT
-        public virtual ICollection<NSI_PRODUCT> NSI_PRODUCT { get; set; }//;
+        public virtual ICollection<NSI_PRODUCT> NSI_PRODUCT2 { get; set; }//;
         #endregion
         
         #region Constructor
@@ -77,7 +77,7 @@ namespace Server.Core.Model
             this.DOCUMENT = new HashSet<DOCUMENT>();
             this.NSI_CALC = new HashSet<NSI_CALC>();
             this.NSI_METER = new HashSet<NSI_METER>();
-            this.NSI_PRODUCT = new HashSet<NSI_PRODUCT>();
+            this.NSI_PRODUCT2 = new HashSet<NSI_PRODUCT>();
         }
         #endregion
     }

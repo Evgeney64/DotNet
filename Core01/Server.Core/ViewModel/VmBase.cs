@@ -123,21 +123,21 @@ namespace Server.Core
         #endregion
 
         #region Gos
-        public void DoSmth()
-        {
-            using (EntityServ _serv = new EntityServ(connectionString))
-            {
-                rgns = _serv.Get_rgn().ToList();
-                villages = _serv.Get_village().ToList();
-            }
-        }
-        public List<rgn> rgns;
-        public List<village> villages;
-        public IEnumerable<street> streets => serv.GetStreets();
-        public List<street> streetsL => serv.GetStreets().ToList();
+        //public void DoSmth()
+        //{
+        //    using (EntityServ _serv = new EntityServ(connectionString))
+        //    {
+        //        rgns = _serv.Get_rgn().ToList();
+        //        villages = _serv.Get_village().ToList();
+        //    }
+        //}
+        //public List<rgn> rgns;
+        //public List<village> villages;
+        //public IEnumerable<street> streets => serv.GetStreets();
+        //public List<street> streetsL => serv.GetStreets().ToList();
 
-        public IEnumerable<type_street> type_streets => serv.GetTypeStreets();
-        public List<type_street> type_streetsL => serv.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
+        //public IEnumerable<type_street> type_streets => serv.GetTypeStreets();
+        //public List<type_street> type_streetsL => serv.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
         #endregion
 
     }

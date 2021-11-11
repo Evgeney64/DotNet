@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_OKOPF : IEntityObject, IEntityLog
+    public partial class NSI_OKOPF : IEntityObject
     {
         
         #region Columns

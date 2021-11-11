@@ -72,7 +72,7 @@ namespace Server.Core.Model
         
         // FK_NSI_VILLAGE_NSI_VILLAGE
         [InverseProperty("PARENT_ID")]
-        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
+        public virtual NSI_VILLAGE NSI_VILLAGE1 { get; set; }//;
         
         // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
         [InverseProperty("NVILLAGE_TYPE_ID")]
@@ -80,17 +80,17 @@ namespace Server.Core.Model
         #endregion
         
         #region Navigation - children
-        // FK_BUILD_NSI_VILLAGE1
+        // FK_BUILD_NSI_VILLAGE2
         public virtual ICollection<BUILD> BUILD { get; set; }//;
         
-        // FK_BUILD_NSI_VILLAGE2
+        // FK_BUILD_NSI_VILLAGE1
         public virtual ICollection<BUILD> BUILD1 { get; set; }//;
         
         // FK_NSI_STREET_NSI_VILLAGE
         public virtual ICollection<NSI_STREET> NSI_STREET { get; set; }//;
         
         // FK_NSI_VILLAGE_NSI_VILLAGE
-        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
+        public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE2 { get; set; }//;
         #endregion
         
         #region Constructor
@@ -99,7 +99,7 @@ namespace Server.Core.Model
             this.BUILD = new HashSet<BUILD>();
             this.BUILD1 = new HashSet<BUILD>();
             this.NSI_STREET = new HashSet<NSI_STREET>();
-            this.NSI_VILLAGE = new HashSet<NSI_VILLAGE>();
+            this.NSI_VILLAGE2 = new HashSet<NSI_VILLAGE>();
         }
         #endregion
     }

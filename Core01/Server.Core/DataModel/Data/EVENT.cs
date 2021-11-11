@@ -138,7 +138,7 @@ namespace Server.Core.Model
         
         // FK_EVENT_PROCESS_EVENT
         [InverseProperty("PROCESS_ID")]
-        public virtual EVENT EVENT { get; set; }//;
+        public virtual EVENT EVENT1 { get; set; }//;
         
         // FK_EVENT_FACILITY
         [InverseProperty("FACILITY_ID")]
@@ -187,7 +187,7 @@ namespace Server.Core.Model
         
         #region Navigation - children
         // FK_EVENT_PROCESS_EVENT
-        public virtual ICollection<EVENT> EVENT { get; set; }//;
+        public virtual ICollection<EVENT> EVENT2 { get; set; }//;
         
         // FK_EVENT_SCHEM_EVENT
         public virtual ICollection<EVENT_SCHEM> EVENT_SCHEM { get; set; }//;
@@ -205,7 +205,7 @@ namespace Server.Core.Model
         #region Constructor
         public EVENT()
         {
-            this.EVENT = new HashSet<EVENT>();
+            this.EVENT2 = new HashSet<EVENT>();
             this.EVENT_SCHEM = new HashSet<EVENT_SCHEM>();
             this.EVENT_SCHEM1 = new HashSet<EVENT_SCHEM>();
             this.EVENT_STATE = new HashSet<EVENT_STATE>();

@@ -19,8 +19,8 @@ namespace Server.Core.Model
     public interface IGroupFilter
     {
         //IQueryable GetObjectsByFilter(XElement filter);
-        IQueryable<long> GetObjectIdsByFilter(SysTable_Enum sysTable, XElement filter);
-        IQueryable<long> GetObjectIdsByParent(SysTable_Enum sysTable, SysTable_Enum parentSysTable);
+        //IQueryable<long> GetObjectIdsByFilter(SysTable_Enum sysTable, XElement filter);
+        //IQueryable<long> GetObjectIdsByParent(SysTable_Enum sysTable, SysTable_Enum parentSysTable);
     }
 
     public interface IEntityTree : IEntityObject

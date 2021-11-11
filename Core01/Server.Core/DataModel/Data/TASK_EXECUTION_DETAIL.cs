@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class TASK_EXECUTION_DETAIL : IEntityObject, IEntityLog, IEntityPeriod
+    public partial class TASK_EXECUTION_DETAIL : IEntityObject, IEntityLog
     {
         
         #region Columns

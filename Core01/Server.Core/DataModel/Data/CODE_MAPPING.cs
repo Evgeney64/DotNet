@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class CODE_MAPPING : IEntityObject, IEntityLog, IEntityPeriod
+    public partial class CODE_MAPPING : IEntityObject, IEntityLog
     {
         
         #region Columns

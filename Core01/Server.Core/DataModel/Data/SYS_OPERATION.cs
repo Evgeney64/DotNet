@@ -44,18 +44,18 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_SYS_OPERATION_PARENT
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_OPERATION SYS_OPERATION { get; set; }//;
+        public virtual SYS_OPERATION SYS_OPERATION1 { get; set; }//;
         #endregion
         
         #region Navigation - children
         // FK_SYS_OPERATION_PARENT
-        public virtual ICollection<SYS_OPERATION> SYS_OPERATION { get; set; }//;
+        public virtual ICollection<SYS_OPERATION> SYS_OPERATION2 { get; set; }//;
         #endregion
         
         #region Constructor
         public SYS_OPERATION()
         {
-            this.SYS_OPERATION = new HashSet<SYS_OPERATION>();
+            this.SYS_OPERATION2 = new HashSet<SYS_OPERATION>();
         }
         #endregion
     }

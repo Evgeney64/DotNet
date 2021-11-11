@@ -48,18 +48,18 @@ namespace Server.Core.Model
         
         // FK_SYS_AUTO_TEST_DETAIL_SYS_AUTO_TEST_DETAIL_PARENT
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_AUTO_TEST_DETAIL SYS_AUTO_TEST_DETAIL { get; set; }//;
+        public virtual SYS_AUTO_TEST_DETAIL SYS_AUTO_TEST_DETAIL1 { get; set; }//;
         #endregion
         
         #region Navigation - children
         // FK_SYS_AUTO_TEST_DETAIL_SYS_AUTO_TEST_DETAIL_PARENT
-        public virtual ICollection<SYS_AUTO_TEST_DETAIL> SYS_AUTO_TEST_DETAIL { get; set; }//;
+        public virtual ICollection<SYS_AUTO_TEST_DETAIL> SYS_AUTO_TEST_DETAIL2 { get; set; }//;
         #endregion
         
         #region Constructor
         public SYS_AUTO_TEST_DETAIL()
         {
-            this.SYS_AUTO_TEST_DETAIL = new HashSet<SYS_AUTO_TEST_DETAIL>();
+            this.SYS_AUTO_TEST_DETAIL2 = new HashSet<SYS_AUTO_TEST_DETAIL>();
         }
         #endregion
     }

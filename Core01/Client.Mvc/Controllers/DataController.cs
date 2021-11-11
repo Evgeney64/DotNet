@@ -29,7 +29,7 @@ namespace Data.Controllers
             DataConfiguration conf = ConfigurateHelper.GetConfiguration("config.json", "EntityDataMsSql");
             VmBase vmBase = new VmBase(conf.ConnectionString);
 
-            vmBase.DoSmth();
+            //vmBase.DoSmth();
             //List<rgn> rgns = vmBase.rgns;
             //List<village> villages = vmBase.villages;
             //{ }
@@ -45,7 +45,7 @@ namespace Data.Controllers
         public ViewResult GetGosStreets()
         {
             VmBase vmBase = new VmBase(configuration, ConnectionType_Enum.Gos);
-            List<type_street> type_streets = vmBase.type_streetsL;
+            //List<type_street> type_streets = vmBase.type_streetsL;
             return View("type_street", vmBase);
             //return View(vmBase.type_streetsL);
         }

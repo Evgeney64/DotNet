@@ -38,7 +38,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_SYS_CLIENT_SYS_CLIENT
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_CLIENT SYS_CLIENT { get; set; }//;
+        public virtual SYS_CLIENT SYS_CLIENT1 { get; set; }//;
         #endregion
         
         #region Navigation - children
@@ -49,7 +49,7 @@ namespace Server.Core.Model
         public virtual ICollection<NSI_CONFIG_BINDING> NSI_CONFIG_BINDING { get; set; }//;
         
         // FK_SYS_CLIENT_SYS_CLIENT
-        public virtual ICollection<SYS_CLIENT> SYS_CLIENT { get; set; }//;
+        public virtual ICollection<SYS_CLIENT> SYS_CLIENT2 { get; set; }//;
         
         // FK_SYS_HELP_SYS_CLIENT
         public virtual ICollection<SYS_HELP> SYS_HELP { get; set; }//;
@@ -69,7 +69,7 @@ namespace Server.Core.Model
         {
             this.NSI_ALGORITHM_IMPL_BINDING = new HashSet<NSI_ALGORITHM_IMPL_BINDING>();
             this.NSI_CONFIG_BINDING = new HashSet<NSI_CONFIG_BINDING>();
-            this.SYS_CLIENT = new HashSet<SYS_CLIENT>();
+            this.SYS_CLIENT2 = new HashSet<SYS_CLIENT>();
             this.SYS_HELP = new HashSet<SYS_HELP>();
             this.SYS_HELP_INDEX = new HashSet<SYS_HELP_INDEX>();
             this.SYS_TEMPLATE_BINDING = new HashSet<SYS_TEMPLATE_BINDING>();

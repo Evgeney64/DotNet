@@ -58,12 +58,12 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_NSI_ALGORITHM_NSI_ALGORITHM
         [InverseProperty("PARENT_ID")]
-        public virtual NSI_ALGORITHM NSI_ALGORITHM { get; set; }//;
+        public virtual NSI_ALGORITHM NSI_ALGORITHM1 { get; set; }//;
         #endregion
         
         #region Navigation - children
         // FK_NSI_ALGORITHM_NSI_ALGORITHM
-        public virtual ICollection<NSI_ALGORITHM> NSI_ALGORITHM { get; set; }//;
+        public virtual ICollection<NSI_ALGORITHM> NSI_ALGORITHM2 { get; set; }//;
         
         // FK_NSI_ALGORITHM_IMPL_NSI_ALGORITHM
         public virtual ICollection<NSI_ALGORITHM_IMPL> NSI_ALGORITHM_IMPL { get; set; }//;
@@ -81,7 +81,7 @@ namespace Server.Core.Model
         #region Constructor
         public NSI_ALGORITHM()
         {
-            this.NSI_ALGORITHM = new HashSet<NSI_ALGORITHM>();
+            this.NSI_ALGORITHM2 = new HashSet<NSI_ALGORITHM>();
             this.NSI_ALGORITHM_IMPL = new HashSet<NSI_ALGORITHM_IMPL>();
             this.NSI_ALGORITHM_PARAM = new HashSet<NSI_ALGORITHM_PARAM>();
             this.NSI_PARAM = new HashSet<NSI_PARAM>();

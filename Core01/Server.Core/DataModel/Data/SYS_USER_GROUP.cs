@@ -38,7 +38,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_SYS_USER_GROUP_SYS_USER_GROUP
         [InverseProperty("PARENT_ID")]
-        public virtual SYS_USER_GROUP SYS_USER_GROUP { get; set; }//;
+        public virtual SYS_USER_GROUP SYS_USER_GROUP1 { get; set; }//;
         #endregion
         
         #region Navigation - children
@@ -46,14 +46,14 @@ namespace Server.Core.Model
         public virtual ICollection<SYS_USER> SYS_USER { get; set; }//;
         
         // FK_SYS_USER_GROUP_SYS_USER_GROUP
-        public virtual ICollection<SYS_USER_GROUP> SYS_USER_GROUP { get; set; }//;
+        public virtual ICollection<SYS_USER_GROUP> SYS_USER_GROUP2 { get; set; }//;
         #endregion
         
         #region Constructor
         public SYS_USER_GROUP()
         {
             this.SYS_USER = new HashSet<SYS_USER>();
-            this.SYS_USER_GROUP = new HashSet<SYS_USER_GROUP>();
+            this.SYS_USER_GROUP2 = new HashSet<SYS_USER_GROUP>();
         }
         #endregion
     }

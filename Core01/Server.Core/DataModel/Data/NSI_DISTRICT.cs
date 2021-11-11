@@ -15,7 +15,7 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations.Schema;
     
     
-    public partial class NSI_DISTRICT : IEntityObject, IEntityLog
+    public partial class NSI_DISTRICT : IEntityObject
     {
         
         #region Columns
@@ -38,7 +38,7 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_NSI_DISTRICT_NSI_DISTRICT1
         [InverseProperty("PARENT_ID")]
-        public virtual NSI_DISTRICT NSI_DISTRICT { get; set; }//;
+        public virtual NSI_DISTRICT NSI_DISTRICT1 { get; set; }//;
         
         // FK_NSI_DISTRICT_NSI_DISTRICT
         [InverseProperty("PARTNER_ID")]
@@ -47,13 +47,13 @@ namespace Server.Core.Model
         
         #region Navigation - children
         // FK_NSI_DISTRICT_NSI_DISTRICT1
-        public virtual ICollection<NSI_DISTRICT> NSI_DISTRICT { get; set; }//;
+        public virtual ICollection<NSI_DISTRICT> NSI_DISTRICT2 { get; set; }//;
         #endregion
         
         #region Constructor
         public NSI_DISTRICT()
         {
-            this.NSI_DISTRICT = new HashSet<NSI_DISTRICT>();
+            this.NSI_DISTRICT2 = new HashSet<NSI_DISTRICT>();
         }
         #endregion
     }

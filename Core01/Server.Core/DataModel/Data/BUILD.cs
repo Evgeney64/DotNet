@@ -82,12 +82,12 @@ namespace Server.Core.Model
         [InverseProperty("NSTREET_ID")]
         public virtual NSI_STREET NSI_STREET { get; set; }//;
         
-        // FK_BUILD_NSI_VILLAGE1
-        [InverseProperty("NVILLAGE_ID1")]
-        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
-        
         // FK_BUILD_NSI_VILLAGE2
         [InverseProperty("NVILLAGE_ID2")]
+        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
+        
+        // FK_BUILD_NSI_VILLAGE1
+        [InverseProperty("NVILLAGE_ID1")]
         public virtual NSI_VILLAGE NSI_VILLAGE1 { get; set; }//;
         #endregion
         
