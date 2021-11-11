@@ -76,6 +76,7 @@ namespace Tsb.Generate
             DbInfo info = new DbInfo(conf);
             info.files = files;
             info.GenerateInfo();
+            info.GenerateInfoFk();
             { }
 
             #region generateOneClass

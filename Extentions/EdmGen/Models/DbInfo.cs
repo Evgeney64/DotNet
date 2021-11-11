@@ -40,10 +40,10 @@ namespace Tsb.Model
             {
                 connection.Open();
 
+                #region Read data
                 Console.WriteLine("Get table .......................................");
                 createTables(connection);
 
-                #region metadata
                 Console.WriteLine("");
                 Console.WriteLine("Get metadata .......................................");
                 createColumns(connection);
@@ -51,6 +51,9 @@ namespace Tsb.Model
                 createIndexes(connection);
                 createIndexColumns(connection);
                 { }
+                #endregion
+
+                #region Convert data
                 int count = 1;
                 foreach (table tbl in tables)
                 {
@@ -113,8 +116,12 @@ namespace Tsb.Model
                 }
                 #endregion
             }
+            #endregion
+        }
 
-            #region foreign_keys (parents / children)
+        public void GenerateInfoFk()
+        {
+            #region
             foreach (table tbl in tables.Where(ss => ss.foreign_keys.Count() > 0))
             {
                 foreach (foreign_key fk in tbl.foreign_keys)
@@ -163,7 +170,6 @@ namespace Tsb.Model
                     }
                 }
             }
-            #endregion
             #endregion
         }
     }
