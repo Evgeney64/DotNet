@@ -19,6 +19,8 @@ namespace Tsb.Model
         string collate = "pg_catalog.\"default\"";
 
         public List<table> tables = new List<table>();
+        string object_ids = "";
+
         List<column> columns = new List<column>();
         List<foreign_key> foreign_keys = new List<foreign_key>();
         List<index> indexes = new List<index>();

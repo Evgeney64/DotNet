@@ -39,7 +39,6 @@ namespace Tsb.Model
                     command1.CommandText = sql;
                     command1.Connection = connection;
 
-
                     SqlDataReader reader1 = command1.ExecuteReader();
                     #endregion
                     if (reader1.HasRows)
@@ -70,6 +69,8 @@ namespace Tsb.Model
                         }
                     }
                     reader1.Close();
+
+                    object_ids = String.Join(",", tables.Select(ss => ss.id));
                 }
             }
             catch (Exception ex)
@@ -85,7 +86,6 @@ namespace Tsb.Model
                     #region Define-2
                     command2.CommandText =
                         "SELECT col.name, col.object_id, column_id, user_type_id, max_length" +
-                        //", is_primary_key, is_nullable, is_identity" +
                         ", is_nullable, is_identity" +
                         ", CASE WHEN sch.COLUMN_NAME IS NOT NULL THEN 1 ELSE 0 END AS IS_PRIMARY_KEY" +
                         " FROM sys.all_columns col" +
@@ -93,12 +93,10 @@ namespace Tsb.Model
                         "    LEFT JOIN (SELECT sch.TABLE_NAME, sch.COLUMN_NAME FROM sys.key_constraints pk" +
                         "        INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE sch on sch.CONSTRAINT_NAME=pk.name WHERE pk.type='PK'" +
                         "        ) sch on sch.TABLE_NAME = tbl.name and sch.COLUMN_NAME = col.name" +
+                        " WHERE col.object_id in (" + object_ids + ")" +
                         " ORDER BY col.object_id, column_id" +
-                        //" WHERE col.object_id=@id ORDER BY column_id" +
                         "";
                     command2.Connection = connection;
-                    //SqlParameter nameParam = new SqlParameter("@id", tbl.id);
-                    //command2.Parameters.Add(nameParam);
 
                     SqlDataReader reader2 = command2.ExecuteReader();
                     #endregion
@@ -135,6 +133,7 @@ namespace Tsb.Model
             catch (Exception ex)
             { }
         }
+
         private void createFKs(SqlConnection connection)
         {
             try
@@ -151,12 +150,9 @@ namespace Tsb.Model
                         "   INNER JOIN sys.foreign_key_columns fk_col on fk_col.constraint_object_id = fk.object_id" +
                         "   INNER JOIN sys.all_columns col_par on col_par.OBJECT_ID = fk_col.parent_object_id and col_par.column_id = fk_col.parent_column_id" +
                         "   INNER JOIN sys.all_columns col_ch on col_ch.OBJECT_ID = fk_col.referenced_object_id and col_ch.column_id = fk_col.referenced_column_id" +
+                        " WHERE fk.parent_object_id in (" + object_ids + ")" +
                         " ORDER BY fk.parent_object_id";
-                    //" WHERE fk.parent_object_id=@id";
-                    //" WHERE fk.referenced_object_id=@id";
                     command3.Connection = connection;
-                    //SqlParameter nameParam = new SqlParameter("@id", tbl.id);
-                    //command3.Parameters.Add(nameParam);
 
                     SqlDataReader reader3 = command3.ExecuteReader();
                     #endregion
@@ -188,6 +184,7 @@ namespace Tsb.Model
             catch (Exception ex)
             { }
         }
+
         private void createIndexes(SqlConnection connection)
         {
             try
@@ -199,7 +196,8 @@ namespace Tsb.Model
                         "SELECT ind.name, ind.object_id, ind.index_id, ind.is_unique" +
                         ", CASE WHEN ind.type_desc='CLUSTERED' THEN 1 ELSE 0 END as is_clustered" +
                         " FROM sys.indexes ind" +
-                        " WHERE ind.name IS NOT NULL ORDER BY ind.object_id, ind.index_id" +
+                        " WHERE ind.object_id in (" + object_ids + ") and ind.name IS NOT NULL" +
+                        " ORDER BY ind.object_id, ind.index_id" +
                         //"    INNER JOIN sys.objects ob on ob.object_id=ind.object_id" +
                         //" WHERE ob.name=@name and ind.name IS NOT NULL ORDER BY ind.index_id" +
                         "";
@@ -239,51 +237,51 @@ namespace Tsb.Model
             catch (Exception ex)
             { }
         }
+
         private void createIndexColumns(SqlConnection connection)
         {
-            #region index_column
-            using (SqlCommand command41 = new SqlCommand())
+            try
             {
-                #region Define-41
-                command41.CommandText =
-                    "SELECT col.name, coli.object_id, coli.index_id, col.column_id" +
-                    " FROM sys.index_columns coli" +
-                    "    INNER JOIN sys.all_columns col on col.object_id=coli.object_id and col.column_id=coli.column_id" +
-                    " ORDER BY coli.object_id, coli.index_id, col.column_id" +
-                    //" WHERE coli.object_id=@object_id and coli.index_id=@index_id ORDER BY col.column_id" +
-                    "";
-                command41.Connection = connection;
-                //command41.Parameters.Add(new SqlParameter("@object_id", ind.object_id));
-                //command41.Parameters.Add(new SqlParameter("@index_id", ind.index_id));
-
-                SqlDataReader reader41 = command41.ExecuteReader();
-
-                #endregion
-                if (reader41.HasRows)
+                using (SqlCommand command41 = new SqlCommand())
                 {
-                    while (reader41.Read())
-                    {
-                        #region index_column
-                        object col_name = reader41.GetValue(0);
-                        if (col_name == null)
-                            continue;
-                        index_column ind_col = new index_column
-                        {
-                            column_name = col_name.ToString(),
-                            object_id = long.Parse(reader41.GetValue(1).ToString()),
-                            index_id = int.Parse(reader41.GetValue(2).ToString()),
-                            column_id = int.Parse(reader41.GetValue(3).ToString()),
-                        };
-                        //ind.index_columns.Add(ind_col);
-                        index_columns.Add(ind_col);
-                        #endregion
-                    }
-                }
-                reader41.Close();
-            }
-            #endregion
-        }
+                    #region Define-41
+                    command41.CommandText =
+                        "SELECT col.name, coli.object_id, coli.index_id, col.column_id" +
+                        " FROM sys.index_columns coli" +
+                        "    INNER JOIN sys.all_columns col on col.object_id=coli.object_id and col.column_id=coli.column_id" +
+                        " WHERE coli.object_id in (" + object_ids + ")" +
+                        " ORDER BY coli.object_id, coli.index_id, col.column_id" +
+                        "";
+                    command41.Connection = connection;
 
+                    SqlDataReader reader41 = command41.ExecuteReader();
+                    #endregion
+                    if (reader41.HasRows)
+                    {
+                        while (reader41.Read())
+                        {
+                            #region index_column
+                            object col_name = reader41.GetValue(0);
+                            if (col_name == null)
+                                continue;
+                            index_column ind_col = new index_column
+                            {
+                                column_name = col_name.ToString(),
+                                object_id = long.Parse(reader41.GetValue(1).ToString()),
+                                index_id = int.Parse(reader41.GetValue(2).ToString()),
+                                column_id = int.Parse(reader41.GetValue(3).ToString()),
+                            };
+                            //ind.index_columns.Add(ind_col);
+                            index_columns.Add(ind_col);
+                            #endregion
+                        }
+                    }
+                    reader41.Close();
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
     }
 }
 

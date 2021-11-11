@@ -16,12 +16,13 @@ namespace EdmGen
     {
         static void Main(string[] args)
         {
-            HomeController item = new HomeController();
+            HomeController item = new HomeController("EdmGen");
             
-            item.CreatePostgesScript("EdmGen");
+            //item.CreatePostgesScript();
 
             //item.CreateResultFile();
-            //item.GenerateEdmClass("EdmGen");
+            
+            item.GenerateEdmClass();
 
             Console.WriteLine("");
             Console.WriteLine("Finish .......................................");
@@ -30,7 +31,13 @@ namespace EdmGen
     }
     public partial class HomeController
     {
-        public async Task<String> CreatePostgesScript(string client_path)
+        public string client_path;
+        public HomeController(string _client_path)
+        {
+            client_path = _client_path;
+        }
+
+        public async Task<String> CreatePostgesScript()
         {
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration(client_path, "config.json", "MsSqlConfiguration");
 
@@ -44,17 +51,18 @@ namespace EdmGen
 
         public async Task<String> CreateResultFile()
         {
-            ServiceResult res = EdmGenerator.CreateResultFile();
+            ServiceResult res = EdmGenerator.CreateResultFile(client_path);
             return res.Error ? res.ErrorMessage : res.Message;
         }
 
-        public async Task<String> GenerateEdmClass(string client_path)
+        public async Task<String> GenerateEdmClass()
         {
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration(client_path, "config.json", "MsSqlConfiguration");
 
-            ServiceResult res = EdmGenerator.GenerateEdmClass(conf);
+            ServiceResult res = EdmGenerator.GenerateEdmClass(conf, client_path);
             return res.Error ? res.ErrorMessage : res.Message;
         }
 
     }
 }
+

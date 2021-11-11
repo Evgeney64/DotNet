@@ -12,11 +12,11 @@ namespace Tsb.Generate
 {
     public partial class EdmGenerator
     {
-        public static ServiceResult CreateResultFile()
+        public static ServiceResult CreateResultFile(string client_path)
         {
             #region
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string input_dir = base_dir.Substring(0, base_dir.IndexOf("EdmGen")) + "EdmGen\\Result\\Input";
+            string input_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + client_path + "\\Result\\Input";
             if (Directory.Exists(input_dir))
             {
                 string[] path_files = Directory.GetFiles(input_dir);
@@ -59,16 +59,12 @@ namespace Tsb.Generate
         DataSourceConfiguration conf;
         #endregion
 
-        public static ServiceResult GenerateEdmClass(DataSourceConfiguration conf)
+        public static ServiceResult GenerateEdmClass(DataSourceConfiguration conf, string client_path)
         {
             #region
-            #region Define
-            //user = "\"postgres\"";
-            //schem = "\"tsb\"";
-            #endregion
 
             #region _files.txt
-            string root = "EdmGen";
+            string root = client_path;
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
             string result_dir = base_dir.Substring(0, base_dir.IndexOf(root)) + root + "\\Result";
             string input_dir = result_dir + "\\Input";
@@ -83,6 +79,8 @@ namespace Tsb.Generate
             { }
 
             #region generateOneClass
+            Console.WriteLine("");
+            Console.WriteLine("Generate classes .......................................");
             string str = "";
             if (info.tables.Count > 0)
             {
@@ -90,6 +88,7 @@ namespace Tsb.Generate
                 {
                     generateOneClass(output_dir, tbl);
                     str += "<p>" + tbl.name + "</p>";
+                    Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
                 }
             }
             #region old
