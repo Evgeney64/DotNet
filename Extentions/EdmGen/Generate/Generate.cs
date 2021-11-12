@@ -92,6 +92,7 @@ namespace Tsb.Generate
                     Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
                 }
             }
+            generateContextClass(output_dir, info);
             #region old
             //if (Directory.Exists(input_dir))
             //{

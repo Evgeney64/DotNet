@@ -12,7 +12,7 @@ namespace Tsb.Generate
 {
     public partial class EdmGenerator
     {
-        public static ServiceResult generateOneClass(string dir, table tbl)
+        private static ServiceResult generateOneClass(string dir, table tbl)
         {
             #region
             CodeCompileUnit classUnit = new CodeCompileUnit();
@@ -244,6 +244,66 @@ namespace Tsb.Generate
 
             return new ServiceResult("Файл сохранен");
             #endregion
+        }
+
+        private static ServiceResult generateContextClass(string dir, DbInfo info)
+        {
+            CodeCompileUnit classUnit = new CodeCompileUnit();
+            CodeNamespace classNamespace = new CodeNamespace("Server.Core.Context");
+            classUnit.Namespaces.Add(classNamespace);
+
+            #region uses
+            classNamespace.Imports.Add(new CodeNamespaceImport("Microsoft.EntityFrameworkCore"));
+            classNamespace.Imports.Add(new CodeNamespaceImport("Server.Core.Model"));
+            #endregion
+
+            #region class
+            TsbCodeGenResult classItem = new TsbCodeGenResult
+            {
+                Class_Serv = new CodeTypeDeclaration
+                {
+                    Name = "EntityContext",
+                    IsPartial = true,
+                },
+                Namespace_Serv = classNamespace, //new CodeNamespace("Server.Core.Model"),
+                //FilePath_Serv = dir + "//" + tbl.name + ".cs",
+            };
+            classNamespace.Types.Add(classItem.Class_Serv);
+            #endregion
+
+            #region interfaces
+            classItem.Class_Serv.BaseTypes.Add("DbContext");
+            #endregion
+
+            if (info.tables.Count > 0)
+            {
+                foreach (table tbl in info.tables.OrderBy(ss => ss.name))
+                {
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference("virtual DbSet<" + tbl.name + ">"),
+                        Name = tbl.name + " { get; set; }//",
+                    };
+                    classItem.Class_Serv.Members.Add(prop);
+                    Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
+                }
+            }
+
+            #region save classUnit
+            string codeFileName_Serv = dir + "//_Context.cs";
+            using (var outFile = File.Open(codeFileName_Serv, FileMode.Create))
+            using (var fileWriter = new StreamWriter(outFile))
+            using (var indentedTextWriter = new IndentedTextWriter(fileWriter, "    "))
+            {
+                var provider = new Microsoft.CSharp.CSharpCodeProvider();
+                provider.GenerateCodeFromCompileUnit(classUnit,
+                    indentedTextWriter,
+                    new CodeGeneratorOptions() { BracingStyle = "C" });
+            }
+            #endregion
+
+            return new ServiceResult("Файл сохранен");
         }
     }
 }

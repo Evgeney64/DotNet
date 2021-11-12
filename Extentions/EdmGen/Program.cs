@@ -26,7 +26,7 @@ namespace EdmGen
 
             Console.WriteLine("");
             Console.WriteLine("Finish .......................................");
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
     public partial class HomeController
