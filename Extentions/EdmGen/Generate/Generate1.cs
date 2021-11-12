@@ -256,6 +256,7 @@ namespace Tsb.Generate
 
         private static ServiceResult generateContextClass(string dir, DbInfo info)
         {
+            #region
             #region namespace
             CodeCompileUnit classUnit = new CodeCompileUnit();
             CodeNamespace classNamespace = new CodeNamespace("Server.Core.Context");
@@ -320,6 +321,7 @@ namespace Tsb.Generate
             #endregion
 
             return new ServiceResult("Файл сохранен");
+            #endregion
         }
     }
 }

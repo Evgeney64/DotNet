@@ -70,29 +70,6 @@ namespace Tsb.Generate
             string input_dir = result_dir + "\\Input";
             string output_dir = result_dir + "\\Output";
             string[] files = File.ReadAllLines(input_dir + "//_files.txt");
-            { }
-            #endregion
-
-            DbInfo info = new DbInfo(conf);
-            info.files = files;
-            info.GenerateInfo();
-            info.GenerateInfoFk();
-            { }
-
-            #region generateOneClass
-            Console.WriteLine("");
-            Console.WriteLine("Generate classes .......................................");
-            string str = "";
-            if (info.tables.Count > 0)
-            {
-                foreach (table tbl in info.tables.OrderBy(ss => ss.name))
-                {
-                    generateOneClass(output_dir, tbl);
-                    str += "<p>" + tbl.name + "</p>";
-                    Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
-                }
-            }
-            generateContextClass(output_dir, info);
             #region old
             //if (Directory.Exists(input_dir))
             //{
@@ -101,9 +78,32 @@ namespace Tsb.Generate
             //    files = files.Select(ss => ss.Substring(0, ss.Length - 3)).ToArray();
             //}
             #endregion
+            { }
             #endregion
 
-            return new ServiceResult("<p>Сформированы классы</p><br>" + str);
+            #region DbInfo
+            DbInfo info = new DbInfo(conf);
+            info.files = files;
+            info.GenerateInfo();
+            info.GenerateInfoFk();
+            { }
+            #endregion
+
+            #region generateOneClass
+            Console.WriteLine("");
+            Console.WriteLine("Generate classes .......................................");
+            if (info.tables.Count > 0)
+            {
+                foreach (table tbl in info.tables.OrderBy(ss => ss.name))
+                {
+                    generateOneClass(output_dir, tbl);
+                    Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
+                }
+            }
+            generateContextClass(output_dir, info);
+            #endregion
+
+            return new ServiceResult("Сформированы классы");
             #endregion
         }
     }
