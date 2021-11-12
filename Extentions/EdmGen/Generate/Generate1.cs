@@ -15,9 +15,11 @@ namespace Tsb.Generate
         private static ServiceResult generateOneClass(string dir, table tbl)
         {
             #region
+            #region namespace
             CodeCompileUnit classUnit = new CodeCompileUnit();
             CodeNamespace classNamespace = new CodeNamespace("Server.Core.Model");
             classUnit.Namespaces.Add(classNamespace);
+            #endregion
 
             #region uses
             classNamespace.Imports.Add(new CodeNamespaceImport("System"));
@@ -192,8 +194,10 @@ namespace Tsb.Generate
                 }
                 if (prop0 != null && prop1 != null)
                 {
-                    prop0.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Navigation - parents"));
-                    prop1.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, ""));
+                    CodeRegionDirective region = new CodeRegionDirective(CodeRegionMode.Start, "Navigation - parents");
+                    CodeRegionDirective endregion = new CodeRegionDirective(CodeRegionMode.End, "");
+                    prop0.StartDirectives.Add(region);
+                    prop1.EndDirectives.Add(endregion);
                 }
             }
             #endregion
@@ -238,7 +242,11 @@ namespace Tsb.Generate
                 var provider = new Microsoft.CSharp.CSharpCodeProvider();
                 provider.GenerateCodeFromCompileUnit(classUnit,
                     indentedTextWriter,
-                    new CodeGeneratorOptions() { BracingStyle = "C" });
+                    new CodeGeneratorOptions()
+                    {
+                        BracingStyle = "C",
+                        BlankLinesBetweenMembers = false,
+                    });
             }
             #endregion
 
@@ -248,9 +256,11 @@ namespace Tsb.Generate
 
         private static ServiceResult generateContextClass(string dir, DbInfo info)
         {
+            #region namespace
             CodeCompileUnit classUnit = new CodeCompileUnit();
             CodeNamespace classNamespace = new CodeNamespace("Server.Core.Context");
             classUnit.Namespaces.Add(classNamespace);
+            #endregion
 
             #region uses
             classNamespace.Imports.Add(new CodeNamespaceImport("Microsoft.EntityFrameworkCore"));
@@ -275,6 +285,7 @@ namespace Tsb.Generate
             classItem.Class_Serv.BaseTypes.Add("DbContext");
             #endregion
 
+            #region DbSet<>
             if (info.tables.Count > 0)
             {
                 foreach (table tbl in info.tables.OrderBy(ss => ss.name))
@@ -289,6 +300,7 @@ namespace Tsb.Generate
                     Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
                 }
             }
+            #endregion
 
             #region save classUnit
             string codeFileName_Serv = dir + "//_Context.cs";
@@ -299,7 +311,11 @@ namespace Tsb.Generate
                 var provider = new Microsoft.CSharp.CSharpCodeProvider();
                 provider.GenerateCodeFromCompileUnit(classUnit,
                     indentedTextWriter,
-                    new CodeGeneratorOptions() { BracingStyle = "C" });
+                    new CodeGeneratorOptions() 
+                    { 
+                        BracingStyle = "C",
+                        BlankLinesBetweenMembers = false,
+                    });
             }
             #endregion
 
