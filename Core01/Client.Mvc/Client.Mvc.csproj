@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="project.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Startup.cs1" />
   </ItemGroup>
 

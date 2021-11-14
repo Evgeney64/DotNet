@@ -179,7 +179,7 @@ namespace Tsb.Generate
                         // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
 
                         prop.CustomAttributes.Add(new CodeAttributeDeclaration(
-                            "InverseProperty",
+                            "ForeignKey",
                             new CodeAttributeArgument(new CodePrimitiveExpression(fk.this_column))
                             ));
                     }
@@ -298,7 +298,7 @@ namespace Tsb.Generate
                         Name = tbl.name + " { get; set; }//",
                     };
                     classItem.Class_Serv.Members.Add(prop);
-                    Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
+                    //Console.WriteLine("[gen-context] - " + tbl.nom + " - " + tbl.name);
                 }
             }
             #endregion
@@ -314,6 +314,76 @@ namespace Tsb.Generate
                     indentedTextWriter,
                     new CodeGeneratorOptions() 
                     { 
+                        BracingStyle = "C",
+                        BlankLinesBetweenMembers = false,
+                    });
+            }
+            #endregion
+
+            return new ServiceResult("Файл сохранен");
+            #endregion
+        }
+
+        private static ServiceResult generateServiceClass(string dir, DbInfo info)
+        {
+            #region
+            #region namespace
+            CodeCompileUnit classUnit = new CodeCompileUnit();
+            CodeNamespace classNamespace = new CodeNamespace("Server.Core.Model");
+            classUnit.Namespaces.Add(classNamespace);
+            #endregion
+
+            #region uses
+            classNamespace.Imports.Add(new CodeNamespaceImport("System.Linq"));
+            classNamespace.Imports.Add(new CodeNamespaceImport("Server.Core.Context"));
+            #endregion
+
+            #region class
+            TsbCodeGenResult classItem = new TsbCodeGenResult
+            {
+                Class_Serv = new CodeTypeDeclaration
+                {
+                    Name = "EntityServ",
+                    IsPartial = true,
+                },
+                Namespace_Serv = classNamespace, //new CodeNamespace("Server.Core.Model"),
+                //FilePath_Serv = dir + "//" + tbl.name + ".cs",
+            };
+            classNamespace.Types.Add(classItem.Class_Serv);
+            #endregion
+
+            #region interfaces
+            classItem.Class_Serv.BaseTypes.Add("EntityService<EntityContext>");
+            #endregion
+
+            #region IQueryable<>
+            if (info.tables.Count > 0)
+            {
+                foreach (table tbl in info.tables.OrderBy(ss => ss.name))
+                {
+                    CodeMemberField prop = new CodeMemberField
+                    {
+                        Attributes = MemberAttributes.Public,
+                        Type = new CodeTypeReference("IQueryable<" + tbl.name + ">"),
+                        Name = " Get_" + tbl.name + "() => Context." + tbl.name,
+                    };
+                    classItem.Class_Serv.Members.Add(prop);
+                    //Console.WriteLine("[gen-serv] - " + tbl.nom + " - " + tbl.name);
+                }
+            }
+            #endregion
+
+            #region save classUnit
+            string codeFileName_Serv = dir + "//_Service.cs";
+            using (var outFile = File.Open(codeFileName_Serv, FileMode.Create))
+            using (var fileWriter = new StreamWriter(outFile))
+            using (var indentedTextWriter = new IndentedTextWriter(fileWriter, "    "))
+            {
+                var provider = new Microsoft.CSharp.CSharpCodeProvider();
+                provider.GenerateCodeFromCompileUnit(classUnit,
+                    indentedTextWriter,
+                    new CodeGeneratorOptions()
+                    {
                         BracingStyle = "C",
                         BlankLinesBetweenMembers = false,
                     });

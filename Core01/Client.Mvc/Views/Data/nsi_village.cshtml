@@ -1,17 +1,8 @@
 ﻿@model Server.Core.VmBase
 
 <table>
-    @*@foreach (var p in Model.villages)
-    {
-        <tr>
-            <td>@p.village_id</td>
-            <td>&nbsp&nbsp&nbsp</td>
-            <td>@p.rgn_id</td>
-            <td>&nbsp&nbsp&nbsp</td>
-            <td>@p.village_name</td>
-        </tr>
-    }*@
-    @*@foreach (var p in Model.VwNsiVillages)
+
+    @foreach (var p in Model.VwNsiVillages)
     {
         <tr>
             <td>@p.NVILLAGE_ID</td>
@@ -20,5 +11,5 @@
             <td>&nbsp&nbsp&nbsp</td>
             <td>@p.NVILLAGE_NAME</td>
         </tr>
-    }*@
+    }
 </table>

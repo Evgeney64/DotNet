@@ -100,7 +100,12 @@ namespace Tsb.Generate
                     Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
                 }
             }
+            Console.WriteLine("");
+            Console.WriteLine("Generate context ...");
             generateContextClass(output_dir, info);
+            Console.WriteLine("");
+            Console.WriteLine("Generate service ...");
+            generateServiceClass(output_dir, info);
             #endregion
 
             return new ServiceResult("Сформированы классы");

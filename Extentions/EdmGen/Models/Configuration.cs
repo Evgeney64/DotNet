@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,9 @@ namespace Tsb.Model
         public static DataSourceConfiguration GetDataSourceConfiguration(string client_path, string config_file, string name)
         {
             IConfiguration configuration = getConfiguration(client_path, client_path, config_file);
+            if (configuration == null)
+                return null;
+
             DataSourceConfiguration conf = new DataSourceConfiguration();
             configuration.Bind(name, conf);
 
@@ -23,7 +27,11 @@ namespace Tsb.Model
         {
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
             string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
-            { }
+            if (Directory.Exists(conf_dir) == false)
+            {
+                Console.WriteLine("Не найден каталог - [" + conf_dir + "]");
+                return null;
+            }
             var builder = new ConfigurationBuilder()
                 //.SetBasePath(conf_dir).AddJsonFile(config_file)
                 .AddJsonFile(conf_dir + config_file)

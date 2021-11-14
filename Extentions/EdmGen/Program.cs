@@ -40,6 +40,8 @@ namespace EdmGen
         public async Task<String> CreatePostgesScript()
         {
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration(client_path, "config.json", "MsSqlConfiguration");
+            if (conf == null)
+                return "Не найден файл конфигурации";
 
             DbInfo info = new DbInfo(conf);
             info.GenerateInfo();
@@ -58,6 +60,8 @@ namespace EdmGen
         public async Task<String> GenerateEdmClass()
         {
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration(client_path, "config.json", "MsSqlConfiguration");
+            if (conf == null)
+                return "Не найден файл конфигурации";
 
             ServiceResult res = EdmGenerator.GenerateEdmClass(conf, client_path);
             return res.Error ? res.ErrorMessage : res.Message;

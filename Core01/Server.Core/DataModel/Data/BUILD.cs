@@ -14,96 +14,64 @@ namespace Server.Core.Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     
-    
     public partial class BUILD : IEntityObject, IEntityLog, IEntityPeriod
     {
-        
         #region Columns
         long IEntityObject.Id { get { return BUILD_ID; } }//;
-        
         [KeyAttribute()]
         public long BUILD_ID { get; set; }//;
-        
         public System.Nullable<long> NSTREET_ID { get; set; }//;
-        
         public string HOUSE { get; set; }//;
-        
         public string HOUSE_BODY { get; set; }//;
-        
         public string LITERA { get; set; }//;
-        
         public System.DateTime DATE_BEG { get; set; }//;
-        
         public System.Nullable<System.DateTime> DATE_END { get; set; }//;
-        
         public string POST_INDEX { get; set; }//;
-        
         public string FIAS { get; set; }//;
-        
         public System.Nullable<int> NMUNICIPALITY_ID { get; set; }//;
-        
         public System.Nullable<int> NDATA_SOURCE_ID { get; set; }//;
-        
         public System.Nullable<System.DateTime> CRT_DATE { get; set; }//;
-        
         public System.Nullable<System.DateTime> MFY_DATE { get; set; }//;
-        
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
-        
         public System.Nullable<long> NVILLAGE_ID1 { get; set; }//;
-        
         public System.Nullable<long> NVILLAGE_ID2 { get; set; }//;
-        
         public System.Nullable<long> NOBLAST_ID { get; set; }//;
-        
         public System.Nullable<int> NFACILITY_ID { get; set; }//;
-        
         public string OKTMO { get; set; }//;
-        
         public string FIAS_TEMP { get; set; }//;
-        
         public string CADASTRE { get; set; }//;
         #endregion
-        
         #region Navigation - parents
         // FK_BUILD_NSI_FACILITY
-        [InverseProperty("NFACILITY_ID")]
-        public virtual NSI_FACILITY NSI_FACILITY { get; set; }//;
-        
-        // FK_BUILD_NSI_MUNICIPALITY
-        [InverseProperty("NMUNICIPALITY_ID")]
-        public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
-        
-        // FK_BUILD_NSI_OBLAST
-        [InverseProperty("NOBLAST_ID")]
-        public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
-        
+        //[ForeignKey("NFACILITY_ID")]
+        //public virtual NSI_FACILITY NSI_FACILITY { get; set; }//;
+        //// FK_BUILD_NSI_MUNICIPALITY
+        //[ForeignKey("NMUNICIPALITY_ID")]
+        //public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
+        //// FK_BUILD_NSI_OBLAST
+        //[ForeignKey("NOBLAST_ID")]
+        //public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
         // FK_BUILD_NSI_STREET
-        [InverseProperty("NSTREET_ID")]
+        [ForeignKey("NSTREET_ID")]
         public virtual NSI_STREET NSI_STREET { get; set; }//;
-        
         // FK_BUILD_NSI_VILLAGE2
-        [InverseProperty("NVILLAGE_ID2")]
+        [ForeignKey("NVILLAGE_ID2")]
         public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
-        
         // FK_BUILD_NSI_VILLAGE1
-        [InverseProperty("NVILLAGE_ID1")]
+        [ForeignKey("NVILLAGE_ID1")]
         public virtual NSI_VILLAGE NSI_VILLAGE1 { get; set; }//;
         #endregion
-        
         #region Navigation - children
         // FK_FACILITY_BUILD
-        public virtual ICollection<FACILITY> FACILITY { get; set; }//;
-        
+        //public virtual ICollection<FACILITY> FACILITY { get; set; }//;
         // FK_PARTNER_EXT_BUILD
-        public virtual ICollection<PARTNER_EXT> PARTNER_EXT { get; set; }//;
+        //public virtual ICollection<PARTNER_EXT> PARTNER_EXT { get; set; }//;
         #endregion
-        
         #region Constructor
         public BUILD()
         {
-            this.FACILITY = new HashSet<FACILITY>();
-            this.PARTNER_EXT = new HashSet<PARTNER_EXT>();
+            //this.FACILITY = new HashSet<FACILITY>();
+            //this.PARTNER_EXT = new HashSet<PARTNER_EXT>();
         }
         #endregion
     }

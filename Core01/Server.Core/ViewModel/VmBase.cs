@@ -68,40 +68,57 @@ namespace Server.Core
 
         #region Data
         //public IEnumerable<NSI_STREET> NsiStreets => context.NSI_STREET;
-        public IEnumerable<NSI_STREET> NsiStreets => serv.Get_NSI_STREET();
-        public List<NSI_STREET> NsiStreetsL => NsiStreets.ToList();
+        //public IEnumerable<NSI_STREET> NsiStreets => serv.Get_NSI_STREET();
+        //public List<NSI_STREET> NsiStreetsL => NsiStreets.ToList();
         //public IEnumerable<VW_NSI_STREET> VwNsiStreets => serv.Get_VW_NSI_STREET();
-        public List<VW_NSI_STREET> VwNsiStreetsL
+        //public List<VW_NSI_STREET> VwNsiStreetsL
+        //{
+        //    get
+        //    {
+        //        List<VW_NSI_STREET> vwNsiStreetsL = new List<VW_NSI_STREET>
+        //        {
+        //            new VW_NSI_STREET
+        //            {
+        //                NSTREET_ID = 1,
+        //                NSTREET_NAME = "Test",
+        //            }
+        //        };
+        //        return vwNsiStreetsL;
+        //    }
+        //}
+
+
+        public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages
         {
             get
             {
-                List<VW_NSI_STREET> vwNsiStreetsL = new List<VW_NSI_STREET>
+                using (EntityServ _serv = new EntityServ(connectionString))
                 {
-                    new VW_NSI_STREET
-                    {
-                        NSTREET_ID = 1,
-                        NSTREET_NAME = "Test",
-                    }
-                };
-                return vwNsiStreetsL;
+                    List<NSI_VILLAGE> itemsL = _serv.Get_NSI_VILLAGE().ToList();
+                    { }
+                    vwNsiVillages = _serv.Get_VW_NSI_VILLAGE().ToList();
+                }
+                return vwNsiVillages;
             }
         }
+        private IEnumerable<VW_NSI_VILLAGE> vwNsiVillages;
 
 
-        public IEnumerable<NSI_VILLAGE> NsiVillages => serv.Get_NSI_VILLAGE();
-        public List<NSI_VILLAGE> GetNsiVillages()
+        public IEnumerable<VW_NSI_STREET> VwNsiStreets
         {
-            using (EntityServ _serv = new EntityServ(connectionString))
+            get
             {
-                nsiVillagesL = _serv.Get_NSI_VILLAGE().ToList();
-                return nsiVillagesL;
+                using (EntityServ _serv = new EntityServ(connectionString))
+                {
+                    List<NSI_VILLAGE> itemsL = _serv.Get_NSI_VILLAGE().ToList();
+                    { }
+                    vwNsiStreets = _serv.Get_VW_NSI_STREET().ToList();
+                }
+                return vwNsiStreets;
             }
         }
-        private List<NSI_VILLAGE> nsiVillagesL;
-        public List<NSI_VILLAGE> NsiVillagesL => nsiVillagesL;
-        public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages => serv.Get_VW_NSI_VILLAGE();
-
-
+        private IEnumerable<VW_NSI_STREET> vwNsiStreets;
+        #region User
         public List<scr_user1> UsersL
         {
             get
@@ -121,23 +138,6 @@ namespace Server.Core
 
         public string UsersJson { get { return JsonSerializer.Serialize(UsersAr); } }
         #endregion
-
-        #region Gos
-        //public void DoSmth()
-        //{
-        //    using (EntityServ _serv = new EntityServ(connectionString))
-        //    {
-        //        rgns = _serv.Get_rgn().ToList();
-        //        villages = _serv.Get_village().ToList();
-        //    }
-        //}
-        //public List<rgn> rgns;
-        //public List<village> villages;
-        //public IEnumerable<street> streets => serv.GetStreets();
-        //public List<street> streetsL => serv.GetStreets().ToList();
-
-        //public IEnumerable<type_street> type_streets => serv.GetTypeStreets();
-        //public List<type_street> type_streetsL => serv.GetTypeStreets().OrderBy(ss => ss.tstreet_id).ToList();
         #endregion
 
     }

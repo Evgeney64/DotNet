@@ -35,9 +35,6 @@ namespace Server.Core.Model
         //    List<NSI_STREET> list = items.ToList(); ;
         //    return items;
         //}
-        public IQueryable<NSI_STREET> Get_NSI_STREET() => Context.NSI_STREET;
-
-        public IQueryable<NSI_VILLAGE> Get_NSI_VILLAGE() => Context.NSI_VILLAGE;
 
         #region Gos
         //public IQueryable<village> Get_village() => Context.village;
