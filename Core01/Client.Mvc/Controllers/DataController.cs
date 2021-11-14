@@ -19,6 +19,12 @@ namespace Data.Controllers
             conf = ConfigurateHelper.GetConfiguration("config.json", "EntityDataMsSql");
         }
 
+        public ViewResult DoSmth()
+        {
+            VmBase vmBase = new VmBase(conf.ConnectionString);
+            vmBase.DoSmth();
+            return View("nsi_village", vmBase);
+        }
         public ViewResult GetVillages()
         {
             VmBase vmBase = new VmBase(conf.ConnectionString);

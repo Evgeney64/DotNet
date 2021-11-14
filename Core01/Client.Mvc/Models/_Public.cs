@@ -28,8 +28,8 @@ namespace HtmlHelpersApp.App_Code
 		public static object Customize(this IHtmlHelper html, VmBase vmBase)
 		{
 			string div = "";
-			if (vmBase.UsersJson != null)
-			{ }
+			//if (vmBase.UsersJson != null)
+			//{ }
 			div += "<script>" +
 				"" +
 				"	$(document).ready(function () {" +
@@ -47,7 +47,7 @@ namespace HtmlHelpersApp.App_Code
                 "	});" +
 				"</script>"
 				;
-			string str = vmBase.UsersJson.Replace("\"", "&quot;");
+			string str = "";// vmBase.UsersJson.Replace("\"", "&quot;");
 			div = "<script>$(document).ready(function () {Site_Accordion(\"" + str + "\");});</script>";
 			object view = html.Raw(div);
 			return view;

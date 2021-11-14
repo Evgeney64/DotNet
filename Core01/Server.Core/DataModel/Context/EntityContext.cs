@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 using Server.Core.Context;
+using Server.Core.Model;
 
 namespace Server.Core.Context
 {
@@ -54,6 +55,12 @@ namespace Server.Core.Context
                 if (is_postgres)
                     modelBuilder.HasDefaultSchema(postgresSchema);
             }
+
+            //builder.Entity<Team>().HasMany(t => t.TeamMebers).WithOne(u => u.Team).HasForeignKey(u => u.ID);
+            //builder.Entity<User>().HasOne(u => u.Team).WithMany(t => t.TeamMebers).HasForeignKey(t => t.ID);
+            //modelBuilder.Entity<BUILD>().ToTable("BUILD");
+            //modelBuilder.Entity<NSI_VILLAGE>().ToTable("Users");
+            //modelBuilder.Entity<NSI_VILLAGE>().ToTable("Logs");
 
             base.OnModelCreating(modelBuilder);
             #endregion

@@ -57,8 +57,10 @@ namespace Server.Core.Model
         #endregion
         #region Navigation - children
         //FK_BUILD_NSI_VILLAGE2
-        //public virtual ICollection<BUILD> BUILD { get; set; }//;
+        //[InverseProperty("NVILLAGE_ID2")]
+        public virtual ICollection<BUILD> BUILD { get; set; }//;
         // FK_BUILD_NSI_VILLAGE1
+        //[InverseProperty("NVILLAGE_ID1")]
         //public virtual ICollection<BUILD> BUILD1 { get; set; }//;
         //FK_NSI_STREET_NSI_VILLAGE
         public virtual ICollection<NSI_STREET> NSI_STREET { get; set; }//;
@@ -68,7 +70,7 @@ namespace Server.Core.Model
         #region Constructor
         public NSI_VILLAGE()
         {
-            //this.BUILD = new HashSet<BUILD>();
+            this.BUILD = new HashSet<BUILD>();
             //this.BUILD1 = new HashSet<BUILD>();
             this.NSI_STREET = new HashSet<NSI_STREET>();
             this.NSI_VILLAGE2 = new HashSet<NSI_VILLAGE>();

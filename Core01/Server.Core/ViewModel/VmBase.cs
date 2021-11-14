@@ -38,55 +38,17 @@ namespace Server.Core
         public string HtmlString { get; set; }
         public HtmlHelper Html { get; set; }
         private EntityServ serv { get; }
-        public VmBase(IConfiguration configuration, ConnectionType_Enum connectionType)
-        {
-            
-            //switch (connectionType)
-            //{
-            //    case ConnectionType_Enum.Auth:
-            //        connectionString = configuration["Data:auth:ConnectionString"];
-            //        //authServ = new AuthServ(connectionString);
-            //        break;
-            //    case ConnectionType_Enum.Data:
-            //        connectionString = configuration["Data:renovation_web:ConnectionString"];
-            //        coreServ = new CoreServ(connectionString);
-            //        break;
-            //    case ConnectionType_Enum.Gos:
-            //        connectionString = configuration["Data:gos:ConnectionString"];
-            //        coreServ = new CoreServ(connectionString);
-            //        break;
-            //}
-            //var contextOptions = new DbContextOptionsBuilder<EntityContext>()
-            //    .UseSqlServer(connectionString)
-            //    .Options;
-
-            //context = new CoreEdm(contextOptions);
-        }
-        //private CoreEdm context { get; }
-        //private AuthServ authServ { get; }
         #endregion
 
         #region Data
-        //public IEnumerable<NSI_STREET> NsiStreets => context.NSI_STREET;
-        //public IEnumerable<NSI_STREET> NsiStreets => serv.Get_NSI_STREET();
-        //public List<NSI_STREET> NsiStreetsL => NsiStreets.ToList();
-        //public IEnumerable<VW_NSI_STREET> VwNsiStreets => serv.Get_VW_NSI_STREET();
-        //public List<VW_NSI_STREET> VwNsiStreetsL
-        //{
-        //    get
-        //    {
-        //        List<VW_NSI_STREET> vwNsiStreetsL = new List<VW_NSI_STREET>
-        //        {
-        //            new VW_NSI_STREET
-        //            {
-        //                NSTREET_ID = 1,
-        //                NSTREET_NAME = "Test",
-        //            }
-        //        };
-        //        return vwNsiStreetsL;
-        //    }
-        //}
-
+        public void DoSmth()
+        {
+            using (EntityServ _serv = new EntityServ(connectionString))
+            {
+                List<BUILD> items = _serv.Get_BUILD().ToList();
+                List<NSI_VILLAGE> items1 = _serv.Get_NSI_VILLAGE().ToList();
+            }
+        }
 
         public IEnumerable<VW_NSI_VILLAGE> VwNsiVillages
         {
@@ -94,7 +56,7 @@ namespace Server.Core
             {
                 using (EntityServ _serv = new EntityServ(connectionString))
                 {
-                    List<NSI_VILLAGE> itemsL = _serv.Get_NSI_VILLAGE().ToList();
+                    //List<BUILD> itemsL = _serv.Get_BUILD().ToList();
                     { }
                     vwNsiVillages = _serv.Get_VW_NSI_VILLAGE().ToList();
                 }
@@ -102,7 +64,6 @@ namespace Server.Core
             }
         }
         private IEnumerable<VW_NSI_VILLAGE> vwNsiVillages;
-
 
         public IEnumerable<VW_NSI_STREET> VwNsiStreets
         {
@@ -118,26 +79,6 @@ namespace Server.Core
             }
         }
         private IEnumerable<VW_NSI_STREET> vwNsiStreets;
-        #region User
-        public List<scr_user1> UsersL
-        {
-            get
-            {
-                List<scr_user1> users = new List<scr_user1>
-                {
-                    new scr_user1{ user_id = 1964, user_name = "Евгений"},
-                    new scr_user1{ user_id = 1986, user_name = "Андрей"},
-                    new scr_user1{ user_id = 1990, user_name = "Рита"},
-                    new scr_user1{ user_id = 2014, user_name = "Алиса"},
-                };
-                return users;
-            }
-        }
-
-        public scr_user1[] UsersAr { get { return UsersL.ToArray(); } }
-
-        public string UsersJson { get { return JsonSerializer.Serialize(UsersAr); } }
-        #endregion
         #endregion
 
     }

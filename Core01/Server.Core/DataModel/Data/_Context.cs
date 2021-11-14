@@ -11,7 +11,7 @@ namespace Server.Core.Context
 {
     using Microsoft.EntityFrameworkCore;
     using Server.Core.Model;
-    
+
     public partial class EntityContext : DbContext
     {
         public virtual DbSet<BUILD> BUILD { get; set; }//;
@@ -19,5 +19,8 @@ namespace Server.Core.Context
         public virtual DbSet<NSI_STREET_TYPE> NSI_STREET_TYPE { get; set; }
 
         public virtual DbSet<NSI_VILLAGE> NSI_VILLAGE { get; set; }
-        public virtual DbSet<NSI_VILLAGE_TYPE> NSI_VILLAGE_TYPE { get; set; }    }
+        public virtual DbSet<NSI_VILLAGE_TYPE> NSI_VILLAGE_TYPE { get; set; }
+
+
+    }
 }

@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\AdminController.cs" />
+    <Compile Remove="Controllers\ApiControllrt.cs" />
     <Compile Remove="Startup-0.cs" />
     <Compile Remove="StartupServices-0.cs" />
   </ItemGroup>
