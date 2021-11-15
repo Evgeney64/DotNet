@@ -71,6 +71,7 @@ namespace Tsb.Model
                     reader1.Close();
 
                     object_ids = String.Join(",", tables.Select(ss => ss.id));
+                    tables_str.AddRange(tables.Select(ss => ss.name));
                 }
             }
             catch (Exception ex)
@@ -173,7 +174,13 @@ namespace Tsb.Model
                                 this_column = reader3.GetValue(4).ToString(),
                                 ref_column = reader3.GetValue(5).ToString(),
                             };
-                            foreign_keys.Add(fk);
+                            if (tables_str.Contains(fk.this_table) && tables_str.Contains(fk.ref_table))
+                            {
+                                foreign_keys.Add(fk);
+                                //table ref_table = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
+                                //if (ref_table != null)
+                                //    foreign_keys.Add(fk);
+                            }
                             //tbl.foreign_keys.Add(fk);
                             #endregion
                         }

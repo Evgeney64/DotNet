@@ -19,6 +19,7 @@ namespace Tsb.Model
         string collate = "pg_catalog.\"default\"";
 
         public List<table> tables = new List<table>();
+        public List<string> tables_str = new List<string>();
         string object_ids = "";
 
         List<column> columns = new List<column>();
@@ -146,25 +147,36 @@ namespace Tsb.Model
                 _tables1.AddRange(tbl.children);
                 if (tbl.name == "DOCUMENT")
                 { }
-                int i = 0;
+                int coli = 0;
                 column col = tbl.columns.Where(ss => ss.name == tbl.name).FirstOrDefault();
-                if (col!=null)
+                if (col != null)
                 {
                     col.attr_name = col.name;
-                    col.name = col.name + i;
-                    i++;
+                    col.name = col.name + coli;
+                    coli++;
                 }
+                int fk_nom = 0;
                 foreach (table tbl1 in _tables1.OrderBy(ss => ss.name))
                 {
-                    //int i = 0;
-                    if (tbl.name == tbl1.name && i == 0)
-                        i = 1;
+                    foreign_key fk1 = foreign_keys.Where(ss => ss.fk_name == tbl1.fk_name).FirstOrDefault();
+                    if (fk1 != null)
+                    { }
+                    if (tbl.name == tbl1.name && fk_nom == 0)
+                        fk_nom = 1;
                     List<table> _tables2 = _tables1.Where(ss => ss.name == tbl1.name).ToList();
                     foreach (table tbl2 in _tables2)
                     {
-                        if (i > 0)
-                            tbl2.fk_nom = i;
-                        i++;
+                        if (fk_nom > 0)
+                        {
+                            tbl2.fk_nom = fk_nom;
+                            //fk1.fk_nom = i;
+                            foreign_key fk2 = foreign_keys.Where(ss => ss.fk_name == tbl2.fk_name).FirstOrDefault();
+                            if (fk2 != null)
+                            {
+                                fk2.fk_nom = fk_nom;
+                            }
+                        }
+                        fk_nom++;
                     }
                 }
             }

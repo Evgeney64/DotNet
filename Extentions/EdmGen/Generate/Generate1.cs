@@ -74,6 +74,10 @@ namespace Tsb.Generate
                 };
                 foreach (table child in tbl.children)
                 {
+                    foreign_key fk1 = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
+                    if (fk1 != null && fk1.fk_nom != null)
+                    { }
+
                     CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
                         new CodeThisReferenceExpression(),
                         child.name + child.fk_nom
@@ -172,12 +176,16 @@ namespace Tsb.Generate
                 CodeMemberField prop1 = null;
                 foreach (table parent in tbl.parents.OrderBy(ss => ss.name))
                 {
+                    foreign_key fk2 = tbl.foreign_keys.Where(ss => ss.fk_name == parent.fk_name).FirstOrDefault();
+                    if (fk2 != null && fk2.fk_nom != null)
+                    { }
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual " + parent.name),
                         Name = parent.name + parent.fk_nom + " { get; set; }//",
                     };
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment(parent.fk_name, false)));
 
                     #region [InverseProperty]
@@ -222,6 +230,9 @@ namespace Tsb.Generate
                 CodeMemberField prop1 = null;
                 foreach (table child in tbl.children.OrderBy(ss => ss.name))
                 {
+                    foreign_key fk3 = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
+                    if (fk3 != null && fk3.fk_nom != null)
+                    { }
                     child.fk_name_nom = child.name + child.fk_nom;
                     CodeMemberField prop = new CodeMemberField
                     {
@@ -229,6 +240,7 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
                         Name = child.fk_name_nom + " { get; set; }//",
                     };
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name, false)));
 
                     if (i == 0)
@@ -335,7 +347,7 @@ namespace Tsb.Generate
                             continue;
 
                         string str = "Entity<" + fk.this_table + ">()";
-                        str += ".HasOne(u => u.Partners2)";
+                        str += ".HasOne(u => u." + fk.ref_table + fk.fk_nom + ")";
                         str += ".WithMany(t => t." + tbl1.fk_name_nom + ")";
                         str += ".HasForeignKey(t => t." + fk.this_column + ")";
                         str += ";//";
