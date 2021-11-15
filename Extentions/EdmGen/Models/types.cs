@@ -58,6 +58,7 @@ namespace Tsb.Model
     {
         public long object_id { get; set; }
         public string name { get; set; }
+        public string attr_name { get; set; }
         public int column_id { get; set; }
 
         public void typePostgresSet()

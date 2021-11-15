@@ -16,8 +16,5 @@ namespace Server.Core.Context
     {
         public virtual DbSet<Partners> Partners { get; set; }//;
         public virtual DbSet<payerlive> payerlive { get; set; }//;
-        public virtual DbSet<rgn> rgn { get; set; }//;
-        public virtual DbSet<type_village> type_village { get; set; }//;
-        public virtual DbSet<village> village { get; set; }//;
     }
 }

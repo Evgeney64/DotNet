@@ -18,6 +18,7 @@ namespace Server.Core.Context
         string postgresSchema;
         #endregion
 
+        #region Constructor
         public EntityContext()
         { }
         public EntityContext(DbContextOptions<EntityContext> options)
@@ -30,6 +31,9 @@ namespace Server.Core.Context
             postgresSchema = _postgrSchem;
             //Database.EnsureCreated();
         }
+        #endregion
+
+        #region OnConfiguring
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             #region
@@ -47,6 +51,8 @@ namespace Server.Core.Context
             { }
             #endregion
         }
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region
@@ -55,6 +61,18 @@ namespace Server.Core.Context
                 if (is_postgres)
                     modelBuilder.HasDefaultSchema(postgresSchema);
             }
+
+            modelBuilder.Entity<payerlive>()
+                .HasOne(u => u.Partners2)
+                .WithMany(t => t.payerlive2)
+                .HasForeignKey(t => t.reciever_id)
+                ;
+
+            modelBuilder.Entity<payerlive>()
+                .HasOne(u => u.Partners3)
+                .WithMany(t => t.payerlive3)
+                .HasForeignKey(t => t.payer_id)
+                ;
 
             //builder.Entity<Team>().HasMany(t => t.TeamMebers).WithOne(u => u.Team).HasForeignKey(u => u.ID);
             //builder.Entity<User>().HasOne(u => u.Team).WithMany(t => t.TeamMebers).HasForeignKey(t => t.ID);
@@ -66,6 +84,7 @@ namespace Server.Core.Context
             #endregion
         }
 
+        #region CreateContext
         public static EntityContext CreateContext(string connectionStringName, bool _is_postgres = false)
         {
             #region
@@ -100,6 +119,7 @@ namespace Server.Core.Context
             return context;
             #endregion
         }
+        #endregion
 
         #region Save
         public int SaveChanges(Guid transactionGuid)

@@ -15,6 +15,10 @@ namespace Tsb.Generate
         private static ServiceResult generateOneClass(string dir, table tbl)
         {
             #region
+            #region Define
+            bool generate_children = true;
+            #endregion
+
             #region namespace
             CodeCompileUnit classUnit = new CodeCompileUnit();
             CodeNamespace classNamespace = new CodeNamespace("Server.Core.Model");
@@ -62,7 +66,7 @@ namespace Tsb.Generate
             #endregion
 
             #region Constructor
-            if (tbl.children.Count() > 0)
+            if (generate_children && tbl.children.Count() > 0)
             {
                 CodeConstructor constructor = new CodeConstructor
                 {
@@ -142,6 +146,14 @@ namespace Tsb.Generate
                         //    "System.ComponentModel.DataAnnotations.KeyAttribute",
                         //    new CodeAttributeArgument(new CodePrimitiveExpression(""))));
                     }
+                    if (col.attr_name != null)
+                    {
+                        prop.CustomAttributes.Add(new CodeAttributeDeclaration(
+                            "Column",
+                            new CodeAttributeArgument(new CodePrimitiveExpression(col.attr_name)))
+                            );
+                    }
+
                     classItem.Class_Serv.Members.Add(prop);
                 }
             }
@@ -203,7 +215,7 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (children)
-            if (tbl.children.Count() > 0)
+            if (generate_children && tbl.children.Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;

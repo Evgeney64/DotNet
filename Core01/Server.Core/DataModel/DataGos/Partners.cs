@@ -132,34 +132,17 @@ namespace Server.Core.Model
         public System.Nullable<int> ph_trooms_id { get; set; }//;
         public System.Nullable<int> ml_trooms_id { get; set; }//;
         #endregion
-        #region Navigation - parents
-        // FK_Partners_rgn__ml_rgn_id_PK_rgn
-        [ForeignKey("ml_rgn_id")]
-        public virtual rgn rgn2 { get; set; }//;
-        // FK_Partners_rgn__ph_rgn_id_PK_rgn
-        [ForeignKey("ph_rgn_id")]
-        public virtual rgn rgn1 { get; set; }//;
-        // FK_Partners_rgn__rgn_id_PK_rgn
-        [ForeignKey("rgn_id")]
-        public virtual rgn rgn21 { get; set; }//;
-        // FK_village_partners__village_id_PK_village
-        [ForeignKey("village_id")]
-        public virtual village village { get; set; }//;
-        // FK_village_partners__ph_village_id_PK_village
-        [ForeignKey("ph_village_id")]
-        public virtual village village1 { get; set; }//;
-        #endregion
         #region Navigation - children
         // FK_payerlive_partners__reciever_id_PK_partners
-        public virtual ICollection<payerlive> payerlive { get; set; }//;
+        public virtual ICollection<payerlive> payerlive2 { get; set; }//;
         // FK_payerlive_partners__payer_id_PK_partners
-        public virtual ICollection<payerlive> payerlive1 { get; set; }//;
+        public virtual ICollection<payerlive> payerlive3 { get; set; }//;
         #endregion
         #region Constructor
         public Partners()
         {
-            this.payerlive = new HashSet<payerlive>();
-            this.payerlive1 = new HashSet<payerlive>();
+            this.payerlive2 = new HashSet<payerlive>();
+            this.payerlive3 = new HashSet<payerlive>();
         }
         #endregion
     }

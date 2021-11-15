@@ -146,9 +146,17 @@ namespace Tsb.Model
                 _tables1.AddRange(tbl.children);
                 if (tbl.name == "DOCUMENT")
                 { }
+                int i = 0;
+                column col = tbl.columns.Where(ss => ss.name == tbl.name).FirstOrDefault();
+                if (col!=null)
+                {
+                    col.attr_name = col.name;
+                    col.name = col.name + i;
+                    i++;
+                }
                 foreach (table tbl1 in _tables1.OrderBy(ss => ss.name))
                 {
-                    int i = 0;
+                    //int i = 0;
                     if (tbl.name == tbl1.name && i == 0)
                         i = 1;
                     List<table> _tables2 = _tables1.Where(ss => ss.name == tbl1.name).ToList();

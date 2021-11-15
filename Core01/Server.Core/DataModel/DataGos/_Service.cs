@@ -16,8 +16,5 @@ namespace Server.Core.Model
     {
         public IQueryable<Partners>  Get_Partners() => Context.Partners;
         public IQueryable<payerlive>  Get_payerlive() => Context.payerlive;
-        public IQueryable<rgn>  Get_rgn() => Context.rgn;
-        public IQueryable<type_village>  Get_type_village() => Context.type_village;
-        public IQueryable<village>  Get_village() => Context.village;
     }
 }

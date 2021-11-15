@@ -84,10 +84,10 @@ namespace Server.Core.Model
         #region Navigation - parents
         // FK_payerlive_partners__reciever_id_PK_partners
         [ForeignKey("reciever_id")]
-        public virtual Partners Partners { get; set; }//;
+        public virtual Partners Partners2 { get; set; }//;
         // FK_payerlive_partners__payer_id_PK_partners
         [ForeignKey("payer_id")]
-        public virtual Partners Partners1 { get; set; }//;
+        public virtual Partners Partners3 { get; set; }//;
         #endregion
     }
 }
