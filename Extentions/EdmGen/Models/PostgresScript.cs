@@ -11,6 +11,7 @@ namespace Tsb.Model
     public partial class Postgres
     {
         #region Define
+        DbInfo info;
         List<table> tables = new List<table>();
         string crt = "";
         string del = "";
@@ -23,9 +24,10 @@ namespace Tsb.Model
         List<SysOperation> sysOperations = new List<SysOperation>();
         #endregion
 
-        public Postgres(List<table> _tables)
+        public Postgres(DbInfo _info)
         {
-            tables = _tables;
+            info = _info;
+            tables = info.tables;
         }
         public void GeneratePostgresScript(string client_path)
         {
@@ -45,7 +47,7 @@ namespace Tsb.Model
                 crt += " \n(";
                 del += " \nDROP TABLE " + schem_table_name + ";";
 
-                scriptColumn(tbl, schem_table_name);
+                scriptColumn(info, tbl, schem_table_name);
 
                 crt += " \n)";
                 crt += " TABLESPACE " + table_space;
@@ -56,9 +58,9 @@ namespace Tsb.Model
                 crt += ";\n";
                 #endregion
 
-                scriptFK(tbl, schem_table_name, schem);
+                scriptFK(info, tbl, schem_table_name, schem);
 
-                scriptIndex(tbl, schem_table_name, schem, table_space);
+                scriptIndex(info, tbl, schem_table_name, schem, table_space);
 
                 #region INSERT SysOperation
                 if (1 == 2)
@@ -119,7 +121,7 @@ namespace Tsb.Model
             #endregion
         }
 
-        private void scriptColumn(table tbl, string schem_table_name)
+        private void scriptColumn(DbInfo info, table tbl, string schem_table_name)
         {
             if (tbl.columns.Count() > 0)
             {
@@ -145,12 +147,13 @@ namespace Tsb.Model
                 }
             }
         }
-        private void scriptFK(table tbl, string schem_table_name, string schem)
+        private void scriptFK(DbInfo info, table tbl, string schem_table_name, string schem)
         {
-            if (tbl.foreign_keys.Count() > 0)
+            //if (tbl.foreign_keys.Count() > 0)
             {
                 int count = 0;
-                foreach (foreign_key fk in tbl.foreign_keys)
+                //foreach (foreign_key fk in tbl.foreign_keys)
+                foreach (foreign_key fk in info.foreign_keys.Where(ss=>ss.this_table1 == tbl))
                 {
                     string fk_name = fk.fk_name;
                     if (fk_name.Length > 63)
@@ -185,7 +188,7 @@ namespace Tsb.Model
                 }
             }
         }
-        private void scriptIndex(table tbl, string schem_table_name, string schem, string table_space)
+        private void scriptIndex(DbInfo info, table tbl, string schem_table_name, string schem, string table_space)
         {
             if (tbl.indexes.Count() > 0)
             {

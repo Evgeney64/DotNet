@@ -44,7 +44,7 @@ namespace Tsb.Model
 
 
         public List<column> columns { get; set; }
-        public List<foreign_key> foreign_keys { get; set; }
+        //public List<foreign_key> foreign_keys { get; set; }
         public List<index> indexes { get; set; }
 
         public List<table> parents { get; set; }

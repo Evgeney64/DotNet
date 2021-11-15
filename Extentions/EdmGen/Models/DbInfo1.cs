@@ -56,7 +56,7 @@ namespace Tsb.Model
                                 fk_name = table_name.ToString(),
                                 id = long.Parse(reader1.GetValue(1).ToString()),
                                 columns = new List<column>(),
-                                foreign_keys = new List<foreign_key>(),
+                                //foreign_keys = new List<foreign_key>(),
                                 indexes = new List<index>(),
                                 parents = new List<table>(),
                                 children = new List<table>(),

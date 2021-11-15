@@ -46,7 +46,7 @@ namespace EdmGen
             DbInfo info = new DbInfo(conf);
             info.GenerateInfo();
 
-            Postgres postgre = new Postgres(info.tables);
+            Postgres postgre = new Postgres(info);
             postgre.GeneratePostgresScript(client_path);
             return "";
         }

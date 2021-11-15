@@ -74,9 +74,9 @@ namespace Tsb.Generate
                 };
                 foreach (table child in tbl.children)
                 {
-                    foreign_key fk1 = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
-                    if (fk1 != null && fk1.fk_nom != null)
-                    { }
+                    //foreign_key fk1 = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
+                    //if (fk1 != null && fk1.fk_nom != null)
+                    //{ }
 
                     CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
                         new CodeThisReferenceExpression(),
@@ -169,12 +169,12 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (parents)
-            //if (tbl.parents.Count() > 0)
+            if (info.foreign_keys.Where(ss => ss.this_table1 == tbl).Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
-                foreach (foreign_key fk in info.foreign_keys.OrderBy(ss => ss.ref_table))
+                foreach (foreign_key fk in info.foreign_keys.Where(ss => ss.this_table1 == tbl).OrderBy(ss => ss.ref_table))
                 {
                     table parent = fk.ref_table1;
                     parent.fk_name_nom = fk.ref_table + fk.fk_nom;
@@ -217,12 +217,12 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (children)
-            if (generate_children /*&& tbl.children.Count() > 0*/)
+            if (generate_children && info.foreign_keys.Where(ss => ss.ref_table1 == tbl).Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
-                foreach (foreign_key fk in info.foreign_keys.OrderBy(ss => ss.this_table))
+                foreach (foreign_key fk in info.foreign_keys.Where(ss => ss.ref_table1 == tbl).OrderBy(ss => ss.this_table))
                 {
                     table child = fk.this_table1;
                     child.fk_name_nom = fk.this_table + fk.fk_nom;
