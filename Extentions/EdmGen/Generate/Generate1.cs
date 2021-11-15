@@ -12,7 +12,7 @@ namespace Tsb.Generate
 {
     public partial class EdmGenerator
     {
-        private static ServiceResult generateOneClass(string dir, table tbl)
+        private static ServiceResult generateOneClass(string dir, DbInfo info, table tbl)
         {
             #region
             #region Define
@@ -169,41 +169,35 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (parents)
-            if (tbl.parents.Count() > 0)
+            //if (tbl.parents.Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
-                foreach (table parent in tbl.parents.OrderBy(ss => ss.name))
+                foreach (foreign_key fk in info.foreign_keys.OrderBy(ss => ss.ref_table))
                 {
-                    foreign_key fk2 = tbl.foreign_keys.Where(ss => ss.fk_name == parent.fk_name).FirstOrDefault();
-                    if (fk2 != null && fk2.fk_nom != null)
-                    { }
+                    table parent = fk.ref_table1;
+                    parent.fk_name_nom = fk.ref_table + fk.fk_nom;
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual " + parent.name),
-                        Name = parent.name + parent.fk_nom + " { get; set; }//",
+                        Name = parent.fk_name_nom + " { get; set; }//",
                     };
+
+                    // [ForeignKey()]
+                    // https://www.entityframeworktutorial.net/code-first/foreignkey-dataannotations-attribute-in-code-first.aspx
+
+                    // [InverseProperty("Author")]
+                    // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
+
+                    prop.CustomAttributes.Add(new CodeAttributeDeclaration(
+                        "ForeignKey",
+                        new CodeAttributeArgument(new CodePrimitiveExpression(fk.this_column))
+                        ));
+
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
-                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(parent.fk_name, false)));
-
-                    #region [InverseProperty]
-                    foreign_key fk = tbl.foreign_keys.Where(ss => ss.fk_name == parent.fk_name).FirstOrDefault();
-                    if (fk != null)
-                    {
-                        // [ForeignKey()]
-                        // https://www.entityframeworktutorial.net/code-first/foreignkey-dataannotations-attribute-in-code-first.aspx
-
-                        // [InverseProperty("Author")]
-                        // https://docs.microsoft.com/ru-ru/ef/core/modeling/relationships?tabs=data-annotations%2Cfluent-api-simple-key%2Csimple-key
-
-                        prop.CustomAttributes.Add(new CodeAttributeDeclaration(
-                            "ForeignKey",
-                            new CodeAttributeArgument(new CodePrimitiveExpression(fk.this_column))
-                            ));
-                    }
-                    #endregion
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(parent.fk_name + " [" + fk.fk_nom + "]", false)));
 
                     if (i == 0)
                         prop0 = prop;
@@ -223,17 +217,15 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (children)
-            if (generate_children && tbl.children.Count() > 0)
+            if (generate_children /*&& tbl.children.Count() > 0*/)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
-                foreach (table child in tbl.children.OrderBy(ss => ss.name))
+                foreach (foreign_key fk in info.foreign_keys.OrderBy(ss => ss.this_table))
                 {
-                    foreign_key fk3 = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
-                    if (fk3 != null && fk3.fk_nom != null)
-                    { }
-                    child.fk_name_nom = child.name + child.fk_nom;
+                    table child = fk.this_table1;
+                    child.fk_name_nom = fk.this_table + fk.fk_nom;
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,
@@ -241,7 +233,7 @@ namespace Tsb.Generate
                         Name = child.fk_name_nom + " { get; set; }//",
                     };
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
-                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name, false)));
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name + " [" + child.fk_nom + "]", false)));
 
                     if (i == 0)
                         prop0 = prop;
@@ -328,11 +320,11 @@ namespace Tsb.Generate
             }
             #endregion
 
-            #region creatNavigations
+            #region createNavigations
             {
                 CodeMemberMethod method = new CodeMemberMethod
                 {
-                    Name = "creatNavigations",
+                    Name = "createNavigations",
                 };
                 method.Parameters.Add(new CodeParameterDeclarationExpression("ModelBuilder", "builder"));
 
@@ -340,29 +332,26 @@ namespace Tsb.Generate
 
                 foreach (table tbl in info.tables.Where(ss => ss.children.Count() > 0))
                 {
-                    foreach (table tbl1 in tbl.children)
+                    foreach (foreign_key fk in info.foreign_keys.OrderBy(ss => ss.this_table))
                     {
-                        foreign_key fk = info.foreign_keys.Where(ss => ss.fk_name == tbl1.fk_name).FirstOrDefault();
-                        if (fk == null)
-                            continue;
+                        table tbl1 = fk.this_table1;
 
                         string str = "Entity<" + fk.this_table + ">()";
                         str += ".HasOne(u => u." + fk.ref_table + fk.fk_nom + ")";
-                        str += ".WithMany(t => t." + tbl1.fk_name_nom + ")";
+                        str += ".WithMany(t => t." + fk.this_table + fk.fk_nom + ")";
                         str += ".HasForeignKey(t => t." + fk.this_column + ")";
                         str += ";//";
                         CodeMethodInvokeExpression expr =
                             new CodeMethodInvokeExpression(
                                 new CodeVariableReferenceExpression("builder"), str);
 
-                        //CodeStatement expr = new CodeStatement(new CodeComment(str, false));
                         method.Statements.Add(new CodeCommentStatement(new CodeComment("", false)));
-                        method.Statements.Add(new CodeCommentStatement(new CodeComment(fk.fk_name, false)));
+                        method.Statements.Add(new CodeCommentStatement(new CodeComment(fk.fk_name + " [" + fk.fk_nom + "]", false)));
                         method.Statements.Add(expr);
 
                     }
                 }
-                //method.Statements.Add(new CodeAssignStatement(prop, value));
+
                 #region examples
                 {
                     //// Context.DoSmth();

@@ -249,6 +249,9 @@ namespace Tsb.Model
         public string this_column { get; set; }
         public string ref_column { get; set; }
 
+        public table this_table1 { get; set; }
+        public table ref_table1 { get; set; }
+
         public override string ToString()
         {
             return fk_name;

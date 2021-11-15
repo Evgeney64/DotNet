@@ -96,7 +96,7 @@ namespace Tsb.Generate
             {
                 foreach (table tbl in info.tables.OrderBy(ss => ss.name))
                 {
-                    generateOneClass(output_dir, tbl);
+                    generateOneClass(output_dir, info, tbl);
                     Console.WriteLine("[gen] - " + tbl.nom + " - " + tbl.name);
                 }
             }

@@ -60,6 +60,11 @@ namespace Tsb.Model
                 {
                     tbl.columns.AddRange(columns.Where(ss => ss.object_id == tbl.id).OrderBy(ss => ss.column_id));
                     tbl.foreign_keys.AddRange(foreign_keys.Where(ss => ss.object_id == tbl.id));
+                    foreach (foreign_key fk in tbl.foreign_keys)
+                    {
+                        fk.this_table1 = tbl;
+                        fk.ref_table1 = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
+                    }
 
                     #region index
                     List<index> _indexes = indexes
@@ -123,27 +128,32 @@ namespace Tsb.Model
         public void GenerateInfoFk()
         {
             #region
+            if (foreign_keys != null)
+            { }
             foreach (table tbl in tables.Where(ss => ss.foreign_keys.Count() > 0))
             {
-                foreach (foreign_key fk in tbl.foreign_keys)
+                //foreach (foreign_key fk in tbl.foreign_keys)
+                foreach (foreign_key fk in foreign_keys.Where(ss => ss.this_table1 == tbl))
                 {
-                    table ref_table = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
-                    if (ref_table != null)
+                    //table ref_table = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
+                    if (fk.ref_table1 != null)
                     {
                         tbl.parents.Add(new table { name = fk.ref_table, fk_name = fk.fk_name });
-                        ref_table.children.Add(new table { name = tbl.name, fk_name = fk.fk_name });
+                        fk.ref_table1.children.Add(new table { name = tbl.name, fk_name = fk.fk_name });
                     }
                 }
             }
             { }
 
             foreach (table tbl in tables
-                .Where(ss => ss.parents.Count() > 0 || ss.children.Count() > 0)
+                .Where(ss => 
+                    //ss.parents.Count() > 0 || 
+                    ss.children.Count() > 0)
                 .OrderBy(ss => ss.name)
                 )
             {
                 List<table> _tables1 = new List<table>();
-                _tables1.AddRange(tbl.parents);
+                //_tables1.AddRange(tbl.parents);
                 _tables1.AddRange(tbl.children);
                 if (tbl.name == "DOCUMENT")
                 { }
@@ -158,19 +168,16 @@ namespace Tsb.Model
                 int fk_nom = 0;
                 foreach (table tbl1 in _tables1.OrderBy(ss => ss.name))
                 {
-                    foreign_key fk1 = foreign_keys.Where(ss => ss.fk_name == tbl1.fk_name).FirstOrDefault();
-                    if (fk1 != null)
-                    { }
                     if (tbl.name == tbl1.name && fk_nom == 0)
                         fk_nom = 1;
-                    List<table> _tables2 = _tables1.Where(ss => ss.name == tbl1.name).ToList();
-                    foreach (table tbl2 in _tables2)
+                    foreign_key fk1 = foreign_keys.Where(ss => ss.fk_name == tbl1.fk_name).FirstOrDefault();
+                    if (fk1 != null)
                     {
                         if (fk_nom > 0)
                         {
-                            tbl2.fk_nom = fk_nom;
+                            tbl1.fk_nom = fk_nom;
                             //fk1.fk_nom = i;
-                            foreign_key fk2 = foreign_keys.Where(ss => ss.fk_name == tbl2.fk_name).FirstOrDefault();
+                            foreign_key fk2 = foreign_keys.Where(ss => ss.fk_name == tbl1.fk_name).FirstOrDefault();
                             if (fk2 != null)
                             {
                                 fk2.fk_nom = fk_nom;
@@ -178,6 +185,21 @@ namespace Tsb.Model
                         }
                         fk_nom++;
                     }
+                    //List<table> _tables2 = _tables1.Where(ss => ss.name == tbl1.name).ToList();
+                    //foreach (table tbl2 in _tables2)
+                    //{
+                    //    if (fk_nom > 0)
+                    //    {
+                    //        tbl2.fk_nom = fk_nom;
+                    //        //fk1.fk_nom = i;
+                    //        foreign_key fk2 = foreign_keys.Where(ss => ss.fk_name == tbl2.fk_name).FirstOrDefault();
+                    //        if (fk2 != null)
+                    //        {
+                    //            fk2.fk_nom = fk_nom;
+                    //        }
+                    //    }
+                    //    fk_nom++;
+                    //}
                 }
             }
             #endregion
