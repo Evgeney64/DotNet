@@ -22,7 +22,7 @@ namespace Tsb.Model
         string object_ids = "";
 
         List<column> columns = new List<column>();
-        List<foreign_key> foreign_keys = new List<foreign_key>();
+        public List<foreign_key> foreign_keys = new List<foreign_key>();
         List<index> indexes = new List<index>();
         List<index_column> index_columns = new List<index_column>();
 

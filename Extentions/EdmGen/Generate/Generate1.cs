@@ -330,16 +330,24 @@ namespace Tsb.Generate
                 {
                     foreach (table tbl1 in tbl.children)
                     {
-                        string str = "Entity<"+ tbl1.name + ">()";
+                        foreign_key fk = info.foreign_keys.Where(ss => ss.fk_name == tbl1.fk_name).FirstOrDefault();
+                        if (fk == null)
+                            continue;
+
+                        string str = "Entity<" + fk.this_table + ">()";
                         str += ".HasOne(u => u.Partners2)";
                         str += ".WithMany(t => t." + tbl1.fk_name_nom + ")";
-                        str += ".HasForeignKey(t => t.reciever_id)";
+                        str += ".HasForeignKey(t => t." + fk.this_column + ")";
                         str += ";//";
                         CodeMethodInvokeExpression expr =
                             new CodeMethodInvokeExpression(
                                 new CodeVariableReferenceExpression("builder"), str);
 
+                        //CodeStatement expr = new CodeStatement(new CodeComment(str, false));
+                        method.Statements.Add(new CodeCommentStatement(new CodeComment("", false)));
+                        method.Statements.Add(new CodeCommentStatement(new CodeComment(fk.fk_name, false)));
                         method.Statements.Add(expr);
+
                     }
                 }
                 //method.Statements.Add(new CodeAssignStatement(prop, value));
