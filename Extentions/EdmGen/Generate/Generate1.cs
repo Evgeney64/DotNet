@@ -222,11 +222,12 @@ namespace Tsb.Generate
                 CodeMemberField prop1 = null;
                 foreach (table child in tbl.children.OrderBy(ss => ss.name))
                 {
+                    child.fk_name_nom = child.name + child.fk_nom;
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
-                        Name = child.name + child.fk_nom + " { get; set; }//",
+                        Name = child.fk_name_nom + " { get; set; }//",
                     };
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name, false)));
 
@@ -312,6 +313,79 @@ namespace Tsb.Generate
                     classItem.Class_Serv.Members.Add(prop);
                     //Console.WriteLine("[gen-context] - " + tbl.nom + " - " + tbl.name);
                 }
+            }
+            #endregion
+
+            #region creatNavigations
+            {
+                CodeMemberMethod method = new CodeMemberMethod
+                {
+                    Name = "creatNavigations",
+                };
+                method.Parameters.Add(new CodeParameterDeclarationExpression("ModelBuilder", "builder"));
+
+                classItem.Class_Serv.Members.Add(method);
+
+                foreach (table tbl in info.tables.Where(ss => ss.children.Count() > 0))
+                {
+                    foreach (table tbl1 in tbl.children)
+                    {
+                        string str = "Entity<"+ tbl1.name + ">()";
+                        str += ".HasOne(u => u.Partners2)";
+                        str += ".WithMany(t => t." + tbl1.fk_name_nom + ")";
+                        str += ".HasForeignKey(t => t.reciever_id)";
+                        str += ";//";
+                        CodeMethodInvokeExpression expr =
+                            new CodeMethodInvokeExpression(
+                                new CodeVariableReferenceExpression("builder"), str);
+
+                        method.Statements.Add(expr);
+                    }
+                }
+                //method.Statements.Add(new CodeAssignStatement(prop, value));
+                #region examples
+                {
+                    //// Context.DoSmth();
+                    //// .................................
+                    //CodeMethodInvokeExpression toStringInvoke =
+                    //    new CodeMethodInvokeExpression(
+                    //        new CodeVariableReferenceExpression("Context"),
+                    //        "DoSmth"
+                    //        );
+
+
+                    //// this.DoSmth();
+                    //// .................................
+                    //CodeMethodInvokeExpression toStringInvoke =
+                    //    new CodeMethodInvokeExpression(
+                    //        new CodeThisReferenceExpression(),
+                    //        "DoSmth"
+                    //        );
+                    //method.Statements.Add(toStringInvoke);
+
+
+                    //// this.widthValue = width;
+                    //// .................................
+                    //CodeFieldReferenceExpression widthReference =
+                    //    new CodeFieldReferenceExpression(
+                    //    new CodeThisReferenceExpression(), "widthValue");
+                    //method.Statements.Add(new CodeAssignStatement(widthReference,
+                    //    new CodeArgumentReferenceExpression("width")));
+
+
+                    //// Console.Write("Example string");
+                    //// .................................
+                    //CodeExpression toStringInvoke = new CodeMethodInvokeExpression(
+                    //    new CodeTypeReferenceExpression("Console"),
+                    //    "Write",
+                    //    new CodePrimitiveExpression("Example string")
+                    //    );
+                    //method.Statements.Add(toStringInvoke);
+                }
+                #endregion
+
+                method.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
+                method.Comments.Add(new CodeCommentStatement(new CodeComment("Create navigation props", false)));
             }
             #endregion
 

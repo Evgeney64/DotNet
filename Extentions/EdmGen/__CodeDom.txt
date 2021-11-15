@@ -1,0 +1,26 @@
+﻿-- ****************************************************************************
+
+((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+                {
+                    CodeExpressionStatement statement = new CodeExpressionStatement();
+                    CodeMethodInvokeExpression methodInvoke = new CodeMethodInvokeExpression();
+                    statement.Expression = methodInvoke;
+
+                    CodeMethodReferenceExpression methodRef = new CodeMethodReferenceExpression();
+                    methodRef.MethodName = "BeginInit";
+
+                    CodeCastExpression cast = new CodeCastExpression();
+                    cast.TargetType = new CodeTypeReference();
+                    cast.TargetType.BaseType = "System.ComponentModel.ISupportInitialize";
+
+                    CodeFieldReferenceExpression fieldRef = new CodeFieldReferenceExpression();
+                    fieldRef.FieldName = "pictureBox1";
+                    fieldRef.TargetObject = new CodeThisReferenceExpression();
+                    cast.Expression = fieldRef;
+
+                    methodRef.TargetObject = cast;
+                    methodInvoke.Method = methodRef;
+
+                    method.Statements.Add(statement);
+                }
+-- ****************************************************************************

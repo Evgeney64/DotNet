@@ -39,7 +39,9 @@ namespace Tsb.Model
 
         public int nom { get; set; }
         public string fk_name { get; set; }
+        public string fk_name_nom { get; set; }
         public int? fk_nom { get; set; }
+
 
         public List<column> columns { get; set; }
         public List<foreign_key> foreign_keys { get; set; }

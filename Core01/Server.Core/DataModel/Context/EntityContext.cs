@@ -53,6 +53,7 @@ namespace Server.Core.Context
         }
         #endregion
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region
@@ -61,18 +62,7 @@ namespace Server.Core.Context
                 if (is_postgres)
                     modelBuilder.HasDefaultSchema(postgresSchema);
             }
-
-            modelBuilder.Entity<payerlive>()
-                .HasOne(u => u.Partners2)
-                .WithMany(t => t.payerlive2)
-                .HasForeignKey(t => t.reciever_id)
-                ;
-
-            modelBuilder.Entity<payerlive>()
-                .HasOne(u => u.Partners3)
-                .WithMany(t => t.payerlive3)
-                .HasForeignKey(t => t.payer_id)
-                ;
+            creatNavigations(modelBuilder);
 
             //builder.Entity<Team>().HasMany(t => t.TeamMebers).WithOne(u => u.Team).HasForeignKey(u => u.ID);
             //builder.Entity<User>().HasOne(u => u.Team).WithMany(t => t.TeamMebers).HasForeignKey(t => t.ID);
