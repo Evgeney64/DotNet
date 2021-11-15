@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Data\**" />
+    <Content Remove="Views\Data\**" />
+    <EmbeddedResource Remove="Views\Data\**" />
+    <None Remove="Views\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\AdminController.cs" />
     <Compile Remove="Controllers\ApiControllrt.cs" />
     <Compile Remove="Startup-0.cs" />

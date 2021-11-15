@@ -7,21 +7,18 @@
   <ItemGroup>
     <Compile Remove="Context\**" />
     <Compile Remove="DataModel\Auth\**" />
+    <Compile Remove="DataModel\Data\**" />
     <EmbeddedResource Remove="Context\**" />
     <EmbeddedResource Remove="DataModel\Auth\**" />
+    <EmbeddedResource Remove="DataModel\Data\**" />
     <None Remove="Context\**" />
     <None Remove="DataModel\Auth\**" />
+    <None Remove="DataModel\Data\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="DataModel\Context\EntityContext1.cs" />
     <Compile Remove="DataModel\Context\Types.cs" />
-    <Compile Remove="DataModel\Data\CoreContext.cs" />
-    <Compile Remove="DataModel\Data\CoreServ.cs" />
-    <Compile Remove="DataModel\Data\EntityContext1.cs" />
-    <Compile Remove="DataModel\Data\EntityService1.cs" />
-    <Compile Remove="DataModel\Data\NSI_VILLAGE1.cs" />
-    <Compile Remove="DataModel\Data\NSI_VILLAGE_TYPE1.cs" />
   </ItemGroup>
 
   <ItemGroup>
