@@ -95,7 +95,14 @@ namespace Tsb.Generate
             DbInfo info = new DbInfo(conf);
             info.files = files;
             info.GenerateInfo();
-            info.GenerateInfoFkNom();
+
+            Console.WriteLine("");
+            Console.WriteLine("Get indexes .......................................");
+            info.GenerateInfo_Index();
+
+            Console.WriteLine("");
+            Console.WriteLine("Get foreign_keys .......................................");
+            info.GenerateInfo_Fk();
             { }
             #endregion
 

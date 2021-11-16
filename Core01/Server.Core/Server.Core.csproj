@@ -19,6 +19,7 @@
   <ItemGroup>
     <Compile Remove="DataModel\Context\EntityContext1.cs" />
     <Compile Remove="DataModel\Context\Types.cs" />
+    <Compile Remove="DataModel\DataGos\__Context1.cs" />
   </ItemGroup>
 
   <ItemGroup>

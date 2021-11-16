@@ -62,7 +62,7 @@ namespace Server.Core.Context
                 if (is_postgres)
                     modelBuilder.HasDefaultSchema(postgresSchema);
             }
-            creatNavigations(modelBuilder);
+            createNavigations(modelBuilder);
 
             //builder.Entity<Team>().HasMany(t => t.TeamMebers).WithOne(u => u.Team).HasForeignKey(u => u.ID);
             //builder.Entity<User>().HasOne(u => u.Team).WithMany(t => t.TeamMebers).HasForeignKey(t => t.ID);

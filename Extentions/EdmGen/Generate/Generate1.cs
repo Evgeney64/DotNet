@@ -16,7 +16,7 @@ namespace Tsb.Generate
         {
             #region
             #region Define
-            bool gen_columns = false;
+            bool gen_columns = true;
             bool gen_parent = true;
             bool gen_children = true;
             #endregion
@@ -132,6 +132,11 @@ namespace Tsb.Generate
                     //    new CodePropertySetValueReferenceExpression()));
                     #endregion
 
+                    if (col.name == tbl.name)
+                    {
+                        col.name += "1";
+                        col.attr_name = tbl.name;
+                    }
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,

@@ -26,7 +26,8 @@ namespace Server.Core.Model
         public string fax { get; set; }//;
         public string teletype { get; set; }//;
         public string post_ind { get; set; }//;
-        public string rgn { get; set; }//;
+        [Column("rgn")]
+        public string rgn1 { get; set; }//;
         public System.Nullable<int> village_id { get; set; }//;
         public System.Nullable<int> street_id { get; set; }//;
         public string nb_house { get; set; }//;
@@ -132,17 +133,49 @@ namespace Server.Core.Model
         public System.Nullable<int> ph_trooms_id { get; set; }//;
         public System.Nullable<int> ml_trooms_id { get; set; }//;
         #endregion
+        #region Navigation - parents
+        // 
+        // FK_Partners_rgn__ml_rgn_id_PK_rgn   [rgn.rgn_id]   #2
+        [ForeignKey("ml_rgn_id")]
+        public virtual rgn rgn2 { get; set; }//;
+        // 
+        // FK_Partners_rgn__ph_rgn_id_PK_rgn   [rgn.rgn_id]   #3
+        [ForeignKey("ph_rgn_id")]
+        public virtual rgn rgn3 { get; set; }//;
+        // 
+        // FK_Partners_rgn__rgn_id_PK_rgn   [rgn.rgn_id]   #4
+        [ForeignKey("rgn_id")]
+        public virtual rgn rgn4 { get; set; }//;
+        // 
+        // FK_street_partners__ph_street_id_PK_street   [street.street_id]
+        [ForeignKey("ph_street_id")]
+        public virtual street street { get; set; }//;
+        // 
+        // FK_street_partners__street_id_PK_street   [street.street_id]   #1
+        [ForeignKey("street_id")]
+        public virtual street street1 { get; set; }//;
+        // 
+        // FK_village_partners__village_id_PK_village   [village.village_id]
+        [ForeignKey("village_id")]
+        public virtual village village { get; set; }//;
+        // 
+        // FK_village_partners__ph_village_id_PK_village   [village.village_id]   #1
+        [ForeignKey("ph_village_id")]
+        public virtual village village1 { get; set; }//;
+        #endregion
         #region Navigation - children
-        // FK_payerlive_partners__reciever_id_PK_partners
-        public virtual ICollection<payerlive> payerlive2 { get; set; }//;
-        // FK_payerlive_partners__payer_id_PK_partners
-        public virtual ICollection<payerlive> payerlive3 { get; set; }//;
+        // 
+        // FK_payerlive_partners__reciever_id_PK_partners   [payerlive.reciever_id]
+        public virtual ICollection<payerlive> payerlive { get; set; }//;
+        // 
+        // FK_payerlive_partners__payer_id_PK_partners   [payerlive.payer_id]   #1
+        public virtual ICollection<payerlive> payerlive1 { get; set; }//;
         #endregion
         #region Constructor
         public Partners()
         {
-            this.payerlive2 = new HashSet<payerlive>();
-            this.payerlive3 = new HashSet<payerlive>();
+            this.payerlive = new HashSet<payerlive>();
+            this.payerlive1 = new HashSet<payerlive>();
         }
         #endregion
     }

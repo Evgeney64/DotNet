@@ -82,12 +82,14 @@ namespace Server.Core.Model
         public System.Nullable<short> ver_u_id { get; set; }//;
         #endregion
         #region Navigation - parents
-        // FK_payerlive_partners__reciever_id_PK_partners
+        // 
+        // FK_payerlive_partners__reciever_id_PK_partners   [Partners.par_id]
         [ForeignKey("reciever_id")]
-        public virtual Partners Partners2 { get; set; }//;
-        // FK_payerlive_partners__payer_id_PK_partners
+        public virtual Partners Partners { get; set; }//;
+        // 
+        // FK_payerlive_partners__payer_id_PK_partners   [Partners.par_id]   #1
         [ForeignKey("payer_id")]
-        public virtual Partners Partners3 { get; set; }//;
+        public virtual Partners Partners1 { get; set; }//;
         #endregion
     }
 }

@@ -45,53 +45,11 @@ namespace Tsb.Model
                 Console.WriteLine("Get table .......................................");
                 createTables(connection);
 
-                Console.WriteLine("");
-                Console.WriteLine("Get metadata .......................................");
                 createColumns(connection);
                 createFKs(connection);
                 createIndexes(connection);
                 createIndexColumns(connection);
                 { }
-                #endregion
-
-                #region Convert data
-                int count = 1;
-                foreach (table tbl in tables)
-                {
-                    tbl.columns.AddRange(columns.Where(ss => ss.object_id == tbl.id).OrderBy(ss => ss.column_id));
-
-                    foreach (foreign_key fk in foreign_keys.Where(ss => ss.this_table == tbl.name))
-                        fk.this_table1 = tbl;
-                    foreach (foreign_key fk in foreign_keys.Where(ss => ss.ref_table == tbl.name))
-                        fk.ref_table1 = tbl;
-
-                    #region index
-                    List<index> _indexes = indexes
-                        .Where(ss => ss.object_id == tbl.id).OrderBy(ss => ss.index_id)
-                        .ToList();
-                    tbl.indexes.AddRange(_indexes);
-                    foreach (index ind in _indexes)
-                    {
-                        string ind_name_str = ind.index_name;
-                        if (ind_name_str.Substring(0, 6) == "%_%_FK")
-                            ind_name_str = "IX_FK_" + tbl.name;
-                        if (indexes.Where(ss => ss.index_name == ind_name_str && ss.nom != ind.nom).Count() > 0)
-                        {
-                            ind.index_name += "_" + count;
-                            count++;
-                        }
-                        ind.index_columns.AddRange(index_columns
-                            .Where(ss => ss.object_id == ind.object_id && ss.index_id == ind.index_id)
-                            .OrderBy(ss => ss.index_id));
-                    }
-                    #endregion
-                    Console.WriteLine("[meta] - " + tbl.nom + " - " + tbl.name);
-                }
-                foreach (table tbl in tables)
-                {
-                    tbl.parents = foreign_keys.Where(ss => ss.this_table == tbl.name).ToList();
-                    tbl.children = foreign_keys.Where(ss => ss.ref_table == tbl.name).ToList();
-                }
                 #endregion
 
                 #region insert data
@@ -128,9 +86,57 @@ namespace Tsb.Model
             #endregion
         }
 
-        public void GenerateInfoFkNom()
+        public void GenerateInfo_Index()
         {
             #region
+            int count = 1;
+            foreach (table tbl in tables)
+            {
+                List<index> _indexes = indexes
+                    .Where(ss => ss.object_id == tbl.id).OrderBy(ss => ss.index_id)
+                    .ToList();
+                tbl.indexes.AddRange(_indexes);
+                foreach (index ind in _indexes)
+                {
+                    string ind_name_str = ind.index_name;
+                    if (ind_name_str.Substring(0, 6) == "%_%_FK")
+                        ind_name_str = "IX_FK_" + tbl.name;
+                    if (indexes.Where(ss => ss.index_name == ind_name_str && ss.nom != ind.nom).Count() > 0)
+                    {
+                        ind.index_name += "_" + count;
+                        count++;
+                    }
+                    ind.index_columns.AddRange(index_columns
+                        .Where(ss => ss.object_id == ind.object_id && ss.index_id == ind.index_id)
+                        .OrderBy(ss => ss.index_id));
+                }
+                Console.WriteLine("[index] - " + tbl.nom + " - " + tbl.name);
+            }
+            #endregion
+        }
+
+        public void GenerateInfo_Fk()
+        {
+            #region parents / parents
+            foreach (table tbl in tables)
+            {
+                tbl.columns.AddRange(columns.Where(ss => ss.object_id == tbl.id).OrderBy(ss => ss.column_id));
+
+                foreach (foreign_key fk in foreign_keys.Where(ss => ss.this_table == tbl.name))
+                    fk.this_table1 = tbl;
+                foreach (foreign_key fk in foreign_keys.Where(ss => ss.ref_table == tbl.name))
+                    fk.ref_table1 = tbl;
+
+                Console.WriteLine("[fk] - " + tbl.nom + " - " + tbl.name);
+            }
+            foreach (table tbl in tables)
+            {
+                tbl.parents = foreign_keys.Where(ss => ss.this_table == tbl.name).ToList();
+                tbl.children = foreign_keys.Where(ss => ss.ref_table == tbl.name).ToList();
+            }
+            #endregion
+
+            #region fk_nom
             List<table> ref_tables = foreign_keys.Select(ss => ss.ref_table1).Distinct().ToList();
             foreach (table ref_table in ref_tables)
             {
@@ -146,6 +152,13 @@ namespace Tsb.Model
                     if (children.Count > 1)
                     {
                         int nom = 0;
+                        column col = this_table.columns.Where(ss => ss.name == ref_table.name).FirstOrDefault();
+                        if (col != null)
+                        {
+                            col.name += "1";
+                            col.attr_name = ref_table.name;
+                            nom = 2;
+                        }
                         foreach (foreign_key fk in children)
                         {
                             if (nom > 0)
