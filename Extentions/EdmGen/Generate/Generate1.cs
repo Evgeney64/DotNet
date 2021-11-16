@@ -16,9 +16,9 @@ namespace Tsb.Generate
         {
             #region
             #region Define
-            bool generate_columns = false;
-            bool generate_parent = true;
-            bool generate_children = true;
+            bool gen_columns = false;
+            bool gen_parent = true;
+            bool gen_children = true;
             #endregion
 
             #region namespace
@@ -68,24 +68,20 @@ namespace Tsb.Generate
             #endregion
 
             #region Constructor
-            if (generate_children && tbl.children.Count() > 0)
+            if (gen_children && tbl.children.Count() > 0)
             {
                 CodeConstructor constructor = new CodeConstructor
                 {
                     Attributes = MemberAttributes.Public,
                 };
-                foreach (table child in tbl.children)
+                foreach (foreign_key fk in tbl.children)
                 {
-                    //foreign_key fk1 = tbl.foreign_keys.Where(ss => ss.fk_name == child.fk_name).FirstOrDefault();
-                    //if (fk1 != null && fk1.fk_nom != null)
-                    //{ }
-
                     CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
                         new CodeThisReferenceExpression(),
-                        child.name + child.fk_nom
+                        fk.this_table + fk.fk_nom
                         );
                     CodeObjectCreateExpression value = new CodeObjectCreateExpression(
-                        "HashSet<" + child.name + ">",
+                        "HashSet<" + fk.this_table + ">",
                         new CodeExpression[] { }
                         );
                     constructor.Statements.Add(new CodeAssignStatement(prop, value));
@@ -114,7 +110,7 @@ namespace Tsb.Generate
 
             #region columns
             CodeMemberField propLast = null;
-            if (generate_columns && tbl.columns.Count() > 0)
+            if (gen_columns && tbl.columns.Count() > 0)
             {
                 int i = 0;
                 foreach (column col in tbl.columns)
@@ -170,19 +166,16 @@ namespace Tsb.Generate
             }
             #endregion
 
-            #region get foreign_keys
-            List<foreign_key> parents = info.foreign_keys.Where(ss => ss.this_table1 == tbl).ToList();
-            List<foreign_key> children = info.foreign_keys.Where(ss => ss.ref_table1 == tbl).ToList();
-            { }
-            #endregion
-
             #region navigation props (parents)
-            if (generate_parent && parents.Count() > 0)
+            if (gen_parent && tbl.parents.Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
-                foreach (foreign_key fk in info.foreign_keys.Where(ss => ss.this_table1 == tbl).OrderBy(ss => ss.ref_table))
+                foreach (foreign_key fk in
+                    tbl.parents
+                    //info.foreign_keys.Where(ss => ss.this_table1 == tbl)
+                    .OrderBy(ss => ss.ref_table))
                 {
                     table parent = fk.ref_table1;
                     parent.fk_name_nom = fk.ref_table + fk.fk_nom;
@@ -204,8 +197,11 @@ namespace Tsb.Generate
                         new CodeAttributeArgument(new CodePrimitiveExpression(fk.this_column))
                         ));
 
+                    string comment = fk.fk_name + "   [" + fk.ref_table + "." + fk.ref_column + "]";
+                    if (fk.fk_nom != null)
+                        comment += "   #" + fk.fk_nom;
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
-                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(fk.fk_name + " (" + parent.name + ")" + " [" + fk.fk_nom + "]", false)));
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(comment, false)));
 
                     if (i == 0)
                         prop0 = prop;
@@ -225,12 +221,15 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (children)
-            if (generate_children && children.Count() > 0)
+            if (gen_children && tbl.children.Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
                 CodeMemberField prop1 = null;
-                foreach (foreign_key fk in info.foreign_keys.Where(ss => ss.ref_table1 == tbl).OrderBy(ss => ss.this_table))
+                foreach (foreign_key fk in
+                    tbl.children
+                    //info.foreign_keys.Where(ss => ss.ref_table1 == tbl)
+                    .OrderBy(ss => ss.this_table))
                 {
                     table child = fk.this_table1;
                     child.fk_name_nom = fk.this_table + fk.fk_nom;
@@ -240,8 +239,11 @@ namespace Tsb.Generate
                         Type = new CodeTypeReference("virtual ICollection<" + child.name + ">"),
                         Name = child.fk_name_nom + " { get; set; }//",
                     };
+                    string comment = fk.fk_name + "   [" + fk.this_table + "." + fk.this_column + "]";
+                    if (fk.fk_nom != null)
+                        comment += "   #" + fk.fk_nom;
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
-                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(fk.fk_name + " (" + child.name + ")" + " [" + fk.fk_nom + "]", false)));
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(comment, false)));
 
                     if (i == 0)
                         prop0 = prop;
@@ -338,7 +340,7 @@ namespace Tsb.Generate
 
                 classItem.Class_Serv.Members.Add(method);
 
-                foreach (table tbl in info.tables.Where(ss => ss.children.Count() > 0))
+                //foreach (table tbl in info.tables.Where(ss => ss.children.Count() > 0))
                 {
                     foreach (foreign_key fk in info.foreign_keys.OrderBy(ss => ss.this_table))
                     {

@@ -42,13 +42,11 @@ namespace Tsb.Model
         public string fk_name_nom { get; set; }
         public int? fk_nom { get; set; }
 
-
         public List<column> columns { get; set; }
-        //public List<foreign_key> foreign_keys { get; set; }
         public List<index> indexes { get; set; }
 
-        public List<table> parents { get; set; }
-        public List<table> children { get; set; }
+        public List<foreign_key> parents { get; set; }
+        public List<foreign_key> children { get; set; }
 
         public override string ToString()
         {

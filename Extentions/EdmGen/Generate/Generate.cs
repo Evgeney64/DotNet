@@ -95,7 +95,7 @@ namespace Tsb.Generate
             DbInfo info = new DbInfo(conf);
             info.files = files;
             info.GenerateInfo();
-            //info.GenerateInfoFk();
+            info.GenerateInfoFkNom();
             { }
             #endregion
 
@@ -113,6 +113,7 @@ namespace Tsb.Generate
             Console.WriteLine("");
             Console.WriteLine("Generate context ...");
             generateContextClass(output_dir, info);
+
             Console.WriteLine("");
             Console.WriteLine("Generate service ...");
             generateServiceClass(output_dir, info);
