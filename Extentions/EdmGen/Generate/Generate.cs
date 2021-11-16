@@ -70,6 +70,7 @@ namespace Tsb.Generate
             string input_dir = result_dir + "\\Input";
             string output_dir = result_dir + "\\Output";
             string[] files = File.ReadAllLines(input_dir + "//_files.txt");
+
             #region old
             //if (Directory.Exists(input_dir))
             //{
@@ -78,14 +79,23 @@ namespace Tsb.Generate
             //    files = files.Select(ss => ss.Substring(0, ss.Length - 3)).ToArray();
             //}
             #endregion
-            { }
+            #endregion
+
+            #region Clear output dir
+            if (Directory.Exists(output_dir))
+            {
+                string[] path_files = Directory.GetFiles(output_dir);
+                string[] output_files = path_files.Select(ss => Path.GetFileName(ss)).ToArray();
+                foreach (string file in output_files)
+                    File.Delete(output_dir + "//" + file);
+            }
             #endregion
 
             #region DbInfo
             DbInfo info = new DbInfo(conf);
             info.files = files;
             info.GenerateInfo();
-            info.GenerateInfoFk();
+            //info.GenerateInfoFk();
             { }
             #endregion
 

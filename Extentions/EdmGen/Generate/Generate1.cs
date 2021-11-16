@@ -16,6 +16,8 @@ namespace Tsb.Generate
         {
             #region
             #region Define
+            bool generate_columns = false;
+            bool generate_parent = true;
             bool generate_children = true;
             #endregion
 
@@ -112,7 +114,7 @@ namespace Tsb.Generate
 
             #region columns
             CodeMemberField propLast = null;
-            if (tbl.columns.Count() > 0)
+            if (generate_columns && tbl.columns.Count() > 0)
             {
                 int i = 0;
                 foreach (column col in tbl.columns)
@@ -168,8 +170,14 @@ namespace Tsb.Generate
             }
             #endregion
 
+            #region get foreign_keys
+            List<foreign_key> parents = info.foreign_keys.Where(ss => ss.this_table1 == tbl).ToList();
+            List<foreign_key> children = info.foreign_keys.Where(ss => ss.ref_table1 == tbl).ToList();
+            { }
+            #endregion
+
             #region navigation props (parents)
-            if (info.foreign_keys.Where(ss => ss.this_table1 == tbl).Count() > 0)
+            if (generate_parent && parents.Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
@@ -197,7 +205,7 @@ namespace Tsb.Generate
                         ));
 
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
-                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(parent.fk_name + " [" + fk.fk_nom + "]", false)));
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(fk.fk_name + " (" + parent.name + ")" + " [" + fk.fk_nom + "]", false)));
 
                     if (i == 0)
                         prop0 = prop;
@@ -217,7 +225,7 @@ namespace Tsb.Generate
             #endregion
 
             #region navigation props (children)
-            if (generate_children && info.foreign_keys.Where(ss => ss.ref_table1 == tbl).Count() > 0)
+            if (generate_children && children.Count() > 0)
             {
                 int i = 0;
                 CodeMemberField prop0 = null;
@@ -233,7 +241,7 @@ namespace Tsb.Generate
                         Name = child.fk_name_nom + " { get; set; }//",
                     };
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
-                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(child.fk_name + " [" + child.fk_nom + "]", false)));
+                    prop.Comments.Add(new CodeCommentStatement(new CodeComment(fk.fk_name + " (" + child.name + ")" + " [" + fk.fk_nom + "]", false)));
 
                     if (i == 0)
                         prop0 = prop;

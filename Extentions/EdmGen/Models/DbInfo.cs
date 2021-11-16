@@ -59,17 +59,11 @@ namespace Tsb.Model
                 foreach (table tbl in tables)
                 {
                     tbl.columns.AddRange(columns.Where(ss => ss.object_id == tbl.id).OrderBy(ss => ss.column_id));
-                    //tbl.foreign_keys.AddRange(foreign_keys.Where(ss => ss.object_id == tbl.id));
-                    //foreach (foreign_key fk in tbl.foreign_keys)
-                    //{
-                    //    fk.this_table1 = tbl;
-                    //    fk.ref_table1 = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
-                    //}
-                    foreach (foreign_key fk in foreign_keys)
-                    {
+
+                    foreach (foreign_key fk in foreign_keys.Where(ss => ss.this_table == tbl.name))
                         fk.this_table1 = tbl;
-                        fk.ref_table1 = tables.Where(ss => ss.name == fk.ref_table).FirstOrDefault();
-                    }
+                    foreach (foreign_key fk in foreign_keys.Where(ss => ss.ref_table == tbl.name))
+                        fk.ref_table1 = tbl;
 
                     #region index
                     List<index> _indexes = indexes
