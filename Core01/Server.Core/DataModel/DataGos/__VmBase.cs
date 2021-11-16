@@ -33,7 +33,7 @@ namespace Server.Core
             {
                 List<Partners> pars = _serv.Get_Partners().Where(ss => ss.par_id <= 10).ToList();
                 List<payerlive> plvs = _serv.Get_payerlive().Where(ss => ss.reciever_id <= 10).ToList();
-                //List<rgn> rgns = _serv.Get_rgn().Where(ss => ss.rgn_id <= 10).ToList();
+                List<rgn> rgns = _serv.Get_rgn().Where(ss => ss.rgn_id <= 10).ToList();
             }
         }
         #endregion
