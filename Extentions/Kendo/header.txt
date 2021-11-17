@@ -1,0 +1,63 @@
+<head>
+    <title>2018.10.0.0</title>
+    
+    <meta name="viewport" content="width=initial-scale=0.7">
+    
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/Images/tsb.ico" type="image/x-icon type=" image="" x-icon"="">
+    <link rel="apple-touch-icon-precomposed" href="/Images/tsb.png">
+
+
+
+
+    
+    
+
+    
+    
+    <link href="/Content/Telerik/kendo.dataviz.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Telerik/kendo.dataviz.fiori.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Telerik/kendo.mobile.fiori.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/Content/Telerik/kendo.common.min.css" rel="stylesheet" type="text/css">
+    
+
+    <link href="/Content/Telerik/kendo.blueopal.min.css" rel="stylesheet" type="text/css">
+    
+
+    <link href="/Content/Site.css" rel="stylesheet">
+<link href="/Content/Styles/Base/base.css" rel="stylesheet">
+<link href="/Content/Styles/Layouts/header.css" rel="stylesheet">
+<link href="/Content/Styles/Layouts/container.css" rel="stylesheet">
+<link href="/Content/Styles/Layouts/tabs.css" rel="stylesheet">
+<link href="/Content/Styles/Modules/modules.css" rel="stylesheet">
+<link href="/Content/Styles/States/states.css" rel="stylesheet">
+<link href="/Content/xonomy/xonomy.css" rel="stylesheet">
+
+
+    <link href="/Content/Telerik/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <link href="/Content/Captcha.css" rel="stylesheet" type="text/css">
+
+    
+    
+    
+
+    
+    <script src="/Scripts/Telerik/jquery.min.js"></script>
+    <script src="/Scripts/Telerik/jszip.min.js"></script>
+    
+    
+    
+    <script src="/Scripts/Telerik/kendo.all.min.js"></script>
+    <script src="/Scripts/Telerik/kendo.aspnetmvc.min.js"></script>
+    <script src="/Scripts/Telerik/cultures/kendo.culture.ru-RU.min.js"></script>
+    <script src="/Scripts/Telerik/messages/kendo.messages.ru-RU.min.js"></script>
+
+    
+
+    <script src="/Scripts/Telerik/kendo.modernizr.custom.js"></script>
+
+    
+
+<style>@media (max-width: 768px) {._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-animate.k-rpanel-left,._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-animate.k-rpanel-right {-webkit-transition: -webkit-transform .2s ease-out;-ms-transition: -ms-transform .2s ease-out;transition: transform .2s ease-out;} ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-top {overflow: hidden;}._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-animate.k-rpanel-top {-webkit-transition: max-height .2s linear;-ms-transition: max-height .2s linear;transition: max-height .2s linear;}} @media (min-width: 769px) {.k-rpanel-toggle { display: none; } ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-left { float: left; } ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-right { float: right; } ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-left, ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-right {position: relative;-webkit-transform: translateX(0);-ms-transform: translateX(0);transform: translateX(0);-webkit-transform: translateX(0) translateZ(0);-ms-transform: translateX(0) translateZ(0);transform: translateX(0) translateZ(0);} .k-ie9 ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-left { left: 0; } ._591b794b-8a72-4ba2-8795-a349d74536c6.k-rpanel-top { max-height: none; }}</style><style>@media (max-width: 9999px) {._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-animate.k-rpanel-left,._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-animate.k-rpanel-right {-webkit-transition: -webkit-transform .2s ease-out;-ms-transition: -ms-transform .2s ease-out;transition: transform .2s ease-out;} ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-top {overflow: hidden;}._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-animate.k-rpanel-top {-webkit-transition: max-height .2s linear;-ms-transition: max-height .2s linear;transition: max-height .2s linear;}} @media (min-width: 10000px) {.k-lpanel-toggle { display: none; } ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-left { float: left; } ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-right { float: right; } ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-left, ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-right {position: relative;-webkit-transform: translateX(0);-ms-transform: translateX(0);transform: translateX(0);-webkit-transform: translateX(0) translateZ(0);-ms-transform: translateX(0) translateZ(0);transform: translateX(0) translateZ(0);} .k-ie9 ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-left { left: 0; } ._e65abeeb-a384-4cfc-96c5-58e6b8a769d4.k-rpanel-top { max-height: none; }}</style><style>@media (max-width: 999px) {._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-animate.k-rpanel-left,._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-animate.k-rpanel-right {-webkit-transition: -webkit-transform .2s ease-out;-ms-transition: -ms-transform .2s ease-out;transition: transform .2s ease-out;} ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-top {overflow: hidden;}._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-animate.k-rpanel-top {-webkit-transition: max-height .2s linear;-ms-transition: max-height .2s linear;transition: max-height .2s linear;}} @media (min-width: 1000px) {.k-rpanel-toggle { display: none; } ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-left { float: left; } ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-right { float: right; } ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-left, ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-right {position: relative;-webkit-transform: translateX(0);-ms-transform: translateX(0);transform: translateX(0);-webkit-transform: translateX(0) translateZ(0);-ms-transform: translateX(0) translateZ(0);transform: translateX(0) translateZ(0);} .k-ie9 ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-left { left: 0; } ._82e87950-be99-4958-991f-84d87daa1528.k-rpanel-top { max-height: none; }}</style></head>
