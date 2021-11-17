@@ -42,39 +42,44 @@ namespace Server.Core.Model
         public string CADASTRE { get; set; }//;
         #endregion
         #region Navigation - parents
-        // FK_BUILD_NSI_FACILITY
-        //[ForeignKey("NFACILITY_ID")]
-        //public virtual NSI_FACILITY NSI_FACILITY { get; set; }//;
-        //// FK_BUILD_NSI_MUNICIPALITY
-        //[ForeignKey("NMUNICIPALITY_ID")]
-        //public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
-        //// FK_BUILD_NSI_OBLAST
-        //[ForeignKey("NOBLAST_ID")]
-        //public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
-        // FK_BUILD_NSI_STREET
+        // 
+        // FK_BUILD_NSI_FACILITY   [NSI_FACILITY.NFACILITY_ID]
+        [ForeignKey("NFACILITY_ID")]
+        public virtual NSI_FACILITY NSI_FACILITY { get; set; }//;
+        // 
+        // FK_BUILD_NSI_MUNICIPALITY   [NSI_MUNICIPALITY.NMUNICIPALITY_ID]
+        [ForeignKey("NMUNICIPALITY_ID")]
+        public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
+        // 
+        // FK_BUILD_NSI_OBLAST   [NSI_OBLAST.NOBLAST_ID]
+        [ForeignKey("NOBLAST_ID")]
+        public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
+        // 
+        // FK_BUILD_NSI_STREET   [NSI_STREET.NSTREET_ID]
         [ForeignKey("NSTREET_ID")]
         public virtual NSI_STREET NSI_STREET { get; set; }//;
-
-        // FK_BUILD_NSI_VILLAGE2
-        //[ForeignKey("NVILLAGE_ID2")]
-        //public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
-
-        // FK_BUILD_NSI_VILLAGE1
+        // 
+        // FK_BUILD_NSI_VILLAGE1   [NSI_VILLAGE.NVILLAGE_ID]
         [ForeignKey("NVILLAGE_ID1")]
+        public virtual NSI_VILLAGE NSI_VILLAGE { get; set; }//;
+        // 
+        // FK_BUILD_NSI_VILLAGE2   [NSI_VILLAGE.NVILLAGE_ID]   #1
+        [ForeignKey("NVILLAGE_ID2")]
         public virtual NSI_VILLAGE NSI_VILLAGE1 { get; set; }//;
-
         #endregion
         #region Navigation - children
-        // FK_FACILITY_BUILD
-        //public virtual ICollection<FACILITY> FACILITY { get; set; }//;
-        // FK_PARTNER_EXT_BUILD
-        //public virtual ICollection<PARTNER_EXT> PARTNER_EXT { get; set; }//;
+        // 
+        // FK_FACILITY_BUILD   [FACILITY.BUILD_ID]
+        public virtual ICollection<FACILITY> FACILITY { get; set; }//;
+        // 
+        // FK_PARTNER_EXT_BUILD   [PARTNER_EXT.BUILD_DELIVERY_ID]
+        public virtual ICollection<PARTNER_EXT> PARTNER_EXT { get; set; }//;
         #endregion
         #region Constructor
         public BUILD()
         {
-            //this.FACILITY = new HashSet<FACILITY>();
-            //this.PARTNER_EXT = new HashSet<PARTNER_EXT>();
+            this.PARTNER_EXT = new HashSet<PARTNER_EXT>();
+            this.FACILITY = new HashSet<FACILITY>();
         }
         #endregion
     }

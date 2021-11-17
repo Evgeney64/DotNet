@@ -76,9 +76,13 @@ namespace Tsb.Generate
                 };
                 foreach (foreign_key fk in tbl.children)
                 {
+                    int? fk_nom = fk.fk_nom;
+                    if (fk.fk_nom1 != null)
+                        fk_nom = fk.fk_nom1;
+
                     CodePropertyReferenceExpression prop = new CodePropertyReferenceExpression(
                         new CodeThisReferenceExpression(),
-                        fk.this_table + fk.fk_nom
+                        fk.this_table + fk_nom
                         );
                     CodeObjectCreateExpression value = new CodeObjectCreateExpression(
                         "HashSet<" + fk.this_table + ">",
@@ -237,7 +241,10 @@ namespace Tsb.Generate
                     .OrderBy(ss => ss.this_table))
                 {
                     table child = fk.this_table1;
-                    child.fk_name_nom = fk.this_table + fk.fk_nom;
+                    int? fk_nom = fk.fk_nom;
+                    if (fk.fk_nom1 != null)
+                        fk_nom = fk.fk_nom1;
+                    child.fk_name_nom = fk.this_table + fk_nom;
                     CodeMemberField prop = new CodeMemberField
                     {
                         Attributes = MemberAttributes.Public,
@@ -245,8 +252,8 @@ namespace Tsb.Generate
                         Name = child.fk_name_nom + " { get; set; }//",
                     };
                     string comment = fk.fk_name + "   [" + fk.this_table + "." + fk.this_column + "]";
-                    if (fk.fk_nom != null)
-                        comment += "   #" + fk.fk_nom;
+                    if (fk_nom != null)
+                        comment += "   #" + fk_nom;
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment("", false)));
                     prop.Comments.Add(new CodeCommentStatement(new CodeComment(comment, false)));
 
@@ -351,9 +358,13 @@ namespace Tsb.Generate
                     {
                         table tbl1 = fk.this_table1;
 
+                        int? fk_nom = fk.fk_nom;
+                        if (fk.fk_nom1 != null)
+                            fk_nom = fk.fk_nom1;
+
                         string str = "Entity<" + fk.this_table + ">()";
                         str += ".HasOne(u => u." + fk.ref_table + fk.fk_nom + ")";
-                        str += ".WithMany(t => t." + fk.this_table + fk.fk_nom + ")";
+                        str += ".WithMany(t => t." + fk.this_table + fk_nom + ")";
                         str += ".HasForeignKey(t => t." + fk.this_column + ")";
                         str += ";//";
                         CodeMethodInvokeExpression expr =

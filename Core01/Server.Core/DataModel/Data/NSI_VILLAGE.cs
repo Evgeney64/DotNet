@@ -36,44 +36,52 @@ namespace Server.Core.Model
         public System.Nullable<int> NMUNICIPALITY_TYPE_ID { get; set; }//;
         #endregion
         #region Navigation - parents
-        // FK_NSI_VILLAGE_NSI_MUNICIPALITY
-        //[ForeignKey("NMUNICIPALITY_ID")]
-        //public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
-        //// FK_NSI_VILLAGE_NSI_MUNICIPALITY_TYPE
-        //[ForeignKey("NMUNICIPALITY_TYPE_ID")]
-        //public virtual NSI_MUNICIPALITY_TYPE NSI_MUNICIPALITY_TYPE { get; set; }//;
-        //// FK_NSI_VILLAGE_NSI_OBLAST
-        //[ForeignKey("NOBLAST_ID")]
-        //public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
-        //// FK_NSI_VILLAGE_NSI_OBLAST_REGION
-        //[ForeignKey("NOBLAST_REGION_ID")]
-        //public virtual NSI_OBLAST_REGION NSI_OBLAST_REGION { get; set; }//;
-        //// FK_NSI_VILLAGE_NSI_VILLAGE
+        // 
+        // FK_NSI_VILLAGE_NSI_MUNICIPALITY   [NSI_MUNICIPALITY.NMUNICIPALITY_ID]
+        [ForeignKey("NMUNICIPALITY_ID")]
+        public virtual NSI_MUNICIPALITY NSI_MUNICIPALITY { get; set; }//;
+        // 
+        // FK_NSI_VILLAGE_NSI_MUNICIPALITY_TYPE   [NSI_MUNICIPALITY_TYPE.NMUNICIPALITY_TYPE_ID]
+        [ForeignKey("NMUNICIPALITY_TYPE_ID")]
+        public virtual NSI_MUNICIPALITY_TYPE NSI_MUNICIPALITY_TYPE { get; set; }//;
+        // 
+        // FK_NSI_VILLAGE_NSI_OBLAST   [NSI_OBLAST.NOBLAST_ID]
+        [ForeignKey("NOBLAST_ID")]
+        public virtual NSI_OBLAST NSI_OBLAST { get; set; }//;
+        // 
+        // FK_NSI_VILLAGE_NSI_OBLAST_REGION   [NSI_OBLAST_REGION.NOBLAST_REGION_ID]
+        [ForeignKey("NOBLAST_REGION_ID")]
+        public virtual NSI_OBLAST_REGION NSI_OBLAST_REGION { get; set; }//;
+        // 
+        // FK_NSI_VILLAGE_NSI_VILLAGE   [NSI_VILLAGE.NVILLAGE_ID]   #1
         [ForeignKey("PARENT_ID")]
         public virtual NSI_VILLAGE NSI_VILLAGE1 { get; set; }//;
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
+        // 
+        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE   [NSI_VILLAGE_TYPE.NVILLAGE_TYPE_ID]
         [ForeignKey("NVILLAGE_TYPE_ID")]
         public virtual NSI_VILLAGE_TYPE NSI_VILLAGE_TYPE { get; set; }//;
         #endregion
         #region Navigation - children
-        //FK_BUILD_NSI_VILLAGE2
-        //[InverseProperty("NVILLAGE_ID2")]
+        // 
+        // FK_BUILD_NSI_VILLAGE1   [BUILD.NVILLAGE_ID1]
         public virtual ICollection<BUILD> BUILD { get; set; }//;
-        // FK_BUILD_NSI_VILLAGE1
-        //[InverseProperty("NVILLAGE_ID1")]
-        //public virtual ICollection<BUILD> BUILD1 { get; set; }//;
-        //FK_NSI_STREET_NSI_VILLAGE
+        // 
+        // FK_BUILD_NSI_VILLAGE2   [BUILD.NVILLAGE_ID2]   #1
+        public virtual ICollection<BUILD> BUILD1 { get; set; }//;
+        // 
+        // FK_NSI_STREET_NSI_VILLAGE   [NSI_STREET.NVILLAGE_ID]
         public virtual ICollection<NSI_STREET> NSI_STREET { get; set; }//;
-        // FK_NSI_VILLAGE_NSI_VILLAGE
+        // 
+        // FK_NSI_VILLAGE_NSI_VILLAGE   [NSI_VILLAGE.PARENT_ID]   #2
         public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE2 { get; set; }//;
         #endregion
         #region Constructor
         public NSI_VILLAGE()
         {
-            this.BUILD = new HashSet<BUILD>();
-            //this.BUILD1 = new HashSet<BUILD>();
-            this.NSI_STREET = new HashSet<NSI_STREET>();
             this.NSI_VILLAGE2 = new HashSet<NSI_VILLAGE>();
+            this.NSI_STREET = new HashSet<NSI_STREET>();
+            this.BUILD = new HashSet<BUILD>();
+            this.BUILD1 = new HashSet<BUILD>();
         }
         #endregion
     }

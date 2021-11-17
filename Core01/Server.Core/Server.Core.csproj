@@ -7,19 +7,18 @@
   <ItemGroup>
     <Compile Remove="Context\**" />
     <Compile Remove="DataModel\Auth\**" />
-    <Compile Remove="DataModel\Data\**" />
+    <Compile Remove="DataModel\DataGos\**" />
     <EmbeddedResource Remove="Context\**" />
     <EmbeddedResource Remove="DataModel\Auth\**" />
-    <EmbeddedResource Remove="DataModel\Data\**" />
+    <EmbeddedResource Remove="DataModel\DataGos\**" />
     <None Remove="Context\**" />
     <None Remove="DataModel\Auth\**" />
-    <None Remove="DataModel\Data\**" />
+    <None Remove="DataModel\DataGos\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="DataModel\Context\EntityContext1.cs" />
     <Compile Remove="DataModel\Context\Types.cs" />
-    <Compile Remove="DataModel\DataGos\__Context1.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -28,7 +28,8 @@ namespace Server.Core.Model
         public System.Nullable<int> MFY_SUSER_ID { get; set; }//;
         #endregion
         #region Navigation - children
-        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE
+        // 
+        // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE   [NSI_VILLAGE.NVILLAGE_TYPE_ID]
         public virtual ICollection<NSI_VILLAGE> NSI_VILLAGE { get; set; }//;
         #endregion
         #region Constructor

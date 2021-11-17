@@ -241,6 +241,7 @@ namespace Tsb.Model
     {
         public string fk_name { get; set; }
         public int? fk_nom { get; set; }
+        public int? fk_nom1 { get; set; }
         public long object_id { get; set; }
         public string this_table { get; set; }
         public string ref_table { get; set; }

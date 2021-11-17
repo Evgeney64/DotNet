@@ -138,21 +138,28 @@ namespace Tsb.Model
 
             #region fk_nom
             List<table> ref_tables = foreign_keys.Select(ss => ss.ref_table1).Distinct().ToList();
+            { }
             foreach (table ref_table in ref_tables)
             {
                 List<table> this_tables = foreign_keys
                     .Where(ss => ss.ref_table1 == ref_table)
                     .Select(ss => ss.this_table1).Distinct()
                     .ToList();
+                { }
                 foreach (table this_table in this_tables)
                 {
                     List<foreign_key> children = foreign_keys
                         .Where(ss => ss.ref_table1 == ref_table && ss.this_table1 == this_table)
                         .ToList();
-                    if (children.Count > 1)
+                    if (children.Count == 0)
+                        continue;
+
+                    if (children.Count > 1 || ref_table == this_table)
                     {
                         int nom = 0;
                         column col = this_table.columns.Where(ss => ss.name == ref_table.name).FirstOrDefault();
+                        if (ref_table == this_table)
+                            nom = 1;
                         if (col != null)
                         {
                             col.name += "1";
@@ -162,7 +169,14 @@ namespace Tsb.Model
                         foreach (foreign_key fk in children)
                         {
                             if (nom > 0)
+                            {
                                 fk.fk_nom = nom;
+                                if (ref_table == this_table)
+                                {
+                                    nom++;
+                                    fk.fk_nom1 = nom;
+                                }
+                            }
                             nom++;
                         }
                     }
