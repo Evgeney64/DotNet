@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Data\**" />
-    <Content Remove="Views\Data\**" />
-    <EmbeddedResource Remove="Views\Data\**" />
-    <None Remove="Views\Data\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Controllers\AdminController.cs" />
     <Compile Remove="Controllers\ApiControllrt.cs" />
     <Compile Remove="Startup-0.cs" />
@@ -24,6 +17,12 @@
 
   <ItemGroup>
     <None Remove="Startup.cs1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Data\nsi_street.cshtml" />
+    <None Include="Views\Data\nsi_village.cshtml" />
+    <None Include="Views\Data\type_street.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

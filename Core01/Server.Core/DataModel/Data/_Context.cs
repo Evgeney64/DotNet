@@ -141,38 +141,29 @@ namespace Server.Core.Context
         private void createNavigations(ModelBuilder builder)
         {
             // 
-            // FK_BUILD_NSI_FACILITY []
-            builder.Entity<BUILD>().HasOne(u => u.NSI_FACILITY).WithMany(t => t.BUILD).HasForeignKey(t => t.NFACILITY_ID);//();
-            // 
-            // FK_BUILD_NSI_OBLAST []
-            builder.Entity<BUILD>().HasOne(u => u.NSI_OBLAST).WithMany(t => t.BUILD).HasForeignKey(t => t.NOBLAST_ID);//();
-            // 
             // FK_BUILD_NSI_MUNICIPALITY []
             builder.Entity<BUILD>().HasOne(u => u.NSI_MUNICIPALITY).WithMany(t => t.BUILD).HasForeignKey(t => t.NMUNICIPALITY_ID);//();
+            // 
+            // FK_BUILD_NSI_FACILITY []
+            builder.Entity<BUILD>().HasOne(u => u.NSI_FACILITY).WithMany(t => t.BUILD).HasForeignKey(t => t.NFACILITY_ID);//();
             // 
             // FK_BUILD_NSI_STREET []
             builder.Entity<BUILD>().HasOne(u => u.NSI_STREET).WithMany(t => t.BUILD).HasForeignKey(t => t.NSTREET_ID);//();
             // 
-            // FK_BUILD_NSI_VILLAGE1 []
-            builder.Entity<BUILD>().HasOne(u => u.NSI_VILLAGE).WithMany(t => t.BUILD).HasForeignKey(t => t.NVILLAGE_ID1);//();
+            // FK_BUILD_NSI_OBLAST []
+            builder.Entity<BUILD>().HasOne(u => u.NSI_OBLAST).WithMany(t => t.BUILD).HasForeignKey(t => t.NOBLAST_ID);//();
             // 
-            // FK_BUILD_NSI_VILLAGE2 [1]
-            builder.Entity<BUILD>().HasOne(u => u.NSI_VILLAGE1).WithMany(t => t.BUILD1).HasForeignKey(t => t.NVILLAGE_ID2);//();
+            // FK_BUILD_NSI_VILLAGE2 []
+            builder.Entity<BUILD>().HasOne(u => u.NSI_VILLAGE).WithMany(t => t.BUILD).HasForeignKey(t => t.NVILLAGE_ID2);//();
+            // 
+            // FK_BUILD_NSI_VILLAGE1 [1]
+            builder.Entity<BUILD>().HasOne(u => u.NSI_VILLAGE1).WithMany(t => t.BUILD1).HasForeignKey(t => t.NVILLAGE_ID1);//();
             // 
             // FK_SYS_USER_CHAT []
             builder.Entity<CHAT>().HasOne(u => u.SYS_USER).WithMany(t => t.CHAT).HasForeignKey(t => t.OWNER_ID);//();
             // 
-            // FK_DEAL_NSI_REAZON []
-            builder.Entity<DEAL>().HasOne(u => u.NSI_REAZON).WithMany(t => t.DEAL).HasForeignKey(t => t.OPL_NREAZON_ID);//();
-            // 
-            // FK_DEAL_NSI_FACILITY []
-            builder.Entity<DEAL>().HasOne(u => u.NSI_FACILITY).WithMany(t => t.DEAL).HasForeignKey(t => t.NFACILITY_ID);//();
-            // 
-            // FK_DEAL_NSI_REAZON_1 [1]
-            builder.Entity<DEAL>().HasOne(u => u.NSI_REAZON1).WithMany(t => t.DEAL1).HasForeignKey(t => t.CLOSE_NREAZON_ID);//();
-            // 
-            // FK_DEAL_NSI_REAZON_2 [2]
-            builder.Entity<DEAL>().HasOne(u => u.NSI_REAZON2).WithMany(t => t.DEAL2).HasForeignKey(t => t.CALC_NREAZON_ID);//();
+            // FK_DEAL_NSI_ACCOUNT_PERIOD []
+            builder.Entity<DEAL>().HasOne(u => u.NSI_ACCOUNT_PERIOD).WithMany(t => t.DEAL).HasForeignKey(t => t.NACCOUNT_PERIOD_ID);//();
             // 
             // FK_DEAL_PARTNER []
             builder.Entity<DEAL>().HasOne(u => u.PARTNER).WithMany(t => t.DEAL).HasForeignKey(t => t.ACCOUNT_DEPARTMENT_ID);//();
@@ -180,29 +171,44 @@ namespace Server.Core.Context
             // FK_DEAL_PARTNER1 [1]
             builder.Entity<DEAL>().HasOne(u => u.PARTNER1).WithMany(t => t.DEAL1).HasForeignKey(t => t.DEPARTMENT_ID);//();
             // 
-            // FK_DEAL_NSI_ACCOUNT_PERIOD []
-            builder.Entity<DEAL>().HasOne(u => u.NSI_ACCOUNT_PERIOD).WithMany(t => t.DEAL).HasForeignKey(t => t.NACCOUNT_PERIOD_ID);//();
+            // FK_DEAL_NSI_REAZON_2 []
+            builder.Entity<DEAL>().HasOne(u => u.NSI_REAZON).WithMany(t => t.DEAL).HasForeignKey(t => t.CALC_NREAZON_ID);//();
             // 
-            // FK_DEAL_EXT_PARTNER3 []
-            builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER).WithMany(t => t.DEAL_EXT).HasForeignKey(t => t.CONSIGNEE_ID);//();
+            // FK_DEAL_NSI_FACILITY []
+            builder.Entity<DEAL>().HasOne(u => u.NSI_FACILITY).WithMany(t => t.DEAL).HasForeignKey(t => t.NFACILITY_ID);//();
+            // 
+            // FK_DEAL_NSI_REAZON [1]
+            builder.Entity<DEAL>().HasOne(u => u.NSI_REAZON1).WithMany(t => t.DEAL1).HasForeignKey(t => t.OPL_NREAZON_ID);//();
+            // 
+            // FK_DEAL_NSI_REAZON_1 [2]
+            builder.Entity<DEAL>().HasOne(u => u.NSI_REAZON2).WithMany(t => t.DEAL2).HasForeignKey(t => t.CLOSE_NREAZON_ID);//();
             // 
             // FK_DEAL_EXT_DEAL []
             builder.Entity<DEAL_EXT>().HasOne(u => u.DEAL).WithMany(t => t.DEAL_EXT).HasForeignKey(t => t.DEAL_ID);//();
             // 
-            // FK_DEAL_EXT_PARTNER_1 [1]
-            builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER1).WithMany(t => t.DEAL_EXT1).HasForeignKey(t => t.BUYER_ID);//();
+            // FK_DEAL_EXT_PARTNER_1 []
+            builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER).WithMany(t => t.DEAL_EXT).HasForeignKey(t => t.BUYER_ID);//();
+            // 
+            // FK_DEAL_EXT_PARTNER1 [1]
+            builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER1).WithMany(t => t.DEAL_EXT1).HasForeignKey(t => t.SELLER_ID);//();
             // 
             // FK_DEAL_EXT_PARTNER2 [2]
             builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER2).WithMany(t => t.DEAL_EXT2).HasForeignKey(t => t.PAYER_ID);//();
             // 
-            // FK_DEAL_EXT_PARTNER1 [3]
-            builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER3).WithMany(t => t.DEAL_EXT3).HasForeignKey(t => t.SELLER_ID);//();
+            // FK_DEAL_EXT_PARTNER3 [3]
+            builder.Entity<DEAL_EXT>().HasOne(u => u.PARTNER3).WithMany(t => t.DEAL_EXT3).HasForeignKey(t => t.CONSIGNEE_ID);//();
+            // 
+            // FK_DOCUMENT_NSI_TAG []
+            builder.Entity<DOCUMENT>().HasOne(u => u.NSI_TAG).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.NTAG_ID);//();
+            // 
+            // FK_DOCUMENT_DEAL []
+            builder.Entity<DOCUMENT>().HasOne(u => u.DEAL).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.DEAL_ID);//();
             // 
             // FK_DOCUMENT_PARTNER []
             builder.Entity<DOCUMENT>().HasOne(u => u.PARTNER).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.PARTNER_ID);//();
             // 
-            // FK_DOCUMENT_NSI_TAG []
-            builder.Entity<DOCUMENT>().HasOne(u => u.NSI_TAG).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.NTAG_ID);//();
+            // FK_DOCUMENT_DOCUMENT [1]
+            builder.Entity<DOCUMENT>().HasOne(u => u.DOCUMENT1).WithMany(t => t.DOCUMENT2).HasForeignKey(t => t.CONS_PARENT_ID);//();
             // 
             // FK_DOCUMENT_NSI_REAZON []
             builder.Entity<DOCUMENT>().HasOne(u => u.NSI_REAZON).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.NREAZON_ID);//();
@@ -210,38 +216,35 @@ namespace Server.Core.Context
             // FK_DOCUMENT_NSI_PRODUCT []
             builder.Entity<DOCUMENT>().HasOne(u => u.NSI_PRODUCT).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.NPRODUCT_ID);//();
             // 
-            // FK_DOCUMENT_DOCUMENT [1]
-            builder.Entity<DOCUMENT>().HasOne(u => u.DOCUMENT1).WithMany(t => t.DOCUMENT2).HasForeignKey(t => t.CONS_PARENT_ID);//();
-            // 
-            // FK_DOCUMENT_DEAL []
-            builder.Entity<DOCUMENT>().HasOne(u => u.DEAL).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.DEAL_ID);//();
-            // 
             // FK_DOCUMENT_FACILITY []
             builder.Entity<DOCUMENT>().HasOne(u => u.FACILITY).WithMany(t => t.DOCUMENT).HasForeignKey(t => t.FACILITY_ID);//();
             // 
             // FK_DOCUMENT_ITEM_DOCUMENT_ITEM [1]
             builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.DOCUMENT_ITEM1).WithMany(t => t.DOCUMENT_ITEM2).HasForeignKey(t => t.PARENT_ID);//();
             // 
-            // FK_DOCUMENT_ITEM_NSI_TAG []
-            builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.NSI_TAG).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.NTAG_ID);//();
+            // FK_DOCUMENT_ITEM_DOCUMENT []
+            builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.DOCUMENT).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.DOCUMENT_ID);//();
             // 
             // FK_NSI_DOCUMENT_ITEM_DOCUMENT_ITEM []
             builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.NSI_DOCUMENT_ITEM).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.NDOCUMENT_ITEM_ID);//();
             // 
+            // FK_DOCUMENT_ITEM_PARTNER []
+            builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.PARTNER).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.PARTNER_ID);//();
+            // 
             // FK_DOCUMENT_ITEM_NSI_CALC []
             builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.NSI_CALC).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.NCALC_ID);//();
             // 
-            // FK_DOCUMENT_ITEM_DOCUMENT []
-            builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.DOCUMENT).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.DOCUMENT_ID);//();
+            // FK_DOCUMENT_ITEM_NSI_TAG []
+            builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.NSI_TAG).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.NTAG_ID);//();
             // 
-            // FK_DOCUMENT_ITEM_PARTNER []
-            builder.Entity<DOCUMENT_ITEM>().HasOne(u => u.PARTNER).WithMany(t => t.DOCUMENT_ITEM).HasForeignKey(t => t.PARTNER_ID);//();
+            // FK_DOCUMENT_RELATION_DOCUMENT []
+            builder.Entity<DOCUMENT_RELATION>().HasOne(u => u.DOCUMENT).WithMany(t => t.DOCUMENT_RELATION).HasForeignKey(t => t.DOCUMENT_ID);//();
             // 
             // FK_DOCUMENT_RELATION_DOCUMENT_ITEM []
             builder.Entity<DOCUMENT_RELATION>().HasOne(u => u.DOCUMENT_ITEM).WithMany(t => t.DOCUMENT_RELATION).HasForeignKey(t => t.DOCUMENT_ITEM_ID);//();
             // 
-            // FK_DOCUMENT_RELATION_DOCUMENT []
-            builder.Entity<DOCUMENT_RELATION>().HasOne(u => u.DOCUMENT).WithMany(t => t.DOCUMENT_RELATION).HasForeignKey(t => t.DOCUMENT_ID);//();
+            // FK_DOCUMENT_STORAGE_DOCUMENT []
+            builder.Entity<DOCUMENT_STORAGE>().HasOne(u => u.DOCUMENT).WithMany(t => t.DOCUMENT_STORAGE).HasForeignKey(t => t.DOCUMENT_ID);//();
             // 
             // FK_DOCUMENT_STORAGE_SYS_TABLE []
             builder.Entity<DOCUMENT_STORAGE>().HasOne(u => u.SYS_TABLE).WithMany(t => t.DOCUMENT_STORAGE).HasForeignKey(t => t.STABLE_ID);//();
@@ -249,17 +252,11 @@ namespace Server.Core.Context
             // FK_DOCUMENT_STORAGE_REPORT []
             builder.Entity<DOCUMENT_STORAGE>().HasOne(u => u.REPORT).WithMany(t => t.DOCUMENT_STORAGE).HasForeignKey(t => t.REPORT_ID);//();
             // 
-            // FK_DOCUMENT_STORAGE_DOCUMENT []
-            builder.Entity<DOCUMENT_STORAGE>().HasOne(u => u.DOCUMENT).WithMany(t => t.DOCUMENT_STORAGE).HasForeignKey(t => t.DOCUMENT_ID);//();
-            // 
             // FK_EQUIPMENT_METER_NSI_METER []
             builder.Entity<EQUIPMENT_METER>().HasOne(u => u.NSI_METER).WithMany(t => t.EQUIPMENT_METER).HasForeignKey(t => t.NMETER_ID);//();
             // 
             // FK_EVENT_NSI_EVENT1 []
             builder.Entity<EVENT>().HasOne(u => u.NSI_EVENT).WithMany(t => t.EVENT).HasForeignKey(t => t.NINFO_TRANSFER_ID);//();
-            // 
-            // FK_EVENT_PARTNER1 []
-            builder.Entity<EVENT>().HasOne(u => u.PARTNER).WithMany(t => t.EVENT).HasForeignKey(t => t.COURIER_PARTNER_ID);//();
             // 
             // FK_EVENT_DEAL []
             builder.Entity<EVENT>().HasOne(u => u.DEAL).WithMany(t => t.EVENT).HasForeignKey(t => t.DEAL_ID);//();
@@ -267,38 +264,41 @@ namespace Server.Core.Context
             // FK_EVENT_DOCUMENT []
             builder.Entity<EVENT>().HasOne(u => u.DOCUMENT).WithMany(t => t.EVENT).HasForeignKey(t => t.DOCUMENT_ID);//();
             // 
-            // FK_EVENT_DOCUMENT_ITEM []
-            builder.Entity<EVENT>().HasOne(u => u.DOCUMENT_ITEM).WithMany(t => t.EVENT).HasForeignKey(t => t.DOCUMENT_ITEM_ID);//();
+            // FK_EVENT_PARTNER3 []
+            builder.Entity<EVENT>().HasOne(u => u.PARTNER).WithMany(t => t.EVENT).HasForeignKey(t => t.TO_PARTNER_ID);//();
             // 
-            // FK_EVENT_FACILITY []
-            builder.Entity<EVENT>().HasOne(u => u.FACILITY).WithMany(t => t.EVENT).HasForeignKey(t => t.FACILITY_ID);//();
+            // FK_EVENT_PARTNER [1]
+            builder.Entity<EVENT>().HasOne(u => u.PARTNER1).WithMany(t => t.EVENT1).HasForeignKey(t => t.PARTNER_ID);//();
             // 
-            // FK_EVENT_PARTNER2 [1]
-            builder.Entity<EVENT>().HasOne(u => u.PARTNER1).WithMany(t => t.EVENT1).HasForeignKey(t => t.FROM_PARTNER_ID);//();
-            // 
-            // FK_EVENT_NSI_DATA_SOURCE []
-            builder.Entity<EVENT>().HasOne(u => u.NSI_DATA_SOURCE).WithMany(t => t.EVENT).HasForeignKey(t => t.NDATA_SOURCE_ID);//();
-            // 
-            // FK_EVENT_NSI_EVENT [1]
-            builder.Entity<EVENT>().HasOne(u => u.NSI_EVENT1).WithMany(t => t.EVENT1).HasForeignKey(t => t.NEVENT_ID);//();
-            // 
-            // FK_EVENT_NSI_EVENT_SUBTOPIC []
-            builder.Entity<EVENT>().HasOne(u => u.NSI_EVENT_SUBTOPIC).WithMany(t => t.EVENT).HasForeignKey(t => t.NEVENT_SUBTOPIC_ID);//();
+            // FK_EVENT_PARTNER1 [2]
+            builder.Entity<EVENT>().HasOne(u => u.PARTNER2).WithMany(t => t.EVENT2).HasForeignKey(t => t.COURIER_PARTNER_ID);//();
             // 
             // FK_EVENT_NSI_EVENT_TOPIC []
             builder.Entity<EVENT>().HasOne(u => u.NSI_EVENT_TOPIC).WithMany(t => t.EVENT).HasForeignKey(t => t.NEVENT_TOPIC_ID);//();
             // 
-            // FK_EVENT_PARTNER [2]
-            builder.Entity<EVENT>().HasOne(u => u.PARTNER2).WithMany(t => t.EVENT2).HasForeignKey(t => t.PARTNER_ID);//();
+            // FK_EVENT_NSI_DATA_SOURCE []
+            builder.Entity<EVENT>().HasOne(u => u.NSI_DATA_SOURCE).WithMany(t => t.EVENT).HasForeignKey(t => t.NDATA_SOURCE_ID);//();
+            // 
+            // FK_EVENT_FACILITY []
+            builder.Entity<EVENT>().HasOne(u => u.FACILITY).WithMany(t => t.EVENT).HasForeignKey(t => t.FACILITY_ID);//();
             // 
             // FK_EVENT_PARTNER_CONTACT []
             builder.Entity<EVENT>().HasOne(u => u.PARTNER_CONTACT).WithMany(t => t.EVENT).HasForeignKey(t => t.PARTNER_CONTACT_ID);//();
             // 
+            // FK_EVENT_NSI_EVENT [1]
+            builder.Entity<EVENT>().HasOne(u => u.NSI_EVENT1).WithMany(t => t.EVENT1).HasForeignKey(t => t.NEVENT_ID);//();
+            // 
             // FK_EVENT_PROCESS_EVENT [1]
             builder.Entity<EVENT>().HasOne(u => u.EVENT1).WithMany(t => t.EVENT2).HasForeignKey(t => t.PROCESS_ID);//();
             // 
-            // FK_EVENT_PARTNER3 [3]
-            builder.Entity<EVENT>().HasOne(u => u.PARTNER3).WithMany(t => t.EVENT3).HasForeignKey(t => t.TO_PARTNER_ID);//();
+            // FK_EVENT_NSI_EVENT_SUBTOPIC []
+            builder.Entity<EVENT>().HasOne(u => u.NSI_EVENT_SUBTOPIC).WithMany(t => t.EVENT).HasForeignKey(t => t.NEVENT_SUBTOPIC_ID);//();
+            // 
+            // FK_EVENT_DOCUMENT_ITEM []
+            builder.Entity<EVENT>().HasOne(u => u.DOCUMENT_ITEM).WithMany(t => t.EVENT).HasForeignKey(t => t.DOCUMENT_ITEM_ID);//();
+            // 
+            // FK_EVENT_PARTNER2 [3]
+            builder.Entity<EVENT>().HasOne(u => u.PARTNER3).WithMany(t => t.EVENT3).HasForeignKey(t => t.FROM_PARTNER_ID);//();
             // 
             // FK_EVENT_SCHEM_EVENT []
             builder.Entity<EVENT_SCHEM>().HasOne(u => u.EVENT).WithMany(t => t.EVENT_SCHEM).HasForeignKey(t => t.PARENT_ID);//();
@@ -306,26 +306,26 @@ namespace Server.Core.Context
             // FK_EVENT_SCHEM_EVENT1 [1]
             builder.Entity<EVENT_SCHEM>().HasOne(u => u.EVENT1).WithMany(t => t.EVENT_SCHEM1).HasForeignKey(t => t.CHILD_ID);//();
             // 
+            // FK_EVENT_STATE_NSI_REAZON []
+            builder.Entity<EVENT_STATE>().HasOne(u => u.NSI_REAZON).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.NREAZON_ID);//();
+            // 
+            // FK_EVENT_STATE_DOCUMENT []
+            builder.Entity<EVENT_STATE>().HasOne(u => u.DOCUMENT).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.DOCUMENT_ID);//();
+            // 
+            // FK_EVENT_STATE_EVENT []
+            builder.Entity<EVENT_STATE>().HasOne(u => u.EVENT).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.EVENT_ID);//();
+            // 
+            // FK_EVENT_STATE_DOCUMENT_ITEM []
+            builder.Entity<EVENT_STATE>().HasOne(u => u.DOCUMENT_ITEM).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.DOCUMENT_ITEM_ID);//();
+            // 
             // FK_DOCUMENT_ACTION_STATE_NSI_ACTION_STATE []
             builder.Entity<EVENT_STATE>().HasOne(u => u.NSI_EVENT_STATE).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.NEVENT_STATE_ID);//();
             // 
             // FK_EVENT_STATE_FACILITY []
             builder.Entity<EVENT_STATE>().HasOne(u => u.FACILITY).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.FACILITY_ID);//();
             // 
-            // FK_EVENT_STATE_EVENT []
-            builder.Entity<EVENT_STATE>().HasOne(u => u.EVENT).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.EVENT_ID);//();
-            // 
-            // FK_EVENT_STATE_DOCUMENT []
-            builder.Entity<EVENT_STATE>().HasOne(u => u.DOCUMENT).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.DOCUMENT_ID);//();
-            // 
-            // FK_EVENT_STATE_DOCUMENT_ITEM []
-            builder.Entity<EVENT_STATE>().HasOne(u => u.DOCUMENT_ITEM).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.DOCUMENT_ITEM_ID);//();
-            // 
             // FK_EVENT_STATE_DEAL []
             builder.Entity<EVENT_STATE>().HasOne(u => u.DEAL).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.DEAL_ID);//();
-            // 
-            // FK_EVENT_STATE_NSI_REAZON []
-            builder.Entity<EVENT_STATE>().HasOne(u => u.NSI_REAZON).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.NREAZON_ID);//();
             // 
             // FK_EVENT_STATE_PARTNER []
             builder.Entity<EVENT_STATE>().HasOne(u => u.PARTNER).WithMany(t => t.EVENT_STATE).HasForeignKey(t => t.PARTNER_ID);//();
@@ -336,20 +336,20 @@ namespace Server.Core.Context
             // FK_EXT_PARAM_EXT_PARAM_VALUE []
             builder.Entity<EXT_PARAM_VALUE>().HasOne(u => u.EXT_PARAM).WithMany(t => t.EXT_PARAM_VALUE).HasForeignKey(t => t.EXT_PARAM_ID);//();
             // 
+            // FK_FACILITY_BUILD []
+            builder.Entity<FACILITY>().HasOne(u => u.BUILD).WithMany(t => t.FACILITY).HasForeignKey(t => t.BUILD_ID);//();
+            // 
             // FK_FACILITY_FACILITY [1]
             builder.Entity<FACILITY>().HasOne(u => u.FACILITY1).WithMany(t => t.FACILITY2).HasForeignKey(t => t.PARENT_ID);//();
             // 
             // FK_FACILITY_NSI_FACILITY []
             builder.Entity<FACILITY>().HasOne(u => u.NSI_FACILITY).WithMany(t => t.FACILITY).HasForeignKey(t => t.NFACILITY_ID);//();
             // 
-            // FK_FACILITY_BUILD []
-            builder.Entity<FACILITY>().HasOne(u => u.BUILD).WithMany(t => t.FACILITY).HasForeignKey(t => t.BUILD_ID);//();
+            // FK_LOG_LOG_DETAIL []
+            builder.Entity<LOG_DETAIL>().HasOne(u => u.LOG).WithMany(t => t.LOG_DETAIL).HasForeignKey(t => t.LOG_ID);//();
             // 
             // FK_LOG_DETAIL_LOG_DETAIL [1]
             builder.Entity<LOG_DETAIL>().HasOne(u => u.LOG_DETAIL1).WithMany(t => t.LOG_DETAIL2).HasForeignKey(t => t.PARENT_ID);//();
-            // 
-            // FK_LOG_LOG_DETAIL []
-            builder.Entity<LOG_DETAIL>().HasOne(u => u.LOG).WithMany(t => t.LOG_DETAIL).HasForeignKey(t => t.LOG_ID);//();
             // 
             // FK_NSI_ACCOUNT_PERIOD_PARTNER []
             builder.Entity<NSI_ACCOUNT_PERIOD>().HasOne(u => u.PARTNER).WithMany(t => t.NSI_ACCOUNT_PERIOD).HasForeignKey(t => t.PARTNER_ID);//();
@@ -357,11 +357,11 @@ namespace Server.Core.Context
             // FK_NSI_ALGORITHM_NSI_ALGORITHM [1]
             builder.Entity<NSI_ALGORITHM>().HasOne(u => u.NSI_ALGORITHM1).WithMany(t => t.NSI_ALGORITHM2).HasForeignKey(t => t.PARENT_ID);//();
             // 
-            // FK_NSI_ALGORITHM_PARAM_NSI_ALGORITHM []
-            builder.Entity<NSI_ALGORITHM_PARAM>().HasOne(u => u.NSI_ALGORITHM).WithMany(t => t.NSI_ALGORITHM_PARAM).HasForeignKey(t => t.NALGORITHM_ID);//();
-            // 
             // FK_NSI_ALGORITHM_PARAM_NSI_PARAM []
             builder.Entity<NSI_ALGORITHM_PARAM>().HasOne(u => u.NSI_PARAM).WithMany(t => t.NSI_ALGORITHM_PARAM).HasForeignKey(t => t.NPARAM_ID);//();
+            // 
+            // FK_NSI_ALGORITHM_PARAM_NSI_ALGORITHM []
+            builder.Entity<NSI_ALGORITHM_PARAM>().HasOne(u => u.NSI_ALGORITHM).WithMany(t => t.NSI_ALGORITHM_PARAM).HasForeignKey(t => t.NALGORITHM_ID);//();
             // 
             // FK_NSI_CALC_NSI_PRODUCT []
             builder.Entity<NSI_CALC>().HasOne(u => u.NSI_PRODUCT).WithMany(t => t.NSI_CALC).HasForeignKey(t => t.NPRODUCT_ID);//();
@@ -402,20 +402,20 @@ namespace Server.Core.Context
             // FK_NSI_METER_PARAM_NSI_ZONE []
             builder.Entity<NSI_METER_PARAM>().HasOne(u => u.NSI_ZONE).WithMany(t => t.NSI_METER_PARAM).HasForeignKey(t => t.NZONE_ID);//();
             // 
-            // FK_NSI_METER_PARAM_NSI_METER_CONFIG []
-            builder.Entity<NSI_METER_PARAM>().HasOne(u => u.NSI_METER_CONFIG).WithMany(t => t.NSI_METER_PARAM).HasForeignKey(t => t.NMETER_CONFIG_ID);//();
+            // FK_NSI_METER_PARAM_NSI_PRODUCT_KIND []
+            builder.Entity<NSI_METER_PARAM>().HasOne(u => u.NSI_CALC).WithMany(t => t.NSI_METER_PARAM).HasForeignKey(t => t.NCALC_ID);//();
             // 
             // FK_NSI_METER_PARAM_NSI_METER []
             builder.Entity<NSI_METER_PARAM>().HasOne(u => u.NSI_METER).WithMany(t => t.NSI_METER_PARAM).HasForeignKey(t => t.NMETER_ID);//();
             // 
-            // FK_NSI_METER_PARAM_NSI_PRODUCT_KIND []
-            builder.Entity<NSI_METER_PARAM>().HasOne(u => u.NSI_CALC).WithMany(t => t.NSI_METER_PARAM).HasForeignKey(t => t.NCALC_ID);//();
-            // 
-            // FK_NSI_MUNICIPALITY_NSI_MUNICIPALITY_TYPE []
-            builder.Entity<NSI_MUNICIPALITY>().HasOne(u => u.NSI_MUNICIPALITY_TYPE).WithMany(t => t.NSI_MUNICIPALITY).HasForeignKey(t => t.NMUNICIPALITY_TYPE_ID);//();
+            // FK_NSI_METER_PARAM_NSI_METER_CONFIG []
+            builder.Entity<NSI_METER_PARAM>().HasOne(u => u.NSI_METER_CONFIG).WithMany(t => t.NSI_METER_PARAM).HasForeignKey(t => t.NMETER_CONFIG_ID);//();
             // 
             // FK_NSI_MUNICIPALITY_NSI_OBLAST []
             builder.Entity<NSI_MUNICIPALITY>().HasOne(u => u.NSI_OBLAST).WithMany(t => t.NSI_MUNICIPALITY).HasForeignKey(t => t.NOBLAST_ID);//();
+            // 
+            // FK_NSI_MUNICIPALITY_NSI_MUNICIPALITY_TYPE []
+            builder.Entity<NSI_MUNICIPALITY>().HasOne(u => u.NSI_MUNICIPALITY_TYPE).WithMany(t => t.NSI_MUNICIPALITY).HasForeignKey(t => t.NMUNICIPALITY_TYPE_ID);//();
             // 
             // FK_NSI_MUNICIPALITY_NSI_MUNICIPALITY [1]
             builder.Entity<NSI_MUNICIPALITY>().HasOne(u => u.NSI_MUNICIPALITY1).WithMany(t => t.NSI_MUNICIPALITY2).HasForeignKey(t => t.PARENT_ID);//();
@@ -426,17 +426,17 @@ namespace Server.Core.Context
             // FK_NSI_PARAM_SYS_TABLE []
             builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE).WithMany(t => t.NSI_PARAM).HasForeignKey(t => t.STABLE_ID);//();
             // 
-            // FK_NSI_PARAM_SOURCE_SYS_TABLE_COLUMN []
-            builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE_COLUMN).WithMany(t => t.NSI_PARAM).HasForeignKey(t => t.SOURCE_STABLE_COLUMN_ID);//();
-            // 
-            // FK_NSI_PARAM_SOURCE_SYS_TABLE [1]
-            builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE1).WithMany(t => t.NSI_PARAM1).HasForeignKey(t => t.SOURCE_STABLE_ID);//();
-            // 
             // FK_NSI_PARAM_SYS_TABLE_COLUMN_ENUM_GROUP []
             builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE_COLUMN_ENUM_GROUP).WithMany(t => t.NSI_PARAM).HasForeignKey(t => t.STABLE_COLUMN_ENUM_GROUP_ID);//();
             // 
-            // FK_NSI_PARAM_SYS_TABLE_COLUMN [1]
-            builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE_COLUMN1).WithMany(t => t.NSI_PARAM1).HasForeignKey(t => t.STABLE_COLUMN_ID);//();
+            // FK_NSI_PARAM_SYS_TABLE_COLUMN []
+            builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE_COLUMN).WithMany(t => t.NSI_PARAM).HasForeignKey(t => t.STABLE_COLUMN_ID);//();
+            // 
+            // FK_NSI_PARAM_SOURCE_SYS_TABLE_COLUMN [1]
+            builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE_COLUMN1).WithMany(t => t.NSI_PARAM1).HasForeignKey(t => t.SOURCE_STABLE_COLUMN_ID);//();
+            // 
+            // FK_NSI_PARAM_SOURCE_SYS_TABLE [1]
+            builder.Entity<NSI_PARAM>().HasOne(u => u.SYS_TABLE1).WithMany(t => t.NSI_PARAM1).HasForeignKey(t => t.SOURCE_STABLE_ID);//();
             // 
             // FK_NSI_PARAM_NSI_ALGORITHM []
             builder.Entity<NSI_PARAM>().HasOne(u => u.NSI_ALGORITHM).WithMany(t => t.NSI_PARAM).HasForeignKey(t => t.NALGORITHM_ID);//();
@@ -456,29 +456,26 @@ namespace Server.Core.Context
             // FK_NSI_TAG_NSI_TAG_TYPE []
             builder.Entity<NSI_TAG>().HasOne(u => u.NSI_TAG_TYPE).WithMany(t => t.NSI_TAG).HasForeignKey(t => t.NTAG_TYPE_ID);//();
             // 
-            // FK_NSI_TASK_PARENT_ID [1]
-            builder.Entity<NSI_TASK>().HasOne(u => u.NSI_TASK1).WithMany(t => t.NSI_TASK2).HasForeignKey(t => t.PARENT_ID);//();
-            // 
             // FK_NSI_TASK_SYS_TABLE []
             builder.Entity<NSI_TASK>().HasOne(u => u.SYS_TABLE).WithMany(t => t.NSI_TASK).HasForeignKey(t => t.STABLE_ID);//();
             // 
-            // FK_NSI_TASK_SOURCE_ID [3]
-            builder.Entity<NSI_TASK>().HasOne(u => u.NSI_TASK3).WithMany(t => t.NSI_TASK4).HasForeignKey(t => t.SOURCE_ID);//();
+            // FK_NSI_TASK_SOURCE_ID [1]
+            builder.Entity<NSI_TASK>().HasOne(u => u.NSI_TASK1).WithMany(t => t.NSI_TASK2).HasForeignKey(t => t.SOURCE_ID);//();
+            // 
+            // FK_NSI_TASK_PARENT_ID [3]
+            builder.Entity<NSI_TASK>().HasOne(u => u.NSI_TASK3).WithMany(t => t.NSI_TASK4).HasForeignKey(t => t.PARENT_ID);//();
             // 
             // FK_NSI_TASK_CONFIG_NTASK_ID []
             builder.Entity<NSI_TASK_CONFIG>().HasOne(u => u.NSI_TASK).WithMany(t => t.NSI_TASK_CONFIG).HasForeignKey(t => t.NTASK_ID);//();
             // 
-            // FK_NSI_TASK_JOB_SCHEM_NSI_TASK_JOB1 []
-            builder.Entity<NSI_TASK_JOB_SCHEM>().HasOne(u => u.NSI_TASK_JOB).WithMany(t => t.NSI_TASK_JOB_SCHEM).HasForeignKey(t => t.PARENT_ID);//();
+            // FK_NSI_TASK_JOB_SCHEM_NSI_TASK_JOB []
+            builder.Entity<NSI_TASK_JOB_SCHEM>().HasOne(u => u.NSI_TASK_JOB).WithMany(t => t.NSI_TASK_JOB_SCHEM).HasForeignKey(t => t.CHILD_ID);//();
             // 
-            // FK_NSI_TASK_JOB_SCHEM_NSI_TASK_JOB [1]
-            builder.Entity<NSI_TASK_JOB_SCHEM>().HasOne(u => u.NSI_TASK_JOB1).WithMany(t => t.NSI_TASK_JOB_SCHEM1).HasForeignKey(t => t.CHILD_ID);//();
+            // FK_NSI_TASK_JOB_SCHEM_NSI_TASK_JOB1 [1]
+            builder.Entity<NSI_TASK_JOB_SCHEM>().HasOne(u => u.NSI_TASK_JOB1).WithMany(t => t.NSI_TASK_JOB_SCHEM1).HasForeignKey(t => t.PARENT_ID);//();
             // 
-            // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE []
-            builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_VILLAGE_TYPE).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NVILLAGE_TYPE_ID);//();
-            // 
-            // FK_NSI_VILLAGE_NSI_MUNICIPALITY_TYPE []
-            builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_MUNICIPALITY_TYPE).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NMUNICIPALITY_TYPE_ID);//();
+            // FK_NSI_VILLAGE_NSI_OBLAST []
+            builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_OBLAST).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NOBLAST_ID);//();
             // 
             // FK_NSI_VILLAGE_NSI_OBLAST_REGION []
             builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_OBLAST_REGION).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NOBLAST_REGION_ID);//();
@@ -486,8 +483,11 @@ namespace Server.Core.Context
             // FK_NSI_VILLAGE_NSI_MUNICIPALITY []
             builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_MUNICIPALITY).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NMUNICIPALITY_ID);//();
             // 
-            // FK_NSI_VILLAGE_NSI_OBLAST []
-            builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_OBLAST).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NOBLAST_ID);//();
+            // FK_NSI_VILLAGE_NSI_VILLAGE_TYPE []
+            builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_VILLAGE_TYPE).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NVILLAGE_TYPE_ID);//();
+            // 
+            // FK_NSI_VILLAGE_NSI_MUNICIPALITY_TYPE []
+            builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_MUNICIPALITY_TYPE).WithMany(t => t.NSI_VILLAGE).HasForeignKey(t => t.NMUNICIPALITY_TYPE_ID);//();
             // 
             // FK_NSI_VILLAGE_NSI_VILLAGE [1]
             builder.Entity<NSI_VILLAGE>().HasOne(u => u.NSI_VILLAGE1).WithMany(t => t.NSI_VILLAGE2).HasForeignKey(t => t.PARENT_ID);//();
@@ -507,11 +507,11 @@ namespace Server.Core.Context
             // FK_PARTNER_EXT_PARTNER []
             builder.Entity<PARTNER_EXT>().HasOne(u => u.PARTNER).WithMany(t => t.PARTNER_EXT).HasForeignKey(t => t.PARTNER_ID);//();
             // 
-            // FK_PARTNER_EXT_BUILD []
-            builder.Entity<PARTNER_EXT>().HasOne(u => u.BUILD).WithMany(t => t.PARTNER_EXT).HasForeignKey(t => t.BUILD_DELIVERY_ID);//();
-            // 
             // FK_PARTNER_EXT_NSI_OKOPF []
             builder.Entity<PARTNER_EXT>().HasOne(u => u.NSI_OKOPF).WithMany(t => t.PARTNER_EXT).HasForeignKey(t => t.NOKOPF_ID);//();
+            // 
+            // FK_PARTNER_EXT_BUILD []
+            builder.Entity<PARTNER_EXT>().HasOne(u => u.BUILD).WithMany(t => t.PARTNER_EXT).HasForeignKey(t => t.BUILD_DELIVERY_ID);//();
             // 
             // FK_PARTNER_RELATION_DOCUMENT []
             builder.Entity<PARTNER_RELATION>().HasOne(u => u.DOCUMENT).WithMany(t => t.PARTNER_RELATION).HasForeignKey(t => t.DOCUMENT_ID);//();
@@ -531,11 +531,11 @@ namespace Server.Core.Context
             // FK_REPORT_TABLE_SYS_TABLE []
             builder.Entity<REPORT_TABLE>().HasOne(u => u.SYS_TABLE).WithMany(t => t.REPORT_TABLE).HasForeignKey(t => t.STABLE_ID);//();
             // 
-            // FK_SYS_AUTO_TEST_DETAIL_SYS_AUTO_TEST_DETAIL_PARENT [1]
-            builder.Entity<SYS_AUTO_TEST_DETAIL>().HasOne(u => u.SYS_AUTO_TEST_DETAIL1).WithMany(t => t.SYS_AUTO_TEST_DETAIL2).HasForeignKey(t => t.PARENT_ID);//();
-            // 
             // FK_SYS_AUTO_TEST_SYS_AUTO_TEST_DETAIL []
             builder.Entity<SYS_AUTO_TEST_DETAIL>().HasOne(u => u.SYS_AUTO_TEST).WithMany(t => t.SYS_AUTO_TEST_DETAIL).HasForeignKey(t => t.SAUTO_TEST_ID);//();
+            // 
+            // FK_SYS_AUTO_TEST_DETAIL_SYS_AUTO_TEST_DETAIL_PARENT [1]
+            builder.Entity<SYS_AUTO_TEST_DETAIL>().HasOne(u => u.SYS_AUTO_TEST_DETAIL1).WithMany(t => t.SYS_AUTO_TEST_DETAIL2).HasForeignKey(t => t.PARENT_ID);//();
             // 
             // FK_SYS_BASE_RELATION_NSI_DATA_SOURCE []
             builder.Entity<SYS_BASE_RELATION>().HasOne(u => u.NSI_DATA_SOURCE).WithMany(t => t.SYS_BASE_RELATION).HasForeignKey(t => t.NDATA_SOURCE_ID);//();
@@ -555,23 +555,11 @@ namespace Server.Core.Context
             // FK_SYS_GROUP_FILTER_SYS_GROUP []
             builder.Entity<SYS_GROUP_FILTER>().HasOne(u => u.SYS_GROUP).WithMany(t => t.SYS_GROUP_FILTER).HasForeignKey(t => t.SGROUP_ID);//();
             // 
-            // FK_SYS_GROUP_OBJECT_SYS_TABLE []
-            builder.Entity<SYS_GROUP_OBJECT>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_GROUP_OBJECT).HasForeignKey(t => t.STABLE_ID);//();
-            // 
             // FK_SYS_GROUP_OBJECT_SYS_GROUP []
             builder.Entity<SYS_GROUP_OBJECT>().HasOne(u => u.SYS_GROUP).WithMany(t => t.SYS_GROUP_OBJECT).HasForeignKey(t => t.SGROUP_ID);//();
             // 
-            // FK_SYS_HELP_SYS_HELP [1]
-            builder.Entity<SYS_HELP>().HasOne(u => u.SYS_HELP1).WithMany(t => t.SYS_HELP2).HasForeignKey(t => t.PARENT_ID);//();
-            // 
-            // FK_SYS_HELP_NSI_TAG []
-            builder.Entity<SYS_HELP>().HasOne(u => u.NSI_TAG).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.NTAG_ID);//();
-            // 
-            // FK_SYS_HELP_NSI_EVENT_STATE []
-            builder.Entity<SYS_HELP>().HasOne(u => u.NSI_EVENT_STATE).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.NEVENT_STATE_ID);//();
-            // 
-            // FK_SYS_HELP_NSI_DOCUMENT_ITEM []
-            builder.Entity<SYS_HELP>().HasOne(u => u.NSI_DOCUMENT_ITEM).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.NDOCUMENT_ITEM_ID);//();
+            // FK_SYS_GROUP_OBJECT_SYS_TABLE []
+            builder.Entity<SYS_GROUP_OBJECT>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_GROUP_OBJECT).HasForeignKey(t => t.STABLE_ID);//();
             // 
             // FK_SYS_HELP_SYS_VERSION []
             builder.Entity<SYS_HELP>().HasOne(u => u.SYS_VERSION).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.SVERSION_ID);//();
@@ -579,17 +567,29 @@ namespace Server.Core.Context
             // FK_SYS_HELP_SYS_CLIENT []
             builder.Entity<SYS_HELP>().HasOne(u => u.SYS_CLIENT).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.SCLIENT_ID);//();
             // 
-            // FK_SYS_HELP_INDEX_NSI_DOCUMENT_ITEM []
-            builder.Entity<SYS_HELP_INDEX>().HasOne(u => u.NSI_DOCUMENT_ITEM).WithMany(t => t.SYS_HELP_INDEX).HasForeignKey(t => t.NDOCUMENT_ITEM_ID);//();
+            // FK_SYS_HELP_NSI_DOCUMENT_ITEM []
+            builder.Entity<SYS_HELP>().HasOne(u => u.NSI_DOCUMENT_ITEM).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.NDOCUMENT_ITEM_ID);//();
             // 
-            // FK_SYS_HELP_INDEX_SYS_VERSION []
-            builder.Entity<SYS_HELP_INDEX>().HasOne(u => u.SYS_VERSION).WithMany(t => t.SYS_HELP_INDEX).HasForeignKey(t => t.SVERSION_ID);//();
+            // FK_SYS_HELP_NSI_EVENT_STATE []
+            builder.Entity<SYS_HELP>().HasOne(u => u.NSI_EVENT_STATE).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.NEVENT_STATE_ID);//();
+            // 
+            // FK_SYS_HELP_NSI_TAG []
+            builder.Entity<SYS_HELP>().HasOne(u => u.NSI_TAG).WithMany(t => t.SYS_HELP).HasForeignKey(t => t.NTAG_ID);//();
+            // 
+            // FK_SYS_HELP_SYS_HELP [1]
+            builder.Entity<SYS_HELP>().HasOne(u => u.SYS_HELP1).WithMany(t => t.SYS_HELP2).HasForeignKey(t => t.PARENT_ID);//();
             // 
             // FK_SYS_HELP_INDEX_SYS_HELP []
             builder.Entity<SYS_HELP_INDEX>().HasOne(u => u.SYS_HELP).WithMany(t => t.SYS_HELP_INDEX).HasForeignKey(t => t.SHELP_ID);//();
             // 
+            // FK_SYS_HELP_INDEX_SYS_VERSION []
+            builder.Entity<SYS_HELP_INDEX>().HasOne(u => u.SYS_VERSION).WithMany(t => t.SYS_HELP_INDEX).HasForeignKey(t => t.SVERSION_ID);//();
+            // 
             // FK_SYS_HELP_INDEX_SYS_CLIENT []
             builder.Entity<SYS_HELP_INDEX>().HasOne(u => u.SYS_CLIENT).WithMany(t => t.SYS_HELP_INDEX).HasForeignKey(t => t.SCLIENT_ID);//();
+            // 
+            // FK_SYS_HELP_INDEX_NSI_DOCUMENT_ITEM []
+            builder.Entity<SYS_HELP_INDEX>().HasOne(u => u.NSI_DOCUMENT_ITEM).WithMany(t => t.SYS_HELP_INDEX).HasForeignKey(t => t.NDOCUMENT_ITEM_ID);//();
             // 
             // FK_SYS_OPERATION_PARENT [1]
             builder.Entity<SYS_OPERATION>().HasOne(u => u.SYS_OPERATION1).WithMany(t => t.SYS_OPERATION2).HasForeignKey(t => t.PARENT_ID);//();
@@ -600,14 +600,14 @@ namespace Server.Core.Context
             // FK_SYS_TABLE_SYS_TABLE_PARENT [3]
             builder.Entity<SYS_TABLE>().HasOne(u => u.SYS_TABLE3).WithMany(t => t.SYS_TABLE4).HasForeignKey(t => t.PARENT_ID);//();
             // 
-            // FK_SYS_TABLE_COL_SYS_TABLE []
-            builder.Entity<SYS_TABLE_COLUMN>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_TABLE_COLUMN).HasForeignKey(t => t.STABLE_ID);//();
-            // 
             // FK_SYS_TABLE_COLUMN_SYS_TABLE_COLUMN_ENUM_GROUP []
             builder.Entity<SYS_TABLE_COLUMN>().HasOne(u => u.SYS_TABLE_COLUMN_ENUM_GROUP).WithMany(t => t.SYS_TABLE_COLUMN).HasForeignKey(t => t.STABLE_COLUMN_ENUM_GROUP_ID);//();
             // 
             // FK_SYS_TABLE_COLUMN_SYS_TABLE_COLUMN [1]
             builder.Entity<SYS_TABLE_COLUMN>().HasOne(u => u.SYS_TABLE_COLUMN1).WithMany(t => t.SYS_TABLE_COLUMN2).HasForeignKey(t => t.TREE_PARENT_COLUMN_ID);//();
+            // 
+            // FK_SYS_TABLE_COL_SYS_TABLE []
+            builder.Entity<SYS_TABLE_COLUMN>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_TABLE_COLUMN).HasForeignKey(t => t.STABLE_ID);//();
             // 
             // FK_SYS_TABLE_COL_SYS_TABLE2 [1]
             builder.Entity<SYS_TABLE_COLUMN>().HasOne(u => u.SYS_TABLE1).WithMany(t => t.SYS_TABLE_COLUMN1).HasForeignKey(t => t.PARENT_TABLE_ID);//();
@@ -615,20 +615,20 @@ namespace Server.Core.Context
             // FK_SYS_TABLE_COLUMN_ENUM_GROUP_SYS_TABLE_COLUMN_ENUM []
             builder.Entity<SYS_TABLE_COLUMN_ENUM>().HasOne(u => u.SYS_TABLE_COLUMN_ENUM_GROUP).WithMany(t => t.SYS_TABLE_COLUMN_ENUM).HasForeignKey(t => t.STABLE_COLUMN_ENUM_GROUP_ID);//();
             // 
-            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE1 []
-            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_TABLE_COLUMN_RELATION).HasForeignKey(t => t.STABLE_PARENT_ID);//();
+            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE []
+            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_TABLE_COLUMN_RELATION).HasForeignKey(t => t.STABLE_CHILD_ID);//();
             // 
             // FK_SYS_TABLE_COLUMN_RELATION_SYS_COLUMN_RELATION []
             builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_COLUMN_RELATION).WithMany(t => t.SYS_TABLE_COLUMN_RELATION).HasForeignKey(t => t.SCOLUMN_RELATION_ID);//();
             // 
-            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE [1]
-            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE1).WithMany(t => t.SYS_TABLE_COLUMN_RELATION1).HasForeignKey(t => t.STABLE_CHILD_ID);//();
+            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE1 [1]
+            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE1).WithMany(t => t.SYS_TABLE_COLUMN_RELATION1).HasForeignKey(t => t.STABLE_PARENT_ID);//();
             // 
-            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN []
-            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE_COLUMN).WithMany(t => t.SYS_TABLE_COLUMN_RELATION).HasForeignKey(t => t.STABLE_COLUMN_CHILD_ID);//();
+            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN1 []
+            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE_COLUMN).WithMany(t => t.SYS_TABLE_COLUMN_RELATION).HasForeignKey(t => t.STABLE_COLUMN_PARENT_ID);//();
             // 
-            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN1 [1]
-            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE_COLUMN1).WithMany(t => t.SYS_TABLE_COLUMN_RELATION1).HasForeignKey(t => t.STABLE_COLUMN_PARENT_ID);//();
+            // FK_SYS_TABLE_COLUMN_RELATION_SYS_TABLE_COLUMN [1]
+            builder.Entity<SYS_TABLE_COLUMN_RELATION>().HasOne(u => u.SYS_TABLE_COLUMN1).WithMany(t => t.SYS_TABLE_COLUMN_RELATION1).HasForeignKey(t => t.STABLE_COLUMN_CHILD_ID);//();
             // 
             // FK_SYS_TABLE_RELATION_PARENT []
             builder.Entity<SYS_TABLE_RELATION>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_TABLE_RELATION).HasForeignKey(t => t.PARENT_ID);//();
@@ -636,11 +636,11 @@ namespace Server.Core.Context
             // FK_SYS_TABLE_RELATION_CHILD [1]
             builder.Entity<SYS_TABLE_RELATION>().HasOne(u => u.SYS_TABLE1).WithMany(t => t.SYS_TABLE_RELATION1).HasForeignKey(t => t.CHILD_ID);//();
             // 
-            // FK_SYS_TABLE_TREE_SYS_TABLE_TREE [1]
-            builder.Entity<SYS_TABLE_TREE>().HasOne(u => u.SYS_TABLE_TREE1).WithMany(t => t.SYS_TABLE_TREE2).HasForeignKey(t => t.PARENT_ID);//();
-            // 
             // FK_SYS_TABLE_TREE_SYS_TABLE []
             builder.Entity<SYS_TABLE_TREE>().HasOne(u => u.SYS_TABLE).WithMany(t => t.SYS_TABLE_TREE).HasForeignKey(t => t.STABLE_ID);//();
+            // 
+            // FK_SYS_TABLE_TREE_SYS_TABLE_TREE [1]
+            builder.Entity<SYS_TABLE_TREE>().HasOne(u => u.SYS_TABLE_TREE1).WithMany(t => t.SYS_TABLE_TREE2).HasForeignKey(t => t.PARENT_ID);//();
             // 
             // FK_SYS_TABLE_TREE_RELATION_NSI_SYS_TABLE_TREE_RELATION []
             builder.Entity<SYS_TABLE_TREE_RELATION>().HasOne(u => u.NSI_SYS_TABLE_TREE_RELATION).WithMany(t => t.SYS_TABLE_TREE_RELATION).HasForeignKey(t => t.NSYS_TABLE_TREE_RELATION_ID);//();
@@ -648,32 +648,35 @@ namespace Server.Core.Context
             // FK_SYS_TABLE_TREE_RELATION_SYS_TABLE_TREE []
             builder.Entity<SYS_TABLE_TREE_RELATION>().HasOne(u => u.SYS_TABLE_TREE).WithMany(t => t.SYS_TABLE_TREE_RELATION).HasForeignKey(t => t.STABLE_TREE_ID);//();
             // 
-            // FK_SYS_USER_PARTNER []
-            builder.Entity<SYS_USER>().HasOne(u => u.PARTNER).WithMany(t => t.SYS_USER).HasForeignKey(t => t.PARTNER_ID);//();
-            // 
             // FK_SYS_USER_SYS_USER_GROUP []
             builder.Entity<SYS_USER>().HasOne(u => u.SYS_USER_GROUP).WithMany(t => t.SYS_USER).HasForeignKey(t => t.SUSER_GROUP_ID);//();
+            // 
+            // FK_SYS_USER_PARTNER []
+            builder.Entity<SYS_USER>().HasOne(u => u.PARTNER).WithMany(t => t.SYS_USER).HasForeignKey(t => t.PARTNER_ID);//();
             // 
             // FK_SYS_USER_SYS_GROUP []
             builder.Entity<SYS_USER>().HasOne(u => u.SYS_GROUP).WithMany(t => t.SYS_USER).HasForeignKey(t => t.DEFAULT_SGROUP_ID);//();
             // 
-            // FK_SYS_USER_CALL_SYS_USER []
-            builder.Entity<SYS_USER_CALL>().HasOne(u => u.SYS_USER).WithMany(t => t.SYS_USER_CALL).HasForeignKey(t => t.SUSER_ID);//();
-            // 
             // FK_SYS_USER_CALL_EVENT []
             builder.Entity<SYS_USER_CALL>().HasOne(u => u.EVENT).WithMany(t => t.SYS_USER_CALL).HasForeignKey(t => t.EVENT_ID);//();
+            // 
+            // FK_SYS_USER_CALL_SYS_USER []
+            builder.Entity<SYS_USER_CALL>().HasOne(u => u.SYS_USER).WithMany(t => t.SYS_USER_CALL).HasForeignKey(t => t.SUSER_ID);//();
             // 
             // FK_SYS_USER_DATA_SYS_MODULE []
             builder.Entity<SYS_USER_DATA>().HasOne(u => u.SYS_MODULE).WithMany(t => t.SYS_USER_DATA).HasForeignKey(t => t.SMODULE_ID);//();
             // 
-            // FK_SYS_USER_DATA_SYS_CONFIG []
-            builder.Entity<SYS_USER_DATA>().HasOne(u => u.SYS_CONFIG).WithMany(t => t.SYS_USER_DATA).HasForeignKey(t => t.SCONFIG_ID);//();
-            // 
             // FK_SYS_USER_DATA_SYS_USER []
             builder.Entity<SYS_USER_DATA>().HasOne(u => u.SYS_USER).WithMany(t => t.SYS_USER_DATA).HasForeignKey(t => t.SUSER_ID);//();
             // 
+            // FK_SYS_USER_DATA_SYS_CONFIG []
+            builder.Entity<SYS_USER_DATA>().HasOne(u => u.SYS_CONFIG).WithMany(t => t.SYS_USER_DATA).HasForeignKey(t => t.SCONFIG_ID);//();
+            // 
             // FK_SYS_USER_GROUP_SYS_USER_GROUP [1]
             builder.Entity<SYS_USER_GROUP>().HasOne(u => u.SYS_USER_GROUP1).WithMany(t => t.SYS_USER_GROUP2).HasForeignKey(t => t.PARENT_ID);//();
+            // 
+            // FK_SYS_USER_GROUP_CONFIG_SYS_MODULE []
+            builder.Entity<SYS_USER_GROUP_CONFIG>().HasOne(u => u.SYS_MODULE).WithMany(t => t.SYS_USER_GROUP_CONFIG).HasForeignKey(t => t.SMODULE_ID);//();
             // 
             // FK_SYS_USER_GROUP_CONFIG_SYS_CONFIG []
             builder.Entity<SYS_USER_GROUP_CONFIG>().HasOne(u => u.SYS_CONFIG).WithMany(t => t.SYS_USER_GROUP_CONFIG).HasForeignKey(t => t.SCONFIG_ID);//();
@@ -681,41 +684,41 @@ namespace Server.Core.Context
             // FK_SYS_USER_GROUP_CONFIG_SYS_CLIENT []
             builder.Entity<SYS_USER_GROUP_CONFIG>().HasOne(u => u.SYS_CLIENT).WithMany(t => t.SYS_USER_GROUP_CONFIG).HasForeignKey(t => t.SCLIENT_ID);//();
             // 
-            // FK_SYS_USER_GROUP_CONFIG_SYS_MODULE []
-            builder.Entity<SYS_USER_GROUP_CONFIG>().HasOne(u => u.SYS_MODULE).WithMany(t => t.SYS_USER_GROUP_CONFIG).HasForeignKey(t => t.SMODULE_ID);//();
-            // 
             // FK_SYS_VERSION_SYS_MODULE []
             builder.Entity<SYS_VERSION>().HasOne(u => u.SYS_MODULE).WithMany(t => t.SYS_VERSION).HasForeignKey(t => t.SMODULE_ID);//();
-            // 
-            // FK_TASK_NSI_ALGORITHM []
-            builder.Entity<TASK>().HasOne(u => u.NSI_ALGORITHM).WithMany(t => t.TASK).HasForeignKey(t => t.NALGORITHM_ID);//();
-            // 
-            // FK_TASK_REESTR_NSI_TASK_STATUS []
-            builder.Entity<TASK>().HasOne(u => u.NSI_TASK_STATUS).WithMany(t => t.TASK).HasForeignKey(t => t.NTASK_STATUS_ID);//();
             // 
             // FK_TASK_REESTR_NSI_TASK []
             builder.Entity<TASK>().HasOne(u => u.NSI_TASK).WithMany(t => t.TASK).HasForeignKey(t => t.NTASK_ID);//();
             // 
-            // FK_TASK_CONFIG_RELATION_NTASK_CONFIG_ID []
-            builder.Entity<TASK_CONFIG_RELATION>().HasOne(u => u.NSI_TASK_CONFIG).WithMany(t => t.TASK_CONFIG_RELATION).HasForeignKey(t => t.NTASK_CONFIG_ID);//();
+            // FK_TASK_REESTR_NSI_TASK_STATUS []
+            builder.Entity<TASK>().HasOne(u => u.NSI_TASK_STATUS).WithMany(t => t.TASK).HasForeignKey(t => t.NTASK_STATUS_ID);//();
+            // 
+            // FK_TASK_NSI_ALGORITHM []
+            builder.Entity<TASK>().HasOne(u => u.NSI_ALGORITHM).WithMany(t => t.TASK).HasForeignKey(t => t.NALGORITHM_ID);//();
             // 
             // FK_TASK_CONFIG_RELATION_STABLE_ID []
             builder.Entity<TASK_CONFIG_RELATION>().HasOne(u => u.SYS_TABLE).WithMany(t => t.TASK_CONFIG_RELATION).HasForeignKey(t => t.STABLE_ID);//();
             // 
-            // FK_TASK_EXECUTION_TASK []
-            builder.Entity<TASK_EXECUTION>().HasOne(u => u.TASK).WithMany(t => t.TASK_EXECUTION).HasForeignKey(t => t.TASK_ID);//();
+            // FK_TASK_CONFIG_RELATION_NTASK_CONFIG_ID []
+            builder.Entity<TASK_CONFIG_RELATION>().HasOne(u => u.NSI_TASK_CONFIG).WithMany(t => t.TASK_CONFIG_RELATION).HasForeignKey(t => t.NTASK_CONFIG_ID);//();
             // 
             // FK_TASK_EXECUTION_DOCUMENT []
             builder.Entity<TASK_EXECUTION>().HasOne(u => u.DOCUMENT).WithMany(t => t.TASK_EXECUTION).HasForeignKey(t => t.DOCUMENT_ID);//();
             // 
-            // FK_TASK_EXECUTION_NSI_TASK_RESULT []
-            builder.Entity<TASK_EXECUTION>().HasOne(u => u.NSI_TASK_RESULT).WithMany(t => t.TASK_EXECUTION).HasForeignKey(t => t.NTASK_RESULT_ID);//();
+            // FK_TASK_EXECUTION_TASK []
+            builder.Entity<TASK_EXECUTION>().HasOne(u => u.TASK).WithMany(t => t.TASK_EXECUTION).HasForeignKey(t => t.TASK_ID);//();
             // 
             // FK_TASK_EXECUTION_NSI_TASK_STATUS []
             builder.Entity<TASK_EXECUTION>().HasOne(u => u.NSI_TASK_STATUS).WithMany(t => t.TASK_EXECUTION).HasForeignKey(t => t.NTASK_STATUS_ID);//();
             // 
+            // FK_TASK_EXECUTION_NSI_TASK_RESULT []
+            builder.Entity<TASK_EXECUTION>().HasOne(u => u.NSI_TASK_RESULT).WithMany(t => t.TASK_EXECUTION).HasForeignKey(t => t.NTASK_RESULT_ID);//();
+            // 
             // FK_TASK_EXECUTION_DETAIL_DOCUMENT []
             builder.Entity<TASK_EXECUTION_DETAIL>().HasOne(u => u.DOCUMENT).WithMany(t => t.TASK_EXECUTION_DETAIL).HasForeignKey(t => t.DOCUMENT_ID);//();
+            // 
+            // FK_TASK_EXECUTION_DETAIL_TASK_EXECUTION []
+            builder.Entity<TASK_EXECUTION_DETAIL>().HasOne(u => u.TASK_EXECUTION).WithMany(t => t.TASK_EXECUTION_DETAIL).HasForeignKey(t => t.TASK_EXECUTION_ID);//();
             // 
             // FK_TASK_EXECUTION_DETAIL_NSI_TASK_STATUS []
             builder.Entity<TASK_EXECUTION_DETAIL>().HasOne(u => u.NSI_TASK_STATUS).WithMany(t => t.TASK_EXECUTION_DETAIL).HasForeignKey(t => t.NTASK_STATUS_ID);//();
@@ -723,20 +726,17 @@ namespace Server.Core.Context
             // FK_TASK_EXECUTION_DETAIL_NSI_TASK_RESULT []
             builder.Entity<TASK_EXECUTION_DETAIL>().HasOne(u => u.NSI_TASK_RESULT).WithMany(t => t.TASK_EXECUTION_DETAIL).HasForeignKey(t => t.NTASK_RESULT_ID);//();
             // 
-            // FK_TASK_EXECUTION_DETAIL_TASK_EXECUTION []
-            builder.Entity<TASK_EXECUTION_DETAIL>().HasOne(u => u.TASK_EXECUTION).WithMany(t => t.TASK_EXECUTION_DETAIL).HasForeignKey(t => t.TASK_EXECUTION_ID);//();
+            // FK_TASK_TRIGGER_NSI_TASK_TRIGGER []
+            builder.Entity<TASK_TRIGGER>().HasOne(u => u.NSI_TASK_TRIGGER).WithMany(t => t.TASK_TRIGGER).HasForeignKey(t => t.NTASK_TRIGGER_ID);//();
             // 
             // FK_TASK_TRIGGER_TASK []
             builder.Entity<TASK_TRIGGER>().HasOne(u => u.TASK).WithMany(t => t.TASK_TRIGGER).HasForeignKey(t => t.TASK_ID);//();
             // 
-            // FK_TASK_TRIGGER_NSI_TASK_TRIGGER []
-            builder.Entity<TASK_TRIGGER>().HasOne(u => u.NSI_TASK_TRIGGER).WithMany(t => t.TASK_TRIGGER).HasForeignKey(t => t.NTASK_TRIGGER_ID);//();
+            // FK_TASK_TRIGGER_EVENT_TASK_TRIGGER []
+            builder.Entity<TASK_TRIGGER_EVENT>().HasOne(u => u.TASK_TRIGGER).WithMany(t => t.TASK_TRIGGER_EVENT).HasForeignKey(t => t.TASK_TRIGGER_ID);//();
             // 
             // FK_TASK_EVENT_TRIGGER_NSI_EVENT []
             builder.Entity<TASK_TRIGGER_EVENT>().HasOne(u => u.NSI_EVENT).WithMany(t => t.TASK_TRIGGER_EVENT).HasForeignKey(t => t.NEVENT_ID);//();
-            // 
-            // FK_TASK_TRIGGER_EVENT_TASK_TRIGGER []
-            builder.Entity<TASK_TRIGGER_EVENT>().HasOne(u => u.TASK_TRIGGER).WithMany(t => t.TASK_TRIGGER_EVENT).HasForeignKey(t => t.TASK_TRIGGER_ID);//();
             // 
             // FK_TASK_TRIGGER_TIME_NSI_TASK_TRIGGER_TIME []
             builder.Entity<TASK_TRIGGER_TIME>().HasOne(u => u.NSI_TASK_TRIGGER_TIME).WithMany(t => t.TASK_TRIGGER_TIME).HasForeignKey(t => t.NTASK_TRIGGER_TIME_ID);//();
