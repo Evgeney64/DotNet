@@ -475,7 +475,7 @@ namespace Tsb.Generate
                     {
                         Attributes = MemberAttributes.Public,
                         Type = new CodeTypeReference("IQueryable<" + tbl.name + ">"),
-                        Name = " Get_" + tbl.name + "() => Context." + tbl.name,
+                        Name = "Get_" + tbl.name + "() => Context." + tbl.name,
                     };
                     classItem.Class_Serv.Members.Add(prop);
                     //Console.WriteLine("[gen-serv] - " + tbl.nom + " - " + tbl.name);
