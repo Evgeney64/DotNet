@@ -1,0 +1,29 @@
+﻿
+
+
+
+<div id="MainFilterTableSplitter_ec4134e9-3e01-4764-b9de-1cdd83403891" class="mainSplitter is-not-bordered is-fulled " debug="true">
+    <div id="filter_content" class="is-fulled">
+        <div id="MainFilterTable_Filter_ec4134e9-3e01-4764-b9de-1cdd83403891" class="filter-panel flexbox is-fulled is-not-scrolled" data-filter-selector="True" debug="true">
+            <ul class="k-widget k-reset k-header k-menu is-not-bordered" id="MainFilter_ToolBar_ec4134e9-3e01-4764-b9de-1cdd83403891"><li class="k-item ctrl-menu-button is-not-bordered k-state-default" config_show="1" func_name="configWindow_Visibility" guids_out="Index=c14c0150-0742-41e5-aaaa-a06927e96a7c;MainTab_3216_121=ec4134e9-3e01-4764-b9de-1cdd83403891" id="buttConfig_ec4134e9-3e01-4764-b9de-1cdd83403891" onclick="clickItem_Exec(this)" page_guid="ec4134e9-3e01-4764-b9de-1cdd83403891" title="Конфигурация" uri_path="110_3216_0_10_121_0_6_0_6_0_0;103_3380_101_0_121_121_0_0_6_0;"><span class="k-link"><img alt="image" class="k-image" src="/Images/Operations/Large/Tools.png" /></span></li><li class="k-item ctrl-menu-button ctrl-menu-button-forward is-not-bordered k-state-default" func_name="mainTableFilter_Checkbox_Clear" guids_out="Index=c14c0150-0742-41e5-aaaa-a06927e96a7c;MainTab_3216_121=ec4134e9-3e01-4764-b9de-1cdd83403891" id="buttCheckClear_ec4134e9-3e01-4764-b9de-1cdd83403891" onclick="clickItem_Exec(this)" page_guid="ec4134e9-3e01-4764-b9de-1cdd83403891" title=""><span class="k-link"><img alt="image" class="k-image" src="/Images/Operations/Large/Erase.png" /></span></li><li class="k-item ctrl-menu-button ctrl-menu-button-forward is-not-bordered is-align-right-modal k-state-default" func_name="mainTableFilter_Execute" guids_out="Index=c14c0150-0742-41e5-aaaa-a06927e96a7c;MainTab_3216_121=ec4134e9-3e01-4764-b9de-1cdd83403891" id="buttForward_ec4134e9-3e01-4764-b9de-1cdd83403891" is_started="true" onclick="clickItem_Exec(this)" page_guid="ec4134e9-3e01-4764-b9de-1cdd83403891" selector_header_path="" title="Найти" uri_path="110_3216_0_10_121_0_6_0_6_0_0;103_3380_101_0_121_121_0_0_6_0;101_3288_0_0_0_121_121_0_6_0_0;" url_Action="/Home/MainTable?uri_path=110_3216_0_10_121_0_6_0_6_0_0%3B103_3380_101_0_121_121_0_0_6_0%3B101_3288_0_0_0_121_121_0_6_0_0%3B"><span class="k-link"><img alt="image" class="k-image" src="/Images/Operations/Large/ArrowForward_Green.png" /></span></li></ul><script>
+	jQuery(function(){jQuery("#MainFilter_ToolBar_ec4134e9-3e01-4764-b9de-1cdd83403891").kendoMenu({});});
+</script>
+            <form id="myFilterForm_ec4134e9-3e01-4764-b9de-1cdd83403891" class="formArea flexbox-item-full"></form>
+        </div>
+        <div id="MainFilterTable_Config_ec4134e9-3e01-4764-b9de-1cdd83403891" class="filter-config-panel flexbox is-fulled is-not-scrolled" style="display: none;"/>
+    </div>
+    <div id="MainFilterTable_Content_ec4134e9-3e01-4764-b9de-1cdd83403891" class="is-fulled"/>
+</div>
+
+<script>
+    $(document).ready(function () {
+        jQuery.extend(vm_Base, {"clientController": "MainFilterTable","clientController_Prev": "None","mainTab_IsAutoLoaded": "False","main_page_title": "Главная страница","mainTab_guid": "ec4134e9-3e01-4764-b9de-1cdd83403891","mainTab_StableId": 0,"mainTab_sconfig_type_id": 0,"TabEditSave_Content": "False","TabEditSave_Redirect": 0,"deal_info_ndepartment_id": 0,"soperation_id": 6,"SOperation": "Filter","is_Lik": "False","MainTabTitle_FromGrid": "False","grid_no_refresh": "False","is_dealinfo_refresh": "False","is_last": 0,"IsFilterExists": 1,"isFilterForTree_Int": 0,"editor_in_main_tab": "False","save_in_main_tab": "True","GuidIndex": "c14c0150-0742-41e5-aaaa-a06927e96a7c","parent_guid": "ec4134e9-3e01-4764-b9de-1cdd83403891","parent_guid": "c14c0150-0742-41e5-aaaa-a06927e96a7c","page_guid": "ec4134e9-3e01-4764-b9de-1cdd83403891","guids_out": "Index=c14c0150-0742-41e5-aaaa-a06927e96a7c;MainTab_3216_121=ec4134e9-3e01-4764-b9de-1cdd83403891","GuidChildTabLast": "00000000-0000-0000-0000-000000000000","uri_path_out": "110_3216_0_10_121_0_6_0_6_0_0;103_3380_101_0_121_121_0_0_6_0;","grid_has_grandchild": "False","grid_selected_rows": 0,"is_auto_expand": "False","selector_type_from": "None","is_context_toolbar": "False","is_onIframe_Load": 0,"has_main_menu_sections": 0,"is_child_list_int": 1,"title": "Сделки/ Договоры",});
+
+        mainTableFilter_Ready(
+            "clientController:MainFilterTable|clientController_Prev:None|mainTab_IsAutoLoaded:False|mainTab_Text:|mainTab_TitleField:|mainTab_TitlePrefix:|main_page_title:Главная страница|mainTab_guid:ec4134e9-3e01-4764-b9de-1cdd83403891|mainTab_StableId:0|mainTab_sconfig_type_id:0|TabEditSave_Content:False|TabEditSave_Redirect:0|deal_info_ndepartment_id:0|soperation_id:6|SOperation:Filter|parent_id:|is_Lik:False|MainTabTitle_FromGrid:False|grid_no_refresh:False|is_dealinfo_refresh:False|is_last:0|is_child_editor:|IsFilterExists:1|isFilterForTree_Int:0|editor_in_main_tab:False|save_in_main_tab:True|GuidIndex:c14c0150-0742-41e5-aaaa-a06927e96a7c|parent_guid:ec4134e9-3e01-4764-b9de-1cdd83403891|parent_guid:c14c0150-0742-41e5-aaaa-a06927e96a7c|page_guid:ec4134e9-3e01-4764-b9de-1cdd83403891|guids_out:Index=c14c0150-0742-41e5-aaaa-a06927e96a7c;MainTab_3216_121=ec4134e9-3e01-4764-b9de-1cdd83403891|GuidChildTabLast:00000000-0000-0000-0000-000000000000|uri_path_out:110_3216_0_10_121_0_6_0_6_0_0;103_3380_101_0_121_121_0_0_6_0;|uri_path_auto_test:|grid_has_grandchild:False|grid_selected_rows:0|is_auto_expand:False|selector_filter_dynamic:|selector_header_path:|selector_content_type:|selector_value:|selector_text:|selector_type_from:None|is_context_toolbar:False|is_onIframe_Load:0|has_main_menu_sections:0|selector_result:|is_child_list_int:1|title:Сделки/ Договоры|"
+            , "/"
+            , '110_3216_0_10_121_0_6_0_6_0_0;103_3380_101_0_121_121_0_0_6_0;'
+            );
+    });
+</script>
+

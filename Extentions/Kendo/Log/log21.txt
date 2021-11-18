@@ -1,0 +1,55 @@
+
+
+Home.Main_Layout ---------------------------------
+ - OnActionExecuting [18.11.2021 15:28:51]
+ - OnActionExecuted [18.11.2021 15:28:51]   0,0022256
+ - OnResultExecuting [18.11.2021 15:28:51]
+ - OnResultExecuted [18.11.2021 15:28:51]   0,7299968
+
+Home.MainFilterTable ---------------------------------
+ - OnActionExecuting [18.11.2021 15:29:05]
+ - OnActionExecuted [18.11.2021 15:29:05]   0,0077896
+ - OnResultExecuting [18.11.2021 15:29:05]
+ - OnResultExecuted [18.11.2021 15:29:05]   0,0100152
+
+Home.MainFilter ---------------------------------
+ - OnActionExecuting [18.11.2021 15:29:05]
+ - OnActionExecuted [18.11.2021 15:29:15]   9,54226
+ - OnResultExecuting [18.11.2021 15:29:15]
+ - OnResultExecuted [18.11.2021 15:29:20]   5,0843832
+
+Home.GetCascadeComboItems ---------------------------------
+ - OnActionExecuting [18.11.2021 15:29:20]
+ - OnActionExecuted [18.11.2021 15:29:24]   3,5231248
+ - OnResultExecuting [18.11.2021 15:29:24]
+ - OnResultExecuted [18.11.2021 15:29:24]   0,0011128
+
+Home.MainTable ---------------------------------
+ - OnActionExecuting [18.11.2021 15:29:24]
+ - OnActionExecuted [18.11.2021 15:29:25]   0,9803768
+ - OnResultExecuting [18.11.2021 15:29:25]
+ - OnResultExecuted [18.11.2021 15:29:31]   6,1237384
+
+Home.GetGrid ---------------------------------
+ - OnActionExecuting [18.11.2021 15:29:32]
+ - OnActionExecuted [18.11.2021 15:29:42]   9,286316
+ - OnResultExecuting [18.11.2021 15:29:42]
+ - OnResultExecuted [18.11.2021 15:29:42]   0,0489632
+
+Home.MainEdit ---------------------------------
+ - OnActionExecuting [18.11.2021 15:29:45]
+ - OnActionExecuted [18.11.2021 15:30:30]   45,0528208
+ - OnResultExecuting [18.11.2021 15:30:30]
+ - OnResultExecuted [18.11.2021 15:30:37]   7,227636
+
+Home.TabTable ---------------------------------
+ - OnActionExecuting [18.11.2021 15:30:56]
+ - OnActionExecuted [18.11.2021 15:30:57]   0,9369776
+ - OnResultExecuting [18.11.2021 15:30:57]
+ - OnResultExecuted [18.11.2021 15:30:57]   0,0411736
+
+Home.GetGrid ---------------------------------
+ - OnActionExecuting [18.11.2021 15:31:15]
+ - OnActionExecuted [18.11.2021 15:31:19]   3,7356696
+ - OnResultExecuting [18.11.2021 15:31:19]
+ - OnResultExecuted [18.11.2021 15:31:19]   0,0233688

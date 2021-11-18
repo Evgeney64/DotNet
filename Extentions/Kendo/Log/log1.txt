@@ -1,0 +1,61 @@
+
+
+Home.Index ---------------------------------
+ - OnActionExecuting [18.11.2021 15:14:09]
+ - OnActionExecuted [18.11.2021 15:14:20]   10,323555
+ - OnResultExecuting [18.11.2021 15:14:20]
+ - OnResultExecuted [18.11.2021 15:14:34]   14,379552
+
+Home.Main_Layout ---------------------------------
+ - OnActionExecuting [18.11.2021 15:15:02]
+ - OnActionExecuted [18.11.2021 15:15:14]   12,2375
+ - OnResultExecuting [18.11.2021 15:15:14]
+ - OnResultExecuted [18.11.2021 15:15:18]   4,117674
+
+Home.MainFilterTable ---------------------------------
+ - OnActionExecuting [18.11.2021 15:15:39]
+ - OnActionExecuted [18.11.2021 15:15:44]   4,840176
+ - OnResultExecuting [18.11.2021 15:15:44]
+ - OnResultExecuted [18.11.2021 15:15:46]   2,712809
+
+Home.MainFilter ---------------------------------
+ - OnActionExecuting [18.11.2021 15:15:47]
+ - OnActionExecuted [18.11.2021 15:15:54]   7,040968
+ - OnResultExecuting [18.11.2021 15:15:54]
+ - OnResultExecuted [18.11.2021 15:15:58]   4,508295
+
+Home.GetCascadeComboItems ---------------------------------
+ - OnActionExecuting [18.11.2021 15:15:59]
+ - OnActionExecuted [18.11.2021 15:16:00]   1,680943
+ - OnResultExecuting [18.11.2021 15:16:00]
+ - OnResultExecuted [18.11.2021 15:16:00]   0,002937
+
+Home.MainTable ---------------------------------
+ - OnActionExecuting [18.11.2021 15:16:02]
+ - OnActionExecuted [18.11.2021 15:16:07]   5,706591
+ - OnResultExecuting [18.11.2021 15:16:07]
+ - OnResultExecuted [18.11.2021 15:16:30]   22,457281
+
+Home.GetGrid ---------------------------------
+ - OnActionExecuting [18.11.2021 15:16:42]
+ - OnActionExecuted [18.11.2021 15:16:51]   9,039107
+ - OnResultExecuting [18.11.2021 15:16:51]
+ - OnResultExecuted [18.11.2021 15:16:52]   0,106711
+
+Home.MainEdit ---------------------------------
+ - OnActionExecuting [18.11.2021 15:16:54]
+ - OnActionExecuted [18.11.2021 15:17:43]   48,810982
+ - OnResultExecuting [18.11.2021 15:17:43]
+ - OnResultExecuted [18.11.2021 15:17:54]   10,848299
+
+Home.TabTable ---------------------------------
+ - OnActionExecuting [18.11.2021 15:18:14]
+ - OnActionExecuted [18.11.2021 15:18:22]   7,815357
+ - OnResultExecuting [18.11.2021 15:18:22]
+ - OnResultExecuted [18.11.2021 15:18:26]   4,104947
+
+Home.GetGrid ---------------------------------
+ - OnActionExecuting [18.11.2021 15:18:32]
+ - OnActionExecuted [18.11.2021 15:18:38]   5,724213
+ - OnResultExecuting [18.11.2021 15:18:38]
+ - OnResultExecuted [18.11.2021 15:18:38]   0,046013

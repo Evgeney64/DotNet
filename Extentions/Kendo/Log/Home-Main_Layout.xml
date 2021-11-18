@@ -1,0 +1,179 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title> - Техносбыт</title>
+    
+    <meta name="viewport" content="width=initial-scale=0.7">
+    
+    <meta charset="UTF-8">
+
+
+
+    
+    
+
+    
+    
+    <link href="/Content/Telerik/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Telerik/kendo.dataviz.fiori.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Telerik/kendo.mobile.fiori.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/Content/Telerik/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/Content/Telerik/kendo.blueopal.min.css" rel="stylesheet" type="text/css" />
+    
+
+    <link href="/Content/Site.css" rel="stylesheet"/>
+<link href="/Content/Styles/Base/base.css" rel="stylesheet"/>
+<link href="/Content/Styles/Layouts/header.css" rel="stylesheet"/>
+<link href="/Content/Styles/Layouts/container.css" rel="stylesheet"/>
+<link href="/Content/Styles/Layouts/tabs.css" rel="stylesheet"/>
+<link href="/Content/Styles/Modules/modules.css" rel="stylesheet"/>
+<link href="/Content/Styles/States/states.css" rel="stylesheet"/>
+<link href="/Content/xonomy/xonomy.css" rel="stylesheet"/>
+
+
+    <link href="/Content/Telerik/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <link href="/Content/Captcha.css" rel="stylesheet" type="text/css" />
+
+    
+    
+    
+
+    
+    <script src="/Scripts/Telerik/jquery.min.js"></script>
+    <script src="/Scripts/Telerik/jszip.min.js"></script>
+    
+        <script src="/Scripts/Telerik/kendo.all.min.js"></script>
+    <script src="/Scripts/Telerik/kendo.aspnetmvc.min.js"></script>
+    <script src="/Scripts/Telerik/cultures/kendo.culture.ru-RU.min.js"></script>
+    <script src="/Scripts/Telerik/messages/kendo.messages.ru-RU.min.js"></script>
+
+    
+    
+    
+</head>
+
+<body>
+
+    
+
+
+<link href="/Scripts/codemirror/lib/codemirror.css" rel="stylesheet"/>
+
+<link href="/Scripts/codemirror/addon/hint/show-hint.css" rel="stylesheet"/>
+
+<link href="/Scripts/codemirror/addon/fold/foldgutter.css" rel="stylesheet"/>
+
+<link href="/Scripts/codemirror/addon/search/matchesonscrollbar.css" rel="stylesheet"/>
+
+<link href="/Scripts/codemirror/addon/display/fullscreen.css" rel="stylesheet"/>
+
+
+
+
+    <form name="myForm" class="flexbox">
+        <div class="k-tabstrip-wrapper"><div class="k-widget k-tabstrip k-header is-fulled" id="FilterTab"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-default k-state-active"><a class="k-link"></a></li></ul><div class="k-content k-state-active" id="FilterTab-1" style="display:block"></div></div></div><script>
+	jQuery(function(){jQuery("#FilterTab").kendoTabStrip({"animation":false,"tabPosition":"left","contentUrls":["/Home/MainFilterTable?uri_path=110_3216_0_10_121_0_6_0_6_0_0;103_3380_101_0_121_121_0_0_6_0;\u0026guids_out=Index=c14c0150-0742-41e5-aaaa-a06927e96a7c;MainTab_3216_121=ec4134e9-3e01-4764-b9de-1cdd83403891\u0026field_page_guid=9b8e3c6a-233f-4064-8e7c-e22f0889e916\u0026_iframe=1\u0026main_tab_open=1"]});});
+</script>
+    </form>
+
+
+<script>
+    $(document).ready(function () {
+        if (isMobile()) {
+            $("body").kendoTouch({
+                enableSwipe: true,
+                swipe: function (e) {
+                    if (e.direction === "right") {
+                        top.view_change(false, true);
+                    }
+                    if (e.direction === "left") {
+                        top.view_change(true, false);
+                    }
+                }
+            });
+        }
+
+        $(myForm).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>
+
+
+    <script src="/Scripts/Site/Site.js"></script>
+<script src="/Scripts/Site/SiteAutoTest.js"></script>
+<script src="/Scripts/Site/SiteAutoTestOld.js"></script>
+<script src="/Scripts/Site/SiteAutoTestNew.js"></script>
+<script src="/Scripts/Site/SiteEntity.js"></script>
+<script src="/Scripts/Site/SiteGlobal.js"></script>
+<script src="/Scripts/Site/SiteGrid.js"></script>
+<script src="/Scripts/Site/SiteInputEvent.js"></script>
+<script src="/Scripts/Site/SiteMainTableFilter.js"></script>
+<script src="/Scripts/Site/SiteReady.js"></script>
+<script src="/Scripts/Site/SiteSelector.js"></script>
+<script src="/Scripts/Site/SiteTabs.js"></script>
+<script src="/Scripts/Site/SiteWindow.js"></script>
+<script src="/Scripts/Site/SiteXmlEditor.js"></script>
+<script src="/Scripts/typings/SiteClasses.js"></script>
+<script src="/Scripts/telephony/onclick.js"></script>
+<script src="/Scripts/xonomy/xonomy.js"></script>
+<script src="/Scripts/Bitrix24.js"></script>
+
+    
+    <script src="/Scripts/codemirror/lib/codemirror.js"></script>
+
+    <script src="/Scripts/codemirror/addon/hint/show-hint.js"></script>
+
+    <script src="/Scripts/codemirror/addon/hint/xml-hint-technosb.js"></script>
+
+    <script src="/Scripts/codemirror/mode/xml/xml.js"></script>
+
+    <script src="/Scripts/codemirror/addon/display/autorefresh.js"></script>
+
+    <script src="/Scripts/codemirror/addon/edit/closetag.js"></script>
+
+    <script src="/Scripts/codemirror/addon/fold/foldgutter.js"></script>
+
+    <script src="/Scripts/codemirror/addon/fold/foldcode.js"></script>
+
+    <script src="/Scripts/codemirror/addon/fold/xml-fold.js"></script>
+
+    <script src="/Scripts/codemirror/addon/comment/comment.js"></script>
+
+    <script src="/Scripts/codemirror/addon/search/searchcursor.js"></script>
+
+    <script src="/Scripts/codemirror/addon/search/search.js"></script>
+
+    <script src="/Scripts/codemirror/addon/scroll/annotatescrollbar.js"></script>
+
+    <script src="/Scripts/codemirror/addon/search/matchesonscrollbar.js"></script>
+
+    <script src="/Scripts/codemirror/addon/dialog/dialog.js"></script>
+
+    <script src="/Scripts/codemirror/addon/display/fullscreen.js"></script>
+
+    <script src="/Scripts/codemirror/addon/selection/selection-pointer.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            ;
+        });
+    </script>
+
+<!-- Visual Studio Browser Link -->
+<script type="text/javascript" src="http://localhost:14959/844bf21195db420b88ac224c2444f1ff/browserLink" async="async" id="__browserLink_initializationData" data-requestId="9e84b087a37647c1832952842fc9b4c7" data-appName="Internet Explorer"></script>
+<!-- End Browser Link -->
+
+</body>
+</html>
+
