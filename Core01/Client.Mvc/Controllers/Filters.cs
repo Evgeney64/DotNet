@@ -28,7 +28,7 @@ namespace Home.Controllers
 
             this.responseBody = new MemoryStream();
             // hijack the real stream with our own memory stream 
-            filterContext.HttpContext.Response.Body = responseBody;
+            //filterContext.HttpContext.Response.Body = responseBody;
 
             //stream = filterContext.HttpContext.Response.Body;
             //stream = new MemoryStream();
@@ -41,7 +41,7 @@ namespace Home.Controllers
         {
             base.OnResultExecuted(filterContext);
             //filterContext.HttpContext.Response.Body.CopyToAsync(responseBody);
-            responseBody.CopyToAsync(filterContext.HttpContext.Response.Body);
+            //responseBody.CopyToAsync(filterContext.HttpContext.Response.Body);
             return;
 
             HttpContext context = filterContext.HttpContext;

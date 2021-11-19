@@ -281,7 +281,9 @@ namespace ru.tsb.mvc
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 //endpoints.MapGet("/", DefaultRequest);
+                //endpoints.MapControllers();
             });
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
             #endregion
 
@@ -1076,7 +1078,7 @@ namespace ru.tsb.mvc
             #endregion
 
             #region Start
-            if (1 == 1)
+            if (1 == 2)
             {
                 app.UseMiddleware<StartMiddleware>();
                 app.UseMiddleware<StartEndpointVerifyMiddleware>();
