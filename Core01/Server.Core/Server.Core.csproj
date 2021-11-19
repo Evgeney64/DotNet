@@ -7,13 +7,13 @@
   <ItemGroup>
     <Compile Remove="Context\**" />
     <Compile Remove="DataModel\Auth\**" />
-    <Compile Remove="DataModel\DataGos\**" />
+    <Compile Remove="DataModel\Data\**" />
     <EmbeddedResource Remove="Context\**" />
     <EmbeddedResource Remove="DataModel\Auth\**" />
-    <EmbeddedResource Remove="DataModel\DataGos\**" />
+    <EmbeddedResource Remove="DataModel\Data\**" />
     <None Remove="Context\**" />
     <None Remove="DataModel\Auth\**" />
-    <None Remove="DataModel\DataGos\**" />
+    <None Remove="DataModel\Data\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataModel\Data\Result\" />
     <Folder Include="ViewModel\Classes\" />
     <Folder Include="ViewModel\Config\" />
     <Folder Include="ViewModel\Types\" />

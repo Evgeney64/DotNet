@@ -14,24 +14,24 @@ namespace Server.Core.Context
     
     public partial class EntityContext : DbContext
     {
-        public virtual DbSet<Partners> Partners { get; set; }//;
-        public virtual DbSet<payerlive> payerlive { get; set; }//;
+        //public virtual DbSet<Partners> Partners { get; set; }//;
+        //public virtual DbSet<payerlive> payerlive { get; set; }//;
 
 
-        private void creatNavigations(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<payerlive>()
-                .HasOne(u => u.Partners2)
-                .WithMany(t => t.payerlive2)
-                .HasForeignKey(t => t.reciever_id)
-                ;
+        //private void creatNavigations(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<payerlive>()
+        //        .HasOne(u => u.Partners2)
+        //        .WithMany(t => t.payerlive2)
+        //        .HasForeignKey(t => t.reciever_id)
+        //        ;
 
-            modelBuilder.Entity<payerlive>()
-                .HasOne(u => u.Partners3)
-                .WithMany(t => t.payerlive3)
-                .HasForeignKey(t => t.payer_id)
-                ;
+        //    modelBuilder.Entity<payerlive>()
+        //        .HasOne(u => u.Partners3)
+        //        .WithMany(t => t.payerlive3)
+        //        .HasForeignKey(t => t.payer_id)
+        //        ;
 
-        }
+        //}
     }
 }

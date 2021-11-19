@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Home.Controllers
 {
+    [ActionLog]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

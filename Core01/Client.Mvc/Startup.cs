@@ -280,6 +280,7 @@ namespace ru.tsb.mvc
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapGet("/", DefaultRequest);
             });
 
             #endregion

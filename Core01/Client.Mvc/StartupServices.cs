@@ -135,6 +135,26 @@ namespace ru.tsb.mvc
         }
         #endregion
         #endregion
+
+
+        public async Task DefaultRequest(HttpContext context)
+        {
+            //if (context.Response.Body.Length == 0)
+            { }
+            //StreamReader responsereader = new StreamReader(context.Response.Body);
+            //responsereader.BaseStream.Position = 0;
+            //string response = responsereader.ReadToEnd();
+            { }
+            await context.Response.WriteAsync("<html>");
+            await context.Response.WriteAsync("<html>");
+            await context.Response.WriteAsync("<head>");
+            await context.Response.WriteAsync("<title>Hello World!</title>");
+            await context.Response.WriteAsync("</head>");
+            await context.Response.WriteAsync("<body>");
+            await context.Response.WriteAsync("Hello World!");
+            await context.Response.WriteAsync("</body>");
+            await context.Response.WriteAsync("</html>");
+        }
     }
     #region Start
     #region StartMiddleware
@@ -664,4 +684,39 @@ namespace ru.tsb.mvc
     #endregion
     #endregion
 
+
+    public class ResponseRewindMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public ResponseRewindMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            Stream originalBody = context.Response.Body;
+            try
+            {
+                using (var memStream = new MemoryStream())
+                {
+                    context.Response.Body = memStream;
+
+                    await next(context);
+
+                    memStream.Position = 0;
+                    string responseBody = new StreamReader(memStream).ReadToEnd();
+
+                    memStream.Position = 0;
+                    await memStream.CopyToAsync(originalBody);
+                }
+
+            }
+            finally
+            {
+                context.Response.Body = originalBody;
+            }
+        }
+    }
 }
