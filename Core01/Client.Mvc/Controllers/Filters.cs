@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using System.Web.UI;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Home.Controllers
 {
@@ -20,30 +21,48 @@ namespace Home.Controllers
     public class ActionLogAttribute : ActionFilterAttribute
     {
         private Stream stream;
-
+        private MemoryStream responseBody;
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
 
-            stream = filterContext.HttpContext.Response.Body;
-            stream = new MemoryStream();
-            filterContext.HttpContext.Response.Body = stream;
+            this.responseBody = new MemoryStream();
+            // hijack the real stream with our own memory stream 
+            filterContext.HttpContext.Response.Body = responseBody;
+
+            //stream = filterContext.HttpContext.Response.Body;
+            //stream = new MemoryStream();
+            //filterContext.HttpContext.Response.Body = stream;
 
             //return;
         }
 
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
+            base.OnResultExecuted(filterContext);
+            //filterContext.HttpContext.Response.Body.CopyToAsync(responseBody);
+            responseBody.CopyToAsync(filterContext.HttpContext.Response.Body);
+            return;
+
             HttpContext context = filterContext.HttpContext;
 
+            using (StreamReader sr = new StreamReader(responseBody))
+            {
+                var actionResult = sr.ReadToEnd();
+                Console.WriteLine(actionResult);
+                // create new stream and assign it to body 
+                // context.HttpContext.Response.Body = ;
+            }
 
+            // no ERROR on the next line!
+
+            //string str = (string)context.Items["body"];
+            //context.Features.Set<IHttpSendFileFeature>(bodyWrapperStream);
+            { }
             StreamReader responsereader = new StreamReader(context.Response.Body);  //empty stream? why?
             responsereader.BaseStream.Position = 0;
             string response = responsereader.ReadToEnd();
             context.Response.Body.CopyToAsync(stream);
-
-            base.OnResultExecuted(filterContext);
-            return;
 
             Stream originalBody = context.Response.Body;
             try
