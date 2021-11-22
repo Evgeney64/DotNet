@@ -1,0 +1,1 @@
+"c:\Program Files\7-Zip\7z.exe" a 20211120.7z -xr!**/obj -xr!**/bin -xr!**/.svn "c:\Disk_D\_Dot_Net\Mvc\"
