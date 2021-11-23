@@ -45,7 +45,5 @@ from FACILITY fac
 			inner join NSI_FACILITY nfac on nfac.NFACILITY_ID=fac.NFACILITY_ID
 		where cli.NCALC_ITEM_ID=7
 		) chld on chld.CALC_ITEM_ID=sch.CHILD_ID
-
 where fpr.NPRODUCT_ID=7 and con.DEAL_ID=2020100000000103862 
 order by con.DEAL_ID, cli.NCALC_ITEM_ID, fac.NFACILITY_ID
-
