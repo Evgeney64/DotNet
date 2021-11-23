@@ -16,8 +16,6 @@ using Microsoft.AspNetCore.Http.Features;
 namespace Home.Controllers
 {
     #region ActionLogAttribute
-
-
     public class ActionLogAttribute : ActionFilterAttribute
     {
         private Stream stream;
@@ -279,6 +277,28 @@ namespace Home.Controllers
     }
     #endregion
 
+    public class PageFilterAttribute : Attribute, IPageFilter
+    {
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+        {
+
+        }
+
+        public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            // получаем информацию о браузере пользователя
+            string userAgent = context.HttpContext.Request.Headers["User-Agent"].ToString();
+            if (Regex.IsMatch(userAgent, "MSIE|Trident"))
+            {
+                context.Result = new BadRequestObjectResult("Ваш браузер устарел");
+            }
+        }
+
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+        {
+
+        }
+    }
     public static class IOHelper
     {
         #region
