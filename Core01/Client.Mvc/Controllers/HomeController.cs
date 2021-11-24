@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace Home.Controllers
 {
     [ActionLog]
-    [PageFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

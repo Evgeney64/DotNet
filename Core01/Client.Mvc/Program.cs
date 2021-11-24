@@ -27,6 +27,7 @@ namespace ru.tsb.mvc
             #endregion
 
             CreateHostBuilder(args).Build().Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
