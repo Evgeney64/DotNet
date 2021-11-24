@@ -1,0 +1,85 @@
+Magenta (ПЗ)
+Import
+- МН (Загрузка КП - 630)
+- факты (Volume_value) (Загрузка фактов - 647)
+630	Маджента: Загрузка контейнерных площадок			Tsb.Tasks.SamaraTKO	Tsb.Tasks.SamaraTKO.MagentaImportContainer		Run
+647	Маджента: Загрузка графиков фактического вывоза		Tsb.Tasks.SamaraTKO	Tsb.Tasks.SamaraTKO.MagentaImportContainerFact	Run
+
+Export (АПИ)
+- плановые графики (Volume_value)
+- удаленные графики через log
+
+--------------------------
+1С
+Import (Учет платежей + Карточка импорта + Создать реестр)
+- оплаты (610)
+610	Импорт реестра оплат из 1С		Tsb.Algorithms.Calc	Tsb.Algorithms.Payments.ImportPaymentReestr		ImportPaymentReestrFrom1c_610
+
+      <Item Title="Создать реестр импорта платежей" SOPERATION_ID="8" IsExecution="True" NALGORITHM_ID="610" ImageFolder="Objects" Image="Payment_Raznos_Pay.png" IsModal="True" EditorSubmitTitle="Создать реестр" TabEditor_NoClose="True">
+        <Params Type="PreviewDialog" PreviewDialog="Inline">
+          <PREVIEW_DIALOG>
+            <BODY>
+              <Item Title="Группа сальдо задолженности по умолчанию" Field="NSZ_GROUP_ID" Control="ComboBox" IsRequired="True" Width="Large" IsEmptyItem="False">
+                <Params Type="ComboBoxContent" Table="NSI_SZ_GROUP" />
+              </Item>
+              <Item Title="Тип документа реестра" Field="REESTR_NDOCUMENT_ID" Control="ComboBox" IsRequired="True" Width="Large" IsReadOnly="False" Visible="True" IsEmptyItem="False">
+                <Params Type="ComboBoxContent" Table="NSI_DOCUMENT" />
+                <Params Type="ComboBoxFilter">
+                  <Item Field="NDOCUMENT_ID" Values="274" />
+                </Params>
+              </Item>
+              <Item Title="Тип документа оплаты" Field="NDOCUMENT_ID" Control="ComboBox" IsRequired="True" Width="Large" IsReadOnly="False" Visible="True" IsEmptyItem="False">
+                <Params Type="ComboBoxContent" Table="NSI_DOCUMENT" />
+                <Params Type="ComboBoxFilter">
+                  <Item Field="NDOCUMENT_ID" Values="12" />
+                </Params>
+              </Item>
+              <Item Title="Дата реестра" Field="StatmentDate" Control="DatePicker" DefaultValue="FirstDayThisMonth" Width="Small" IsRequired="True" />
+              <Item Title="Файл реестра" Field="Files" Control="Upload" Multiselect="False" />
+            </BODY>
+          </PREVIEW_DIALOG>
+        </Params>
+      </Item>
+
+
+
+Export (алгоритмы Админа)
+- договоры / КА (482)
+- счета/фактуры (614)
+614	Выгрузка 1С: Счета - фактуры			Tsb.Tasks.Expend	Tsb.Tasks.Expend.CoreServices		OneC_Invoice
+482	Выгрузка 1С: Контрагенты и договоры		Tsb.Tasks.Expend	Tsb.Tasks.Expend.CoreServices		OneC_Partner
+
+		<Group Title="Выгрузка данных для 1С">
+			<Item Title="Документы реализации" SOPERATION_ID="8" NALGORITHM_ID="614" LinkTarget="DownloadFile" IsModal="True" Image="1C.png" 
+				  ModalWindow_Title="Документы реализации для 1С" ModalWindow_Message="Выполнить">
+				<Params Type="PreviewDialog" PreviewDialog="Inline">
+					<PREVIEW_DIALOG>
+						<BODY>
+							<Item Title="Начало" Field="DateBeg" Control="DatePicker" DefaultValue="FirstDayThisMonth" Width="Small" />
+							<Item Title="Конец" Field="DateEnd" Control="DatePicker" DefaultValue="FirstDayThisMonth" Width="Small" />
+							<Item Title="Документы" Field="FltrDoc" Control="Combobox" DefaultValue="1" Width="Large">
+								<Params Type="ComboBoxContent">
+									<Item Text="Документы реализации" Values="1" />
+									<Item Text="Исправления документов" Values="2" />
+								</Params>
+							</Item>
+						</BODY>
+					</PREVIEW_DIALOG>
+				</Params>
+			</Item>
+			<Item Title="Контрагенты и договоры" SOPERATION_ID="8" NALGORITHM_ID="482" LinkTarget="DownloadFile" IsModal="True" Image="1C.png" 
+				  ModalWindow_Title="Контрагенты и договоры для 1С" ModalWindow_Message="Выполнить">
+				<Params Type="PreviewDialog" PreviewDialog="Inline" />
+			</Item>
+		</Group>
+
+=========================================================
+rdp сервер Самары:195.209.51.9:22389
+Логин: TSadmin
+Пароль: MZavABmDR2
+
+
+Тестовое приложение:
+http://tech.ecostr.ru/Billberry_test/
+логин: admin
+пароль: Jnrfpfyj d ljcnegt 403

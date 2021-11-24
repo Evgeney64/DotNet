@@ -1,295 +1,72 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging;
-using System.Web.UI;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace Home.Controllers
 {
     #region ActionLogAttribute
-
-
     public class ActionLogAttribute : ActionFilterAttribute
     {
-        private Stream stream;
-        private MemoryStream responseBody;
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        private Stream responseBody;
+        private MemoryStream memoryBody;
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
-            base.OnActionExecuting(filterContext);
+            responseBody = context.HttpContext.Response.Body;
+            memoryBody = new MemoryStream();
+            context.HttpContext.Response.Body = memoryBody;
 
-            this.responseBody = new MemoryStream();
-            // hijack the real stream with our own memory stream 
-            //filterContext.HttpContext.Response.Body = responseBody;
-
-            //stream = filterContext.HttpContext.Response.Body;
-            //stream = new MemoryStream();
-            //filterContext.HttpContext.Response.Body = stream;
-
-            //return;
+            base.OnActionExecuting(context);
+            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuting, context.HttpContext);
         }
 
-        public override void OnResultExecuted(ResultExecutedContext filterContext)
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
-            base.OnResultExecuted(filterContext);
-            //filterContext.HttpContext.Response.Body.CopyToAsync(responseBody);
-            //responseBody.CopyToAsync(filterContext.HttpContext.Response.Body);
-            return;
+            base.OnActionExecuted(context);
+            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuted, context.HttpContext);
+        }
 
-            HttpContext context = filterContext.HttpContext;
-
-            using (StreamReader sr = new StreamReader(responseBody))
+        public override void OnResultExecuting(ResultExecutingContext context)
+        {
+            base.OnResultExecuting(context);
+            IOHelper.SaveLogResult(FilterAction_enum.OnResultExecuting, context.HttpContext);
+        }
+        public override void OnResultExecuted(ResultExecutedContext context)
+        {
+            memoryBody.Seek(0, SeekOrigin.Begin);
+            using (StreamReader sr = new StreamReader(memoryBody))
             {
-                var actionResult = sr.ReadToEnd();
-                Console.WriteLine(actionResult);
-                // create new stream and assign it to body 
-                // context.HttpContext.Response.Body = ;
+                string str = sr.ReadToEnd();
+                IOHelper.SaveViewResult(str, context.HttpContext);
+
+                byte[] bytes = Encoding.UTF8.GetBytes(str);
+                responseBody.WriteAsync(bytes, 0, bytes.Length);
             }
-
-            // no ERROR on the next line!
-
-            //string str = (string)context.Items["body"];
-            //context.Features.Set<IHttpSendFileFeature>(bodyWrapperStream);
-            { }
-            StreamReader responsereader = new StreamReader(context.Response.Body);  //empty stream? why?
-            responsereader.BaseStream.Position = 0;
-            string response = responsereader.ReadToEnd();
-            context.Response.Body.CopyToAsync(stream);
-
-            Stream originalBody = context.Response.Body;
-            try
-            {
-                using (var memStream = new MemoryStream())
-                {
-                    context.Response.Body = memStream;
-
-                    //await next(context);
-
-                    memStream.Position = 0;
-                    string responseBody = new StreamReader(memStream).ReadToEnd();
-
-                    memStream.Position = 0;
-                    memStream.CopyToAsync(originalBody);
-                }
-
-            }
-            finally
-            {
-                context.Response.Body = originalBody;
-            }
-            return;
-            //string str = filterContext.HttpContext.Request.BodyReader.ToString();
-            { }
-            //StreamReader responsereader = new StreamReader(filterContext.HttpContext.Response.Body);  //empty stream? why?
-            //responsereader.BaseStream.Position = 0;
-            //string response = responsereader.ReadToEnd();
-            //IOHelper.SaveViewResult(response, filterContext.HttpContext);
-
-            //ContentResult contres = new ContentResult();
-            //contres.Content = response;
-            //filterContext.Result = contres;
-
-        }
-    }
-
-    public class ActionLogAttribute0 : ActionFilterAttribute//, IPageFilter
-    {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            base.OnActionExecuting(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuting, filterContext.HttpContext);
-        }
-
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            base.OnActionExecuted(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuted, filterContext.HttpContext);
-        }
-
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            base.OnResultExecuting(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnResultExecuting, filterContext.HttpContext);
-        }
-
-        public override void OnResultExecuted(ResultExecutedContext filterContext)
-        {
-            var content = filterContext.HttpContext.Response;
-            using (var responseWriter = new StreamWriter(content.Body, Encoding.UTF8))
-            {
-                responseWriter.Write("This is some text to write!");
-            }
-            //Stream body = filterContext.HttpContext.Response.Body;
-            //Span<byte> buffer = new Span<byte>();
-            //filterContext.HttpContext.Response.Body.Read(buffer);
-            //ViewResult viewResult = filterContext.Result as ViewResult;
-
-            base.OnResultExecuted(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnResultExecuted, filterContext.HttpContext);
-        }
-
-        //public void OnPageHandlerExecuting(PageHandlerExecutingContext context) { }
-        //public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
-        //public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
-    }
-
-    public class ActionLogAttribute1 : ReadOnlyActionFilterAttribute
-    {
-        protected override void OnClose(Stream stream, HttpContext httpContext)
-        {
-            #region
-            byte[] buffer = new byte[stream.Length];
-            stream.Read(buffer, 0, (int)stream.Length);
-
-            MemoryStream memoryStream = new MemoryStream(buffer);
-            StreamReader reader = new StreamReader(memoryStream);
-            string text = reader.ReadToEnd();
-
-            IOHelper.SaveViewResult(text, httpContext);
-            #endregion
-        }
-    }
-
-    public class ActionLogAttribute3 : ActionFilterAttribute
-    {
-        #region Define
-        private HtmlTextWriter tw;
-        private StringWriter sw;
-        private StringBuilder sb;
-        //private HttpWriter output;
-        #endregion
-
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            //return;
-            sb = new StringBuilder();
-            sw = new StringWriter(sb);
-            tw = new HtmlTextWriter(sw);
-            //output = (HttpWriter)filterContext.HttpContext.Response.Body;
-            //filterContext.RequestContext.HttpContext.Response.Output = tw;
-
-            base.OnActionExecuting(filterContext);
-        }
-
-        public override void OnResultExecuted(ResultExecutedContext filterContext)
-        {
-            #region
-            string response = sb.ToString();
-            //output.Write(response);
-
-            base.OnResultExecuted(filterContext);
-            return;
-
-            //IOHelper.SaveResult(text, httpContext);
-
-            string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string path_name = base_dir + "\\log";
-
-            string controllerName = filterContext.RouteData.Values["controller"].ToString();
-            string actionName = filterContext.RouteData.Values["action"].ToString();
-            string file_name = controllerName + "-" + actionName + ".xml";
-
-            if (actionName == "Index")
-            {
-                string[] path_files = Directory.GetFiles(path_name);
-                string[] output_files = path_files.Select(ss => Path.GetFileName(ss)).ToArray();
-                foreach (string file in output_files)
-                    File.Delete(path_name + "//" + file);
-            }
-
-            Encoding encoding = Encoding.GetEncoding("UTF-8");
-            string[] arr_src = new string[1];
-            arr_src[0] = response;
-
-            File.WriteAllLines(Path.Combine(path_name, file_name), arr_src, encoding);
-
-            //response processing
-            //output.Write(response);
-            #endregion
-        }
-    }
-
-    public abstract class ReadOnlyActionFilterAttribute : ActionFilterAttribute
-    {
-        private delegate void ReadOnlyOnClose(Stream stream, HttpContext httpContext);
-
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            filterContext.HttpContext.Response.Body = new OnCloseFilter(
-                filterContext.HttpContext.Response.Body,
-                this.OnClose,
-                filterContext.HttpContext
-                );
-            base.OnActionExecuting(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuting, filterContext.HttpContext);
-        }
-
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            base.OnActionExecuted(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuted, filterContext.HttpContext);
-        }
-
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            base.OnResultExecuting(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnResultExecuting, filterContext.HttpContext);
-        }
-
-        public override void OnResultExecuted(ResultExecutedContext filterContext)
-        {
-            base.OnResultExecuted(filterContext);
-            IOHelper.SaveLogResult(FilterAction_enum.OnResultExecuted, filterContext.HttpContext);
-        }
-
-        protected abstract void OnClose(Stream stream, HttpContext httpContext);
-
-        private class OnCloseFilter : MemoryStream
-        {
-            private readonly Stream stream;
-
-            private readonly HttpContext httpContext;
-
-            private readonly ReadOnlyOnClose onClose;
-
-            public OnCloseFilter(Stream _stream, ReadOnlyOnClose _onClose, HttpContext _httpContext)
-            {
-                this.stream = _stream;
-                this.onClose = _onClose;
-                this.httpContext = _httpContext;
-            }
-
-            public override void Close()
-            {
-                this.Position = 0;
-                this.onClose(this, httpContext);
-                this.Position = 0;
-                this.CopyTo(this.stream);
-                base.Close();
-            }
+            base.OnResultExecuted(context);
+            IOHelper.SaveLogResult(FilterAction_enum.OnActionExecuted, context.HttpContext);
         }
     }
     #endregion
 
+
     public static class IOHelper
     {
         #region
+        private static string root_dir_name = "Client.Mvc";
         private static DateTime actionExecutingTime;
         private static DateTime resultExecutingTime;
 
-        public static void SaveViewResult(string response, HttpContext httpContext)
+        public static string GetRootDir(string _root_dir_name)
         {
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string path_name = base_dir + "\\log";
-            path_name=@"c:\Disc_D\Prog\DotNet\Core01\Client.Mvc\Log";
+            string root_dir_path = base_dir.Substring(0, base_dir.IndexOf(_root_dir_name)) + _root_dir_name;
+            return root_dir_path;
+        }
+        public static void SaveViewResult(string response, HttpContext httpContext)
+        {
+            string log_dir = GetRootDir(root_dir_name) + "\\log";
 
             var routeData = httpContext.Request.RouteValues;
             string controllerName = routeData["controller"].ToString();
@@ -301,15 +78,13 @@ namespace Home.Controllers
             string[] arr_src = new string[1];
             arr_src[0] = response;
 
-            File.WriteAllLines(Path.Combine(path_name, file_name), arr_src, encoding);
+            File.WriteAllLines(Path.Combine(log_dir, file_name), arr_src, encoding);
         }
 
         public static void SaveLogResult(FilterAction_enum filterAction, HttpContext httpContext)
         {
-            return;
-            string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-            string path_name = base_dir + "\\log";
-            string log_file_name = path_name + "\\_log.txt";
+            string log_dir = GetRootDir(root_dir_name) + "\\log";
+            string log_file_name = log_dir + "\\_log.txt";
 
             //var routeData = httpContext.Request.RequestContext.RouteData;
             //string controllerName = routeData.Values["controller"].ToString();
@@ -320,11 +95,11 @@ namespace Home.Controllers
 
             if (actionName == "Index" && filterAction == FilterAction_enum.OnActionExecuting)
             {
-                string[] path_files = Directory.GetFiles(path_name);
+                string[] path_files = Directory.GetFiles(log_dir);
                 string[] output_files = path_files.Select(ss => Path.GetFileName(ss)).ToArray();
                 foreach (string file in output_files)
                 {
-                    File.Delete(path_name + "//" + file);
+                    File.Delete(log_dir + "//" + file);
                 }
             }
             if (File.Exists(log_file_name) == false)

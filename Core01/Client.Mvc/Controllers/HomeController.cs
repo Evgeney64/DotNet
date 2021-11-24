@@ -15,6 +15,7 @@ namespace Home.Controllers
             _logger = logger;
         }
 
+        [PageFilter]
         public IActionResult Index()
         {
             return View();

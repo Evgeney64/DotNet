@@ -277,14 +277,19 @@ namespace ru.tsb.mvc
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 //endpoints.MapGet("/", DefaultRequest);
                 //endpoints.MapControllers();
             });
-            app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+            //app.UseLogUrl();
+            return;
             #endregion
 
             #region Services

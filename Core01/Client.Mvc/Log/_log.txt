@@ -1,0 +1,19 @@
+
+
+. ---------------------------------
+ - OnActionExecuting [24.11.2021 17:25:25]
+ - OnActionExecuted [24.11.2021 17:25:25]   0,018559
+ - OnResultExecuting [24.11.2021 17:25:25]
+ - OnActionExecuted [24.11.2021 17:25:25]   0,3066459
+
+. ---------------------------------
+ - OnActionExecuting [24.11.2021 17:35:12]
+ - OnActionExecuted [24.11.2021 17:35:12]   0,0149364
+ - OnResultExecuting [24.11.2021 17:35:12]
+ - OnActionExecuted [24.11.2021 17:35:12]   0,3550399
+
+. ---------------------------------
+ - OnActionExecuting [24.11.2021 17:36:57]
+ - OnActionExecuted [24.11.2021 17:36:57]   0,0373321
+ - OnResultExecuting [24.11.2021 17:36:57]
+ - OnActionExecuted [24.11.2021 17:36:57]   0,3400443

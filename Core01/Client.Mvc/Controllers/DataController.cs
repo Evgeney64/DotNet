@@ -9,8 +9,11 @@ using Server.Core;
 using Server.Core.Public;
 using Server.Core.Model;
 
+using Home.Controllers;
+
 namespace Data.Controllers
 {
+    [ActionLog]
     public class DataController : Controller
     {
         private DataConfiguration conf;

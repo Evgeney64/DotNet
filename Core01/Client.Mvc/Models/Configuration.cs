@@ -15,13 +15,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Filters;
 
+using Home.Controllers;
+
 namespace Client.Mvc.Models
 {
     public static class ConfigurateHelper
     {
+		private static string root_dir_name = "Client.Mvc";
 		public static DataConfiguration GetConfiguration(string config_file, string name)
 		{
-			IConfiguration configuration = getConfiguration("Client.Mvc", "Client.Mvc", config_file);
+			IConfiguration configuration = getConfiguration(root_dir_name, root_dir_name, config_file);
 			DataConfiguration conf = new DataConfiguration();
 			configuration.Bind(name, conf);
 
@@ -30,8 +33,9 @@ namespace Client.Mvc.Models
 
 		private static IConfiguration getConfiguration(string client_path, string config_path, string config_file)
 		{
-			string base_dir = AppDomain.CurrentDomain.BaseDirectory;
-			string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
+			//string base_dir = AppDomain.CurrentDomain.BaseDirectory;
+			//string conf_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + config_path + "\\";
+			string conf_dir = IOHelper.GetRootDir(client_path) + "\\";
 			{ }
 			var builder = new ConfigurationBuilder()
 				//.SetBasePath(conf_dir).AddJsonFile(config_file)
