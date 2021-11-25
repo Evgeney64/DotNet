@@ -7,18 +7,25 @@
   <ItemGroup>
     <Compile Remove="Context\**" />
     <Compile Remove="DataModel\Auth\**" />
+    <Compile Remove="DataModel\DataGos\Result\**" />
+    <Compile Remove="DataModel\DataUap\**" />
     <Compile Remove="DataModel\Data\**" />
     <EmbeddedResource Remove="Context\**" />
     <EmbeddedResource Remove="DataModel\Auth\**" />
+    <EmbeddedResource Remove="DataModel\DataGos\Result\**" />
+    <EmbeddedResource Remove="DataModel\DataUap\**" />
     <EmbeddedResource Remove="DataModel\Data\**" />
     <None Remove="Context\**" />
     <None Remove="DataModel\Auth\**" />
+    <None Remove="DataModel\DataGos\Result\**" />
+    <None Remove="DataModel\DataUap\**" />
     <None Remove="DataModel\Data\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="DataModel\Context\EntityContext1.cs" />
     <Compile Remove="DataModel\Context\Types.cs" />
+    <Compile Remove="DataModel\DataGos\View\VW_NSI_STREET.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataModel\Data\Result\" />
     <Folder Include="ViewModel\Classes\" />
     <Folder Include="ViewModel\Config\" />
     <Folder Include="ViewModel\Types\" />

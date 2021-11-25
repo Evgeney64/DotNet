@@ -1,17 +1,17 @@
 ﻿@model Server.Core.VmBase
 
 <table>
-    @*@if (Model.VwNsiVillages != null)
-    {
-        foreach (var p in Model.VwNsiVillages)
+    @if (Model.VwNsiVillages != null)
         {
-            <tr>
-                <td>@p.NVILLAGE_ID</td>
-                <td>&nbsp&nbsp&nbsp</td>
-                <td>@p.NVILLAGE_TYPE_NAME</td>
-                <td>&nbsp&nbsp&nbsp</td>
-                <td>@p.NVILLAGE_NAME</td>
-            </tr>
+            foreach (var p in Model.VwNsiVillages)
+            {
+                <tr>
+                    <td>@p.NVILLAGE_ID</td>
+                    <td>&nbsp&nbsp&nbsp</td>
+                    <td>@p.NVILLAGE_TYPE_NAME</td>
+                    <td>&nbsp&nbsp&nbsp</td>
+                    <td>@p.NVILLAGE_NAME</td>
+                </tr>
+            }
         }
-    }*@
 </table>

@@ -17,3 +17,33 @@
  - OnActionExecuted [24.11.2021 17:36:57]   0,0373321
  - OnResultExecuting [24.11.2021 17:36:57]
  - OnActionExecuted [24.11.2021 17:36:57]   0,3400443
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 8:49:03]
+ - OnActionExecuted [25.11.2021 8:49:03]   0,0407011
+ - OnResultExecuting [25.11.2021 8:49:03]
+ - OnActionExecuted [25.11.2021 8:49:03]   0,6187478
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 8:49:16]
+ - OnActionExecuted [25.11.2021 8:49:16]   0,0028868
+ - OnResultExecuting [25.11.2021 8:49:16]
+ - OnActionExecuted [25.11.2021 8:49:16]   0,1707919
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 8:49:50]
+ - OnActionExecuted [25.11.2021 8:49:50]   0,0176011
+ - OnResultExecuting [25.11.2021 8:49:50]
+ - OnActionExecuted [25.11.2021 8:49:50]   0,1440025
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 14:22:33]
+ - OnActionExecuted [25.11.2021 14:22:33]   0,0177025
+ - OnResultExecuting [25.11.2021 14:22:33]
+ - OnActionExecuted [25.11.2021 14:22:33]   0,394755
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 16:43:02]
+ - OnActionExecuted [25.11.2021 16:43:02]   0,0155971
+ - OnResultExecuting [25.11.2021 16:43:02]
+ - OnActionExecuted [25.11.2021 16:43:06]   4,3027258

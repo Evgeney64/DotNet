@@ -1,8 +1,8 @@
 {
   "EntityDataMsSql": {
-    "ConnectionString0": "Server=172.16.100.15; Database=gostest3; user id=sa;password=123456Qwerty; MultipleActiveResultSets=true;",
+    "ConnectionString": "Server=172.16.100.15; Database=gostest3; user id=sa;password=123456Qwerty; MultipleActiveResultSets=true;",
     "ConnectionString1": "Server=172.16.100.15; Database=GisHcs; user id=sa;password=123456Qwerty; MultipleActiveResultSets=true;",
-    "ConnectionString": "Server=ROEV\\EVGEN; Database=renovation_home; user id=sa;password=1212; MultipleActiveResultSets=true;",
+    "ConnectionString2": "Server=ROEV\\EVGEN; Database=renovation_home; user id=sa;password=1212; MultipleActiveResultSets=true;",
     "ConnectionString3": "Server=192.168.168.175; Database=renovation_web; user id=renovation_web;password=123; MultipleActiveResultSets=true;",
     "CommandTimeout": "300",
     "Log": {
