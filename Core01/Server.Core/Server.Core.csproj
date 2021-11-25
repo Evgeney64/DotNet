@@ -7,28 +7,30 @@
   <ItemGroup>
     <Compile Remove="Context\**" />
     <Compile Remove="DataModel\Auth\**" />
-    <Compile Remove="DataModel\DataGos\Result\**" />
+    <Compile Remove="DataModel\DataGos\**" />
     <Compile Remove="DataModel\DataUap\**" />
-    <Compile Remove="DataModel\Data\**" />
     <EmbeddedResource Remove="Context\**" />
     <EmbeddedResource Remove="DataModel\Auth\**" />
-    <EmbeddedResource Remove="DataModel\DataGos\Result\**" />
+    <EmbeddedResource Remove="DataModel\DataGos\**" />
     <EmbeddedResource Remove="DataModel\DataUap\**" />
-    <EmbeddedResource Remove="DataModel\Data\**" />
     <None Remove="Context\**" />
     <None Remove="DataModel\Auth\**" />
-    <None Remove="DataModel\DataGos\Result\**" />
+    <None Remove="DataModel\DataGos\**" />
     <None Remove="DataModel\DataUap\**" />
-    <None Remove="DataModel\Data\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="DataModel\Context\EntityContext1.cs" />
     <Compile Remove="DataModel\Context\Types.cs" />
-    <Compile Remove="DataModel\DataGos\View\VW_NSI_STREET.cs" />
+    <Compile Remove="DataModel\Data\__VmBase.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CodeGenerator.Templates.EF6-CQRS-Aurelia" Version="1.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="ExpressionToSql" Version="2.0.0" />
     <PackageReference Include="Ext.NET" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -37,6 +39,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />-->
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.19" />
+    <PackageReference Include="SerializeEFTablesToString" Version="2.0.5" />
 
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.18" />

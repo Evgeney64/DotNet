@@ -46,6 +46,8 @@ namespace Server.Core
                     { }
                     vwNsiVillages = _serv.Get_VW_NSI_VILLAGE().ToList();
                 }
+                //string query_sql = (vwNsiVillages as DbQuery<VW_NSI_VILLAGE>).ToString();
+                //string query_sql1 = (vwNsiVillages as DbQuery<VW_NSI_VILLAGE>).Sql;
                 return vwNsiVillages;
             }
         }

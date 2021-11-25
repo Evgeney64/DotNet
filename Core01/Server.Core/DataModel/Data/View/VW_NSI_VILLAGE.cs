@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Server.Core.Model
 {
@@ -23,6 +24,9 @@ namespace Server.Core.Model
                     NVILLAGE_NAME = vil.NVILLAGE_NAME,
                     NVILLAGE_TYPE_NAME = tp.NVILLAGE_TYPE_NAME,
                 };
+            //string query_sql = (items as System.Data.Entity.Infrastructure.DbQuery<VW_NSI_VILLAGE>).ToString();
+            //string query_sql1 = (items as DbQuery<VW_NSI_VILLAGE>).Sql;
+            //string query_sql2 = items.ToQueryString();
             return items;
         }
     }
