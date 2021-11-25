@@ -1,7 +1,0 @@
-Partners.cs
-payerlive.cs
-rgn.cs
-street.cs
-type_street.cs
-type_village.cs
-village.cs
