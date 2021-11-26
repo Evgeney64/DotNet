@@ -7,6 +7,7 @@ using System.Reflection;
 
 using Server.Core.Context;
 using Server.Core.Model;
+using Microsoft.Extensions.Logging;
 
 namespace Server.Core.Context
 {
@@ -16,6 +17,7 @@ namespace Server.Core.Context
         string connectionString;
         bool is_postgres;
         string postgresSchema;
+        //private readonly ILoggerFactory loggerFactory;
         #endregion
 
         #region Constructor
@@ -31,6 +33,12 @@ namespace Server.Core.Context
             postgresSchema = _postgrSchem;
             //Database.EnsureCreated();
         }
+
+        //public EntityContext(DbContextOptions<EntityContext> options, ILoggerFactory loggerFactory)
+        //        : base(options)
+        //{
+        //    this.loggerFactory = loggerFactory;
+        //}
         #endregion
 
         #region OnConfiguring
@@ -46,6 +54,15 @@ namespace Server.Core.Context
                     else
                         optionsBuilder.UseNpgsql(connectionString);
                 }
+
+                //if (loggerFactory != null)
+                //{
+                //    //if (Debugger.IsAttached)
+                //    {
+                //        // Probably shouldn't log sql statements in production
+                //        optionsBuilder.UseLoggerFactory(this.loggerFactory);
+                //    }
+                //}
             }
             catch (Exception ex)
             { }

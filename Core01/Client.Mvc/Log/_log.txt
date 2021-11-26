@@ -49,6 +49,41 @@
  - OnActionExecuted [25.11.2021 16:43:06]   4,3027258
 
 . ---------------------------------
+<<<<<<< HEAD
+ - OnActionExecuting [25.11.2021 16:45:09]
+ - OnActionExecuted [25.11.2021 16:45:09]   0,0206981
+ - OnResultExecuting [25.11.2021 16:45:09]
+ - OnActionExecuted [25.11.2021 16:45:09]   0,5933485
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 16:45:16]
+ - OnActionExecuted [25.11.2021 16:45:21]   4,4345845
+ - OnResultExecuting [25.11.2021 16:45:21]
+ - OnActionExecuted [25.11.2021 16:45:21]   4,7203964
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 16:45:54]
+ - OnActionExecuted [25.11.2021 16:45:54]   0,2485437
+ - OnResultExecuting [25.11.2021 16:45:54]
+ - OnActionExecuted [25.11.2021 16:46:20]   25,548793
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 16:46:42]
+ - OnActionExecuted [25.11.2021 16:46:42]   0,0127604
+ - OnResultExecuting [25.11.2021 16:46:42]
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 16:47:53]
+ - OnActionExecuted [25.11.2021 16:47:53]   0,0349956
+ - OnResultExecuting [25.11.2021 16:47:53]
+ - OnActionExecuted [25.11.2021 16:47:53]   0,7233594
+
+. ---------------------------------
+ - OnActionExecuting [25.11.2021 16:47:59]
+ - OnActionExecuted [25.11.2021 16:47:59]   0,0304095
+ - OnResultExecuting [25.11.2021 16:47:59]
+ - OnActionExecuted [25.11.2021 16:50:15]   136,2195335
+=======
  - OnActionExecuting [25.11.2021 22:50:40]
  - OnActionExecuted [25.11.2021 22:50:40]   0,0379971
  - OnResultExecuting [25.11.2021 22:50:40]
@@ -128,3 +163,16 @@
  - OnActionExecuted [25.11.2021 23:28:44]   0,00082
  - OnResultExecuting [25.11.2021 23:28:44]
  - OnActionExecuted [25.11.2021 23:28:44]   0,0091673
+>>>>>>> a9be6ad5b0924fdedd578578edd7ab8cd46d19d4
+
+. ---------------------------------
+ - OnActionExecuting [26.11.2021 15:50:14]
+ - OnActionExecuted [26.11.2021 15:50:14]   0,0149602
+ - OnResultExecuting [26.11.2021 15:50:14]
+ - OnActionExecuted [26.11.2021 15:50:16]   1,4337375
+
+. ---------------------------------
+ - OnActionExecuting [26.11.2021 15:53:16]
+ - OnActionExecuted [26.11.2021 15:53:16]   0,0554425
+ - OnResultExecuting [26.11.2021 15:53:16]
+ - OnActionExecuted [26.11.2021 15:53:16]   0,1028543
