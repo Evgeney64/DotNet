@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
+    <PackageReference Include="EPPlus" Version="5.8.3" />
+    <PackageReference Include="GemBox.Spreadsheet" Version="47.0.1321" />
+    <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
     <PackageReference Include="System.CodeDom" Version="6.0.0" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.19" />

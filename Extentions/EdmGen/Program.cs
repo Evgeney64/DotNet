@@ -22,7 +22,9 @@ namespace EdmGen
 
             //item.CreateResultFile();
             
-            item.GenerateEdmClass();
+            //item.GenerateEdmClass();
+
+            XlsxHelper.ReadXlsx();
 
             Console.WriteLine("");
             Console.WriteLine("Finish .......................................");
