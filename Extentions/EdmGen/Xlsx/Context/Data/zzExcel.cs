@@ -21,17 +21,22 @@ namespace Server.Core.Model
         [KeyAttribute()]
         public int id { get; set; }//;
         public string name { get; set; }//;
-        public int? nom { get; set; }//;
+        public string nom { get; set; }//;
         public string val1 { get; set; }//;
         public string val2 { get; set; }//;
         public string val3 { get; set; }//;
         public string val4 { get; set; }//;
         public string municipality { get; set; }//;
         public string village { get; set; }//;
+        public System.Nullable<long> village_id { get; set; }//;
         public string type_village { get; set; }//;
-        public string region { get; set; }//;
+        public System.Nullable<long> type_village_id { get; set; }//;
         public string street { get; set; }//;
+        public System.Nullable<long> street_id { get; set; }//;
         public string type_street { get; set; }//;
+        public System.Nullable<long> type_street_id { get; set; }//;
+        public string region { get; set; }//;
+        public System.Nullable<long> region_id { get; set; }//;
         #endregion
     }
 }

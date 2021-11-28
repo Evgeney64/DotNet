@@ -19,6 +19,7 @@ namespace EdmGen
     {
         public static void ReadXlsx()
         {
+            Console.WriteLine("ReadXlsx .......................................");
             string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Result\";
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
             if (conf == null)
@@ -91,7 +92,7 @@ namespace EdmGen
                             nomc = sheet.GetRow(rowi).GetCell(0).NumericCellValue.ToString();
                         int nom = 0;
                         if (int.TryParse(nomc, out nom))
-                            item.nom = nom;
+                            item.nom = nom.ToString();
                     }
                     if (sheet.GetRow(rowi).GetCell(1) != null)
                         item.val1 = sheet.GetRow(rowi).GetCell(1).StringCellValue;
@@ -114,7 +115,8 @@ namespace EdmGen
 
         public static void UpdateData()
         {
-            string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Result\";
+            #region Define
+            Console.WriteLine("UpdateData .......................................");
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
             if (conf == null)
                 return;
@@ -122,64 +124,93 @@ namespace EdmGen
             using (SqlConnection connection = new SqlConnection(conf.ConnectionString))
             {
                 connection.Open();
-                string sql = "update zzExcel set municipality=null, village=null, type_village=null, region=null, street=null, type_street=null";
+                string sql = "update zzExcel set municipality=null" +
+                    ", village=null, type_village=null, type_village_id=null" +
+                    ", region=null" +
+                    ", street=null, type_street=null, type_street_id=null";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.ExecuteNonQuery();
                 }
                 connection.Close();
             }
+            #endregion
 
             using (EntityContext context = new EntityContext(conf.ConnectionString))
             {
-                foreach (zzExcel item in context.zzExcel)
+                List<string> names = context.zzExcel.Select(ss => ss.name).Distinct().ToList();
+                List<NSI_STREET_TYPE> type_streets = context.NSI_STREET_TYPE.ToList();
+                List<NSI_VILLAGE_TYPE> type_villages = context.NSI_VILLAGE_TYPE.ToList();
+                foreach (string _name in names)
                 {
-                    if (item.name.Substring(item.name.Length - 2, 2) == "-1")
+                    foreach (zzExcel item in context.zzExcel.Where(ss => ss.name == _name))
                     {
-                        item.municipality = item.val1;
-                        item.region = item.val2;
-                        item.village = item.val3;
-                        item.street = item.val4;
-                    }
-                    else
-                    {
-                        item.municipality = item.val1;
-                        item.village = item.val2;
-                        item.street = item.val3;
-                    }
-                    if (string.IsNullOrEmpty(item.village))
-                        item.village = item.name;
-
-                    #region type_village
-                    if (item.village != null)
-                    {
-                        int point = item.village.IndexOf(".");
-                        if (point > 0)
+                        #region get data
+                        string village = null;
+                        string street = null;
+                        if (item.name.Substring(item.name.Length - 2, 2) == "-1")
                         {
-                            string name = item.village.Substring(point + 1, item.village.Length - point - 1);
-                            string type = item.village.Substring(0, point);
-                            item.village = name.TrimStart().TrimEnd();
-                            item.type_village = type.TrimStart().TrimEnd();
+                            item.municipality = item.val1;
+                            item.region = item.val2;
+                            village = item.val3;
+                            street = item.val4;
                         }
-                    }
-                    #endregion
-
-                    #region type_street
-                    if (item.street != null)
-                    {
-                        int point = item.street.IndexOf(".");
-                        if (point > 0)
+                        else
                         {
-                            string name = item.street.Substring(point + 1, item.street.Length - point - 1);
-                            string type = item.street.Substring(0, point);
-                            item.street = name.TrimStart().TrimEnd();
-                            item.type_street = type.TrimStart().TrimEnd();
+                            item.municipality = item.val1;
+                            village = item.val2;
+                            street = item.val3;
                         }
+                        #endregion
+
+                        #region type_village
+                        if (string.IsNullOrEmpty(village))
+                        {
+                            item.village = item.name;
+                            item.type_village = "г";
+                        }
+                        else if (village != null)
+                        {
+                            int point = village.IndexOf(".");
+                            if (point > 0)
+                            {
+                                string name = village.Substring(point + 1, village.Length - point - 1);
+                                string type = village.Substring(0, point);
+                                item.village = name.TrimStart().TrimEnd();
+                                item.type_village = type.TrimStart().TrimEnd();
+                            }
+                        }
+                        NSI_VILLAGE_TYPE type_village = type_villages
+                            .Where(ss => ss.GNI_SOCR == item.type_village)
+                            .FirstOrDefault();
+                        if (type_village != null)
+                            item.type_village_id = type_village.NVILLAGE_TYPE_ID;
+                        #endregion
+
+                        #region type_street
+                        if (street != null)
+                        {
+                            int point = street.IndexOf(".");
+                            if (point > 0)
+                            {
+                                string name = street.Substring(point + 1, street.Length - point - 1);
+                                string type = street.Substring(0, point);
+                                item.street = name.TrimStart().TrimEnd();
+                                item.type_street = type.TrimStart().TrimEnd();
+
+                                NSI_STREET_TYPE type_street = type_streets
+                                    .Where(ss => ss.NSTREET_TYPE_NAME == item.type_street)
+                                    .FirstOrDefault();
+                                if (type_street != null)
+                                    item.type_street_id = type_street.NSTREET_TYPE_ID;
+                            }
+                        }
+                        #endregion
                     }
-                    #endregion
+
+                    Console.WriteLine("- " + _name);
+                    context.SaveChanges();
                 }
-
-                context.SaveChanges();
             }
         }
     }

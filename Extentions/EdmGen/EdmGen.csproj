@@ -7,8 +7,11 @@
 
   <ItemGroup>
     <Compile Remove="Result\**" />
+    <Compile Remove="Xlsx\Result\**" />
     <EmbeddedResource Remove="Result\**" />
+    <EmbeddedResource Remove="Xlsx\Result\**" />
     <None Remove="Result\**" />
+    <None Remove="Xlsx\Result\**" />
   </ItemGroup>
 
   <ItemGroup>

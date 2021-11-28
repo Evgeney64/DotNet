@@ -14,6 +14,10 @@ namespace Server.Core.Model
     
     public partial class EntityServ : EntityService<EntityContext>
     {
+        public IQueryable<NSI_STREET> Get_NSI_STREET() => Context.NSI_STREET;
+        public IQueryable<NSI_STREET_TYPE> Get_NSI_STREET_TYPE() => Context.NSI_STREET_TYPE;
+        public IQueryable<NSI_VILLAGE> Get_NSI_VILLAGE() => Context.NSI_VILLAGE;
+        public IQueryable<NSI_VILLAGE_TYPE> Get_NSI_VILLAGE_TYPE() => Context.NSI_VILLAGE_TYPE;
         public IQueryable<zzExcel> Get_zzExcel() => Context.zzExcel;
     }
 }

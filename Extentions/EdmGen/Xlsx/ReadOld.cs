@@ -124,30 +124,40 @@ namespace EdmGen
     }
 }
 
-//DROP TABLE[zzExcel]
-//GO
-//CREATE TABLE [dbo].[zzExcel](
+/*
+DROP TABLE[zzExcel]
+GO
+CREATE TABLE [dbo].[zzExcel](
 
-//[id][int] IDENTITY(1, 1) NOT NULL,
 
-//[name] [varchar](1000) NULL,
-//	[nom] [varchar](1000) NULL,
-//	[val1] [varchar](1000) NULL,
-//	[val2] [varchar](1000) NULL,
-//	[val3] [varchar](1000) NULL,
-//	[val4] [varchar](1000) NULL,
-//	[municipality] [varchar](1000) NULL,
-//	[village] [varchar](1000) NULL,
-//	[type_village] [varchar](1000) NULL,
-//	[region] [varchar](1000) NULL,
-//	[street] [varchar](1000) NULL,
-//	[type_street] [varchar](1000) NULL,
-// CONSTRAINT[PK_zzExcel] PRIMARY KEY CLUSTERED 
-//(
+[id][int] IDENTITY(1, 1) NOT NULL,
 
-//    [id] ASC
-//)WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON[PRIMARY]
-//) ON[PRIMARY]
-//GO
 
+[name] [varchar](1000) NULL,
+	[nom] [varchar](1000) NULL,
+	[val1] [varchar](1000) NULL,
+	[val2] [varchar](1000) NULL,
+	[val3] [varchar](1000) NULL,
+	[val4] [varchar](1000) NULL,
+	[municipality] [varchar](1000) NULL,
+	[village] [varchar](1000) NULL,
+	[village_id] [bigint] NULL,
+	[type_village] [varchar](1000) NULL,
+	[type_village_id] [bigint] NULL,
+	[street] [varchar](1000) NULL,
+	[street_id] [bigint] NULL,
+	[type_street] [varchar](1000) NULL,
+	[type_street_id] [bigint] NULL,
+	[region] [varchar](1000) NULL,
+	[region_id] [bigint] NULL,
+ CONSTRAINT[PK_zzExcel] PRIMARY KEY CLUSTERED 
+(
+
+    [id] ASC
+)WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON[PRIMARY]
+) ON[PRIMARY]
+GO 
+ * */
+
+//select * from zzExcel
 
