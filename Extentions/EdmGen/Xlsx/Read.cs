@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using GemBox.Spreadsheet;
-using ICSharpCode.SharpZipLib.Zip;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -16,14 +15,24 @@ using Tsb.Model;
 
 namespace EdmGen
 {
-    public class XlsxHelper
+    public partial class XlsxHelper
     {
         public static void ReadXlsx()
         {
-            string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Data\";
+            string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Result\";
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
             if (conf == null)
                 return;
+
+            using (SqlConnection connection = new SqlConnection(conf.ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("truncate table zzExcel", connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
 
             if (Directory.Exists(path_name))
             {
@@ -46,18 +55,14 @@ namespace EdmGen
                 }
             }
         }
-        private static void readXlsx(string path_name, string file_name, EntityContext context)
+        private static void readXlsx(string path_name, string file_name_ext, EntityContext context)
         {
-            //DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
-            //if (conf == null)
-            //    return;
-
-            //string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Data\";
-            //string file_name = "Алексеевский.xlsx";
+            string file_name = Path.GetFileNameWithoutExtension(file_name_ext);
+            Console.WriteLine("- " + file_name);
 
             //HSSFWorkbook xls;
             IWorkbook xlsx;
-            using (FileStream file = new FileStream(path_name + file_name, FileMode.Open, FileAccess.Read))
+            using (FileStream file = new FileStream(path_name + file_name_ext, FileMode.Open, FileAccess.Read))
             {
                 //xls = new HSSFWorkbook(file);
                 xlsx = new XSSFWorkbook(file);
@@ -65,131 +70,41 @@ namespace EdmGen
 
             //ISheet sheet = xls.GetSheet("Лист1");
             ISheet sheet = xlsx.GetSheetAt(0);
-            for (int row = 6; row <= sheet.LastRowNum; row++)
+            IRow row0 = sheet.GetRow(0);
+            IRow row1 = sheet.GetRow(1);
+            IRow row2 = sheet.GetRow(2);
+            { }
+            for (int rowi = 0; rowi <= sheet.LastRowNum; rowi++)
             {
-                if (sheet.GetRow(row) != null) //null is when the row only contains empty cells 
+                if (sheet.GetRow(rowi) != null) //null is when the row only contains empty cells 
                 {
                     zzExcel item = new zzExcel
                     {
-                        name = Path.GetFileNameWithoutExtension(file_name),
+                        name = file_name,
                     };
-                    if (sheet.GetRow(row).GetCell(1) != null)
+                    if (sheet.GetRow(rowi).GetCell(0) != null)
                     {
-                        if (sheet.GetRow(row).GetCell(1).CellType == CellType.String)
-                            item.val1 = sheet.GetRow(row).GetCell(1).StringCellValue;
-                        else if (sheet.GetRow(row).GetCell(1).CellType == CellType.Numeric)
-                            item.val1 = sheet.GetRow(row).GetCell(1).NumericCellValue.ToString();
+                        string nomc = "";
+                        if (sheet.GetRow(rowi).GetCell(0).CellType == CellType.String)
+                            nomc = sheet.GetRow(rowi).GetCell(0).StringCellValue;
+                        else if (sheet.GetRow(rowi).GetCell(0).CellType == CellType.Numeric)
+                            nomc = sheet.GetRow(rowi).GetCell(0).NumericCellValue.ToString();
+                        int nom = 0;
+                        if (int.TryParse(nomc, out nom))
+                            item.nom = nom;
                     }
-                    if (sheet.GetRow(row).GetCell(2) != null)
-                        item.val2 = sheet.GetRow(row).GetCell(2).StringCellValue;
-                    if (sheet.GetRow(row).GetCell(3) != null)
-                        item.val3 = sheet.GetRow(row).GetCell(3).StringCellValue;
-                    if (sheet.GetRow(row).GetCell(4) != null)
-                        item.val4 = sheet.GetRow(row).GetCell(4).StringCellValue;
+                    if (sheet.GetRow(rowi).GetCell(1) != null)
+                        item.val1 = sheet.GetRow(rowi).GetCell(1).StringCellValue;
+                    if (sheet.GetRow(rowi).GetCell(2) != null)
+                        item.val2 = sheet.GetRow(rowi).GetCell(2).StringCellValue;
+                    if (sheet.GetRow(rowi).GetCell(3) != null)
+                        item.val3 = sheet.GetRow(rowi).GetCell(3).StringCellValue;
+                    if (sheet.GetRow(rowi).GetCell(4) != null)
+                        item.val4 = sheet.GetRow(rowi).GetCell(4).StringCellValue;
 
                     context.zzExcel.Add(item);
                 }
             }
-        }
-
-        private static string readOds(Stream fileStream)
-        {
-            var contentXml = "";
-
-            using (var zipInputStream = new ZipInputStream(fileStream))
-            {
-                ZipEntry contentEntry = null;
-                while ((contentEntry = zipInputStream.GetNextEntry()) != null)
-                {
-                    if (!contentEntry.IsFile)
-                        continue;
-                    if (contentEntry.Name.ToLower() == "content.xml")
-                        break;
-                }
-
-                if (contentEntry.Name.ToLower() != "content.xml")
-                {
-                    throw new Exception("Cannot find content.xml");
-                }
-
-                var bytesResult = new byte[] { };
-                var bytes = new byte[2000];
-                var i = 0;
-
-                while ((i = zipInputStream.Read(bytes, 0, bytes.Length)) != 0)
-                {
-                    var arrayLength = bytesResult.Length;
-                    Array.Resize<byte>(ref bytesResult, arrayLength + i);
-                    Array.Copy(bytes, 0, bytesResult, arrayLength, i);
-                }
-                contentXml = Encoding.UTF8.GetString(bytesResult);
-            }
-            return contentXml;
-        }
-        private static void readOd1s(string file_name)
-        {
-            DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
-            if (conf == null)
-                return;
-
-            //string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Data\";
-            //string file_name = "Алексеевский район.ods";
-
-            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
-
-            var workbook = ExcelFile.Load(file_name);
-
-            var sb = new StringBuilder();
-
-            // Iterate through all worksheets in an Excel workbook.
-            foreach (var worksheet in workbook.Worksheets)
-            {
-                //sb.AppendLine();
-                //sb.AppendFormat("{0} {1} {0}", new string('-', 25), worksheet.Name);
-
-                // Iterate through all rows in an Excel worksheet.
-                using (EntityContext context = new EntityContext(conf.ConnectionString))
-                {
-                    foreach (var row in worksheet.Rows)
-                    {
-                        zzExcel item = new zzExcel();
-                        //sb.AppendLine();
-
-                        // Iterate through all allocated cells in an Excel row.
-                        int i = 0;
-                        foreach (var cell in row.AllocatedCells)
-                        {
-                            if (cell.Value == null)
-                                break;
-                            string val = cell.Value.ToString();
-                            i++;
-                            if (i == 1)
-                            {
-                                int nom = 0;
-                                if (int.TryParse(val, out nom) == false)
-                                    break;
-                                continue;
-                            }
-                            switch (i)
-                            {
-                                case 1: item.val1 = val; break;
-                                case 2: item.val2 = val; break;
-                                case 3: item.val3 = val; break;
-                                case 4: item.val4 = val; break;
-                                case 5: item.val5 = val; break;
-                            }
-                            context.zzExcel.Add(item);
-                            //if (cell.ValueType != CellValueType.Null)
-                            //    sb.Append(string.Format("{0} [{1}]", cell.Value, cell.ValueType).PadRight(25));
-                            //else
-                            //    sb.Append(new string(' ', 25));
-                        }
-                    }
-                    context.SaveChanges();
-                }
-            }
-
-            Console.WriteLine(sb.ToString());
         }
     }
 }
