@@ -102,7 +102,12 @@ namespace EdmGen
                     if (sheet.GetRow(rowi).GetCell(4) != null)
                         item.val4 = sheet.GetRow(rowi).GetCell(4).StringCellValue;
 
-                    context.zzExcel.Add(item);
+                    if (!string.IsNullOrEmpty(item.val1)
+                        || !string.IsNullOrEmpty(item.val2)
+                        || !string.IsNullOrEmpty(item.val3)
+                        || !string.IsNullOrEmpty(item.val4)
+                        )
+                        context.zzExcel.Add(item);
                 }
             }
         }
