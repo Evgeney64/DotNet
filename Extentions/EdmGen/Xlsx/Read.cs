@@ -111,5 +111,76 @@ namespace EdmGen
                 }
             }
         }
+
+        public static void UpdateData()
+        {
+            string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Result\";
+            DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
+            if (conf == null)
+                return;
+
+            using (SqlConnection connection = new SqlConnection(conf.ConnectionString))
+            {
+                connection.Open();
+                string sql = "update zzExcel set municipality=null, village=null, type_village=null, region=null, street=null, type_street=null";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+
+            using (EntityContext context = new EntityContext(conf.ConnectionString))
+            {
+                foreach (zzExcel item in context.zzExcel)
+                {
+                    if (item.name.Substring(item.name.Length - 2, 2) == "-1")
+                    {
+                        item.municipality = item.val1;
+                        item.region = item.val2;
+                        item.village = item.val3;
+                        item.street = item.val4;
+                    }
+                    else
+                    {
+                        item.municipality = item.val1;
+                        item.village = item.val2;
+                        item.street = item.val3;
+                    }
+                    if (string.IsNullOrEmpty(item.village))
+                        item.village = item.name;
+
+                    #region type_village
+                    if (item.village != null)
+                    {
+                        int point = item.village.IndexOf(".");
+                        if (point > 0)
+                        {
+                            string name = item.village.Substring(point + 1, item.village.Length - point - 1);
+                            string type = item.village.Substring(0, point);
+                            item.village = name.TrimStart().TrimEnd();
+                            item.type_village = type.TrimStart().TrimEnd();
+                        }
+                    }
+                    #endregion
+
+                    #region type_street
+                    if (item.street != null)
+                    {
+                        int point = item.street.IndexOf(".");
+                        if (point > 0)
+                        {
+                            string name = item.street.Substring(point + 1, item.street.Length - point - 1);
+                            string type = item.street.Substring(0, point);
+                            item.street = name.TrimStart().TrimEnd();
+                            item.type_street = type.TrimStart().TrimEnd();
+                        }
+                    }
+                    #endregion
+                }
+
+                context.SaveChanges();
+            }
+        }
     }
 }

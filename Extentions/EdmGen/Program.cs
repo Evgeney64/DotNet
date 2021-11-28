@@ -25,6 +25,7 @@ namespace EdmGen
             //item.GenerateEdmClass();
 
             XlsxHelper.ReadXlsx();
+            XlsxHelper.UpdateData();
 
             Console.WriteLine("");
             Console.WriteLine("Finish .......................................");
