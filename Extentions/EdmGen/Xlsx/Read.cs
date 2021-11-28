@@ -21,6 +21,7 @@ namespace EdmGen
         {
             Console.WriteLine("ReadXlsx .......................................");
             string path_name = @"c:\Disk_D\_Dot_Net\DotNet\Extentions\EdmGen\Xlsx\Result\";
+            //string path_name = @"C:\Users\roev\_DotNet\DotNet\Extentions\EdmGen\Xlsx\Result\";
             DataSourceConfiguration conf = Configuration.GetDataSourceConfiguration("EdmGen", "config.json", "MsSqlConfiguration");
             if (conf == null)
                 return;
