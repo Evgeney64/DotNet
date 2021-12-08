@@ -17,15 +17,16 @@ namespace EdmGen
         static void Main(string[] args)
         {
             HomeController item = new HomeController("EdmGen");
-            
+
             //item.CreatePostgesScript();
 
             //item.CreateResultFile();
-            
+            item.CreateKendoIconsFile();
+
             //item.GenerateEdmClass();
 
             //XlsxHelper.ReadXlsx();
-            XlsxHelper.UpdateData();
+            //XlsxHelper.UpdateData();
 
             Console.WriteLine("");
             Console.WriteLine("Finish .......................................");
@@ -57,6 +58,11 @@ namespace EdmGen
         public async Task<String> CreateResultFile()
         {
             ServiceResult res = EdmGenerator.CreateResultFile(client_path);
+            return res.Error ? res.ErrorMessage : res.Message;
+        }
+        public async Task<String> CreateKendoIconsFile()
+        {
+            ServiceResult res = EdmGenerator.CreateKendoIconsFile(client_path);
             return res.Error ? res.ErrorMessage : res.Message;
         }
 

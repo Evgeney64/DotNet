@@ -1,3 +1,24 @@
+=========================================================
+rdp сервер Самары:195.209.51.9:22389
+Логин: TSadmin
+Пароль: MZavABmDR2
+
+
+Тестовое приложение:
+http://tech.ecostr.ru/Billberry_test/
+логин: admin
+пароль: Jnrfpfyj d ljcnegt 403
+
+
+
+\\VM172\bb\Develop\UapRelease
+
+C:\Tsb.Extensions.Setup\Tsb.Extensions.Setup\InstallerExe
+сборщик там. почитай инструкцию
+=========================================================
+
+
+
 Magenta (ПЗ)
 Import
 - МН (Загрузка КП - 630)
@@ -73,13 +94,3 @@ Export (алгоритмы Админа)
 			</Item>
 		</Group>
 
-=========================================================
-rdp сервер Самары:195.209.51.9:22389
-Логин: TSadmin
-Пароль: MZavABmDR2
-
-
-Тестовое приложение:
-http://tech.ecostr.ru/Billberry_test/
-логин: admin
-пароль: Jnrfpfyj d ljcnegt 403

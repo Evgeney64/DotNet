@@ -14,13 +14,20 @@ order by cli.NCALC_ITEM_ID, fac.NFACILITY_ID
 
 
 -- ОН и сделка
-select fac.FACILITY_ID, fac.PARENT_ID, con.DEAL_ID, cli.CALC_ITEM_ID, *
+select * from CONSUM where DEAL_ID=2020100000000106089 
+
+select fac.FACILITY_ID, fac.PARENT_ID, con.DEAL_ID, cli.CALC_ITEM_ID
+	, con.CONSUM_ID, con.DATE_BEG, con.DATE_END
+	, chi.CHARGE_ITEM_ID
+	--, *
 from FACILITY fac
 	inner join FACILITY_PRODUCT fpr on fpr.FACILITY_ID=fac.FACILITY_ID and fpr.NPRODUCT_ID = 7
 	inner join CALC_ITEM cli on cli.FACILITY_PRODUCT_ID=fpr.FACILITY_PRODUCT_ID
 	inner join NSI_FACILITY nfac on nfac.NFACILITY_ID=fac.NFACILITY_ID
 	inner join CONSUM con on con.FACILITY_ID=fac.FACILITY_ID
-where cli.NCALC_ITEM_ID=1 and con.DEAL_ID=2020100000000103862 
+	inner join DEAL_PRODUCT dpr on dpr.DEAL_ID=con.DEAL_ID
+	inner join CHARGE_ITEM chi on chi.DEAL_PRODUCT_ID=dpr.DEAL_PRODUCT_ID
+where cli.NCALC_ITEM_ID=1 and con.DEAL_ID=2020100000000106089 
 order by cli.NCALC_ITEM_ID, fac.NFACILITY_ID
 
 
@@ -45,7 +52,7 @@ from FACILITY fac
 			inner join NSI_FACILITY nfac on nfac.NFACILITY_ID=fac.NFACILITY_ID
 		where cli.NCALC_ITEM_ID=7
 		) chld on chld.CALC_ITEM_ID=sch.CHILD_ID
-where fpr.NPRODUCT_ID=7 and con.DEAL_ID=2020100000000103862 
+where fpr.NPRODUCT_ID=7 and con.DEAL_ID=2020100000000106089 
 order by con.DEAL_ID, cli.NCALC_ITEM_ID, fac.NFACILITY_ID
 
 

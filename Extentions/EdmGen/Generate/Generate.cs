@@ -33,6 +33,75 @@ namespace Tsb.Generate
             #endregion
         }
 
+        public static ServiceResult CreateKendoIconsFile(string client_path)
+        {
+            #region
+            string base_dir = AppDomain.CurrentDomain.BaseDirectory;
+            string input_dir = base_dir.Substring(0, base_dir.IndexOf(client_path)) + client_path + "\\kendo";
+            if (Directory.Exists(input_dir))
+            {
+                string[] path_files = Directory.GetFiles(input_dir);
+                List<string> icons = new List<string>();
+                foreach (string file in path_files)
+                {
+                    string[] content = File.ReadAllLines(file);
+                    foreach (string str in content)
+                    {
+                        if (str.Length > 0)
+                        { }
+                        int ind = 0;
+                        while (1 == 1)
+                        {
+                            string pref = "";
+                            //pref = "{background-position:-80px -48px}.";
+                            ind = str.IndexOf(pref + "k-i-", ind);
+                            //ind = str.IndexOf("k-i-", ind);
+                            if (ind == -1)
+                                break;
+
+                            ind += pref.Length;
+                            int ind1 = str.IndexOf(",", ind + 1);
+                            if (ind1 - ind > 20) ind1 = str.IndexOf(":", ind + 1);
+                            if (ind1 - ind > 20) ind1 = str.IndexOf(".", ind + 1);
+                            if (ind1 - ind > 20) ind1 = str.IndexOf("{", ind + 1);
+                            if (ind1 == -1)
+                                break;
+
+                            string icon = str.Substring(ind, ind1 - ind);
+                            ind1 = icon.IndexOf("{");
+                            if (ind1 != -1) icon = icon.Substring(0, ind1 - 1);
+                            ind1 = icon.IndexOf(":");
+                            if (ind1 != -1) icon = icon.Substring(0, ind1 - 1);
+                            ind1 = icon.IndexOf(",");
+                            if (ind1 != -1) icon = icon.Substring(0, ind1 - 1);
+                            ind1 = icon.IndexOf(".");
+                            if (ind1 != -1) icon = icon.Substring(0, ind1 - 1);
+
+                            icon = icon.Trim();
+                            if (icon == "k-i-close{display")
+                            { }
+
+                            if (icons.Contains(icon) == false)
+                                icons.Add(icon);
+                            ind += 20;
+                        }
+                    }
+                }
+
+                List<string> items = icons.OrderBy(ss => ss)
+                    .Select(ss => "<Item isAuto=\"true\" Title=\"" + ss + "\" Table=\"DEAL_EXT\" Field=\"BUYER_ID\" Control=\"Selector\" Content=\"PARTNER\" IsNavigatable=\"True\" IconNavigate=\"" + ss + " Width=\"Small\" />")
+                    .ToList();
+
+
+                File.WriteAllLines(input_dir + "//icons.txt", icons.ToArray());
+                File.WriteAllLines(input_dir + "//items.txt", items.ToArray());
+
+                return new ServiceResult("Файл сохранен");
+            }
+            return new ServiceResult("Файл не сохранен", true);
+            #endregion
+        }
+
         #region Define
         string user = "\"gis_hcs\"";
         string schem = "\"gis_hcs\"";
