@@ -89,7 +89,8 @@ namespace Tsb.Generate
                 }
 
                 List<string> items = icons.OrderBy(ss => ss)
-                    .Select(ss => "<Item isAuto=\"true\" Title=\"" + ss + "\" Table=\"DEAL_EXT\" Field=\"BUYER_ID\" Control=\"Selector\" Content=\"PARTNER\" IsNavigatable=\"True\" IconNavigate=\"" + ss + " Width=\"Small\" />")
+                    //.Select(ss => "<Item isAuto=\"true\" Title=\"" + ss + "\" Table=\"DEAL_EXT\" Field=\"BUYER_ID\" Control=\"Selector\" Content=\"PARTNER\" IsNavigatable=\"True\" IconNavigate=\"" + ss + " Width=\"Small\" />")
+                    .Select(ss => "<Item isAuto=\"true\" Title=\"" + ss + "\" Field=\"DEAL_ID\" Control=\"Selector\" />")
                     .ToList();
 
 
