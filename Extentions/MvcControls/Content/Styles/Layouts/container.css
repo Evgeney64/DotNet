@@ -1,0 +1,253 @@
+﻿/*Контейнеры. Содержат в себе контролы или другие контейнеры*/
+/*Левая панель left-pane*/
+.l-p {
+    height: calc(100% - 41px);
+    z-index: 100;
+    /*top: 41px;*/
+    bottom: 0;
+    overflow: visible;
+    /*position: absolute;*/
+    float: left;
+    width: 0px;
+    min-width: 320px;
+    padding: 0px;
+}
+#deal_content {
+    position: absolute;
+}
+
+/*панель фильтра*/
+.filter-panel, 
+.filter-config-panel {
+    width: calc(100% - 2px);
+    top: auto;
+    bottom: auto;
+    /*z-index: 100;*/
+}
+
+/*поля ввода панели поиска*/
+.formArea {
+    /*font-size: 14px;*/
+    /*height: calc(100% - 48px);*/
+    overflow: auto;
+}
+
+/*редактирование панели поиска*/
+.formAreaEdit {
+    /*font-size: 14px;*/
+    right: 0px;
+    margin-right: 5px;
+}
+
+.formAreaTree {
+    /*font-size: 14px;*/
+    height: calc(100% - 70px);
+    overflow: auto;
+    right: 0px;
+}
+
+#editor_content {
+    height: 100%;
+}
+
+/*Контейнер со списком контролов/экспандеров*/
+.editor-field-list,
+/*Экспандер со списком контролов*/
+.editor-expander-field-list
+{
+    margin: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    list-style-type: none !important;
+    list-style: none !important;
+    overflow: auto !important;
+}
+/*Список контролов в экспанедере*/
+.editor-expander-field-list {
+    padding-left: 20px;
+}
+.ctrl-selector > .editor-field {
+    width: 100%;
+}
+
+/*Футер редактора*/
+.editor-footer {
+    /*position: fixed;*/
+    bottom: 3px;
+    min-height: 20px;
+    height: 50px;
+    line-height: normal;
+    padding: 0px;
+    /*padding-left: 10px;
+    padding-right: 10px;*/
+}
+/*Заголовок редактора*/
+.editor-header {
+    min-height: 20px;
+    height: 50px;
+    line-height: normal;
+}
+
+/*Диалоговое окно*/
+/*Содержимое окна*/
+.modal-window-content {
+    height: calc(100% - 34px);
+    min-width: inherit;
+    line-height: normal;
+    list-style-type: none;
+}
+/*Текст в окне*/
+.modal-window-content-textarea {
+    max-width: 450px;
+    font-family: b;
+    font-size: 115%;
+    margin-bottom: 10px;
+}
+/*Область детализации для окна ошибки*/
+.modal-window-content-textarea-detail {
+    max-height: 300px;
+    max-width: 500px;
+    font-size: 100%;
+    display: none;
+}
+.k-widget.k-window {
+    max-width: 950px !important;
+    max-height: 70% !important;
+}
+
+/*Редактор*/
+.editTab {
+    height: 100%;
+}
+
+#tab_relation_grid {
+    float: left;
+    width: 40%;
+    height: calc(100% - 48px);
+}
+#tab_relation_tree {
+    float: right;
+    width: 60%;
+    height: calc(100% - 48px);
+}
+
+.report-header {
+    margin-bottom: 30px;
+    max-width: 1000px;
+    width: 100%;
+    list-style-type: none;
+}
+
+.report-content {
+    max-width: 1000px;
+    width: 100%;
+}
+
+form[name=myForm] {
+    height: 100%;
+}
+
+#autotest_label {
+    display: none;
+}
+
+.content-export-to-pdf {
+    font-family: 'Times New Roman';
+}
+
+#mainContextMenu {
+    width: 200px !important;
+}
+    #mainContextMenu > .k-item {
+        border: 0px;
+    }
+
+#panelbar_controller_error {
+    max-width: 1000px;
+}
+
+.flexbox {
+    /*display: flex;
+    display: -webkit-box-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    overflow: visible !important;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow: visible !important;
+}
+.flexbox-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow: auto !important;
+}
+.flexbox-horizontal {
+    /*display: flex;
+    display: -webkit-box-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    overflow: visible !important;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    overflow: visible !important;
+}
+.flexbox-item {
+
+}
+.flexbox-item-full {
+    /*flex-grow: 1;
+    -webkit-flex-grow: 1;*/
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+#EditTab #border {
+    width: calc(100% - 2px) !important;
+}
+#border {
+    width: 100%;/*calc(100% - 10px) !important;*/
+    overflow: auto !important;
+    max-height: 100% !important;
+}
+
+#modal_row_text {
+    margin-top: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 80px;
+    display: block;
+}
+#bottom {
+    min-height: 30px;
+}
+
+.dashbord-template-main {
+    height: calc(100vh - 5px) !important;
+    /*height: 100% !important;*/
+    overflow: auto;
+}
+#deal_content > .dashbord-template-main {
+    overflow: hidden;
+}
+
+/*Не работают свайпы с мобил*/
+.k-rpanel, .k-chart, .k-grid {
+    touch-action: auto !important;
+}

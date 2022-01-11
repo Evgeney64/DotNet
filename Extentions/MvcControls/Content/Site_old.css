@@ -1,0 +1,462 @@
+﻿html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+body {
+    /*прячем скрол*/
+    overflow: hidden;
+}
+
+/*заголовок по середине, сейчас там пусто*/
+.title h1 {
+    font-size: 22px;
+    margin-bottom: 0.65em;
+    margin-top: 0.65em;
+}
+
+/*заголовок по середине, сейчас там пусто*/
+h4.title {
+    margin-bottom: 0;
+    margin-top: 0.5em;
+}
+
+/*при загрузки айфрейма мы показываем иконку загрузки. пока контента нет его видно потом он закрывается контентом*/
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background-color: transparent !important;
+}
+
+.loader-spin {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(Telerik/Fiori/loading-image.gif);
+}
+
+/*класс для того чтобы какой нить див растянуть на всю высоту*/
+.full {
+    height: 100%;
+    border-width: 0px !important;
+}
+.full > .k-editor, 
+.full textarea {
+    height: 100% !important;
+    border-width: 0px !important;
+}
+.full_scroll {
+    overflow: auto !important;
+}
+
+/*убираем лишние скролы*/
+.k-pane.k-scrollable {
+    overflow: visible !important;
+    height: 100% !important;
+}
+div.k-animation-container > ul.k-pane.k-scrollable {
+    height: auto !important;
+}
+/*панель фильтра*/
+.filterPanel, 
+.filterConfigPanel {
+    height: 100%;
+    width: calc(100% - 2px);
+    top: auto;
+    bottom: auto;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/*левое главное меню*/
+#left-pane {
+    height: 100%;
+    z-index: 100;
+    top: 41px;
+    bottom: 0;
+    overflow: visible;
+    position: absolute;
+    width: 0;
+    min-width: 320px;
+}
+    .combobox-for-deals-pane.k-header {
+        margin-left: -2px;
+    }
+        .combobox-for-deals-pane > .k-combobox {
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+
+/*права панель для планшетов и мобил где главные табы*/
+/*.right-pane {
+    z-index: 99;
+    top: 0;
+    top: inherit;
+    bottom: 0;
+    border-style: solid;
+    border-width: 1px;
+}
+
+    .right-pane > div {
+        z-index: 100;
+        top: inherit;
+        bottom: 0;
+        border-style: solid;
+        border-width: 1px;
+    }*/
+
+/* на десктопе не показываем якорь панели с табами*/
+.k-rpanel-toggle {
+    display: none;
+}
+/*поля ввода панели поиска*/
+.formArea {
+    font-size: 14px;
+    height: calc(100% - 48px);
+    overflow: auto;
+}
+
+/*редактирование панели поиска*/
+.formAreaEdit {
+    font-size: 14px;
+    height: calc(100% - 45px);
+    overflow: hidden;
+    right: 0px;
+    margin-right: 5px;
+}
+.content_bordered {
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+}
+
+.content_bordered_red {
+    border-color: rgba(255, 0, 0, 1);
+    border-style: solid;
+}
+
+/*поля поиска на панеле для выбора*/
+/*.fieldlistEdit {
+    margin: -2em 0 0;
+    padding: 10px;
+}
+    .fieldlistEdit li {
+        list-style: none;
+        padding-top: 1em;
+    }*/
+/*поля поиска на панеле*/
+.fieldlist {
+    padding: 10px;
+}
+    div.editor_content > .fieldlist{
+        height: 100%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        overflow: auto;
+    }
+    .fieldlist li {
+        list-style: none;
+    }
+        .fieldlist li > label {
+            display: block;
+            padding-bottom: 0.5em;
+            font-weight: bold;
+            text-transform: capitalize;
+            font-size: 12px;
+        }
+        .fieldlist li > table {
+            width: 100%;
+        }
+        .fieldlist li > table td:first-child {
+            padding-right: 1.5em;
+        }
+
+/*менюшки*/
+#panelbar {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.k-panelbar .k-link > .k-image {
+    float: none;
+    margin-top: 0;
+}
+
+.k-button-icontext .k-icon {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+a.k-button-icon
+{
+    border: 0px !important;
+    padding-top: 5px;
+}
+
+div.k-toolbar > .k-button.k-button-icon {
+    background-color: transparent;
+}
+
+.k-content-frame {
+    position: fixed;
+}
+
+.km-actionsheet-wrapper {
+    bottom: 0;
+    text-align: center;
+}
+
+.km-accent.km-widget.km-navbar {
+    background-color: transparent;
+}
+
+#div_main_header{
+    height: 41px;
+}
+#main_header {
+    position: absolute;
+    width: 100%;
+    height: 41px;
+    padding: 0px;
+    line-height: normal !important;
+    border-bottom-width: 0px;
+    z-index: 100;
+}
+    #main_header > table {
+        width: 100%;
+        height: 100%;
+    }
+        #main_header > table td.left {
+            width: 320px;
+            left: 0px;
+            border-right-style: solid;
+            border-right-width: 1px;
+        }
+        #main_header > table td.right {
+            width: calc(100% - 320px);
+        }
+        #main_header > table > tbody {
+            top: 0px !important;
+            height: 100%;
+        } 
+          
+.km-leftitem {
+    left: 0px;
+    top: 0px;
+    line-height: normal !important;
+}
+    .km-leftitem > .km-widget.km-button.k-lpanel-toggle {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            padding-top: 0px;
+          }
+
+.km-rightitem {
+    position: relative;
+    float: right;
+    right: 0px;
+    width: 100%;
+    line-height: normal !important;
+}
+
+/*уменьшаем размер тулбара*/
+.k-toolbar {
+    border-width: 0;
+}
+.k-toolbar-resizable {
+    white-space: normal;
+}
+
+.formBtn {
+    padding: 2px;
+    bottom: 0px;
+    border-width: 1px;
+}
+
+/*кнопка сохранить на тулбаре*/
+.commit {
+    padding-top: 8px !important;
+    height: 35px;
+}
+    .commit img {
+        margin-top: -3px;
+    }
+
+/*уменьшаем высоту строк в гриде*/
+.k-grid td {
+    padding: 1px;
+    white-space: nowrap;
+}
+
+.k-grid img {
+    vertical-align: top;
+}
+
+.k-pager-wrap.k-grid-pager.k-floatwrap {
+    border-bottom-width: 1px !important;
+}
+
+/*заголовки у panelbar'ов редактора*/
+.k-panelbar > .k-item > .k-link {
+    line-height: 1.5em /*!important*/;
+}
+
+/*кнопка выхода у едитора (всегда справа)*/
+.buttons-exit {
+    float: right;
+    height: 35px;
+}
+
+/*Расположение контролов у експандеров в едиторе*/
+.k-link > table {
+    width: 100% !important;
+    font-size: 14px;
+}
+    .k-link > table td {
+        width: 50% !important;
+    }
+/* кнопка контекстного меню в гриде*/
+.gridCellContextMenu {
+    float: left;
+    margin: 5px;
+}
+
+/* кнопка контекстного меню в дереве*/
+table[role="treegrid"] .gridCellContextMenu {
+    float: none;
+    margin: 0;
+}
+
+ul[data-role="contextmenu"] {
+    width: 151.203px !important;
+    height: 92.25px !important;
+    font-size: 16px !important;
+    line-height: 25.6px !important;
+    left: 0 !important;
+}
+
+/*Отображение полосы прокрутки для экспандеров*/
+ul.k-panelbar {
+    overflow: auto;
+    min-width: 500px !important;
+    /*height:  100%;*//*calc(100% - 35px);*/
+}
+
+.formAreaTree {
+    font-size: 14px;
+    height: calc(100% - 70px);
+    overflow: auto;
+    right: 0px;
+}
+
+/*позиционирование*/
+.align-left {
+    float: left;
+    margin-left: 10px;
+}
+
+.align-right {
+    float: right;
+    margin-right: 10px; 
+}
+
+/*отступы и положение у кнопок в тулбарах*/
+div[data-role="toolbar"]{
+    line-height: 0px !important;
+}
+.k-overflow-anchor{
+    /*line-height: normal !important;*/
+    height: auto !important;
+}
+
+a[operation='add'] {
+    padding-top: 5.6px;
+    padding-bottom: 5.6px;
+    line-height: normal;
+}
+a[operation='del']  {
+    padding-top: 5.6px;
+    padding-bottom: 5.6px;
+    line-height: normal;
+}
+a[operation='edit']  {
+    padding-top: 5.6px;
+    padding-bottom: 5.6px;
+    line-height: normal;
+}
+
+li[role="menuitem"] {
+    border-width: 0px !important;
+}
+    /*Меню, межстрочный интервал*/
+    li[role="menuitem"] > a{
+        line-height: 2 !important;
+    }
+    li[role="menuitem"] td {
+        vertical-align: top !important;
+    }
+
+.tab_title{
+    width: 100%;
+    text-align: right;
+}
+
+.grid_column_editable{
+    border-width :1px !important;
+    border-color :black !important;
+    font-weight: bold;
+}
+
+.k-upload > .k-upload-selected, .k-upload > .k-clear-selected {
+    display: none !important;
+}
+
+.k-upload .k-dropzone em {
+    visibility: visible;
+}
+
+.k-image-new-items {
+    margin-left: 10px !important;
+}
+.k-count-new-items{
+    color: red !important;
+    margin-left: 5px !important;
+}
+
+li.k-item.k-state-active.k-first.k-last{
+    height: 100%;
+}
+    li.k-item.k-state-active.k-first.k-last > div.k-content{
+        height: 100%;
+    }
+        ul[ul_for_grid='true']{
+            height: 100%;
+        }
+            ul[ul_for_grid='true'] > li {
+                height: 100%;
+            }
+
+.k-widget.k-listview.k-selectable{
+    overflow: auto !important;
+}
+
+#MainMenu .k-item .k-link{
+    padding-left: 10px;
+}
+#hold_mm_span{
+    line-height: normal;
+    float: right;
+    margin-right: 15px;
+    margin-top: 4px;
+}
+
+div.tab_edit_content.dashbord_content {
+    height: 100%; 
+    overflow: auto; 
+}

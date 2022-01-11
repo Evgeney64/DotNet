@@ -1,0 +1,131 @@
+﻿/*body {
+    overflow: auto;
+}*/
+
+#container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #ffffff;
+}
+
+.k-rpanel-toggle {
+    display: none;
+}
+
+.panel-wrap {
+    display: table;
+    margin: 0 0 20px;
+    width: calc(100% - 2px);
+}
+
+#main-content {
+    /*display: table-cell;*/
+    margin: 0;
+    vertical-align: top;
+}
+
+.widget.placeholder {
+    opacity: 0.4;
+    border: 1px dashed #a6a6a6;
+}
+
+/* WIDGETS */
+.widget {
+    margin: 20px;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    width: 300px;
+    height: 300px;
+    float: left;
+}
+
+.wide {
+    width: 642px;
+}
+.high {
+    height: 642px;
+}
+
+.widget:hover {
+    background-color: #fcfcfc;
+    border-color: #cccccc;
+}
+
+.widget > div {
+    min-height: 50px;
+    height: calc(100% - 35px);
+}
+
+    .widget > div > iframe {
+        height: 100%;
+        width: 100%;
+        border: none;
+    }
+
+.widget h3 {
+    font-size: 12px;
+    padding: 8px 10px;
+    cursor: move;
+    margin-bottom: 0;
+    /*text-transform: uppercase;*/
+    border-bottom: 1px solid #e7e7e7;
+    font-size: 16px;
+    margin: 0px;
+}
+
+    .widget h3 span {
+        float: right;
+    }
+
+        .widget h3 span:hover {
+            cursor: pointer;
+            background-color: #e7e7e7;
+            border-radius: 20px;
+        }
+
+.hint {
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+}
+
+    .hint > h3 {
+        padding-left: 20px;
+    }
+
+#menu {
+    width: 100%;
+    float: left;
+}
+
+/*@media (max-width: 600px) {
+
+    #menu {
+        width: 300px;
+        float: none;
+    }
+
+    .k-rpanel-toggle {
+        display: block;
+        float: left;
+        background-color: #fff;
+        padding: 18px 18px 19.25px;
+    }
+
+    .wide {
+        width: calc(100% - 4px);
+    }
+
+    .widget {
+        width: calc(100% - 4px);
+        margin: 2px;
+    }
+
+    #main-content {
+        padding: 2px;
+    }
+}*/

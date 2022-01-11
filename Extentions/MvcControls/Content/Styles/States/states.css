@@ -1,0 +1,229 @@
+﻿/*<doc>*/
+/*<it> Состояния. Как правило стиль из одной строки, который отвечает за наличие/остсутствие какого-то свойства (рамки, полосы прокрутки и т.п.). Не допускается использование идентификаторов и тэгов. Можно, а иногда и нужно использовать атрибут "!important".</it>*/
+/*Значок загрузки*/
+.loader-spin {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(../../Telerik/Fiori/loading-image.gif);
+}
+ 
+/*есть скролл*/
+.is-scrolled {
+    overflow: auto;
+}
+/*Иногда влияет на отображение выпадающего содержимого меню*/
+.is-scrolled-visible {
+    overflow: visible !important;
+}
+/*нет скролла*/
+.is-not-scrolled {
+    overflow: hidden;
+}
+ 
+/*полная высота*/
+.is-fulled {
+    height: 100% !important;
+}
+/*полная ширина*/
+.is-width-fulled {
+    width: 100% !important;
+}
+/*ширина 50%*/
+.is-width-50 {
+    width: 50% !important;
+}
+/*ширина 40%*/
+.is-width-40 {
+    width: 40% !important;
+}
+/*ширина 60%*/
+.is-width-60 {
+    width: 60% !important;
+}
+ 
+/*есть рамка*/
+.is-bordered{
+    border-width: 1px;
+    border-style: solid;
+}
+/*нет рамки*/
+.is-not-bordered{
+    border-width: 0px !important;
+    border-style: none !important;
+}
+/*красный текст*/
+.is-red-colored {
+    color: red;
+}
+/*красная рамка*/
+.is-red-bordered {
+    border-color: rgba(255, 0, 0, 1);
+}
+/*черная рамка*/
+.is-black-bordered {
+    border-color: rgba(0, 0, 0,  0.2);
+}
+/*серая рамка*/
+.is-gray-bordered {
+    border-color: rgba(128, 128, 128, 1);
+}
+/*серебрянная рамка*/
+.is-silver-bordered {
+    border-color: rgba(192, 192, 192, 1);
+}
+/*жирная рамка*/
+.is-bold-bordered {
+    border-width: 3px;
+    border-style: solid;
+}
+ 
+/*позиционирование слева*/
+.is-align-left {
+    float: left !important;
+    margin-left: 10px;
+    right: auto !important;
+}
+.is-align-left-dealinfo {
+    float: left !important;
+    /*margin-left: 4px;*/
+}
+.is-align-left-modal {
+    float: left !important;
+}
+/*позиционирование справа*/
+.is-align-right {
+    float: right !important;
+    margin-right: 10px;
+    left: auto !important; 
+}
+.is-align-right-dealinfo {
+    float: right !important;
+    margin-right: 4px;
+    left: auto !important;
+}
+.is-align-right-modal {
+    float: right !important;
+    left: auto !important;
+}
+.is-margin-top {
+    margin-top: 0px;
+} 
+
+/*Жирный шрифт*/
+.is-font-bold {
+    font-weight: bold;
+}
+
+/*Размеры контролов фиксированы вариантами*/
+.Tiny {
+    width: 80px;
+    float: left;
+}
+.Small {
+    width: 120px;
+    float: left;
+}
+.Medium {
+    width: 200px;
+    float: left;
+}
+.Large {
+    width: 300px;
+    float: left;
+}
+.ExtraLarge {
+    width: 500px;
+    float: left;
+}
+
+.is-button-gold {
+    display: inline-block !important;
+    color: white !important;
+    text-decoration: none !important;
+    padding: .3em 1.7em !important;
+    margin: 2px !important;
+    outline: none !important;
+    border-width: 2px 0 !important;
+    border-style: solid none !important;
+    border-color: #FDBE33 #000 #D77206 !important;
+    border-radius: 6px !important;
+    background: linear-gradient(#F3AE0F, #E38916) #E38916 !important;
+    transition: 0.2s !important;
+}
+
+.is-button-gold-silver {
+    display: inline-block !important;
+    color: white !important;
+    text-decoration: none !important;
+    padding: .3em 1.7em !important;
+    margin: 2px !important;
+    outline: none !important;
+    border-width: 2px 0 !important;
+    border-style: solid none !important;
+    border-color: Silver !important;
+    border-radius: 6px !important;
+    background: Silver !important;
+    transition: 0.2s !important;
+}
+
+.is-button-blue {
+    display: inline-block !important;
+    color: white !important;
+    text-decoration: none !important;
+    padding: .5em 2em !important;
+    margin: 2px !important;
+    outline: none !important;
+    border-width: 2px 0 !important;
+    border-style: solid none !important;
+    border-color: SteelBlue !important;
+    border-radius: 6px !important;
+    background: SteelBlue !important;
+    transition: 0.2s !important;
+}
+.is-button-blue.k-state-disabled {
+    border-color: #b5b5b5 !important;
+    background-color: #b5b5b5 !important;
+}
+.is-button-blue.k-state-hover > .k-link {
+    background: SteelBlue !important;
+    color: white !important;
+}
+.is-button-blue.k-state-disabled > .k-link {
+    color: white !important;
+} 
+ 
+.is-button-silver {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: Silver;
+    border-radius: 6px;
+    background: Silver;
+    transition: 0.2s;
+}
+ 
+.is-invisibility {
+    visibility: hidden !important;
+}
+.is-not-visible {
+    display: none !important;
+}
+.is-visible {
+    display: inline !important;
+}
+
+.is-menu-relative {
+    position: relative;
+}
+.is-menu-absolute {
+    position: absolute;
+    z-index: 100;
+    top: 41px;
+}
+/*<it> Наименования стилей начинается с "is-" и по названию должно отражать назначение стиля.</it>*/
+/*</doc>*/

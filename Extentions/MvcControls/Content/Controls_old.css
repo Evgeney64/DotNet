@@ -1,0 +1,399 @@
+﻿/*************************************Controls************************************/
+/*Левый столбец в редакторе (заголовки)*/
+.ctrl_label {
+    min-width: 100px;
+    width: 40% !important;
+}
+
+/*Правый столбец в редакторе (контролы)*/
+.ctrl_value {
+    width: 60% !important;
+}
+
+.ctrl_label_LIK_editor {
+    width: 300px !important;
+}
+.ctrl_value_LIK_editor {
+    width: 200px !important;
+}
+
+.ctrl_value input {
+    width: calc(100% - 52px);
+}
+/*Элементы селектора*/
+.ctrl_value span.k-textbox.k-picker-wrap {
+        height: 28px;
+        margin: 0px;
+        top: 0px;
+    }
+    .ctrl_value span.k-textbox.k-picker-wrap > input {
+        position: absolute;
+        z-index: 100;
+        top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .ctrl_value span.k-textbox.k-picker-wrap > span.k-i-close-selector {
+        z-index: 101;
+    }
+
+.full_width {
+    width: 100% !important;
+}
+.full_width textarea {
+    width: 100% !important;
+}
+
+.ctrl_label_dealinfo {
+    width: 60%;
+    padding-left: 1.4em;
+}
+.ctrl_value_dealinfo {
+    width: 40%;
+}
+
+
+.deal_info_content .k-content > ul{
+    padding-left: 0px !important;
+}
+.deal_info_content .ctrl_label{
+    padding-right: 0px !important;
+    width: 55% !important;
+}
+.deal_info_content .ctrl_value{
+    width: 45% !important;
+}
+.deal_info_content .ctrl_label_linkbutton{
+    padding-right: 0px !important;
+    width: 55% !important;
+}
+.deal_info_content .ctrl_value_linkbutton{
+    width: 35% !important;
+}
+.deal_info_content .ctrl_button{
+    width: 10% !important;
+}
+.deal_info_content a{
+    padding-right: 10px;
+    line-height: normal !important;
+    padding: 0px;
+    padding-right: 7px;
+    border: 0px;
+    height: 20px;
+}
+.deal_info_content a > img{
+    padding-top: calc(-2px);
+}
+
+/*Убираем рамки и фон для панели детализации по текущей сделки*/
+.deal_info_content {
+    border-style: none !important;
+    border-width: 0px !important;
+    overflow: hidden !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+    .deal_info_content .tab_edit_content {
+        border-style: none !important;
+        height: 100%;
+    }
+        .deal_info_content .tab_edit_content > ul {
+            border-style: none !important;
+            border-width: 0px !important;
+        }
+            .deal_info_content .tab_edit_content > ul > li {
+                background-color: transparent !important;
+            }
+                .deal_info_content .tab_edit_content > ul > li > div {
+                    background-color: transparent !important;
+                    border-width: 0px !important;
+                }
+                    div.deal_info_content > div > ul > li > a.k-link {
+                        border-bottom-style: none !important;
+                    }
+
+.k-checkbox-style {
+    font-size: 14px;
+}
+
+.k-checkbox-combobox-style {
+    margin: 0;
+    padding: 0;
+}
+
+/*Размеры контролов фиксированы вариантами*/
+.Tiny {
+    width: 80px;
+    float: left;
+}
+.Small {
+    width: 120px;
+    float: left;
+}
+.Medium {
+    width: 200px;
+    float: left;
+}
+.Large {
+    width: 300px;
+    float: left;
+}
+.ExtraLarge {
+    width: 500px;
+    float: left;
+}
+.fieldlist li > table .k-textbox,
+.k-modal-window-content li > table .k-textbox,
+.k-widget.k-multiselect.k-header,
+.k-widget.k-dropdown.k-header,
+.k-widget.k-combobox.k-header,
+.k-widget.k-datepicker.k-header,
+.k-widget.k-numerictextbox,
+.k-widget.k-datetimepicker.k-header,
+.k-widget.k-textbox.k-header,
+.k-textbox.k-space-left.k-space-right.k-picker-wrap {
+    width: 100% !important;
+    float: left !important;
+}
+.fieldlist li > table .k-tool-group .k-widget.k-dropdown.k-header{
+    width: auto !important;
+}
+td.ctrl_value > label {
+    margin-left: 10px;
+}
+/*Дата с комбо-боксом*/
+.k-widget.k-combobox-date.k-header {
+    width: calc(100% - 70px) !important;
+}
+/*Диапазон с комбо-боксом*/
+.k-widget.k-numeric-range {
+    width: calc(100% - 235px) !important;
+}
+.combobox_for_date, .combobox_for_numeric {
+    width: 70px;
+    float: left;
+}
+
+/*Обтекание текста для чекбоксов*/
+.formAreaEdit label.k-checkbox-label,
+[data-role="treeview"] label.k-checkbox-label{
+    float: none;
+}
+div.editor_content label.k-checkbox-label{
+    float: left;
+}
+
+/*Видимость чекбоксов в конфигурации фильтра. В IE они почему-то не видны*/
+[data-role="treeitem"] span.k-checkbox-wrapper > input[type="checkbox"] {
+    display: inline-block !important;
+}
+
+/*Убираем отступ только для гридов в редкторе*/
+ul[ul_for_grid="true"] {
+    padding-left: 0px !important;
+}
+
+ul[role="menubar"] {
+    border-width: 0px !important;
+}
+body > div.full > ul[role="menubar"] {
+    border-radius: 0px !important;
+}
+
+.k-i-close-selector {
+    right: 3px !important;
+    left: auto !important;
+}
+
+.column-text-align-right{
+    text-align: right !important;
+    padding-right: 7px !important;
+}
+
+div.list-view-item{
+        border-style: none;
+        border-bottom-style: double;
+        border-width: 1px;
+        margin: 2px;
+        line-height: 0.5;
+}
+
+.editor_footer{
+    position: fixed;
+    bottom: 3px;
+    width: 100%;
+    min-height: 20px;
+    height: 50px;
+    line-height: normal;
+    overflow: auto !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.editor_header {
+    overflow: auto;
+    width: 100%;
+    min-height: 20px;
+    height: 50px;
+    line-height: normal;
+    overflow: auto !important;
+}
+div.editor_content{
+    height: 100%;
+    overflow: hidden;
+}
+    div.editor_content > li{
+        list-style-type: none;
+    }
+        div.editor_content > li > table {
+            width: 100%;
+        }
+            div.editor_content td.ctrl_button > a{
+                padding-right: 10px;
+                line-height: normal !important;
+                padding: 0px;
+                padding-right: 7px;
+                border: 0px;
+                height: 25px;
+            }
+                div.editor_content td.ctrl_button > a a > img{
+                    padding-top: calc(-2px);
+                }
+
+input[readonly] {  
+  background-color: #eee;
+  opacity: 1;
+}
+
+.checkboxOne {
+    width: 40px;
+    height: 10px;
+    background: #555;
+    margin: 20px 80px;
+    position: relative;
+    border-radius: 3px;
+}
+.checkboxOne label {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+
+	background: #ccc;
+}
+.checkboxTwo {
+    width: 120px;
+    height: 40px;
+    background: #333;
+    margin: 20px 60px;
+    border-radius: 50px;
+    position: relative;
+}
+.checkboxTwo label {
+	display: block;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+	left: 12px;
+	background: #ddd;
+}
+.checkboxThree {
+    width: 120px;
+    height: 40px;
+    background: #333;
+    margin: 20px 60px;
+    border-radius: 50px;
+    position: relative;
+}
+.checkboxThree label {
+	display: block;
+	width: 52px;
+	height: 22px;
+	border-radius: 50px;
+
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+	left: 12px;
+	background: #ddd;
+}
+.checkboxFour {
+    width: 20px;
+    height: 20px;
+    background: #ddd;
+    margin: 10px 10px;
+    border-radius: 100%;
+    position: relative;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
+.checkboxFour1 {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    transition: all .5s ease;
+    cursor: pointer;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    background: #333;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+}
+.checkboxFive {
+    width: 25px;
+    margin: 20px 100px;
+    position: relative;
+}
+.checkboxFive label {
+	cursor: pointer;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 0;
+  	left: 0;
+	background: #eee;
+	border:1px solid #ddd;
+}
+
+a.button_gold {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: #FDBE33 #000 #D77206;
+    border-radius: 6px;
+    background: linear-gradient(#F3AE0F, #E38916) #E38916;
+    transition: 0.2s;
+}
+
+a.button_blue {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: SteelBlue;
+    border-radius: 6px;
+    background: SteelBlue;
+    transition: 0.2s;
+}

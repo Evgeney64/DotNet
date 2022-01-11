@@ -1,0 +1,185 @@
+﻿/************************************************TABS***********************************/ 
+/*Горизонтальные табы вверху*/
+/*высчитываем высоту минус тулбар*/
+#tabstrip {
+    height: calc(100% - 33px);
+    left: 0px;
+    width: 100%;
+}
+div.k-tabstrip-top {
+    height: 100%;
+    border-width: 0px;
+}
+
+    div.k-tabstrip-top:before {
+        display: none;
+    }
+
+    div.k-tabstrip-top > ul {
+        left: -12px;
+        overflow: hidden;
+    }
+    div.childTabs.k-tabstrip-top > ul,
+    div.wizardTab.k-tabstrip-top > ul  {
+        left: 0px;
+    }
+        /*Отступ справа для кнопки "меню"*/
+        #tabstrip > ul > li.k-first {
+            margin-left: 12px;
+        }
+        /*Нижняя линия для вех табов*/
+        div.k-tabstrip-top > ul > li {
+            border-bottom-width: 0px !important;
+            border-width: 0px !important;
+        }
+        div.k-tabstrip-top > ul > li.k-state-active {
+            border-width: 1px 1px 0px 1px !important;
+        }
+        div.k-tabstrip-top > ul > li.k-state-hover {
+            border-bottom-color: transparent;
+            background-color: transparent;
+        }
+            /*Ограничение ширины вкладки*/
+            div.k-tabstrip-top > ul > li span{
+                max-width: 200px;
+            }
+            /*Текст урезатеся и добавляется многоточие*/    
+            div.k-tabstrip-top > ul > li .tab-title-left{
+                max-width: 170px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                float: left;
+            }
+            div.k-tabstrip-top > ul > li .tab-title-right {
+                float: right;
+            }
+            /*Возвращаем крестик, на вкладке курсор*/
+            div.k-tabstrip-top > ul > li[role="tab"].k-state-hover span.k-icon.k-i-close {
+                visibility: visible;
+            }
+            /*Убираем крестик для главной страницы всегда*/
+            div.k-tabstrip-top > ul > li[role="tab"].k-state-hover span.main-tab span.k-icon.k-i-close {
+                visibility: hidden;
+            }
+            /*Убираем крестик для неактивных вкладок*/
+            div.k-tabstrip-top > ul > li[role="tab"] span.k-icon.k-i-close {
+                visibility: hidden;
+            }
+            /*Возвращаем крестик, вкладка активна*/
+            div.k-tabstrip-top > ul > li[role="tab"].k-state-active span.k-icon.k-i-close {
+                visibility: visible;
+            }
+            /*Убираем крестик для главной страницы всегда*/
+            div.k-tabstrip-top > ul > li[role="tab"].k-state-active span.main-tab span.k-icon.k-i-close {
+                visibility: hidden;
+            }
+
+    div.k-tabstrip-top > .k-button {
+        margin-left: 38px;
+        top: 4px;
+    }
+    /*Содержимое таба*/
+    div.k-tabstrip-top > .k-content {
+        border-top-style: none;
+        border-width: 0px;
+        position: relative;
+        width: 100%;
+    }
+
+/*Вертикальные табы для визарда слева*/
+div.k-tabstrip-left {
+    position: static;
+    height: 100%;
+    border-top-width: 0px;
+    border-left-width: 0px;
+}   
+    /* набор табов визарда*/
+    div.k-tabstrip-left > ul {
+        position: absolute;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        -webkit-transform-origin: 100% 0;
+        -moz-transform-origin: 100% 0;
+        -o-transform-origin: 100% 0;
+        -ms-transform-origin: 100% 0;
+        transform-origin: 100% 0;
+        -webkit-transform: translate(-100%, 0) rotate(-90deg);
+        -moz-transform: translate(-100%, 0) rotate(-90deg);
+        -o-transform: translate(-100%, 0) rotate(-90deg);
+        -ms-transform: translate(-100%, 0) rotate(-90deg);
+        transform: translate(-100%, 0) rotate(-90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        display: -webkit-inline-box;
+        width: 600px;
+        direction: rtl;
+    }
+        /* отдельные табы визарда*/
+        /*Табы слева решено было убрать. Пока сделал их просто невидимыми*/
+        div.k-tabstrip-left > ul > li {
+            float: right;
+            border-bottom-left-radius: 0;
+            border-width: 0px !important;
+            margin-left: 5px !important;
+            margin-right: 5px !important;
+            padding: 0px;
+            direction: ltr;
+            display: none !important;
+        }
+            div.k-tabstrip-left > ul > li > .k-link {
+                padding-bottom: .9em;
+                padding-top: .9em;
+                padding-left: 8px;
+            }
+                div.k-tabstrip-left > ul > li > .k-link > img {
+                    margin-left: 0;
+                }
+                div.k-tabstrip-left > ul > li > .k-link > i {
+                    margin-left: 14.4px;
+                }
+   
+    /* содержимое таба*/
+    div.k-tabstrip-left > .k-content {
+        border-left-width: 0;
+        width: 100% !important;
+        height: 100%;
+        position: absolute;
+        margin: 0 0 0 0!important;
+        border-top-width: 0px;
+    }
+
+/*иконка загрузки для табов*/
+.loader-spin:before,
+.k-tabstrip:before {
+    content: "";
+    position: relative;
+    background-image: url(Telerik/Fiori/loading-image.gif) !important;
+    background-position: 50% 50% !important;
+    width: 100%;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
+/*убираем спин после загрузки*/
+.childTabs:before {
+    content: none;
+}
+/*занимаем вкладками всю высоту*/
+.k-tabstrip-wrapper {
+    height: 100%;
+    overflow: hidden;
+}
+/*содержимое вкладок на весь экран без скролов*/
+.k-tabstrip > .k-content {
+    padding: 0px;
+    overflow: hidden;
+}
+
+/*так как мы применили плагин kendoResponsitivePanel к табам то делаем их табами на десктопе*/
+.k-tabstrip-items {
+    float: none !important;
+    height: auto !important;
+}
+    /*кнопка закрыть таб*/
+    .k-tabstrip-items li .k-icon {
+        margin: 2px 0 0 2px;
+    }

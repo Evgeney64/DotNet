@@ -1,0 +1,229 @@
+// Шаблон для генерации JS модуля для редактора XML
+//см. StaticContext.GetJsForXmlEditor()
+
+
+//Описание Auto-complete правил для конфигурации списков
+
+
+//Item для списка
+var gridItem = {
+          attrs: {
+              <#GridItemAttrs>
+        },
+        children: []
+};
+
+//Item для меню
+var menuItem = {
+          attrs: {
+              <#MenuItemAttrs>
+          },
+          children: []
+};
+
+
+// Схема для списка
+
+var xmlTagsForGrid = {
+        "!top": ["GRID"],
+
+    GRID: {
+        children: ["SECTION", "Item"]
+        },
+
+    SECTION: {
+        attrs: {
+            Name: [""],
+            Default: ["True", "False"]
+        },
+        children: ["Item", "Params"]
+    },
+
+    Item: {
+        attrs: {
+            <#GridItemAttrs>
+        },
+        children: []
+    },
+    Params: {
+        attrs: {
+            Type: ["GridOrderBy", "SectionCondition"]
+        },
+        children: ["Item"]
+    },
+};
+
+
+// Схема для редактора (не сделана)
+
+var xmlTagsForEditor = {
+        "!top": ["GRID"],
+
+    GRID: {
+        children: ["SECTION"]
+        },
+
+    SECTION: {
+        attrs: {
+            Name: [""],
+            Default: ["True", "False"]
+        },
+        children: ["Item", "Params"]
+    },
+
+    Item: {
+        attrs: {
+            <#EditorItemAttrs>
+        },
+        children: []
+    },
+    Params: {
+        attrs: {
+            Type: ["GridOrderBy", "SectionCondition"]
+        },
+        children: ["Item"]
+    },
+    };
+
+    // Схема для меню
+
+    var xmlTagsForMenu = {
+        "!top": ["MENU"],
+
+    MENU: {
+        children: ["SECTION"]
+        },
+
+    SECTION: {
+        attrs: {
+            Name: [""],
+            Default: ["True", "False"]
+        },
+        children: ["OPERATIONS", "LIST_OPEN", "Params"]
+    },
+
+    OPERATIONS: {
+        children: ["Item", "Separator", "Group"]
+    },
+
+    LIST_OPEN: {
+        children: ["Item", "Separator", "Group"]
+    },
+
+    Item: {
+        attrs: {
+            <#MenuItemAttrs>
+        },
+        children: []
+    },
+
+    Separator: {},
+
+    Group: {
+        attrs: {
+            SOPERATION_ID: [""],
+            Title: [""]
+        },
+        children: ["Item"]
+    },
+
+    Params: {
+        attrs: {
+            Type: ["SectionCondition", "SectionNom", "MenuFilter", "PreviewDialog", "ParameterAttribute"],
+            PreviewDialog: ["Inline"]
+        },
+        children: ["Item", "PREVIEW_DIALOG"]
+    },
+
+    PREVIEW_DIALOG: {
+        attrs: {
+            Modal: ["True", "False"],
+        },
+        //children: ["EXPANDER"]
+
+    }
+};
+      
+
+// Настройка элементов
+
+//editorKind - "grid", "editor", "filter", "menu"
+function setupXmlEditor(textAreaId, editorKind)
+{
+        
+    var editor = CodeMirror.fromTextArea(document.getElementById(textAreaId), {
+        mode: "xml",
+        lineNumbers: true,
+        foldGutter: true,
+        extraKeys: {
+            "'<'": completeAfter,
+            "'/'": completeIfAfterLt,
+            "' '": completeIfInTag,
+            "'='": completeIfInTag,
+            "F11": function (cm) {
+              cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            },
+            "Esc": function(cm) {
+              if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+            },
+            "Ctrl-Space": "autocomplete",
+            "Ctrl-Q": "toggleComment"
+        },
+        hintOptions: { schemaInfo: getTagsForXmlEditor(editorKind) },
+        autoRefresh: true,
+        matchTags: true,
+        autoCloseTags: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+     });
+
+    editor.on("focus", function (cm, event) { cm.refresh(); });
+    editor.on("blur", function (cm, event) { cm.save(); });
+    editor.refresh();
+    return editor;
+    }
+
+    //! Править синхронно с SYS_CONFIG.XmlFormat
+    function getTagsForXmlEditor(editorKind)
+    {
+    if (editorKind == "grid")
+    {
+        return xmlTagsForGrid;
+    }
+    if (editorKind == "editor")
+    {
+        return xmlTagsForEditor;
+    }
+    if (editorKind == "menu")
+    {
+        return xmlTagsForMenu;
+    }
+    return null;
+}
+
+      
+//Auto-complete functions
+
+function completeAfter(cm, pred) {
+    var cur = cm.getCursor();
+    if (!pred || pred()) setTimeout(function() {
+        if (!cm.state.completionActive)
+        cm.showHint({completeSingle: false});
+    }, 100);
+    return CodeMirror.Pass;
+    }
+
+    function completeIfAfterLt(cm) {
+    return completeAfter(cm, function() {
+        var cur = cm.getCursor();
+        return cm.getRange(CodeMirror.Pos(cur.line, cur.ch - 1), cur) == "<";
+    });
+    }
+
+    function completeIfInTag(cm) {
+    return completeAfter(cm, function() {
+        var tok = cm.getTokenAt(cm.getCursor());
+        if (tok.type == "string" && (!/['"]/.test(tok.string.charAt(tok.string.length - 1)) || tok.string.length == 1)) return false;
+        var inner = CodeMirror.innerMode(cm.getMode(), tok.state).state;
+        return inner.tagName;
+    });
+}      

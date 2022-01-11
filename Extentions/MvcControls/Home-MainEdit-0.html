@@ -1,0 +1,1268 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <title> - Техносбыт</title>
+    
+    <meta name="viewport" content="width=initial-scale=0.7">
+    <meta charset="UTF-8" />
+    
+    <link href="Content/Telerik/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Telerik/kendo.dataviz.fiori.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Telerik/kendo.mobile.fiori.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Telerik/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Telerik/kendo.blueopal.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="Content/Site.css" rel="stylesheet"/>
+	<link href="Content/Styles/Base/base.css" rel="stylesheet"/>
+	<link href="Content/Styles/Layouts/header.css" rel="stylesheet"/>
+	<link href="Content/Styles/Layouts/container.css" rel="stylesheet"/>
+	<link href="Content/Styles/Layouts/tabs.css" rel="stylesheet"/>
+	<link href="Content/Styles/Modules/modules.css" rel="stylesheet"/>
+	<link href="Content/Styles/States/states.css" rel="stylesheet"/>
+	<link href="Content/xonomy/xonomy.css" rel="stylesheet"/>
+
+
+    <link href="Content/Telerik/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="Content/Captcha.css" rel="stylesheet" type="text/css" />
+
+    
+    <script src="/Scripts/Telerik/jquery.min.js"></script>
+    <script src="/Scripts/Telerik/jszip.min.js"></script>
+    <script src="/Scripts/Telerik/kendo.all.min.js"></script>
+    <script src="/Scripts/Telerik/kendo.aspnetmvc.min.js"></script>
+    <script src="/Scripts/Telerik/cultures/kendo.culture.ru-RU.min.js"></script>
+    <script src="/Scripts/Telerik/messages/kendo.messages.ru-RU.min.js"></script>
+
+
+</head>
+<body>
+
+<div>
+  <ul class="k-widget k-panelbar k-reset editor-field-list is-scrolled is-fulled is-not-bordered" id="panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db">
+    <li class="k-item k-state-default">
+      <a class="k-link k-header" href="#panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-1">
+        <b>Основное: </b>№<text></text><b></b><text></text>, Срок действия<text></text><b></b><text></text>по<text></text><b></b><text></text>, <text></text><b></b><text></text>, Статус<text></text><b></b><text></text><span class="k-icon k-i-arrow-s k-panelbar-expand"></span></a>
+      <div class="k-content" id="panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-1" style="display:none">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Номер договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_a60f71e7-345f-4e4e-b19e-f38e0699beff" id="label_a60f71e7-345f-4e4e-b19e-f38e0699beff" title="Номер сделки [DEAL.DEAL_NUM] - Правила нумерации при добавлении настраиваются.">Номер договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_a60f71e7-345f-4e4e-b19e-f38e0699beff" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="a60f71e7-345f-4e4e-b19e-f38e0699beff" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_5_0_0_121_0_246_2_0_1_0;" name="DEAL.DEAL_NUM.5.TextBox.Editor.0" controltype="TextBox" title="Номер договора" onchange="control_Click('a60f71e7-345f-4e4e-b19e-f38e0699beff');" />
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Тип договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_85003c4d-0f22-44d2-80c2-447e109bf5c6" id="label_85003c4d-0f22-44d2-80c2-447e109bf5c6" title="Тип сделки [DEAL.NDEAL_ID]">Тип договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input Changed="Changed" class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_85003c4d-0f22-44d2-80c2-447e109bf5c6" name="DEAL.NDEAL_ID.6.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="NSI_DEAL" page_guid="85003c4d-0f22-44d2-80c2-447e109bf5c6" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Тип договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_6_0_0_121_0_257_2_0_101_0;" value="15" />
+                <script>
+	jQuery(function(){jQuery("#val_85003c4d-0f22-44d2-80c2-447e109bf5c6").kendoComboBox({"change":function(){ combo_onChange(this, '85003c4d-0f22-44d2-80c2-447e109bf5c6'); },"dataBound":function(){ combo_onChange(this, '85003c4d-0f22-44d2-80c2-447e109bf5c6', 'dataBound'); },"dataSource":[{"Kod":15,"KodStr":"15","Value":"15","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"ТКО","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"ТКО","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Продавец">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_798f9531-c00d-4b0d-8e27-ae1efd7528fa" id="label_798f9531-c00d-4b0d-8e27-ae1efd7528fa" title="Продавец [DEAL_EXT.SELLER_ID]">Продавец</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '798f9531-c00d-4b0d-8e27-ae1efd7528fa', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9d02c00d-b94e-4c5d-8a6f-ac3f64b627db', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_7_0_127_1_0_859_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9d02c00d-b94e-4c5d-8a6f-ac3f64b627db%3BSelector%3D798f9531-c00d-4b0d-8e27-ae1efd7528fa', 2, '');" id="search_798f9531-c00d-4b0d-8e27-ae1efd7528fa" page_guid="798f9531-c00d-4b0d-8e27-ae1efd7528fa" data-label="Продавец" data-val="SELLER_ID" data-caption="" data-selector-parent-guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-selector-result="Item" data-page_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-grid_cell_content="1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_7_0_127_1_0_859_602_0_501_0;" data-parent_id="7" data-title="Продавец" data-is_main="true" data-fk_field="PARTNER_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_798f9531-c00d-4b0d-8e27-ae1efd7528fa" value="7" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.SELLER_ID.7.Selector.Editor.0.1.1" id="val_798f9531-c00d-4b0d-8e27-ae1efd7528fa" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" value="%3Croot%3E%0D%0A%20%20%3Cid%3E7%3C%2Fid%3E%0D%0A%20%20%3Ctext%3E7%3C%2Ftext%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="798f9531-c00d-4b0d-8e27-ae1efd7528fa" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_7_0_127_1_0_859_602_0_501_0;" nom="1" controltype="Selector" selector_id="7" isrequired="true" title="Продавец" Changed="Changed" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;798f9531-c00d-4b0d-8e27-ae1efd7528fa&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Р/счет (по умолчанию)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_2fb31318-5c15-47f1-8b59-e9caa0155df1" id="label_2fb31318-5c15-47f1-8b59-e9caa0155df1" title="Расчетный счет продавца [DEAL_EXT.SELLER_RS_ID]">Р/счет (по умолчанию)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '2fb31318-5c15-47f1-8b59-e9caa0155df1', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9d02c00d-b94e-4c5d-8a6f-ac3f64b627db', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_8_0_127_118_0_17065_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9d02c00d-b94e-4c5d-8a6f-ac3f64b627db%3BSelector%3D2fb31318-5c15-47f1-8b59-e9caa0155df1', 2, '');" id="search_2fb31318-5c15-47f1-8b59-e9caa0155df1" page_guid="2fb31318-5c15-47f1-8b59-e9caa0155df1" data-label="Р/счет (по умолчанию)" data-val="SELLER_RS_ID" data-caption="RsBankName" data-selector-parent-guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-selector-result="Item" data-page_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-grid_cell_content="118" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_8_0_127_118_0_17065_602_0_501_0;" data-title="Р/счет (по умолчанию)" data-is_main="true" data-fk_field="PARTNER_RS_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_2fb31318-5c15-47f1-8b59-e9caa0155df1" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.SELLER_RS_ID.8.Selector.Editor.0.2.118" id="val_2fb31318-5c15-47f1-8b59-e9caa0155df1" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="2fb31318-5c15-47f1-8b59-e9caa0155df1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_8_0_127_118_0_17065_602_0_501_0;" nom="2" controltype="Selector" use_header_path="True" title="Р/счет (по умолчанию)" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;2fb31318-5c15-47f1-8b59-e9caa0155df1&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Способ закупки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_22a168eb-e8f9-4776-bb39-2862cca591e5" id="label_22a168eb-e8f9-4776-bb39-2862cca591e5" title="Способ закупки [DEAL.PURCHASE_METHOD] - Содержимое справочника - строки из SYS_TABLE_TREE у которых PARENT_ID = 455 или их дочерние узлы">Способ закупки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '22a168eb-e8f9-4776-bb39-2862cca591e5', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9d02c00d-b94e-4c5d-8a6f-ac3f64b627db', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_9_0_121_43_0_10526_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9d02c00d-b94e-4c5d-8a6f-ac3f64b627db%3BSelector%3D22a168eb-e8f9-4776-bb39-2862cca591e5', 2, '');" id="search_22a168eb-e8f9-4776-bb39-2862cca591e5" page_guid="22a168eb-e8f9-4776-bb39-2862cca591e5" data-label="Способ закупки" data-val="PURCHASE_METHOD" data-caption="StableTreeName_ParentStableTreeName" data-selector-parent-guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-selector-result="Item" data-page_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-grid_cell_content="43" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_9_0_121_43_0_10526_602_0_501_0;" data-title="Способ закупки" data-is_main="true" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_22a168eb-e8f9-4776-bb39-2862cca591e5" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL.PURCHASE_METHOD.9.Selector.Editor.0.43" id="val_22a168eb-e8f9-4776-bb39-2862cca591e5" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="22a168eb-e8f9-4776-bb39-2862cca591e5" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_9_0_121_43_0_10526_602_0_501_0;" controltype="Selector" title="Способ закупки" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;22a168eb-e8f9-4776-bb39-2862cca591e5&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" is-not-visible ctrl-color-orange-bckgr" field-title="Группа отчетного периода">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_0c8792ba-477d-4899-9ffe-24605e4ad417" id="label_0c8792ba-477d-4899-9ffe-24605e4ad417" title="Группа отчетного периода [DEAL.NACCOUNT_PERIOD_ID] - Нумерация счетов (счетов-фактур) может быть настроена в разрезе групп ОП.&#xD;&#xA;Помимо разделения сделок по группам закрытия отчетного периода справочник NSI_ACCOUNT_PERIOD.ACCOUNT_PERIOD_TYPE используется для деления сделок на лицевые счета бытового потребления (1 - PRIVAT) и договоры с организациями (2 - GOS) с организационной точки зрения.">Группа отчетного периода</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input Changed="Changed" cascade_noms="" class="ctrl-input is-width-fulled is-not-visible" controltype="DropDownList" id="val_0c8792ba-477d-4899-9ffe-24605e4ad417" isheaderpath="True" name="DEAL.NACCOUNT_PERIOD_ID.10.DropDownList.Editor.0" nsi_group_name="" nsi_table_name="VW_NSI_ACCOUNT_PERIOD" page_guid="0c8792ba-477d-4899-9ffe-24605e4ad417" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Группа отчетного периода" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_10_0_0_631_0_9371_2_0_105_0;" value="1" />
+                <script>
+	jQuery(function(){jQuery("#val_0c8792ba-477d-4899-9ffe-24605e4ad417").kendoDropDownList({"change":function(){ combo_onChange(this, '0c8792ba-477d-4899-9ffe-24605e4ad417', 'change'); },"dataBound":function(){ combo_onChange(this, '0c8792ba-477d-4899-9ffe-24605e4ad417', 'dataBound'); },"dataSource":[{"Kod":1,"KodStr":"1","Value":"1","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение по работе с ФЛ","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение по работе с ФЛ","Image":null,"Selected":false},{"Kod":2,"KodStr":"2","Value":"2","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение по работе с ЮЛ","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение по работе с ЮЛ","Image":null,"Selected":false},{"Kod":3,"KodStr":"3","Value":"3","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Сводные сделки","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Сводные сделки","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr"});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Отдел">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_a3622275-6cc5-44d4-a3a5-79167c735e13" id="label_a3622275-6cc5-44d4-a3a5-79167c735e13" title="Подразделение из группы отчетного периода [DEAL.ACCOUNT_DEPARTMENT_ID] - Данное поле не используется для привязки договора к отчетному периоду. Смотри поле NACCOUNT_PERIOD_ID.&#xD;&#xA;Для ЭкоСтройРесурса - ссылка на Partner_id: &quot;Коммерческое отд&quot;, &quot;Работа с бюджетом&quot;. Для них нельзя разделять на разные NACCOUNT_PERIOD_ID потому что должна быть единая нумерация счетов.">Отдел</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_a3622275-6cc5-44d4-a3a5-79167c735e13" name="DEAL.ACCOUNT_DEPARTMENT_ID.11.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="" page_guid="a3622275-6cc5-44d4-a3a5-79167c735e13" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Отдел" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_11_0_0_121_0_5879_2_0_101_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_a3622275-6cc5-44d4-a3a5-79167c735e13").kendoComboBox({"change":function(){ combo_onChange(this, 'a3622275-6cc5-44d4-a3a5-79167c735e13'); },"dataBound":function(){ combo_onChange(this, 'a3622275-6cc5-44d4-a3a5-79167c735e13', 'dataBound'); },"dataSource":[{"Kod":10,"KodStr":"10","Value":null,"Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Комм. управление","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Комм. управление","Image":null,"Selected":false},{"Kod":110,"KodStr":"110","Value":null,"Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отдел по работе с бюджетом","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отдел по работе с бюджетом","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Обслуживающее отделение">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_fd897f5e-5743-4ae3-9cd9-6135ce6911d4" id="label_fd897f5e-5743-4ae3-9cd9-6135ce6911d4" title="Подразделение обслуживающее сделку [DEAL.DEPARTMENT_ID]">Обслуживающее отделение</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input cascade_noms="" class="ctrl-input is-width-fulled" controltype="DropDownList" id="val_fd897f5e-5743-4ae3-9cd9-6135ce6911d4" isheaderpath="True" name="DEAL.DEPARTMENT_ID.12.DropDownList.Editor.0" nsi_group_name="" nsi_table_name="VW_NSI_ACCOUNT_PERIOD_1" page_guid="fd897f5e-5743-4ae3-9cd9-6135ce6911d4" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Обслуживающее отделение" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_12_0_0_-631_0_5880_2_0_105_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_fd897f5e-5743-4ae3-9cd9-6135ce6911d4").kendoDropDownList({"change":function(){ combo_onChange(this, 'fd897f5e-5743-4ae3-9cd9-6135ce6911d4', 'change'); },"dataBound":function(){ combo_onChange(this, 'fd897f5e-5743-4ae3-9cd9-6135ce6911d4', 'dataBound'); },"dataSource":[{"Kod":2020200000033073338,"KodStr":"2020200000033073338","Value":"2020200000033073338","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"наименование обособленной единицы 1","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"наименование обособленной единицы 1","Image":null,"Selected":false},{"Kod":2020200000033073280,"KodStr":"2020200000033073280","Value":"2020200000033073280","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение 3","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение 3","Image":null,"Selected":false},{"Kod":2020200000033071811,"KodStr":"2020200000033071811","Value":"2020200000033071811","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Северный отдел","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Северный отдел","Image":null,"Selected":false},{"Kod":2020200000033072296,"KodStr":"2020200000033072296","Value":"2020200000033072296","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Центральное отделение","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Центральное отделение","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr"});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Статус договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_663398d5-c603-48d8-af77-e04557a6072d" id="label_663398d5-c603-48d8-af77-e04557a6072d" title="Статус договора [DEAL_EXT.STATUS]">Статус договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_663398d5-c603-48d8-af77-e04557a6072d" name="DEAL_EXT.STATUS.13.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="" page_guid="663398d5-c603-48d8-af77-e04557a6072d" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Статус договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_13_0_0_121_0_10516_2_0_101_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_663398d5-c603-48d8-af77-e04557a6072d").kendoComboBox({"change":function(){ combo_onChange(this, '663398d5-c603-48d8-af77-e04557a6072d'); },"dataBound":function(){ combo_onChange(this, '663398d5-c603-48d8-af77-e04557a6072d', 'dataBound'); },"dataSource":[{"Kod":1,"KodStr":"1","Value":"1","Group":null,"Source":null,"Xml":null,"Group2":453,"ShowKod":false,"Name":"Действующий","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Действующий","Image":null,"Selected":false},{"Kod":2,"KodStr":"2","Value":"2","Group":null,"Source":null,"Xml":null,"Group2":454,"ShowKod":false,"Name":"Прекращен","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Прекращен","Image":null,"Selected":false},{"Kod":3,"KodStr":"3","Value":"3","Group":null,"Source":null,"Xml":null,"Group2":455,"ShowKod":false,"Name":"Архивный","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Архивный","Image":null,"Selected":false},{"Kod":4,"KodStr":"4","Value":"4","Group":null,"Source":null,"Xml":null,"Group2":633,"ShowKod":false,"Name":"Проект","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Проект","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата подписания договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_ef936984-d4f6-46ad-8063-004bcd164a21" id="label_ef936984-d4f6-46ad-8063-004bcd164a21" title="Дата заключения договора [DEAL.CONTRACT_BEG]">Дата подписания договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_ef936984-d4f6-46ad-8063-004bcd164a21" name="DEAL.CONTRACT_BEG.14.DatePicker.Editor.0" page_guid="ef936984-d4f6-46ad-8063-004bcd164a21" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Дата подписания договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_14_0_0_121_0_10653_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_ef936984-d4f6-46ad-8063-004bcd164a21").kendoDatePicker({"change":function(){ control_Click('ef936984-d4f6-46ad-8063-004bcd164a21'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата расторжения договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_5b17ea34-640c-41d5-bc12-dacab2f77bed" id="label_5b17ea34-640c-41d5-bc12-dacab2f77bed" title="Дата расторжения договора [DEAL.CONTRACT_END]">Дата расторжения договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_5b17ea34-640c-41d5-bc12-dacab2f77bed" name="DEAL.CONTRACT_END.15.DatePicker.Editor.0" page_guid="5b17ea34-640c-41d5-bc12-dacab2f77bed" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Дата расторжения договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_15_0_0_121_0_10654_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_5b17ea34-640c-41d5-bc12-dacab2f77bed").kendoDatePicker({"change":function(){ control_Click('5b17ea34-640c-41d5-bc12-dacab2f77bed'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Действует с">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_223ef5fc-72a5-46de-a4f5-39557665f836" id="label_223ef5fc-72a5-46de-a4f5-39557665f836" title="Действует с [DEAL.DATE_BEG]">Действует с</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_223ef5fc-72a5-46de-a4f5-39557665f836" isrequired="true" name="DEAL.DATE_BEG.16.DatePicker.Editor.0" page_guid="223ef5fc-72a5-46de-a4f5-39557665f836" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Действует с" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_16_0_0_121_0_247_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_223ef5fc-72a5-46de-a4f5-39557665f836").kendoDatePicker({"change":function(){ control_Click('223ef5fc-72a5-46de-a4f5-39557665f836'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Действует до">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_ca7281df-45d7-49a3-a7b7-76e575be23a8" id="label_ca7281df-45d7-49a3-a7b7-76e575be23a8" title="Действует до [DEAL.DATE_END]">Действует до</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_ca7281df-45d7-49a3-a7b7-76e575be23a8" name="DEAL.DATE_END.17.DatePicker.Editor.0" page_guid="ca7281df-45d7-49a3-a7b7-76e575be23a8" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" title="Действует до" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_17_0_0_121_0_248_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_ca7281df-45d7-49a3-a7b7-76e575be23a8").kendoDatePicker({"change":function(){ control_Click('ca7281df-45d7-49a3-a7b7-76e575be23a8'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-active">
+      <a class="k-link k-header" href="#panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-2">
+        <b>Покупатель: </b>
+        <text></text>
+        <b></b>
+        <text></text>, Р/счет (по умолчанию)<text></text><b></b><text></text><span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a>
+      <div class="k-content" id="panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-2">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Покупатель">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_c04e695d-43b5-4c91-8d56-04cf56dbc190" id="label_c04e695d-43b5-4c91-8d56-04cf56dbc190" title="Покупатель [DEAL_EXT.BUYER_ID]">Покупатель</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, 'c04e695d-43b5-4c91-8d56-04cf56dbc190', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9d02c00d-b94e-4c5d-8a6f-ac3f64b627db', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_20_0_127_1_0_305_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9d02c00d-b94e-4c5d-8a6f-ac3f64b627db%3BSelector%3Dc04e695d-43b5-4c91-8d56-04cf56dbc190', 2, '');" id="search_c04e695d-43b5-4c91-8d56-04cf56dbc190" page_guid="c04e695d-43b5-4c91-8d56-04cf56dbc190" data-label="Покупатель" data-val="BUYER_ID" data-caption="NameText" data-selector-parent-guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-selector-result="Item" data-page_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-grid_cell_content="1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_20_0_127_1_0_305_602_0_501_0;" data-title="Покупатель" data-is_main="true" data-fk_field="PARTNER_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_c04e695d-43b5-4c91-8d56-04cf56dbc190" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.BUYER_ID.20.Selector.Editor.0.3.1" id="val_c04e695d-43b5-4c91-8d56-04cf56dbc190" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="c04e695d-43b5-4c91-8d56-04cf56dbc190" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_20_0_127_1_0_305_602_0_501_0;" nom="3" controltype="Selector" isrequired="true" title="Покупатель" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;c04e695d-43b5-4c91-8d56-04cf56dbc190&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Р/счет (по умолчанию)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_25c764cd-faa8-460f-86a4-74e127b2eda4" id="label_25c764cd-faa8-460f-86a4-74e127b2eda4" title="Расчетный счет КА [DEAL_EXT.PARTNER_RS_ID]">Р/счет (по умолчанию)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '25c764cd-faa8-460f-86a4-74e127b2eda4', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9d02c00d-b94e-4c5d-8a6f-ac3f64b627db', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_21_0_127_118_0_307_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9d02c00d-b94e-4c5d-8a6f-ac3f64b627db%3BSelector%3D25c764cd-faa8-460f-86a4-74e127b2eda4', 2, '');" id="search_25c764cd-faa8-460f-86a4-74e127b2eda4" page_guid="25c764cd-faa8-460f-86a4-74e127b2eda4" data-label="Р/счет (по умолчанию)" data-val="PARTNER_RS_ID" data-caption="RsBankName" data-selector-parent-guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-selector-result="Item" data-page_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-grid_cell_content="118" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_21_0_127_118_0_307_602_0_501_0;" data-title="Р/счет (по умолчанию)" data-is_main="true" data-fk_field="PARTNER_RS_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_25c764cd-faa8-460f-86a4-74e127b2eda4" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.PARTNER_RS_ID.21.Selector.Editor.0.4.118" id="val_25c764cd-faa8-460f-86a4-74e127b2eda4" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="25c764cd-faa8-460f-86a4-74e127b2eda4" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_21_0_127_118_0_307_602_0_501_0;" nom="4" controltype="Selector" use_header_path="True" title="Р/счет (по умолчанию)" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;25c764cd-faa8-460f-86a4-74e127b2eda4&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Адрес доставки документов">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_27fa4622-c0a6-44cf-b2f3-caeadc023b3c" id="label_27fa4622-c0a6-44cf-b2f3-caeadc023b3c" title="Адрес (с № помещ.) доставки док. [DEAL_EXT.BUILD_DELIVERY_ID]">Адрес доставки документов</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '27fa4622-c0a6-44cf-b2f3-caeadc023b3c', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9d02c00d-b94e-4c5d-8a6f-ac3f64b627db', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_22_0_127_22_0_10513_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9d02c00d-b94e-4c5d-8a6f-ac3f64b627db%3BSelector%3D27fa4622-c0a6-44cf-b2f3-caeadc023b3c', 2, '');" id="search_27fa4622-c0a6-44cf-b2f3-caeadc023b3c" page_guid="27fa4622-c0a6-44cf-b2f3-caeadc023b3c" data-label="Адрес доставки документов" data-val="BUILD_DELIVERY_ID" data-caption="PostIndex_AdressVillageStreet_BuildNom" data-selector-parent-guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-selector-result="Item" data-page_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" data-grid_cell_content="22" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_22_0_127_22_0_10513_602_0_501_0;" data-title="Адрес доставки документов" data-is_main="true" data-fk_field="BUILD_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_27fa4622-c0a6-44cf-b2f3-caeadc023b3c" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.BUILD_DELIVERY_ID.22.Selector.Editor.0.22" id="val_27fa4622-c0a6-44cf-b2f3-caeadc023b3c" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="27fa4622-c0a6-44cf-b2f3-caeadc023b3c" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_22_0_127_22_0_10513_602_0_501_0;" controltype="Selector" isrequired="true" title="Адрес доставки документов" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;27fa4622-c0a6-44cf-b2f3-caeadc023b3c&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Период пролонгации (в месяцах)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_7a999164-eead-4f35-a38e-8787971d206d" id="label_7a999164-eead-4f35-a38e-8787971d206d" title="Период действия договора [DEAL.PROLONGATION_TIME] - Период действия договора для пролонгации time-prolongation (количество в месяцах)">Период пролонгации (в месяцах)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_7a999164-eead-4f35-a38e-8787971d206d" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="7a999164-eead-4f35-a38e-8787971d206d" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_25_0_0_121_0_10511_2_0_1_0;" name="DEAL.PROLONGATION_TIME.25.TextBox.Editor.0" controltype="TextBox" title="Период пролонгации (в месяцах)" onchange="control_Click('7a999164-eead-4f35-a38e-8787971d206d');" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-active">
+      <a class="k-link k-header" href="#panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-3">
+        <b>Итоги: </b>Начислено<text></text><b></b><text></text>, Оплачено<text></text><b></b><text></text>, Сальдо<text></text><b></b><text></text><span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a>
+      <div class="k-content" id="panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-3">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Начислено">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_53955b1b-a22a-4bfa-83bb-09a4efec22f7" id="label_53955b1b-a22a-4bfa-83bb-09a4efec22f7" title=" [DEAL.SUMMA_CHARGE]">Начислено</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <table>
+                <tr>
+                  <td class="ctrl-value ctrl-color-red Small">
+                    <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_53955b1b-a22a-4bfa-83bb-09a4efec22f7" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="53955b1b-a22a-4bfa-83bb-09a4efec22f7" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_30_0_0_121_0_0_2_0_12_0;" name="DEAL.SUMMA_CHARGE.30.TextBox2.Editor.0" readonly="readonly" controltype="TextBox2" title="Начислено" />
+                  </td>
+                  <td>Объем</td>
+                  <td class="ctrl-value ctrl-color-red Small">
+                    <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_53955b1b-a22a-4bfa-83bb-09a4efec22f7" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="53955b1b-a22a-4bfa-83bb-09a4efec22f7" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_30_0_0_121_0_0_2_0_12_0;" name="DEAL.SUMMA_CHARGE.30.TextBox2.Editor.0" readonly="readonly" controltype="TextBox2" title="Начислено" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Оплачено">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_e5c5610c-ac10-42fd-b759-06b35751a01e" id="label_e5c5610c-ac10-42fd-b759-06b35751a01e" title="По всем оплатам [DEAL.SUMMA_PAY]">Оплачено</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_e5c5610c-ac10-42fd-b759-06b35751a01e" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="e5c5610c-ac10-42fd-b759-06b35751a01e" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_31_0_0_121_0_0_2_0_1_0;" name="DEAL.SUMMA_PAY.31.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="По всем оплатам" />
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Сальдо">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_ec20db4c-5f60-4321-b076-24931e91dc38" id="label_ec20db4c-5f60-4321-b076-24931e91dc38" title="Начислено-Оплачено [DEAL.SALDO_DEAL]">Сальдо</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_ec20db4c-5f60-4321-b076-24931e91dc38" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="ec20db4c-5f60-4321-b076-24931e91dc38" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_32_0_0_121_0_0_2_0_1_0;" name="DEAL.SALDO_DEAL.32.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="Начислено-Оплачено" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-default">
+      <a class="k-link k-header" href="#panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-4">
+        <b>Коды: </b>
+        <span class="k-icon k-i-arrow-s k-panelbar-expand"></span>
+      </a>
+      <div class="k-content" id="panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db-4" style="display:none">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Код сделки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_d1260848-1196-40db-a83d-dbdad28bf169" id="label_d1260848-1196-40db-a83d-dbdad28bf169" title="Код сделки [DEAL.DEAL_ID]">Код сделки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="Numeric" id="val_d1260848-1196-40db-a83d-dbdad28bf169" name="DEAL.DEAL_ID.33.Numeric.Editor.0" page_guid="d1260848-1196-40db-a83d-dbdad28bf169" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" readonly="readonly" title="Код сделки" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_33_0_0_121_0_245_2_0_2_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_d1260848-1196-40db-a83d-dbdad28bf169").kendoMaskedTextBox({"mask":"00000000000000000000","promptChar":" ","rules":{},"unmaskOnPost":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата создания">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_6fe4a679-d036-411f-9539-004ec1f47992" id="label_6fe4a679-d036-411f-9539-004ec1f47992" title="Дата создания [DEAL.CRT_DATE]">Дата создания</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_6fe4a679-d036-411f-9539-004ec1f47992" name="DEAL.CRT_DATE.34.DatePicker.Editor.0" page_guid="6fe4a679-d036-411f-9539-004ec1f47992" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" readonly="readonly" title="Дата создания" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_34_0_0_121_0_9475_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_6fe4a679-d036-411f-9539-004ec1f47992").kendoDatePicker({"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата последней корректировки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_871fad34-59ad-48d5-95a6-55d3fc999e05" id="label_871fad34-59ad-48d5-95a6-55d3fc999e05" title="Дата последней корректировки [DEAL.MFY_DATE]">Дата последней корректировки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_871fad34-59ad-48d5-95a6-55d3fc999e05" name="DEAL.MFY_DATE.35.DatePicker.Editor.0" page_guid="871fad34-59ad-48d5-95a6-55d3fc999e05" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" readonly="readonly" title="Дата последней корректировки" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_35_0_0_121_0_9476_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_871fad34-59ad-48d5-95a6-55d3fc999e05").kendoDatePicker({"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Автор послед.коректир.">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_7842e874-c711-4bb3-bfa7-a66945a77568" id="label_7842e874-c711-4bb3-bfa7-a66945a77568" title="Наименование Контрагента [VW_DEAL.USER_PARTNER_NAME_CALC] - Уточнить">Автор послед.коректир.</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_7842e874-c711-4bb3-bfa7-a66945a77568" parent_guid="9d02c00d-b94e-4c5d-8a6f-ac3f64b627db" page_guid="7842e874-c711-4bb3-bfa7-a66945a77568" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_36_0_0_121_0_12413_2_0_1_0;" name="VW_DEAL.USER_PARTNER_NAME_CALC.36.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="Автор послед.коректир." />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+  </ul>
+  <script>
+	jQuery(function(){jQuery("#panelbar_edit_9d02c00d-b94e-4c5d-8a6f-ac3f64b627db").kendoPanelBar({"expandMode":"multiple"});});
+</script>
+</div>
+
+  <ul class="k-widget k-panelbar k-reset editor-field-list is-scrolled is-fulled is-not-bordered" id="panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf">
+    <li class="k-item k-state-active">
+      <a class="k-link k-header" href="#panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-1">
+        <b>Основное: </b>№<text></text><b></b><text></text>, Срок действия<text></text><b></b><text></text>по<text></text><b></b><text></text>, <text></text><b></b><text></text>, Статус<text></text><b></b><text></text><span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a>
+      <div class="k-content" id="panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-1">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Номер договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_d1b0babd-56e7-4c7e-a027-a9a3f14f8b21" id="label_d1b0babd-56e7-4c7e-a027-a9a3f14f8b21" title="Номер сделки [DEAL.DEAL_NUM] - Правила нумерации при добавлении настраиваются.">Номер договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_d1b0babd-56e7-4c7e-a027-a9a3f14f8b21" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="d1b0babd-56e7-4c7e-a027-a9a3f14f8b21" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_5_0_0_121_0_246_2_0_1_0;" name="DEAL.DEAL_NUM.5.TextBox.Editor.0" controltype="TextBox" title="Номер договора" onchange="control_Click('d1b0babd-56e7-4c7e-a027-a9a3f14f8b21');" />
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Тип договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_68b47f1c-f3f2-432c-9857-042fccfd223e" id="label_68b47f1c-f3f2-432c-9857-042fccfd223e" title="Тип сделки [DEAL.NDEAL_ID]">Тип договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input Changed="Changed" class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_68b47f1c-f3f2-432c-9857-042fccfd223e" name="DEAL.NDEAL_ID.6.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="NSI_DEAL" page_guid="68b47f1c-f3f2-432c-9857-042fccfd223e" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Тип договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_6_0_0_121_0_257_2_0_101_0;" value="15" />
+                <script>
+	jQuery(function(){jQuery("#val_68b47f1c-f3f2-432c-9857-042fccfd223e").kendoComboBox({"change":function(){ combo_onChange(this, '68b47f1c-f3f2-432c-9857-042fccfd223e'); },"dataBound":function(){ combo_onChange(this, '68b47f1c-f3f2-432c-9857-042fccfd223e', 'dataBound'); },"dataSource":[{"Kod":15,"KodStr":"15","Value":"15","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"ТКО","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"ТКО","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Продавец">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" id="label_1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" title="Продавец [DEAL_EXT.SELLER_ID]">Продавец</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '1ed1fb15-b03c-4f99-8e7b-b6410aedcc78', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_7_0_127_1_0_859_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf%3BSelector%3D1ed1fb15-b03c-4f99-8e7b-b6410aedcc78', 2, '');" id="search_1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" page_guid="1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" data-label="Продавец" data-val="SELLER_ID" data-caption="" data-selector-parent-guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-selector-result="Item" data-page_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-grid_cell_content="1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_7_0_127_1_0_859_602_0_501_0;" data-parent_id="7" data-title="Продавец" data-is_main="true" data-fk_field="PARTNER_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" value="7" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.SELLER_ID.7.Selector.Editor.0.1.1" id="val_1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" value="%3Croot%3E%0D%0A%20%20%3Cid%3E7%3C%2Fid%3E%0D%0A%20%20%3Ctext%3E7%3C%2Ftext%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="1ed1fb15-b03c-4f99-8e7b-b6410aedcc78" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_7_0_127_1_0_859_602_0_501_0;" nom="1" controltype="Selector" selector_id="7" isrequired="true" title="Продавец" Changed="Changed" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;1ed1fb15-b03c-4f99-8e7b-b6410aedcc78&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Р/счет (по умолчанию)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_330193af-1f55-4049-82c9-d30dede2e3b5" id="label_330193af-1f55-4049-82c9-d30dede2e3b5" title="Расчетный счет продавца [DEAL_EXT.SELLER_RS_ID]">Р/счет (по умолчанию)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '330193af-1f55-4049-82c9-d30dede2e3b5', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_8_0_127_118_0_17065_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf%3BSelector%3D330193af-1f55-4049-82c9-d30dede2e3b5', 2, '');" id="search_330193af-1f55-4049-82c9-d30dede2e3b5" page_guid="330193af-1f55-4049-82c9-d30dede2e3b5" data-label="Р/счет (по умолчанию)" data-val="SELLER_RS_ID" data-caption="RsBankName" data-selector-parent-guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-selector-result="Item" data-page_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-grid_cell_content="118" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_8_0_127_118_0_17065_602_0_501_0;" data-title="Р/счет (по умолчанию)" data-is_main="true" data-fk_field="PARTNER_RS_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_330193af-1f55-4049-82c9-d30dede2e3b5" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.SELLER_RS_ID.8.Selector.Editor.0.2.118" id="val_330193af-1f55-4049-82c9-d30dede2e3b5" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="330193af-1f55-4049-82c9-d30dede2e3b5" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_8_0_127_118_0_17065_602_0_501_0;" nom="2" controltype="Selector" use_header_path="True" title="Р/счет (по умолчанию)" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;330193af-1f55-4049-82c9-d30dede2e3b5&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Способ закупки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_1eaced62-c451-486d-9638-a0298adbe125" id="label_1eaced62-c451-486d-9638-a0298adbe125" title="Способ закупки [DEAL.PURCHASE_METHOD] - Содержимое справочника - строки из SYS_TABLE_TREE у которых PARENT_ID = 455 или их дочерние узлы">Способ закупки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '1eaced62-c451-486d-9638-a0298adbe125', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_9_0_121_43_0_10526_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf%3BSelector%3D1eaced62-c451-486d-9638-a0298adbe125', 2, '');" id="search_1eaced62-c451-486d-9638-a0298adbe125" page_guid="1eaced62-c451-486d-9638-a0298adbe125" data-label="Способ закупки" data-val="PURCHASE_METHOD" data-caption="StableTreeName_ParentStableTreeName" data-selector-parent-guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-selector-result="Item" data-page_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-grid_cell_content="43" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_9_0_121_43_0_10526_602_0_501_0;" data-title="Способ закупки" data-is_main="true" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_1eaced62-c451-486d-9638-a0298adbe125" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL.PURCHASE_METHOD.9.Selector.Editor.0.43" id="val_1eaced62-c451-486d-9638-a0298adbe125" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="1eaced62-c451-486d-9638-a0298adbe125" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_9_0_121_43_0_10526_602_0_501_0;" controltype="Selector" title="Способ закупки" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;1eaced62-c451-486d-9638-a0298adbe125&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" is-not-visible ctrl-color-orange-bckgr" field-title="Группа отчетного периода">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_78416a5b-f298-4ef7-985d-bddbefa6322e" id="label_78416a5b-f298-4ef7-985d-bddbefa6322e" title="Группа отчетного периода [DEAL.NACCOUNT_PERIOD_ID] - Нумерация счетов (счетов-фактур) может быть настроена в разрезе групп ОП.&#xD;&#xA;Помимо разделения сделок по группам закрытия отчетного периода справочник NSI_ACCOUNT_PERIOD.ACCOUNT_PERIOD_TYPE используется для деления сделок на лицевые счета бытового потребления (1 - PRIVAT) и договоры с организациями (2 - GOS) с организационной точки зрения.">Группа отчетного периода</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input Changed="Changed" cascade_noms="" class="ctrl-input is-width-fulled is-not-visible" controltype="DropDownList" id="val_78416a5b-f298-4ef7-985d-bddbefa6322e" isheaderpath="True" name="DEAL.NACCOUNT_PERIOD_ID.10.DropDownList.Editor.0" nsi_group_name="" nsi_table_name="VW_NSI_ACCOUNT_PERIOD" page_guid="78416a5b-f298-4ef7-985d-bddbefa6322e" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Группа отчетного периода" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_10_0_0_631_0_9371_2_0_105_0;" value="1" />
+                <script>
+	jQuery(function(){jQuery("#val_78416a5b-f298-4ef7-985d-bddbefa6322e").kendoDropDownList({"change":function(){ combo_onChange(this, '78416a5b-f298-4ef7-985d-bddbefa6322e', 'change'); },"dataBound":function(){ combo_onChange(this, '78416a5b-f298-4ef7-985d-bddbefa6322e', 'dataBound'); },"dataSource":[{"Kod":1,"KodStr":"1","Value":"1","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение по работе с ФЛ","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение по работе с ФЛ","Image":null,"Selected":false},{"Kod":2,"KodStr":"2","Value":"2","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение по работе с ЮЛ","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение по работе с ЮЛ","Image":null,"Selected":false},{"Kod":3,"KodStr":"3","Value":"3","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Сводные сделки","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Сводные сделки","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr"});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Отдел">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_5ad719ff-41af-4215-a55e-0b2b7fa3c2a0" id="label_5ad719ff-41af-4215-a55e-0b2b7fa3c2a0" title="Подразделение из группы отчетного периода [DEAL.ACCOUNT_DEPARTMENT_ID] - Данное поле не используется для привязки договора к отчетному периоду. Смотри поле NACCOUNT_PERIOD_ID.&#xD;&#xA;Для ЭкоСтройРесурса - ссылка на Partner_id: &quot;Коммерческое отд&quot;, &quot;Работа с бюджетом&quot;. Для них нельзя разделять на разные NACCOUNT_PERIOD_ID потому что должна быть единая нумерация счетов.">Отдел</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_5ad719ff-41af-4215-a55e-0b2b7fa3c2a0" name="DEAL.ACCOUNT_DEPARTMENT_ID.11.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="" page_guid="5ad719ff-41af-4215-a55e-0b2b7fa3c2a0" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Отдел" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_11_0_0_121_0_5879_2_0_101_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_5ad719ff-41af-4215-a55e-0b2b7fa3c2a0").kendoComboBox({"change":function(){ combo_onChange(this, '5ad719ff-41af-4215-a55e-0b2b7fa3c2a0'); },"dataBound":function(){ combo_onChange(this, '5ad719ff-41af-4215-a55e-0b2b7fa3c2a0', 'dataBound'); },"dataSource":[{"Kod":10,"KodStr":"10","Value":null,"Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Комм. управление","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Комм. управление","Image":null,"Selected":false},{"Kod":110,"KodStr":"110","Value":null,"Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отдел по работе с бюджетом","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отдел по работе с бюджетом","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Обслуживающее отделение">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_bc9e615d-2cdc-4aec-bd72-9c3dae319f63" id="label_bc9e615d-2cdc-4aec-bd72-9c3dae319f63" title="Подразделение обслуживающее сделку [DEAL.DEPARTMENT_ID]">Обслуживающее отделение</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input cascade_noms="" class="ctrl-input is-width-fulled" controltype="DropDownList" id="val_bc9e615d-2cdc-4aec-bd72-9c3dae319f63" isheaderpath="True" name="DEAL.DEPARTMENT_ID.12.DropDownList.Editor.0" nsi_group_name="" nsi_table_name="VW_NSI_ACCOUNT_PERIOD_1" page_guid="bc9e615d-2cdc-4aec-bd72-9c3dae319f63" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Обслуживающее отделение" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_12_0_0_-631_0_5880_2_0_105_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_bc9e615d-2cdc-4aec-bd72-9c3dae319f63").kendoDropDownList({"change":function(){ combo_onChange(this, 'bc9e615d-2cdc-4aec-bd72-9c3dae319f63', 'change'); },"dataBound":function(){ combo_onChange(this, 'bc9e615d-2cdc-4aec-bd72-9c3dae319f63', 'dataBound'); },"dataSource":[{"Kod":2020200000033073338,"KodStr":"2020200000033073338","Value":"2020200000033073338","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"наименование обособленной единицы 1","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"наименование обособленной единицы 1","Image":null,"Selected":false},{"Kod":2020200000033073280,"KodStr":"2020200000033073280","Value":"2020200000033073280","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение 3","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение 3","Image":null,"Selected":false},{"Kod":2020200000033071811,"KodStr":"2020200000033071811","Value":"2020200000033071811","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Северный отдел","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Северный отдел","Image":null,"Selected":false},{"Kod":2020200000033072296,"KodStr":"2020200000033072296","Value":"2020200000033072296","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Центральное отделение","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Центральное отделение","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr"});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Статус договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_db430978-e7b9-4e22-8872-1f2fce2f76ca" id="label_db430978-e7b9-4e22-8872-1f2fce2f76ca" title="Статус договора [DEAL_EXT.STATUS]">Статус договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_db430978-e7b9-4e22-8872-1f2fce2f76ca" name="DEAL_EXT.STATUS.13.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="" page_guid="db430978-e7b9-4e22-8872-1f2fce2f76ca" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Статус договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_13_0_0_121_0_10516_2_0_101_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_db430978-e7b9-4e22-8872-1f2fce2f76ca").kendoComboBox({"change":function(){ combo_onChange(this, 'db430978-e7b9-4e22-8872-1f2fce2f76ca'); },"dataBound":function(){ combo_onChange(this, 'db430978-e7b9-4e22-8872-1f2fce2f76ca', 'dataBound'); },"dataSource":[{"Kod":1,"KodStr":"1","Value":"1","Group":null,"Source":null,"Xml":null,"Group2":453,"ShowKod":false,"Name":"Действующий","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Действующий","Image":null,"Selected":false},{"Kod":2,"KodStr":"2","Value":"2","Group":null,"Source":null,"Xml":null,"Group2":454,"ShowKod":false,"Name":"Прекращен","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Прекращен","Image":null,"Selected":false},{"Kod":3,"KodStr":"3","Value":"3","Group":null,"Source":null,"Xml":null,"Group2":455,"ShowKod":false,"Name":"Архивный","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Архивный","Image":null,"Selected":false},{"Kod":4,"KodStr":"4","Value":"4","Group":null,"Source":null,"Xml":null,"Group2":633,"ShowKod":false,"Name":"Проект","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Проект","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата подписания договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_d723cfe1-62ce-4d50-a70f-3e684b0458f3" id="label_d723cfe1-62ce-4d50-a70f-3e684b0458f3" title="Дата заключения договора [DEAL.CONTRACT_BEG]">Дата подписания договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_d723cfe1-62ce-4d50-a70f-3e684b0458f3" name="DEAL.CONTRACT_BEG.14.DatePicker.Editor.0" page_guid="d723cfe1-62ce-4d50-a70f-3e684b0458f3" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Дата подписания договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_14_0_0_121_0_10653_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_d723cfe1-62ce-4d50-a70f-3e684b0458f3").kendoDatePicker({"change":function(){ control_Click('d723cfe1-62ce-4d50-a70f-3e684b0458f3'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата расторжения договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_bc3c9dff-0238-4af1-b5a7-9b2769093ef7" id="label_bc3c9dff-0238-4af1-b5a7-9b2769093ef7" title="Дата расторжения договора [DEAL.CONTRACT_END]">Дата расторжения договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_bc3c9dff-0238-4af1-b5a7-9b2769093ef7" name="DEAL.CONTRACT_END.15.DatePicker.Editor.0" page_guid="bc3c9dff-0238-4af1-b5a7-9b2769093ef7" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Дата расторжения договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_15_0_0_121_0_10654_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_bc3c9dff-0238-4af1-b5a7-9b2769093ef7").kendoDatePicker({"change":function(){ control_Click('bc3c9dff-0238-4af1-b5a7-9b2769093ef7'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Действует с">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_842cd98f-0548-4dfe-96f9-5cb48272c565" id="label_842cd98f-0548-4dfe-96f9-5cb48272c565" title="Действует с [DEAL.DATE_BEG]">Действует с</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_842cd98f-0548-4dfe-96f9-5cb48272c565" isrequired="true" name="DEAL.DATE_BEG.16.DatePicker.Editor.0" page_guid="842cd98f-0548-4dfe-96f9-5cb48272c565" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Действует с" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_16_0_0_121_0_247_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_842cd98f-0548-4dfe-96f9-5cb48272c565").kendoDatePicker({"change":function(){ control_Click('842cd98f-0548-4dfe-96f9-5cb48272c565'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Действует до">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_ed7281cc-a522-4f6f-80c5-6e34447cfc36" id="label_ed7281cc-a522-4f6f-80c5-6e34447cfc36" title="Действует до [DEAL.DATE_END]">Действует до</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_ed7281cc-a522-4f6f-80c5-6e34447cfc36" name="DEAL.DATE_END.17.DatePicker.Editor.0" page_guid="ed7281cc-a522-4f6f-80c5-6e34447cfc36" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" title="Действует до" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_17_0_0_121_0_248_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_ed7281cc-a522-4f6f-80c5-6e34447cfc36").kendoDatePicker({"change":function(){ control_Click('ed7281cc-a522-4f6f-80c5-6e34447cfc36'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-active">
+      <a class="k-link k-header" href="#panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-2">
+        <b>Покупатель: </b>
+        <text></text>
+        <b></b>
+        <text></text>, Р/счет (по умолчанию)<text></text><b></b><text></text><span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a>
+      <div class="k-content" id="panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-2">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Покупатель">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_b9ea7cd9-0055-46b9-a826-524e796ef8b4" id="label_b9ea7cd9-0055-46b9-a826-524e796ef8b4" title="Покупатель [DEAL_EXT.BUYER_ID]">Покупатель</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, 'b9ea7cd9-0055-46b9-a826-524e796ef8b4', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_20_0_127_1_0_305_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf%3BSelector%3Db9ea7cd9-0055-46b9-a826-524e796ef8b4', 2, '');" id="search_b9ea7cd9-0055-46b9-a826-524e796ef8b4" page_guid="b9ea7cd9-0055-46b9-a826-524e796ef8b4" data-label="Покупатель" data-val="BUYER_ID" data-caption="NameText" data-selector-parent-guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-selector-result="Item" data-page_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-grid_cell_content="1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_20_0_127_1_0_305_602_0_501_0;" data-title="Покупатель" data-is_main="true" data-fk_field="PARTNER_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_b9ea7cd9-0055-46b9-a826-524e796ef8b4" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.BUYER_ID.20.Selector.Editor.0.3.1" id="val_b9ea7cd9-0055-46b9-a826-524e796ef8b4" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="b9ea7cd9-0055-46b9-a826-524e796ef8b4" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_20_0_127_1_0_305_602_0_501_0;" nom="3" controltype="Selector" isrequired="true" title="Покупатель" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;b9ea7cd9-0055-46b9-a826-524e796ef8b4&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Р/счет (по умолчанию)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_c81d0ae5-1867-4f55-b84b-3ef57bed29b8" id="label_c81d0ae5-1867-4f55-b84b-3ef57bed29b8" title="Расчетный счет КА [DEAL_EXT.PARTNER_RS_ID]">Р/счет (по умолчанию)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, 'c81d0ae5-1867-4f55-b84b-3ef57bed29b8', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_21_0_127_118_0_307_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf%3BSelector%3Dc81d0ae5-1867-4f55-b84b-3ef57bed29b8', 2, '');" id="search_c81d0ae5-1867-4f55-b84b-3ef57bed29b8" page_guid="c81d0ae5-1867-4f55-b84b-3ef57bed29b8" data-label="Р/счет (по умолчанию)" data-val="PARTNER_RS_ID" data-caption="RsBankName" data-selector-parent-guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-selector-result="Item" data-page_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-grid_cell_content="118" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_21_0_127_118_0_307_602_0_501_0;" data-title="Р/счет (по умолчанию)" data-is_main="true" data-fk_field="PARTNER_RS_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_c81d0ae5-1867-4f55-b84b-3ef57bed29b8" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.PARTNER_RS_ID.21.Selector.Editor.0.4.118" id="val_c81d0ae5-1867-4f55-b84b-3ef57bed29b8" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="c81d0ae5-1867-4f55-b84b-3ef57bed29b8" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_21_0_127_118_0_307_602_0_501_0;" nom="4" controltype="Selector" use_header_path="True" title="Р/счет (по умолчанию)" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;c81d0ae5-1867-4f55-b84b-3ef57bed29b8&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Адрес доставки документов">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_314965a1-5a01-4578-93e3-6dd761f3f4bd" id="label_314965a1-5a01-4578-93e3-6dd761f3f4bd" title="Адрес (с № помещ.) доставки док. [DEAL_EXT.BUILD_DELIVERY_ID]">Адрес доставки документов</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '314965a1-5a01-4578-93e3-6dd761f3f4bd', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_22_0_127_22_0_10513_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf%3BSelector%3D314965a1-5a01-4578-93e3-6dd761f3f4bd', 2, '');" id="search_314965a1-5a01-4578-93e3-6dd761f3f4bd" page_guid="314965a1-5a01-4578-93e3-6dd761f3f4bd" data-label="Адрес доставки документов" data-val="BUILD_DELIVERY_ID" data-caption="PostIndex_AdressVillageStreet_BuildNom" data-selector-parent-guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-selector-result="Item" data-page_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" data-grid_cell_content="22" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_22_0_127_22_0_10513_602_0_501_0;" data-title="Адрес доставки документов" data-is_main="true" data-fk_field="BUILD_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_314965a1-5a01-4578-93e3-6dd761f3f4bd" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.BUILD_DELIVERY_ID.22.Selector.Editor.0.22" id="val_314965a1-5a01-4578-93e3-6dd761f3f4bd" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="314965a1-5a01-4578-93e3-6dd761f3f4bd" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_22_0_127_22_0_10513_602_0_501_0;" controltype="Selector" isrequired="true" title="Адрес доставки документов" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;314965a1-5a01-4578-93e3-6dd761f3f4bd&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Период пролонгации (в месяцах)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_88bf4715-459f-42e6-9ee5-aa0c628e2fa2" id="label_88bf4715-459f-42e6-9ee5-aa0c628e2fa2" title="Период действия договора [DEAL.PROLONGATION_TIME] - Период действия договора для пролонгации time-prolongation (количество в месяцах)">Период пролонгации (в месяцах)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_88bf4715-459f-42e6-9ee5-aa0c628e2fa2" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="88bf4715-459f-42e6-9ee5-aa0c628e2fa2" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_25_0_0_121_0_10511_2_0_1_0;" name="DEAL.PROLONGATION_TIME.25.TextBox.Editor.0" controltype="TextBox" title="Период пролонгации (в месяцах)" onchange="control_Click('88bf4715-459f-42e6-9ee5-aa0c628e2fa2');" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-active">
+      <a class="k-link k-header" href="#panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-3">
+        <b>Итоги: </b>Начислено<text></text><b></b><text></text>, Оплачено<text></text><b></b><text></text>, Сальдо<text></text><b></b><text></text><span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a>
+      <div class="k-content" id="panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-3">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Начислено">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_9d02fb2b-e658-493f-9e81-7ad7ce8546c1" id="label_9d02fb2b-e658-493f-9e81-7ad7ce8546c1" title=" [DEAL.SUMMA_CHARGE]">Начислено</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <table>
+                <tr>
+                  <td class="ctrl-value ctrl-color-red Small">
+                    <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_9d02fb2b-e658-493f-9e81-7ad7ce8546c1" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="9d02fb2b-e658-493f-9e81-7ad7ce8546c1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_30_0_0_121_0_0_2_0_12_0;" name="DEAL.SUMMA_CHARGE.30.TextBox2.Editor.0" readonly="readonly" controltype="TextBox2" title="Начислено" />
+                  </td>
+                  <td>Объем</td>
+                  <td class="ctrl-value ctrl-color-red Small">
+                    <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_9d02fb2b-e658-493f-9e81-7ad7ce8546c1" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="9d02fb2b-e658-493f-9e81-7ad7ce8546c1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_30_0_0_121_0_0_2_0_12_0;" name="DEAL.SUMMA_CHARGE.30.TextBox2.Editor.0" readonly="readonly" controltype="TextBox2" title="Начислено" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Оплачено">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_c6e0587d-6048-4a02-a489-1f878fce689d" id="label_c6e0587d-6048-4a02-a489-1f878fce689d" title="По всем оплатам [DEAL.SUMMA_PAY]">Оплачено</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_c6e0587d-6048-4a02-a489-1f878fce689d" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="c6e0587d-6048-4a02-a489-1f878fce689d" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_31_0_0_121_0_0_2_0_1_0;" name="DEAL.SUMMA_PAY.31.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="По всем оплатам" />
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Сальдо">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_e0220a41-8018-4cd7-acde-db0bdab25ddf" id="label_e0220a41-8018-4cd7-acde-db0bdab25ddf" title="Начислено-Оплачено [DEAL.SALDO_DEAL]">Сальдо</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_e0220a41-8018-4cd7-acde-db0bdab25ddf" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="e0220a41-8018-4cd7-acde-db0bdab25ddf" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_32_0_0_121_0_0_2_0_1_0;" name="DEAL.SALDO_DEAL.32.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="Начислено-Оплачено" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-active">
+      <a class="k-link k-header" href="#panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-4">
+        <b>Коды: </b>
+        <span class="k-icon k-i-arrow-n k-panelbar-collapse"></span>
+      </a>
+      <div class="k-content" id="panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf-4">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Код сделки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_9c455a6a-f5aa-4528-acdb-b12dc671cc09" id="label_9c455a6a-f5aa-4528-acdb-b12dc671cc09" title="Код сделки [DEAL.DEAL_ID]">Код сделки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="Numeric" id="val_9c455a6a-f5aa-4528-acdb-b12dc671cc09" name="DEAL.DEAL_ID.33.Numeric.Editor.0" page_guid="9c455a6a-f5aa-4528-acdb-b12dc671cc09" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" readonly="readonly" title="Код сделки" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_33_0_0_121_0_245_2_0_2_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_9c455a6a-f5aa-4528-acdb-b12dc671cc09").kendoMaskedTextBox({"mask":"00000000000000000000","promptChar":" ","rules":{},"unmaskOnPost":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата создания">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_61512e07-35c4-4283-81ca-d80ef9593fa4" id="label_61512e07-35c4-4283-81ca-d80ef9593fa4" title="Дата создания [DEAL.CRT_DATE]">Дата создания</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_61512e07-35c4-4283-81ca-d80ef9593fa4" name="DEAL.CRT_DATE.34.DatePicker.Editor.0" page_guid="61512e07-35c4-4283-81ca-d80ef9593fa4" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" readonly="readonly" title="Дата создания" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_34_0_0_121_0_9475_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_61512e07-35c4-4283-81ca-d80ef9593fa4").kendoDatePicker({"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата последней корректировки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_cb207769-977e-4a1a-846d-17737f9fdbbd" id="label_cb207769-977e-4a1a-846d-17737f9fdbbd" title="Дата последней корректировки [DEAL.MFY_DATE]">Дата последней корректировки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_cb207769-977e-4a1a-846d-17737f9fdbbd" name="DEAL.MFY_DATE.35.DatePicker.Editor.0" page_guid="cb207769-977e-4a1a-846d-17737f9fdbbd" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" readonly="readonly" title="Дата последней корректировки" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_35_0_0_121_0_9476_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_cb207769-977e-4a1a-846d-17737f9fdbbd").kendoDatePicker({"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Автор послед.коректир.">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_917f0f13-7d23-466f-adb4-1f3b12a633fc" id="label_917f0f13-7d23-466f-adb4-1f3b12a633fc" title="Наименование Контрагента [VW_DEAL.USER_PARTNER_NAME_CALC] - Уточнить">Автор послед.коректир.</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_917f0f13-7d23-466f-adb4-1f3b12a633fc" parent_guid="9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf" page_guid="917f0f13-7d23-466f-adb4-1f3b12a633fc" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_36_0_0_121_0_12413_2_0_1_0;" name="VW_DEAL.USER_PARTNER_NAME_CALC.36.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="Автор послед.коректир." />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+  </ul>
+  <script>
+	jQuery(function(){jQuery("#panelbar_edit_9fc56c0a-8ff7-4c2b-998c-2942c6b5f4cf").kendoPanelBar({"expandMode":"multiple"});});
+</script>
+</div>
+  <ul class="k-widget k-panelbar k-reset editor-field-list is-scrolled is-fulled is-not-bordered" id="panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7">
+    <li class="k-item k-state-default">
+      <a class="k-link k-header" href="#panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-1">
+        <b>Основное: </b>№<text></text><b></b><text></text>, Срок действия<text></text><b></b><text></text>по<text></text><b></b><text></text>, <text></text><b></b><text></text>, Статус<text></text><b></b><text></text><span class="k-icon k-i-arrow-s k-panelbar-expand"></span></a>
+      <div class="k-content" id="panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-1" style="display:none">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Номер договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_31f9a1b4-9d5e-4f02-ae0b-000440868e49" id="label_31f9a1b4-9d5e-4f02-ae0b-000440868e49" title="Номер сделки [DEAL.DEAL_NUM] - Правила нумерации при добавлении настраиваются.">Номер договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_31f9a1b4-9d5e-4f02-ae0b-000440868e49" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="31f9a1b4-9d5e-4f02-ae0b-000440868e49" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_5_0_0_121_0_246_2_0_1_0;" name="DEAL.DEAL_NUM.5.TextBox.Editor.0" controltype="TextBox" title="Номер договора" onchange="control_Click('31f9a1b4-9d5e-4f02-ae0b-000440868e49');" />
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Тип договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_35fd51b1-a0f3-49d7-8206-e70f5f784d01" id="label_35fd51b1-a0f3-49d7-8206-e70f5f784d01" title="Тип сделки [DEAL.NDEAL_ID]">Тип договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input Changed="Changed" class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_35fd51b1-a0f3-49d7-8206-e70f5f784d01" name="DEAL.NDEAL_ID.6.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="NSI_DEAL" page_guid="35fd51b1-a0f3-49d7-8206-e70f5f784d01" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Тип договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_6_0_0_121_0_257_2_0_101_0;" value="15" />
+                <script>
+	jQuery(function(){jQuery("#val_35fd51b1-a0f3-49d7-8206-e70f5f784d01").kendoComboBox({"change":function(){ combo_onChange(this, '35fd51b1-a0f3-49d7-8206-e70f5f784d01'); },"dataBound":function(){ combo_onChange(this, '35fd51b1-a0f3-49d7-8206-e70f5f784d01', 'dataBound'); },"dataSource":[{"Kod":15,"KodStr":"15","Value":"15","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"ТКО","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"ТКО","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Продавец">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_3538168d-e23c-4716-82e8-17382146e7a8" id="label_3538168d-e23c-4716-82e8-17382146e7a8" title="Продавец [DEAL_EXT.SELLER_ID]">Продавец</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '3538168d-e23c-4716-82e8-17382146e7a8', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=2f678248-538d-4697-9df5-d477ba36c1b7', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_7_0_127_1_0_859_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D2f678248-538d-4697-9df5-d477ba36c1b7%3BSelector%3D3538168d-e23c-4716-82e8-17382146e7a8', 2, '');" id="search_3538168d-e23c-4716-82e8-17382146e7a8" page_guid="3538168d-e23c-4716-82e8-17382146e7a8" data-label="Продавец" data-val="SELLER_ID" data-caption="" data-selector-parent-guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-selector-result="Item" data-page_guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-grid_cell_content="1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_7_0_127_1_0_859_602_0_501_0;" data-parent_id="7" data-title="Продавец" data-is_main="true" data-fk_field="PARTNER_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_3538168d-e23c-4716-82e8-17382146e7a8" value="7" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.SELLER_ID.7.Selector.Editor.0.1.1" id="val_3538168d-e23c-4716-82e8-17382146e7a8" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" value="%3Croot%3E%0D%0A%20%20%3Cid%3E7%3C%2Fid%3E%0D%0A%20%20%3Ctext%3E7%3C%2Ftext%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="3538168d-e23c-4716-82e8-17382146e7a8" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_7_0_127_1_0_859_602_0_501_0;" nom="1" controltype="Selector" selector_id="7" isrequired="true" title="Продавец" Changed="Changed" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;3538168d-e23c-4716-82e8-17382146e7a8&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Р/счет (по умолчанию)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_e103c2e7-8f69-47c7-9276-44dc112ebbe7" id="label_e103c2e7-8f69-47c7-9276-44dc112ebbe7" title="Расчетный счет продавца [DEAL_EXT.SELLER_RS_ID]">Р/счет (по умолчанию)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, 'e103c2e7-8f69-47c7-9276-44dc112ebbe7', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=2f678248-538d-4697-9df5-d477ba36c1b7', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_8_0_127_118_0_17065_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D2f678248-538d-4697-9df5-d477ba36c1b7%3BSelector%3De103c2e7-8f69-47c7-9276-44dc112ebbe7', 2, '');" id="search_e103c2e7-8f69-47c7-9276-44dc112ebbe7" page_guid="e103c2e7-8f69-47c7-9276-44dc112ebbe7" data-label="Р/счет (по умолчанию)" data-val="SELLER_RS_ID" data-caption="RsBankName" data-selector-parent-guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-selector-result="Item" data-page_guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-grid_cell_content="118" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_8_0_127_118_0_17065_602_0_501_0;" data-title="Р/счет (по умолчанию)" data-is_main="true" data-fk_field="PARTNER_RS_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_e103c2e7-8f69-47c7-9276-44dc112ebbe7" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.SELLER_RS_ID.8.Selector.Editor.0.2.118" id="val_e103c2e7-8f69-47c7-9276-44dc112ebbe7" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="e103c2e7-8f69-47c7-9276-44dc112ebbe7" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_8_0_127_118_0_17065_602_0_501_0;" nom="2" controltype="Selector" use_header_path="True" title="Р/счет (по умолчанию)" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;e103c2e7-8f69-47c7-9276-44dc112ebbe7&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Способ закупки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_9daa5487-78cc-46bc-b48c-2142ecf3e0f6" id="label_9daa5487-78cc-46bc-b48c-2142ecf3e0f6" title="Способ закупки [DEAL.PURCHASE_METHOD] - Содержимое справочника - строки из SYS_TABLE_TREE у которых PARENT_ID = 455 или их дочерние узлы">Способ закупки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '9daa5487-78cc-46bc-b48c-2142ecf3e0f6', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=2f678248-538d-4697-9df5-d477ba36c1b7', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_9_0_121_43_0_10526_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D2f678248-538d-4697-9df5-d477ba36c1b7%3BSelector%3D9daa5487-78cc-46bc-b48c-2142ecf3e0f6', 2, '');" id="search_9daa5487-78cc-46bc-b48c-2142ecf3e0f6" page_guid="9daa5487-78cc-46bc-b48c-2142ecf3e0f6" data-label="Способ закупки" data-val="PURCHASE_METHOD" data-caption="StableTreeName_ParentStableTreeName" data-selector-parent-guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-selector-result="Item" data-page_guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-grid_cell_content="43" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_9_0_121_43_0_10526_602_0_501_0;" data-title="Способ закупки" data-is_main="true" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_9daa5487-78cc-46bc-b48c-2142ecf3e0f6" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL.PURCHASE_METHOD.9.Selector.Editor.0.43" id="val_9daa5487-78cc-46bc-b48c-2142ecf3e0f6" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="9daa5487-78cc-46bc-b48c-2142ecf3e0f6" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_9_0_121_43_0_10526_602_0_501_0;" controltype="Selector" title="Способ закупки" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;9daa5487-78cc-46bc-b48c-2142ecf3e0f6&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" is-not-visible ctrl-color-orange-bckgr" field-title="Группа отчетного периода">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_3088906a-6df4-4c21-8ddc-c309ccd35011" id="label_3088906a-6df4-4c21-8ddc-c309ccd35011" title="Группа отчетного периода [DEAL.NACCOUNT_PERIOD_ID] - Нумерация счетов (счетов-фактур) может быть настроена в разрезе групп ОП.&#xD;&#xA;Помимо разделения сделок по группам закрытия отчетного периода справочник NSI_ACCOUNT_PERIOD.ACCOUNT_PERIOD_TYPE используется для деления сделок на лицевые счета бытового потребления (1 - PRIVAT) и договоры с организациями (2 - GOS) с организационной точки зрения.">Группа отчетного периода</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input Changed="Changed" cascade_noms="" class="ctrl-input is-width-fulled is-not-visible" controltype="DropDownList" id="val_3088906a-6df4-4c21-8ddc-c309ccd35011" isheaderpath="True" name="DEAL.NACCOUNT_PERIOD_ID.10.DropDownList.Editor.0" nsi_group_name="" nsi_table_name="VW_NSI_ACCOUNT_PERIOD" page_guid="3088906a-6df4-4c21-8ddc-c309ccd35011" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Группа отчетного периода" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_10_0_0_631_0_9371_2_0_105_0;" value="1" />
+                <script>
+	jQuery(function(){jQuery("#val_3088906a-6df4-4c21-8ddc-c309ccd35011").kendoDropDownList({"change":function(){ combo_onChange(this, '3088906a-6df4-4c21-8ddc-c309ccd35011', 'change'); },"dataBound":function(){ combo_onChange(this, '3088906a-6df4-4c21-8ddc-c309ccd35011', 'dataBound'); },"dataSource":[{"Kod":1,"KodStr":"1","Value":"1","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение по работе с ФЛ","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение по работе с ФЛ","Image":null,"Selected":false},{"Kod":2,"KodStr":"2","Value":"2","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение по работе с ЮЛ","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение по работе с ЮЛ","Image":null,"Selected":false},{"Kod":3,"KodStr":"3","Value":"3","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Сводные сделки","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Сводные сделки","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr"});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Отдел">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_fbcbe86a-a7c1-416a-ad6b-78aa245fef09" id="label_fbcbe86a-a7c1-416a-ad6b-78aa245fef09" title="Подразделение из группы отчетного периода [DEAL.ACCOUNT_DEPARTMENT_ID] - Данное поле не используется для привязки договора к отчетному периоду. Смотри поле NACCOUNT_PERIOD_ID.&#xD;&#xA;Для ЭкоСтройРесурса - ссылка на Partner_id: &quot;Коммерческое отд&quot;, &quot;Работа с бюджетом&quot;. Для них нельзя разделять на разные NACCOUNT_PERIOD_ID потому что должна быть единая нумерация счетов.">Отдел</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_fbcbe86a-a7c1-416a-ad6b-78aa245fef09" name="DEAL.ACCOUNT_DEPARTMENT_ID.11.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="" page_guid="fbcbe86a-a7c1-416a-ad6b-78aa245fef09" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Отдел" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_11_0_0_121_0_5879_2_0_101_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_fbcbe86a-a7c1-416a-ad6b-78aa245fef09").kendoComboBox({"change":function(){ combo_onChange(this, 'fbcbe86a-a7c1-416a-ad6b-78aa245fef09'); },"dataBound":function(){ combo_onChange(this, 'fbcbe86a-a7c1-416a-ad6b-78aa245fef09', 'dataBound'); },"dataSource":[{"Kod":10,"KodStr":"10","Value":null,"Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Комм. управление","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Комм. управление","Image":null,"Selected":false},{"Kod":110,"KodStr":"110","Value":null,"Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отдел по работе с бюджетом","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отдел по работе с бюджетом","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Обслуживающее отделение">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_e2ae295a-5c7f-4de6-b7f7-5d979c02cc84" id="label_e2ae295a-5c7f-4de6-b7f7-5d979c02cc84" title="Подразделение обслуживающее сделку [DEAL.DEPARTMENT_ID]">Обслуживающее отделение</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <div>
+                <input cascade_noms="" class="ctrl-input is-width-fulled" controltype="DropDownList" id="val_e2ae295a-5c7f-4de6-b7f7-5d979c02cc84" isheaderpath="True" name="DEAL.DEPARTMENT_ID.12.DropDownList.Editor.0" nsi_group_name="" nsi_table_name="VW_NSI_ACCOUNT_PERIOD_1" page_guid="e2ae295a-5c7f-4de6-b7f7-5d979c02cc84" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Обслуживающее отделение" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_12_0_0_-631_0_5880_2_0_105_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_e2ae295a-5c7f-4de6-b7f7-5d979c02cc84").kendoDropDownList({"change":function(){ combo_onChange(this, 'e2ae295a-5c7f-4de6-b7f7-5d979c02cc84', 'change'); },"dataBound":function(){ combo_onChange(this, 'e2ae295a-5c7f-4de6-b7f7-5d979c02cc84', 'dataBound'); },"dataSource":[{"Kod":2020200000033073338,"KodStr":"2020200000033073338","Value":"2020200000033073338","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"наименование обособленной единицы 1","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"наименование обособленной единицы 1","Image":null,"Selected":false},{"Kod":2020200000033073280,"KodStr":"2020200000033073280","Value":"2020200000033073280","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Отделение 3","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Отделение 3","Image":null,"Selected":false},{"Kod":2020200000033071811,"KodStr":"2020200000033071811","Value":"2020200000033071811","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Северный отдел","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Северный отдел","Image":null,"Selected":false},{"Kod":2020200000033072296,"KodStr":"2020200000033072296","Value":"2020200000033072296","Group":null,"Source":null,"Xml":null,"Group2":null,"ShowKod":false,"Name":"Центральное отделение","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Центральное отделение","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr"});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Статус договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_535d5450-bafd-4efb-b9bb-0ca26a3c7351" id="label_535d5450-bafd-4efb-b9bb-0ca26a3c7351" title="Статус договора [DEAL_EXT.STATUS]">Статус договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="ComboBox" id="val_535d5450-bafd-4efb-b9bb-0ca26a3c7351" name="DEAL_EXT.STATUS.13.ComboBox.Editor.0" nsi_group_name="" nsi_table_name="" page_guid="535d5450-bafd-4efb-b9bb-0ca26a3c7351" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Статус договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_13_0_0_121_0_10516_2_0_101_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_535d5450-bafd-4efb-b9bb-0ca26a3c7351").kendoComboBox({"change":function(){ combo_onChange(this, '535d5450-bafd-4efb-b9bb-0ca26a3c7351'); },"dataBound":function(){ combo_onChange(this, '535d5450-bafd-4efb-b9bb-0ca26a3c7351', 'dataBound'); },"dataSource":[{"Kod":1,"KodStr":"1","Value":"1","Group":null,"Source":null,"Xml":null,"Group2":453,"ShowKod":false,"Name":"Действующий","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Действующий","Image":null,"Selected":false},{"Kod":2,"KodStr":"2","Value":"2","Group":null,"Source":null,"Xml":null,"Group2":454,"ShowKod":false,"Name":"Прекращен","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Прекращен","Image":null,"Selected":false},{"Kod":3,"KodStr":"3","Value":"3","Group":null,"Source":null,"Xml":null,"Group2":455,"ShowKod":false,"Name":"Архивный","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Архивный","Image":null,"Selected":false},{"Kod":4,"KodStr":"4","Value":"4","Group":null,"Source":null,"Xml":null,"Group2":633,"ShowKod":false,"Name":"Проект","SName":null,"Description":null,"ImageSource":null,"IsChecked":false,"IsVisible":true,"Children":null,"Text":"Проект","Image":null,"Selected":false}],"dataTextField":"Text","filter":"contains","dataValueField":"KodStr","placeholder":"Выберите значение","suggest":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата подписания договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_df501d9e-656b-409b-986d-b75e01f6fd06" id="label_df501d9e-656b-409b-986d-b75e01f6fd06" title="Дата заключения договора [DEAL.CONTRACT_BEG]">Дата подписания договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_df501d9e-656b-409b-986d-b75e01f6fd06" name="DEAL.CONTRACT_BEG.14.DatePicker.Editor.0" page_guid="df501d9e-656b-409b-986d-b75e01f6fd06" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Дата подписания договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_14_0_0_121_0_10653_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_df501d9e-656b-409b-986d-b75e01f6fd06").kendoDatePicker({"change":function(){ control_Click('df501d9e-656b-409b-986d-b75e01f6fd06'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата расторжения договора">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_fdb7e964-7236-4d71-bb6e-861b86ae85a0" id="label_fdb7e964-7236-4d71-bb6e-861b86ae85a0" title="Дата расторжения договора [DEAL.CONTRACT_END]">Дата расторжения договора</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_fdb7e964-7236-4d71-bb6e-861b86ae85a0" name="DEAL.CONTRACT_END.15.DatePicker.Editor.0" page_guid="fdb7e964-7236-4d71-bb6e-861b86ae85a0" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Дата расторжения договора" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_15_0_0_121_0_10654_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_fdb7e964-7236-4d71-bb6e-861b86ae85a0").kendoDatePicker({"change":function(){ control_Click('fdb7e964-7236-4d71-bb6e-861b86ae85a0'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Действует с">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_6d97ee87-76eb-40a5-9561-65ad7395ee61" id="label_6d97ee87-76eb-40a5-9561-65ad7395ee61" title="Действует с [DEAL.DATE_BEG]">Действует с</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_6d97ee87-76eb-40a5-9561-65ad7395ee61" isrequired="true" name="DEAL.DATE_BEG.16.DatePicker.Editor.0" page_guid="6d97ee87-76eb-40a5-9561-65ad7395ee61" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Действует с" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_16_0_0_121_0_247_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_6d97ee87-76eb-40a5-9561-65ad7395ee61").kendoDatePicker({"change":function(){ control_Click('6d97ee87-76eb-40a5-9561-65ad7395ee61'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Действует до">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_aa9088d6-fc5f-4455-8d15-68461c10c9a1" id="label_aa9088d6-fc5f-4455-8d15-68461c10c9a1" title="Действует до [DEAL.DATE_END]">Действует до</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_aa9088d6-fc5f-4455-8d15-68461c10c9a1" name="DEAL.DATE_END.17.DatePicker.Editor.0" page_guid="aa9088d6-fc5f-4455-8d15-68461c10c9a1" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" title="Действует до" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_17_0_0_121_0_248_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_aa9088d6-fc5f-4455-8d15-68461c10c9a1").kendoDatePicker({"change":function(){ control_Click('aa9088d6-fc5f-4455-8d15-68461c10c9a1'); },"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-default">
+      <a class="k-link k-header" href="#panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-2">
+        <b>Покупатель: </b>
+        <text></text>
+        <b></b>
+        <text></text>, Р/счет (по умолчанию)<text></text><b></b><text></text><span class="k-icon k-i-arrow-s k-panelbar-expand"></span></a>
+      <div class="k-content" id="panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-2" style="display:none">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Покупатель">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_b4777740-cb5c-4a73-9628-8452e18a6d3f" id="label_b4777740-cb5c-4a73-9628-8452e18a6d3f" title="Покупатель [DEAL_EXT.BUYER_ID]">Покупатель</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, 'b4777740-cb5c-4a73-9628-8452e18a6d3f', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=2f678248-538d-4697-9df5-d477ba36c1b7', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_20_0_127_1_0_305_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D2f678248-538d-4697-9df5-d477ba36c1b7%3BSelector%3Db4777740-cb5c-4a73-9628-8452e18a6d3f', 2, '');" id="search_b4777740-cb5c-4a73-9628-8452e18a6d3f" page_guid="b4777740-cb5c-4a73-9628-8452e18a6d3f" data-label="Покупатель" data-val="BUYER_ID" data-caption="NameText" data-selector-parent-guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-selector-result="Item" data-page_guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-grid_cell_content="1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_20_0_127_1_0_305_602_0_501_0;" data-title="Покупатель" data-is_main="true" data-fk_field="PARTNER_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_b4777740-cb5c-4a73-9628-8452e18a6d3f" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.BUYER_ID.20.Selector.Editor.0.3.1" id="val_b4777740-cb5c-4a73-9628-8452e18a6d3f" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="b4777740-cb5c-4a73-9628-8452e18a6d3f" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_20_0_127_1_0_305_602_0_501_0;" nom="3" controltype="Selector" isrequired="true" title="Покупатель" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;b4777740-cb5c-4a73-9628-8452e18a6d3f&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Р/счет (по умолчанию)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_86d54c6c-3e31-4218-825d-1d40f2ee42e1" id="label_86d54c6c-3e31-4218-825d-1d40f2ee42e1" title="Расчетный счет КА [DEAL_EXT.PARTNER_RS_ID]">Р/счет (по умолчанию)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, '86d54c6c-3e31-4218-825d-1d40f2ee42e1', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=2f678248-538d-4697-9df5-d477ba36c1b7', '/', '/Home/MainTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_21_0_127_118_0_307_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D2f678248-538d-4697-9df5-d477ba36c1b7%3BSelector%3D86d54c6c-3e31-4218-825d-1d40f2ee42e1', 2, '');" id="search_86d54c6c-3e31-4218-825d-1d40f2ee42e1" page_guid="86d54c6c-3e31-4218-825d-1d40f2ee42e1" data-label="Р/счет (по умолчанию)" data-val="PARTNER_RS_ID" data-caption="RsBankName" data-selector-parent-guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-selector-result="Item" data-page_guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-grid_cell_content="118" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_21_0_127_118_0_307_602_0_501_0;" data-title="Р/счет (по умолчанию)" data-is_main="true" data-fk_field="PARTNER_RS_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_86d54c6c-3e31-4218-825d-1d40f2ee42e1" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.PARTNER_RS_ID.21.Selector.Editor.0.4.118" id="val_86d54c6c-3e31-4218-825d-1d40f2ee42e1" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="86d54c6c-3e31-4218-825d-1d40f2ee42e1" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_21_0_127_118_0_307_602_0_501_0;" nom="4" controltype="Selector" use_header_path="True" title="Р/счет (по умолчанию)" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;86d54c6c-3e31-4218-825d-1d40f2ee42e1&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Адрес доставки документов">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" id="label_fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" title="Адрес (с № помещ.) доставки док. [DEAL_EXT.BUILD_DELIVERY_ID]">Адрес доставки документов</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <table>
+                <tr>
+                  <td />
+                  <td td-title="span2" class="ctrl-color-black">
+                    <span class="ctrl-color-blue ctrl-selector-icon-search k-icon k-i-search k-link" onclick="selector_Click(this, 'fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554', 'Index=d3ad144d-0f7e-4ab5-827c-aba1a75736e3;MainTab_3216_121=2f678248-538d-4697-9df5-d477ba36c1b7', '/', '/Home/MainFilterTable?uri_path=110_3216_0_12_121_0_2_0_2_0_0%3B102_3217_11_22_0_127_22_0_10513_602_0_501_0%3B&amp;guids_out=Index%3Dd3ad144d-0f7e-4ab5-827c-aba1a75736e3%3BMainTab_3216_121%3D2f678248-538d-4697-9df5-d477ba36c1b7%3BSelector%3Dfb5c3197-6d7f-4c6c-8f08-8c2c5f80c554', 2, '');" id="search_fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" page_guid="fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" data-label="Адрес доставки документов" data-val="BUILD_DELIVERY_ID" data-caption="PostIndex_AdressVillageStreet_BuildNom" data-selector-parent-guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-selector-result="Item" data-page_guid="2f678248-538d-4697-9df5-d477ba36c1b7" data-grid_cell_content="22" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_22_0_127_22_0_10513_602_0_501_0;" data-title="Адрес доставки документов" data-is_main="true" data-fk_field="BUILD_ID" />
+                  </td>
+                  <td td-title="input1" class="ctrl-color-black flexbox-item-full">
+                    <input class="ctrl-color-black ctrl-selector-input flexbox-item-full k-textbox k-header ctrl-input is-width-fulled" id="caption_fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" readonly="readonly" type="text" caption="" />
+                  </td>
+                  <td td-title="input2">
+                    <input class="ctrl-color-red ctrl-input" name="DEAL_EXT.BUILD_DELIVERY_ID.22.Selector.Editor.0.22" id="val_fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" value="%3Croot%3E%0D%0A%20%20%3Cid%20%2F%3E%0D%0A%20%20%3Ctext%20%2F%3E%0D%0A%3C%2Froot%3E" type="hidden" page_guid="fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_22_0_127_22_0_10513_602_0_501_0;" controltype="Selector" isrequired="true" title="Адрес доставки документов" />
+                  </td>
+                  <td td-title="span3" class="ctrl-color-black is-align-right">
+                    <span class="ctrl-color-green ctrl-selector-icon-close k-icon k-i-close k-link is-align-right" onclick="selector_Clear(&quot;fb5c3197-6d7f-4c6c-8f08-8c2c5f80c554&quot;);" />
+                  </td>
+                  <td />
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Период пролонгации (в месяцах)">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_df502779-60ef-4e8b-8af5-ac7e11239864" id="label_df502779-60ef-4e8b-8af5-ac7e11239864" title="Период действия договора [DEAL.PROLONGATION_TIME] - Период действия договора для пролонгации time-prolongation (количество в месяцах)">Период пролонгации (в месяцах)</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_df502779-60ef-4e8b-8af5-ac7e11239864" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="df502779-60ef-4e8b-8af5-ac7e11239864" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_25_0_0_121_0_10511_2_0_1_0;" name="DEAL.PROLONGATION_TIME.25.TextBox.Editor.0" controltype="TextBox" title="Период пролонгации (в месяцах)" onchange="control_Click('df502779-60ef-4e8b-8af5-ac7e11239864');" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-default">
+      <a class="k-link k-header" href="#panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-3">
+        <b>Итоги: </b>Начислено<text></text><b></b><text></text>, Оплачено<text></text><b></b><text></text>, Сальдо<text></text><b></b><text></text><span class="k-icon k-i-arrow-s k-panelbar-expand"></span></a>
+      <div class="k-content" id="panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-3" style="display:none">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Начислено">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_ed0ed803-0b09-40e2-8ed2-0465fac5b653" id="label_ed0ed803-0b09-40e2-8ed2-0465fac5b653" title=" [DEAL.SUMMA_CHARGE]">Начислено</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <table>
+                <tr>
+                  <td class="ctrl-value ctrl-color-red Small">
+                    <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_ed0ed803-0b09-40e2-8ed2-0465fac5b653" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="ed0ed803-0b09-40e2-8ed2-0465fac5b653" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_30_0_0_121_0_0_2_0_12_0;" name="DEAL.SUMMA_CHARGE.30.TextBox2.Editor.0" readonly="readonly" controltype="TextBox2" title="Начислено" />
+                  </td>
+                  <td>Объем</td>
+                  <td class="ctrl-value ctrl-color-red Small">
+                    <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_ed0ed803-0b09-40e2-8ed2-0465fac5b653" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="ed0ed803-0b09-40e2-8ed2-0465fac5b653" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_30_0_0_121_0_0_2_0_12_0;" name="DEAL.SUMMA_CHARGE.30.TextBox2.Editor.0" readonly="readonly" controltype="TextBox2" title="Начислено" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Оплачено">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_cfcd5f04-953b-4b98-b0d3-7aa056e7622b" id="label_cfcd5f04-953b-4b98-b0d3-7aa056e7622b" title="По всем оплатам [DEAL.SUMMA_PAY]">Оплачено</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_cfcd5f04-953b-4b98-b0d3-7aa056e7622b" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="cfcd5f04-953b-4b98-b0d3-7aa056e7622b" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_31_0_0_121_0_0_2_0_1_0;" name="DEAL.SUMMA_PAY.31.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="По всем оплатам" />
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Сальдо">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_92f3df3d-0a4c-45a8-ab25-d71bb078ceff" id="label_92f3df3d-0a4c-45a8-ab25-d71bb078ceff" title="Начислено-Оплачено [DEAL.SALDO_DEAL]">Сальдо</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_92f3df3d-0a4c-45a8-ab25-d71bb078ceff" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="92f3df3d-0a4c-45a8-ab25-d71bb078ceff" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_32_0_0_121_0_0_2_0_1_0;" name="DEAL.SALDO_DEAL.32.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="Начислено-Оплачено" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+    <li class="k-item k-state-default">
+      <a class="k-link k-header" href="#panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-4">
+        <b>Коды: </b>
+        <span class="k-icon k-i-arrow-s k-panelbar-expand"></span>
+      </a>
+      <div class="k-content" id="panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7-4" style="display:none">
+        <table id="border" class=" k-widget k-panelbar k-reset editor-field editor-field-list ctrl-color-black">
+          <tr class=" ctrl-color-orange-bckgr" field-title="Код сделки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_5ea1b6a7-89bf-4610-951e-779fe29c3f6f" id="label_5ea1b6a7-89bf-4610-951e-779fe29c3f6f" title="Код сделки [DEAL.DEAL_ID]">Код сделки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Medium">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="Numeric" id="val_5ea1b6a7-89bf-4610-951e-779fe29c3f6f" name="DEAL.DEAL_ID.33.Numeric.Editor.0" page_guid="5ea1b6a7-89bf-4610-951e-779fe29c3f6f" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" readonly="readonly" title="Код сделки" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_33_0_0_121_0_245_2_0_2_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_5ea1b6a7-89bf-4610-951e-779fe29c3f6f").kendoMaskedTextBox({"mask":"00000000000000000000","promptChar":" ","rules":{},"unmaskOnPost":true});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата создания">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_f7bb436b-1d9c-4144-a4f4-91cac34c04b5" id="label_f7bb436b-1d9c-4144-a4f4-91cac34c04b5" title="Дата создания [DEAL.CRT_DATE]">Дата создания</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_f7bb436b-1d9c-4144-a4f4-91cac34c04b5" name="DEAL.CRT_DATE.34.DatePicker.Editor.0" page_guid="f7bb436b-1d9c-4144-a4f4-91cac34c04b5" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" readonly="readonly" title="Дата создания" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_34_0_0_121_0_9475_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_f7bb436b-1d9c-4144-a4f4-91cac34c04b5").kendoDatePicker({"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Дата последней корректировки">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_a86fe3d5-7968-4665-a74d-f68f4940612f" id="label_a86fe3d5-7968-4665-a74d-f68f4940612f" title="Дата последней корректировки [DEAL.MFY_DATE]">Дата последней корректировки</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Small">
+              <div>
+                <input class="ctrl-input is-width-fulled" controltype="DatePicker" id="val_a86fe3d5-7968-4665-a74d-f68f4940612f" name="DEAL.MFY_DATE.35.DatePicker.Editor.0" page_guid="a86fe3d5-7968-4665-a74d-f68f4940612f" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" readonly="readonly" title="Дата последней корректировки" type="text" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_35_0_0_121_0_9476_2_0_201_0;" />
+                <script>
+	jQuery(function(){jQuery("#val_a86fe3d5-7968-4665-a74d-f68f4940612f").kendoDatePicker({"format":"dd.MM.yyyy","min":new Date(1900,0,1,0,0,0,0),"max":new Date(2099,11,31,0,0,0,0)});});
+</script>
+              </div>
+            </td>
+          </tr>
+          <tr class=" ctrl-color-orange-bckgr" field-title="Автор послед.коректир.">
+            <td class="ctrl-label ctrl-color-blue">
+              <label class="label" for="check_65d413c1-25ac-4aa7-81ce-d9d46d490af3" id="label_65d413c1-25ac-4aa7-81ce-d9d46d490af3" title="Наименование Контрагента [VW_DEAL.USER_PARTNER_NAME_CALC] - Уточнить">Автор послед.коректир.</label>
+            </td>
+            <td class="ctrl-value ctrl-color-red Large">
+              <input class="k-textbox k-header ctrl-input is-width-fulled" id="val_65d413c1-25ac-4aa7-81ce-d9d46d490af3" parent_guid="2f678248-538d-4697-9df5-d477ba36c1b7" page_guid="65d413c1-25ac-4aa7-81ce-d9d46d490af3" uri_path="110_3216_0_12_121_0_2_0_2_0_0;102_3217_11_36_0_0_121_0_12413_2_0_1_0;" name="VW_DEAL.USER_PARTNER_NAME_CALC.36.TextBox.Editor.0" readonly="readonly" controltype="TextBox" title="Автор послед.коректир." />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+  </ul>
+  <script>
+	jQuery(function(){jQuery("#panelbar_edit_2f678248-538d-4697-9df5-d477ba36c1b7").kendoPanelBar({"expandMode":"multiple"});});
+</script>
+</div>
+
+</body>
+
+</html>
+

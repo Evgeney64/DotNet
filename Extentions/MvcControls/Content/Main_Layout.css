@@ -1,0 +1,71 @@
+﻿/*вертикальные табы для визарда*/
+#FilterTab {
+    position: static;
+}
+    /* набор табов визарда*/
+    #FilterTab > ul {
+        /*background-color: #f2f2f2;*/
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        -webkit-transform-origin: 100% 0;
+        -moz-transform-origin: 100% 0;
+        -o-transform-origin: 100% 0;
+        -ms-transform-origin: 100% 0;
+        transform-origin: 100% 0;
+        -webkit-transform: translate(-100%, 0) rotate(-90deg);
+        -moz-transform: translate(-100%, 0) rotate(-90deg);
+        -o-transform: translate(-100%, 0) rotate(-90deg);
+        -ms-transform: translate(-100%, 0) rotate(-90deg);
+        transform: translate(-100%, 0) rotate(-90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        display: -webkit-inline-box;
+        width: 600px;
+        direction: rtl;
+    }
+        /* отдельные табы визарда*/
+        #FilterTab > ul > li {
+            float: right;
+            border-right-style: none;
+            border-bottom-style: solid;
+            border-bottom-width: 4px;
+            border-bottom-left-radius: 0;
+            margin: 0;
+            direction: ltr;
+        }
+
+            #FilterTab > ul > li > .k-link {
+                padding-bottom: .9em;
+                padding-top: .9em;
+                padding-left: 8px;
+            }
+
+                #FilterTab > ul > li > .k-link > img {
+                    margin-left: 0;
+                }
+
+                #FilterTab > ul > li > .k-link > i {
+                    margin-left: 14.4px;
+                }
+    /* содержимое таба*/
+    #FilterTab > .k-content {
+        border-left-width: 0;
+        height: 100%;
+        width: calc(100% - 1.8em - 22px);
+        position: absolute;
+        margin: 0 0 0 calc(1.8em + 22px) !important;
+        z-index: 100;
+    }
+/* для планшетов*/
+@media (max-width: 768px) {
+    /*уменьшаем отступы*/
+    #FilterTab > ul > li > .k-link {
+        padding-bottom: .45em;
+        padding-top: .45em;
+    }
+    /*соразмерно двигаем содержимое таба*/
+    #FilterTab > .k-content {
+        width: calc(100% - .9em - 22px) !important;
+        margin: 0 0 0 calc(.9em + 22px) !important;
+    }
+}
