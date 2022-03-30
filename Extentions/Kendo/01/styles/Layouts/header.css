@@ -1,0 +1,44 @@
+﻿/*Контейнеры заголовока. Используется в одном месте (Index.cshtml)*/
+#div_main_header {
+    height: 41px;
+    top: 0px;
+}
+/*Главный заголовок main-header*/
+.m-h { 
+    position: absolute;
+    height: 41px;
+    padding: 0px;
+    line-height: normal;
+    border-bottom-width: 0px;
+    z-index: 100;
+}
+    .m-h tbody {
+        top: 0px;
+        height: 100%;
+    } 
+    /*Левая колонка у заголовка*/
+    .m-h-column-left {
+        width: 320px;
+        border-right-style: solid;
+        border-right-width: 1px;
+    }
+        .m-h-column-left-div {
+            left: 0px;
+            top: 0px;
+        }
+    /*Права колонка у заголовка*/
+    .m-h-column-right {
+        width: calc(100% - 320px);
+    }
+        .m-h-column-right-div {
+            position: relative;
+        }
+    /*Информация - подпись*/
+    .m-h-label-title {
+    }
+    /*Информация - значение*/
+    .m-h-label-item {
+        padding-left: 1px;
+        padding-right: 3px;
+        font-weight: 600;
+    }

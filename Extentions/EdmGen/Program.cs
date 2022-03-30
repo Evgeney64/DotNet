@@ -21,9 +21,9 @@ namespace EdmGen
             //item.CreatePostgesScript();
 
             //item.CreateResultFile();
-            item.CreateKendoIconsFile();
+            //item.CreateKendoIconsFile();
 
-            //item.GenerateEdmClass();
+            item.GenerateEdmClass();
 
             //XlsxHelper.ReadXlsx();
             //XlsxHelper.UpdateData();
